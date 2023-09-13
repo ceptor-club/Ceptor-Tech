@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Oswald&family=Poppins&family=Raleway:wght@500&family=Source+Code+Pro&display=swap");
+
+@font-face {
+  font-family: "Oswald";
+  src: url("/font/Oswald.ttf") format("truetype");
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: rgb(0, 0, 0);
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    color: white;
+    background: rgb(162, 145, 145);
+  }
+} */
+
+h1 {
+  margin: auto;
+  text-align: center;
+}
+
+#inputs {
+  text-align: center;
+}
+
+#imagegeneration {
+  display: inline-block;
+  text-align: center;
+  border-style: solid;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+}
+
+.div-child {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+}
+
+#bodytype {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+h3 {
+  text-align: center;
+  white-space: break-word;
+}
+
+button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.logo {
+  height: 3em;
+  width: 3em;
+}
+
+#trynow {
+  width: 300px;
+}
+
+/* .stats {
+  background-image: url("../public/images/CREATE/char-stat-bg.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+
+.checkbox-stats {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  border: 1px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#logo Image {
+  height: 3em;
+  width: 3em;
+}
+
+.fire-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.fire-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 300ms ease-in;
+}
+
+.checkbox-stats:checked {
+  background-color: rgb(255, 45, 80);
+}
+
+option {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  width: 200px;
+}
+
+.opacity-load {
+  animation: 1s ease-out 0s 1 opacity-in;
+}
+
+@keyframes opacity-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+
+  border-top: 20px solid #fff;
+}
