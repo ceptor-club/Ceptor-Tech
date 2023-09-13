@@ -17,15 +17,11 @@ LFG Ceptor Club Hackers! 🚀🚀
 
 ## 🧑‍💻 Let's Setup Frontend First 
 
-1. Go to FrontEndV2 folder
+1. Go to frontend folder
 
-   `cd FrontEndV2`
+   `cd frontend`
 
-2. Switch to `navbar` branch and install dependencies
-
-   `git checkout navbar`
-
-   `git pull origin navbar`
+2. Install dependencies
 
    `npm install`
 
@@ -79,7 +75,7 @@ LFG Ceptor Club Hackers! 🚀🚀
 
 1. Go to Backend folder
 
-   `cd Backend`
+   `cd backend`
 
 2. Install all the dependencies
 
@@ -92,7 +88,7 @@ LFG Ceptor Club Hackers! 🚀🚀
 4. Setting up .env variables
  
    - For ALCHEMY_API_KEY use the same key as in frontend
-   - Setup API_KEY for Socket io connections
+   - Setup API_KEY="testKey" for Socket io connections
 
 5. Renable CORS object 
 
