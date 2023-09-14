@@ -12,7 +12,7 @@ LFG Ceptor Club Hackers! 🚀🚀
 
    `git clone https://github.com/ceptor-club/ETHChicago.git`
 
-2. It will create two folders: `Backend` and `FrontEndV2`.
+2. It will create two folders: `backend` and `frontend`.
 
 
 ## 🧑‍💻 Let's Setup Frontend First 
