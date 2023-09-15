@@ -1,4 +1,4 @@
-# EthChiacgo 2023 Hackathon Template: Ceptor Club
+# ETHChicago 2023 Hackathon Starter-Kit: Ceptor Club
 
 ## About 
 
