@@ -25,9 +25,9 @@ LFG Ceptor Club Hackers! 🚀🚀
 
    `npm install`
 
-3. Clone .env.example to .env
+3. Clone .env.sample to .env
 
-   `cp .env.example .env`
+   `cp .env.sample .env`
 
 4. Setting up .env variables 
 
