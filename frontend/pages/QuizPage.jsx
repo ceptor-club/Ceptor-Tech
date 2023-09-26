@@ -5,8 +5,7 @@ import HamburgerMenu from '../components/HamburgerMenu';
 import VectorImage from '../components/VectorImage';
 import Meta from '../components/Meta';
 import Image from 'next/image';
-import NavbarMdUp from '../components/NavbarMdUp';
-import NavbarSmUp from '../components/NavbarSmUp';
+import { NavbarMdUp, NavbarSmUp } from '../components/NavBar/index';
 import Quiz from '../components/Quiz';
 import { CharacterContext } from '../components/CharacterContext';
 
