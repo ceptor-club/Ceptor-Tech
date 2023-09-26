@@ -1,3 +1,5 @@
+// Randomly generates a name for the user
+
 function RandomName() {
 
     let ranPart1 = Math.floor(Math.random() * 18) + 1;

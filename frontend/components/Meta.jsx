@@ -1,3 +1,4 @@
+// Metadata for the website used by the browser and search engines
 import Head from 'next/head';
 import Script from 'next/script';
 
