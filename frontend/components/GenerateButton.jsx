@@ -56,7 +56,7 @@ const GenerateButton = ({
     setConditionalCreate("results");
 
     // const result = { images: [CONSTANTS.testBase64Image] }; // <------------- THIS IS FOR TESTING
-
+    // setImageResult(result);
     socket.emit("imageRequest", { prompt: prompt });
   };
 
@@ -109,11 +109,11 @@ const GenerateButton = ({
           ) : pdfData ? (
             <div>
               <p className="w-fit py-1 px-6 cursor-pointer">Generate</p>
-              
-              <Tooltip content={generateButtonTT} defaultContainerClass={"w-5 h-5"}>
-                  
-              </Tooltip>
-            
+
+              <Tooltip
+                content={generateButtonTT}
+                defaultContainerClass={"w-5 h-5"}
+              ></Tooltip>
             </div>
           ) : (
             <div>
