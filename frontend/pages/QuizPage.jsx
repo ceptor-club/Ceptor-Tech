@@ -6,7 +6,7 @@ import Meta from '../components/Meta';
 import Image from 'next/image';
 import { NavbarMdUp, NavbarSmUp } from '../components/NavBar/index';
 import Quiz from '../components/Quiz';
-import { CharacterContext } from '../components/CharacterContext';
+import { CharacterContext } from '../components//CharacterModule/CharacterContext';
 
 
 

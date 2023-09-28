@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { RandomName } from './RandomName'
+import { RandomName } from './CharacterModule/RandomName'
 import {
     NameLevelGender,
     Weapon,
