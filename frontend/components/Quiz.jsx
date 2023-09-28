@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { RandomName } from './RandomName'
-
 import {
     NameLevelGender,
     Weapon,
@@ -14,7 +13,7 @@ import {
     Background,
     GenerateCharacter,
     CharacterPage
-} from "./QuizComponents/QuizComponentsExports";
+} from "./QuizComponents/index.jsx";
 
 const State = {
     QUESTION1: 'question1',

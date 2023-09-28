@@ -1,3 +1,4 @@
+// Exports all quiz components
 export { default as NameLevelGender } from './NameLevelGender'
 export { default as Weapon } from './Weapon'
 export { default as AlignmentLawfulChaotic } from './AlignmentLawfulChaotic'
@@ -9,4 +10,3 @@ export { default as Species } from './Species'
 export { default as Background } from './Background'
 export { default as CharacterPage } from './CharacterPage'
 export { default as GenerateCharacter } from './GenerateCharacter'
-

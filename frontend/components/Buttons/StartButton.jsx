@@ -1,5 +1,5 @@
 import React from "react";
-import buttonImage from "../public/images/CREATE-hero/buttonImage.png";
+import buttonImage from "../../public/images/CREATE-hero/buttonImage.png";
 import Image from "next/image";
 
 const StartButton = ({ setConditionalRender }) => {

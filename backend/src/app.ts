@@ -6,13 +6,14 @@ const app: Application = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL, // allow to server to accept request from different origin
     methods: ["GET", "POST"],
   },
 });
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
 import { getUser, saveUser } from "./utils/mongo";
+import { env } from "process";
 
 app.use(cors()); // Open requests
 app.use(express.json());
@@ -31,6 +32,7 @@ io.use((socket: any, next: any) => {
 
 //test socket
 app.get("/", (req, res) => {
+  console.log(req.path)
   io.emit("test", "test"); //using io sends to all clients
   res.send("test should have been successful");
 });

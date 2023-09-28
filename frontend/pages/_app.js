@@ -1,3 +1,4 @@
+// This is the root component that wraps all other components
 import "../styles/globals.css";
 import {
   EthereumClient,
@@ -8,7 +9,7 @@ import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { sepolia, goerli } from "wagmi/chains";
 import Layout from "../components/Layout";
-import { CharacterProvider } from '../components/CharacterContext';
+import { CharacterProvider } from '../components//CharacterModule/CharacterContext';
 import SocketProvider from "../utils/socketContext";
 
 const chains = [sepolia, goerli];

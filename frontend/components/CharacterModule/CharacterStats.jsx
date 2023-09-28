@@ -2,10 +2,10 @@
 import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { createPrompt } from '../../utils/promptGen';
-import AdvancedButton from '../AdvancedButton';
+import AdvancedButton from '../Buttons/AdvancedButton';
 import { CONSTANTS } from '../../utils/CONSTANTS';
 import Image from 'next/image';
-import { CharacterContext } from '../CharacterContext';
+import { CharacterContext } from './CharacterContext';
 import Tooltip from "../ToolTip";
 import InfoIcon from "../InfoIcon";
 

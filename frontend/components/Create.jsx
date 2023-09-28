@@ -3,18 +3,18 @@ import React from "react";
 import Link from 'next/link';
 import { useEffect, useState, useContext } from "react";
 import { createPrompt } from "../utils/promptGen";
-import { CharacterBackstory } from "./CharacterBackstory";
+import { CharacterBackstory } from "./CharacterModule/CharacterBackstory";
 import { CreateImageGrid } from "./CreateImageGrid";
 import PDFParser from "./PDFParser";
 import Placeholder from "../public/images/CREATE/placeholder.png";
-import SaveButton from "./SaveButton";
-import CopyButton from "./CopyButton";
+import SaveButton from "./Buttons/SaveButton";
+import CopyButton from "./Buttons/CopyButton";
 import CharacterStats from "./CharacterModule/CharacterStats";
 import ToolTip from "./ToolTip";
-import MintButton from "./MintButton";
-import GenerateButton from "./GenerateButton";
+import MintButton from "./Buttons/MintButton";
+import GenerateButton from "./Buttons/GenerateButton";
 import Image from "next/image";
-import AdvancedButton from "./AdvancedButton";
+import AdvancedButton from "./Buttons/AdvancedButton";
 import OCRParser from "./OCRParser";
 import SuccessModal from "./SuccessModal";
 
@@ -51,7 +51,7 @@ const promptBoxTT =
   "This is the prompt our Creator AI Artist used to draw your character based on your character sheet and your stats.";
 
 
-import { CharacterContext } from './CharacterContext';
+import { CharacterContext } from './CharacterModule/CharacterContext';
 
 // wallet connect
 // buy dice/ display dice + timer

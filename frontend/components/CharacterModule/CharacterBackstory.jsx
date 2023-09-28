@@ -1,6 +1,6 @@
 import React from "react"
 import { useState } from "react"
-import { CONSTANTS } from "../utils/CONSTANTS"
+import { CONSTANTS } from "../../utils/CONSTANTS"
 
 export const CharacterBackstory = ({ pdfData }) => {
   const [backstory, setBackstory] = useState("")
