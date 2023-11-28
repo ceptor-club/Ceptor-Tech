@@ -27,7 +27,7 @@ export default function NavbarMdUp() {
 
           {navMenuVisible ? (
             <>
-              <div className='w-full flex flex-col ml-6 mt-6'>
+              <div className='w-full flex flex-col ml-16 mt-6 leading-10'>
                 <Image
                   src='/logo.png'
                   alt=''
