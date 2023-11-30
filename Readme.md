@@ -48,7 +48,7 @@ LFG Ceptor Club Hackers! 🚀🚀
      - Create a new project and copy the API Key
      - Paste the API Key in `.env` file as `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=f88d2c49_sample`
      
-   - Setting up OPENAI_API_KEY for AI Image Generation
+   - Setting up OPENAI_API_KEY (optional)
 
      - Go to [OpenAI Dashboard](https://platform.openai.com/account/api-keys) and create an account(if you don't have one already)
      - Create a new project and copy the API Key
