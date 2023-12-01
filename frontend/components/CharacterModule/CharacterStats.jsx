@@ -25,32 +25,38 @@ const CharacterStats = ({
   const { characterData } = useContext(CharacterContext)
   useEffect(() => {
     if (!advanced && pdfData) {
-       console.log("pdfData: ", pdfData); 
-      //create text prompt using pdfData and other data
+      console.log("pdfData: ", pdfData); 
       const prompt = createPrompt(pdfData);
       setPrompt(prompt);
       setError(null);
     }
+  
+    let updatedPdfData = { ...pdfData };
+  
+    updatedPdfData.race = characterData.species;
+  
     if (characterData.myClass !== pdfData.class) {
-      setPdfData({ ...pdfData, class: characterData.myClass })
+      updatedPdfData.class = characterData.myClass;
     }
     if (characterData.background !== pdfData.background) {
-      setPdfData({ ...pdfData, background: characterData.background })
+      updatedPdfData.background = characterData.background;
     }
     if (characterData.myAlignment !== pdfData.alignment) {
-      setPdfData({...pdfData, alignment: characterData.myAlignment})
+      updatedPdfData.alignment = characterData.myAlignment;
     }
     if(characterData.gender !== pdfData.gender) {
       if (characterData.gender === "He" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "He / Him"})
+        updatedPdfData.gender = "male";
       } else if (characterData.gender === "She" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "She / Hers"})
+        updatedPdfData.gender = "female";
       } else if (characterData.gender === "They" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "They / Them"})
+        updatedPdfData.gender = "nonbinary";
       }
     }
-    console.log(pdfData)
-  });
+  
+    setPdfData(updatedPdfData);
+    console.log(updatedPdfData);
+  }, [advanced, pdfData, characterData]);
 
   const handleClassSelect = (e) => {
     const input = document.getElementById("classInput");
