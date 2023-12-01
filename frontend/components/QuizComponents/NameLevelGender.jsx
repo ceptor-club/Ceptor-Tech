@@ -1,5 +1,5 @@
 import React from "react"
-import { RandomName } from "../RandomName"
+import { RandomName } from "../CharacterModule/RandomName"
 
 export default function NameLevelGender({ charName, setCharName, level, setLevel, gender, setGender }) {
 

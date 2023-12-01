@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import { SocketContext } from "../utils/socketContext";
+import { SocketContext } from "../../utils/socketContext";
 import Image from "next/image";
-import { CONSTANTS } from "../utils/CONSTANTS";
+import { CONSTANTS } from "../../utils/CONSTANTS";
 import { useRouter } from "next/router";
-import Tooltip from "./ToolTip";
-import InfoIcon from "./InfoIcon";
+import Tooltip from "../ToolTip";
+import InfoIcon from "../InfoIcon";
 
 const generateButtonTT =
   "Generate your avatar based on the configuration above. Don't worry, you can always re-roll.";
@@ -56,7 +56,7 @@ const GenerateButton = ({
     setConditionalCreate("results");
 
     // const result = { images: [CONSTANTS.testBase64Image] }; // <------------- THIS IS FOR TESTING
-
+    // setImageResult(result);
     socket.emit("imageRequest", { prompt: prompt });
   };
 
@@ -109,11 +109,11 @@ const GenerateButton = ({
           ) : pdfData ? (
             <div>
               <p className="w-fit py-1 px-6 cursor-pointer">Generate</p>
-              
-              <Tooltip content={generateButtonTT} defaultContainerClass={"w-5 h-5"}>
-                  
-              </Tooltip>
-            
+
+              <Tooltip
+                content={generateButtonTT}
+                defaultContainerClass={"w-5 h-5"}
+              ></Tooltip>
             </div>
           ) : (
             <div>

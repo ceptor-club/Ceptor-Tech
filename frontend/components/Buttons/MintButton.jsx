@@ -1,16 +1,16 @@
 import Image from "next/image";
 import React from "react";
-import { avatarNFTSTORAGE } from "../utils/web3utils";
+import { avatarNFTSTORAGE } from "../../utils/web3utils";
 import {
   useContractWrite,
   usePrepareContractWrite,
   useWaitForTransaction,
 } from "wagmi";
-import { CONSTANTS } from "../utils/CONSTANTS";
+import { CONSTANTS } from "../../utils/CONSTANTS";
 import { useEffect, useState } from "react";
 import { useAccount, useDisconnect } from "wagmi";
 import { useWeb3Modal } from "@web3modal/react";
-import SuccessModal from "./SuccessModal";
+import SuccessModal from "../SuccessModal";
 
 const MintButton = ({
   selectedImage,

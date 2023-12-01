@@ -2,10 +2,10 @@
 import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { createPrompt } from '../../utils/promptGen';
-import AdvancedButton from '../AdvancedButton';
+import AdvancedButton from '../Buttons/AdvancedButton';
 import { CONSTANTS } from '../../utils/CONSTANTS';
 import Image from 'next/image';
-import { CharacterContext } from '../CharacterContext';
+import { CharacterContext } from './CharacterContext';
 import Tooltip from "../ToolTip";
 import InfoIcon from "../InfoIcon";
 
@@ -182,7 +182,7 @@ const CharacterStats = ({
                   <p className="mx-4">CLASS: </p>
                   <select
                     id="classInput"
-                    className="bg-transparent resize-none h-6  bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6  bg-slate-200 text-white flex-grow"
                     onChange={handleClassSelect}
                     disabled={imageResult}
                   >
@@ -227,7 +227,7 @@ const CharacterStats = ({
                   <select
                     id="backgroundInput"
                     placeholder="Background"
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black  flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 text-white  flex-grow"
                     onChange={handleBackgroundSelect}
                     disabled={imageResult}
                   >
@@ -258,7 +258,7 @@ const CharacterStats = ({
                   <select
                     id="alignmentInput"
                     placeholder="Neutral Good"
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 text-white flex-grow"
                     onChange={handleAlignmentSelect}
                     disabled={imageResult}
                   >
@@ -305,7 +305,7 @@ const CharacterStats = ({
                   <select
                     id="colorInput"
                     placeholder=""
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 text-white flex-grow"
                     onChange={handleColorSelect}
                     disabled={imageResult}
                   >

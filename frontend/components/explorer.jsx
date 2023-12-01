@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Alchemy, Network } from "alchemy-sdk";
-import NftCard from "../components/NftCard";
-import NftModal from "../components/NftModal";
+import NftCard from "../components/NFTModule/NftCard";
+import NftModal from "../components/NFTModule/NftModal";
 
 const Explorer = ({ ALCHEMY_GOERLI_API_KEY, ALCHEMY_SEPOLIA_API_KEY }) => {
     const [alchemy, setAlchemy] = useState(null);

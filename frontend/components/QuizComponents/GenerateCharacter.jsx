@@ -1,4 +1,4 @@
-import { CharacterContext } from "../CharacterContext";
+import { CharacterContext } from "../CharacterModule/CharacterContext";
 import { useContext } from "react";
 import Link from "next/link";
 

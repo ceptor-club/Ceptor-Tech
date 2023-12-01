@@ -92,6 +92,7 @@ LFG Ceptor Club Hackers! 🚀🚀
 
 5. Renable CORS object 
 
+
 6. Run the backend
 
    `npm run dev`
