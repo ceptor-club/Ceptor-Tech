@@ -131,7 +131,6 @@ Link to readme:
 
 5. Renable CORS object 
 
-
 6. Run the backend
 
    `npm run dev`
@@ -140,7 +139,7 @@ Link to readme:
 
 ## **🛠️ MongoDB Setup: Endpoints for user creation and lookup!**
 
-Put `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
+Put the connection string: `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
 
 GET /user?wallet=<wallet0x> will give you the user
 POST /user with
