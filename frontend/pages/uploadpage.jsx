@@ -19,6 +19,7 @@ const StyledSignUpContainer = styled.div`
 `;
 
 const StyledPhotoUpload = styled.div`
+  color: #2F0213;
   cursor: pointer;
 `;
 
@@ -40,6 +41,7 @@ const StyledUsernameInput = styled.input`
 `;
 
 const StyledRoleText = styled.p`
+  color: #2F0213;
   font-weight: bold;
   font-size: 18px;
   margin: 10px 0;

@@ -10,7 +10,6 @@ import { NavbarMdUp, NavbarSmUp } from '../components/NavBar/index';
 import Link from "next/link";
 import { SocketContext } from "../utils/socketContext";
 
-
 export default function Home() {
   const socket = useContext(SocketContext);
 
@@ -28,7 +27,7 @@ export default function Home() {
     }
   }, [socket]);
 
-  const [imageProcessing, setImageProcessing] = useState(false); //processing state ie. loading...
+  const [imageProcessing, setImageProcessing] = useState(false); // processing state ie. loading...
   const [conditionalRender, setConditionalRender] = useState("");
 
   const toggleImageProcessing = async () => {
@@ -66,6 +65,14 @@ export default function Home() {
             NFT Explorer
           </span>
         </Link>
+
+        {/* Add the link to the "CCID" page */}
+        <Link href="/CCID">
+          <span className="text-2xl relative z-10 text-white underline cursor-pointer font-black ml-4">
+            CCID
+          </span>
+        </Link>
+
         <Logo setConditionalRender={setConditionalRender} />
 
         <div className="z-10 flex w-full justify-center">
@@ -74,6 +81,7 @@ export default function Home() {
           </div> */}
 
           <div className=" z-10">
+            {/* Include your Create component */}
             <Create />
           </div>
         </div>
