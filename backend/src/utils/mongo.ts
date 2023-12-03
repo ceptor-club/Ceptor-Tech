@@ -18,6 +18,12 @@ export interface Submission {
   voterWallets: string[];
 }
 
+interface CharacterData {
+  _id: string;
+  name: string;
+  owner: User["_id"];
+}
+
 const url = process.env.DB_CONN_STRING as string;
 const client = new MongoClient(url);
 
@@ -89,10 +95,7 @@ export async function getMostLikedSubmission() {
 }
 
 // vote for a submission, only  one vote per wallet
-export async function voteForSubmission(
-  tokenID: number,
-  wallet: string
-) {
+export async function voteForSubmission(tokenID: number, wallet: string) {
   try {
     // check if the wallet already voted
     const submissionAlreadyVoted = await client
