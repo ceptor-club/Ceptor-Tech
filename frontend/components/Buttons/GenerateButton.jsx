@@ -51,6 +51,7 @@ const GenerateButton = ({
 
   const generateImages = async () => {
     console.log("Generating images... for ", prompt);
+    alert("Generating images... for " + prompt);
     setError(false);
     setImageProcessing(true);
     setConditionalCreate("results");
