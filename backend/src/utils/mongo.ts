@@ -13,6 +13,7 @@ interface User {
 }
 
 interface CharacterData {
+  _id: string
   name: string
   owner: User["_id"]
 }
