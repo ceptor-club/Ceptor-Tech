@@ -19,7 +19,6 @@ const StyledSignUpContainer = styled.div`
 `;
 
 const StyledPhotoUpload = styled.div`
-  color: #2F0213;
   cursor: pointer;
 `;
 
