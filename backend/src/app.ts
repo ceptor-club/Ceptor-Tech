@@ -12,7 +12,7 @@ const io = require("socket.io")(server, {
 });
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
-import { getUser, saveUser } from "./utils/mongo";
+import { getUserByWallet, saveUser, getAllUsers, saveCharacterData, getAllCharacters } from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
@@ -35,15 +35,30 @@ app.get("/", (req, res) => {
   res.send("test should have been successful");
 });
 
-app.get("/user", async (req, res) => {
-  const user = await getUser(req.query.wallet as string);
+app.get("/user/:wallet", async (req, res) => {
+  const user = await getUserByWallet(req.params.wallet);
   user ? res.send(user) : res.send("user not found");
 });
+
+app.get("/users", async (req, res) => {
+  const users = await getAllUsers()
+  users ? res.send(users) : res.send("no users in database")
+})
 
 app.post("/user", async (req, res) => {
   const user = await saveUser(req.body);
   res.send(user);
 });
+
+app.post("/characterData", async (req, res) => {
+  const characterData = await saveCharacterData(req.body)
+  res.send(characterData)
+})
+
+app.get("/characterData", async (req, res) => {
+  const characters = await getAllCharacters()
+  characters ? res.send(characters) : res.send("no characters in database")
+})
 
 io.on("connection", (socket: any) => {
   console.log("A user connected");
