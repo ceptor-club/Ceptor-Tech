@@ -280,3 +280,19 @@ option {
   /* height: 10vh; Full  */
   width: 5vw; /* Full width */
 }
+
+.nft-card {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-hero/Vector4.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 360px;
+  width: 340px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  color: red;
+}

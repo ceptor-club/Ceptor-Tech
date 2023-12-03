@@ -7,12 +7,13 @@ import { Countdown } from "../components/Countdown";
 import { sepolia, useNetwork } from "wagmi";
 import NftCard from "../components/NftCard";
 import { getServerSideProperties } from "../utils/getServerSideProps";
+import { getMostLikedSubmission } from "./api/getMostLikedSubmission";
 
 export async function getServerSideProps() {
   return getServerSideProperties();
 }
 
-export default function PotW({
+export default function WeeklyChallenge({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
@@ -52,63 +53,56 @@ export default function PotW({
     });
 
     const getNFTofTheWeek = async () => {
+      // const response = await getMostLikedSubmission();
       const response = await alchemy.nft.getNftsForContract(
         "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A"
       );
-
       setWinnerNFT(response.nfts[1]);
     };
     getNFTofTheWeek();
-  }, []);
-
-  const connectWallet = async () => {
-    if ((window as any).ethereum) {
-      // Check if MetaMask is installed
-      try {
-        // Request account access
-        const accounts = await (window as any).ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        setAccount(accounts[0]);
-        setIsConnected(true);
-        console.log(accounts[0]);
-      } catch (error) {
-        console.error("User denied account access");
-      }
-    } else {
-      console.error(
-        "Non-Ethereum browser detected. You should consider trying MetaMask!"
-      );
-    }
-  };
+  }, [ALCHEMY_SEPOLIA_API_KEY]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-5">
-      <div className="w-full top-0 right-0 p-5 text-right">
-        <button onClick={connectWallet}>
-          {isConnected ? "Connected" : "Connect Wallet"}
-        </button>
-      </div>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-5">
-          Prompt of the Week Challenge!
+    <div className="bg-black flex flex-col items-center  min-h-screen py-5 space-y-10">
+      <div className="flex flex-col justify-center items-center ">
+        <h1 className="font-milonga text-4xl uppercase text-light-yellow mb-5">
+          Challenge of the Week{" "}
         </h1>
-        <h3 className=" font-bold">Champion of the Week:</h3>
-        <div>
+        <h1 className="font-oswald text-2xl uppercase font-bold mb-2">
+          powered by Chainlink VRF, Automation, & Functions
+        </h1>
+        <h1 className="font-oswald text-xl uppercase font-bold ">
+          Are you an AI Prompt artist / wizard?
+        </h1>
+        <h1 className="font-oswald text-xl uppercase font-bold">
+          Burn a die and mint your ChallengerNFT
+        </h1>
+        <div className="flex flex-col justify-center items-center mt-10">
           {winnerNFT && (
             <NftCard
               key={winnerNFT.tokenId}
               nft={winnerNFT}
+              winner={true}
               onCardClick={() => console.log("nothing")}
             />
           )}
+          <h1 className="font-oswald text-sm uppercase font-bold">
+            Winner of last weeks challenge
+          </h1>
         </div>
-        <div className="mt-4 bg-blue-200 mx-auto min-w-max p-4 px-4 rounded-xl shadow-lg">
-          <p className="text-2xl">{promptOfTheMoment}</p>
-        </div>
-        <div>
-          {/* TODO: add real deadline from smart contract */}
-          <Countdown deadline={oneWeekFromNow} />
+        <div className="flex flex-wrap justify-center items-center">
+          <div className="mt-4 bg-light-pink mx-auto min-w-max p-4 px-4 rounded-xl shadow-lg">
+            <h1 className="font-oswald text-xl uppercase text-light-yellow">
+              This week’s challenge:
+            </h1>
+            <p className="text-2xl font-nothing-you-could-do">
+              {promptOfTheMoment}
+            </p>
+          </div>
+          <div className="text-light-pink font-oswald m-5">
+            {/* TODO: add real deadline from smart contract */}
+            <Countdown deadline={oneWeekFromNow} />
+          </div>
         </div>
       </div>
 
