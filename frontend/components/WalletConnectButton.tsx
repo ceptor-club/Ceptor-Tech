@@ -33,9 +33,9 @@ const WalletConnectButton = () => {
   return (
     <div className="flex flex-col space-y-2">
       {/* <w3m-network-button /> */}
-      <w3m-account-button />
-      <w3m-connect-button label="Connected" loadingLabel="Connected" />
-      {/* {isConnected ? (
+      {/* <w3m-account-button />
+      <w3m-connect-button label="Connected" loadingLabel="Connected" /> */}
+      {isConnected ? (
         <button
           className="text-black bg-red-700  focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 hover:bg-[#F87171] hover:text-white dark:focus:ring-red-800"
           onClick={handleDisconnect}
@@ -49,7 +49,7 @@ const WalletConnectButton = () => {
         >
           Wallet Connect
         </button>
-      )} */}
+      )}
     </div>
   );
 };
