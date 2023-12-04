@@ -128,7 +128,7 @@ Link to readme:
  
    - For ALCHEMY_API_KEY use the same key as in frontend
    - Setup API_KEY="testKey" for Socket io connections
-
+   - Setup DB_CONN_STRING=mongodb+srv://verinta:BFWmxukoOsNdIx4x@ceptorclub.rq4oohp.mongodb.net/ for DB connection
 5. Renable CORS object 
 
 
