@@ -9,7 +9,7 @@ import {
     calculateSkill
 } from '../QuizFunctions'
 import { CharacterContext } from '../CharacterContext'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -17,6 +17,17 @@ import Link from 'next/link'
 export default function CharacterPage() {
 
     const { characterData, setCharacterData } = useContext(CharacterContext)
+    const [saveStatus, setSaveStatus] = useState({ success: null, error: null })
+    const [isMessageVisible, setIsMessageVisible] = useState(false)
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setIsMessageVisible(false)
+            setSaveStatus({ success: null, error: null })
+        }, 2000)
+        return () => clearTimeout(timeoutId)
+    }, [isMessageVisible])
+
     console.log(characterData)
     let character = characterData
 
@@ -92,9 +103,6 @@ export default function CharacterPage() {
     const [lowestTrait, lowestScore] = findLowestTraitAndScore(trait)
     let ltModifier = setLTModifier(lowestScore)
     let htModifier = setHTModifier(highestScore)
-
-
-
 
     // Find High Trait
     function setHTModifier(highestTrait) {
@@ -175,8 +183,27 @@ export default function CharacterPage() {
 
     }
 
-    function saveCharacter() {
+    async function saveCharacter() {
         setCharacterData(character)
+        try {
+            const response = await fetch('http://localhost:4000/characterData', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(characterData)
+            })
+
+            if (response.ok) {
+                setSaveStatus({ success: 'Character saved successfully', error: null })
+            } else {
+                setSaveStatus({ success: null, error: 'Error saving character' })
+            }
+        } catch (error) {
+            console.error('Error saving character data: ', error)
+            setSaveStatus({ success: null, error: 'Error saving character' })
+        }
+        setIsMessageVisible(true)
     }
 
     function exportCharacter() {
@@ -250,14 +277,24 @@ export default function CharacterPage() {
                 </div>
             </div>
 
-            <br /><br />
-            <div className="flex justify-center">
-                <Link href='/'>
-                    <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>Save Character?</button>
-                </Link>
-                <Link href='http://localhost:3000/issuecredentials'>
-                    <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={exportCharacter}>Export to Bit Bender</button>
-                </Link>
+            <div className="flex justify-center flex-col items-center">
+                <div className="message-container" style={{ height: isMessageVisible ? '30px' : '30px', overflow: 'hidden' }}>
+                    {isMessageVisible && (
+                        <div className={`text-${saveStatus.success ? 'green' : 'red'}-500 mt-0 mb-0`}>
+                            {saveStatus.success || saveStatus.error}
+                        </div>
+                    )}
+                </div>
+                <div className='flex flex-row mt-0'>
+                    <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
+                        Save Character?
+                    </button>
+                    <Link href='http://localhost:3000/issuecredentials'>
+                        <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={exportCharacter}>
+                            Export to Bit Bender
+                        </button>
+                    </Link>
+                </div>
             </div>
         </>
     )
