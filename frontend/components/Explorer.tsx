@@ -49,7 +49,11 @@ const Explorer = ({
       setAlchemy(newAlchemy);
     };
     initializeAlchemy();
-  }, [ALCHEMY_GOERLI_API_KEY, ALCHEMY_SEPOLIA_API_KEY]);
+  }, [
+    ALCHEMY_GOERLI_API_KEY,
+    ALCHEMY_SEPOLIA_API_KEY,
+    ALCHEMY_POLYGON_ZKEVM_API_KEY,
+  ]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

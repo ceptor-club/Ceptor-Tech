@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import { Alchemy, Network } from "alchemy-sdk";
+import { Alchemy, Network, Nft } from "alchemy-sdk";
 import Explorer from "../components/Explorer";
 import Link from "next/link";
 import { Countdown } from "../components/Countdown";
-import { useNetwork } from "wagmi";
+import { sepolia, useNetwork } from "wagmi";
+import NftCard from "../components/NftCard";
 
 export async function getServerSideProps() {
   const ALCHEMY_GOERLI_API_KEY = process.env.ALCHEMY_GOERLI_API_KEY;
@@ -29,7 +30,7 @@ export default function PotW({
   const { chain, chains } = useNetwork();
   console.log(chain);
 
-  const [alchemy, setAlchemy] = useState<Alchemy>();
+  // const [alchemy, setAlchemy] = useState<Alchemy>();
   const [latestBlock, setLatestBlock] = useState(null);
   const [nftList, setNFTList] = useState([]);
   const [deadline, setDeadline] = useState<Date>();
@@ -38,6 +39,7 @@ export default function PotW({
   );
   const [account, setAccount] = useState("");
   const [isConnected, setIsConnected] = useState(false);
+  const [winnerNFT, setWinnerNFT] = useState<Nft>();
 
   // TODO: remove this temp variable once we get the deadline for powt from the smart contract
   const oneWeekFromNow = new Date();
@@ -53,6 +55,23 @@ export default function PotW({
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
+  useEffect(() => {
+    const alchemy = new Alchemy({
+      apiKey: ALCHEMY_SEPOLIA_API_KEY,
+      network: Network.ETH_SEPOLIA,
+    });
+    console.log(alchemy);
+
+    const getNFTofTheWeek = async () => {
+      const response = await alchemy.nft.getNftsForContract(
+        "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A"
+      );
+
+      setWinnerNFT(response.nfts[1]);
+    };
+    getNFTofTheWeek();
+  }, []);
 
   const connectWallet = async () => {
     if ((window as any).ethereum) {
@@ -83,7 +102,19 @@ export default function PotW({
         </button>
       </div>
       <div className="text-center">
-        <h1 className="text-4xl font-bold">Prompt of the Week Challenge!</h1>
+        <h1 className="text-4xl font-bold mb-5">
+          Prompt of the Week Challenge!
+        </h1>
+        <h3 className=" font-bold">Champion of the Week:</h3>
+        <div>
+          {winnerNFT && (
+            <NftCard
+              key={winnerNFT.tokenId}
+              nft={winnerNFT}
+              onCardClick={() => console.log("nothing")}
+            />
+          )}
+        </div>
         <div className="mt-4 bg-blue-200 mx-auto min-w-max p-4 px-4 rounded-xl shadow-lg">
           <p className="text-2xl">{promptOfTheMoment}</p>
         </div>
