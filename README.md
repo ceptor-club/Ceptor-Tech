@@ -128,9 +128,9 @@ Link to readme:
  
    - For ALCHEMY_API_KEY use the same key as in frontend
    - Setup API_KEY="testKey" for Socket io connections
+   - Setup DB_CONN_STRING=mongodb+srv://verinta:BFWmxukoOsNdIx4x@ceptorclub.rq4oohp.mongodb.net/ for db connection
 
 5. Renable CORS object 
-
 
 6. Run the backend
 
@@ -140,7 +140,7 @@ Link to readme:
 
 ## **🛠️ MongoDB Setup: Endpoints for user creation and lookup!**
 
-Put `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
+Put the connection string: `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
 
 GET /user?wallet=<wallet0x> will give you the user
 POST /user with
