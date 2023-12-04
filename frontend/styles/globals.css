@@ -158,3 +158,9 @@ option {
 
   border-top: 20px solid #fff;
 }
+
+.scrollableDiv {
+  overflow: auto;
+  width: 300px;
+  height: 500px;
+}
