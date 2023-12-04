@@ -4,6 +4,7 @@ require("dotenv").config();
 import ethers from "ethers";
 const app: Application = express();
 const server = require("http").createServer(app);
+const {ObjectId} = require('mongodb')
 const io = require("socket.io")(server, {
   cors: {
     origin: process.env.FRONTEND_URL,
@@ -12,7 +13,7 @@ const io = require("socket.io")(server, {
 });
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
-import { getUserByWallet, saveUser, getAllUsers, saveCharacterData, getAllCharacters } from "./utils/mongo";
+import { getUserByWallet, saveUser, getAllUsers, saveCharacterData, getAllCharacters, getUserById } from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
@@ -44,6 +45,26 @@ app.get("/users", async (req, res) => {
   const users = await getAllUsers()
   users ? res.send(users) : res.send("no users in database")
 })
+
+app.get('/userData/:_id', async (req, res) => {
+  try {
+    const userId = req.params._id;
+
+    // Convert the string _id to ObjectId
+    const userObjectId = new ObjectId(userId);
+
+    const user = await getUserById(userObjectId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 app.post("/user", async (req, res) => {
   const user = await saveUser(req.body);

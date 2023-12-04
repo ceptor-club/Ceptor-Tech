@@ -41,6 +41,16 @@ export async function getUserByWallet(wallet: string) {
   }
 }
 
+//function to get user by _id
+export async function getUserById(_id: string) {
+  try {
+    return usersCollection.findOne({_id: _id})
+  } catch (error) {
+    console.error(error)
+    return error
+  }
+}
+
 //function to list all users
 export async function getAllUsers() {
   try {
@@ -52,6 +62,7 @@ export async function getAllUsers() {
   }
 }
 
+//function to save character data
 export async function saveCharacterData(characterData: any) {
   try {
     return characterDataCollection.insertOne(characterData)
@@ -60,6 +71,7 @@ export async function saveCharacterData(characterData: any) {
   }
 }
 
+//function to list all characters
 export async function getAllCharacters() {
   try {
     const characterDataCursor = characterDataCollection.find()
