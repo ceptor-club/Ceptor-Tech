@@ -11,8 +11,15 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-oswald)", ...fontFamily.sans],
       },
+      width: {
+        '600': '600px',
+      },
       colors: {
-        'ceptor': '#FFFF00'
+        'ceptor': '#FFFF00',
+        'customOrange': '#ED670B',
+        'customYellow': '#F8C522',
+        'radioYellow': '#FFFD2F',
+        'radioLightYellow': '#FFFfD6'
       },
     }
   },
