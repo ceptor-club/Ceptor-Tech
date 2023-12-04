@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NftCard from "./NftCard";
 import NftModal from "./NftModal";
-import { Alchemy, Network } from "alchemy-sdk";
+import { Alchemy, Network, Nft } from "alchemy-sdk";
 
 const Explorer = ({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
   nftList,
+}: {
+  ALCHEMY_GOERLI_API_KEY: string;
+  ALCHEMY_SEPOLIA_API_KEY: string;
+  ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
+  nftList: Nft[];
 }) => {
   const [alchemy, setAlchemy] = useState(null);
   const [nfts, setNfts] = useState([]);

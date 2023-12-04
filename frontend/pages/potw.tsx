@@ -6,30 +6,21 @@ import Link from "next/link";
 import { Countdown } from "../components/Countdown";
 import { sepolia, useNetwork } from "wagmi";
 import NftCard from "../components/NftCard";
+import { getServerSideProperties } from "../utils/getServerSideProps";
 
 export async function getServerSideProps() {
-  const ALCHEMY_GOERLI_API_KEY = process.env.ALCHEMY_GOERLI_API_KEY;
-  const ALCHEMY_SEPOLIA_API_KEY = process.env.ALCHEMY_SEPOLIA_API_KEY;
-  const ALCHEMY_POLYGON_ZKEVM_API_KEY =
-    process.env.ALCHEMY_POLYGON_ZKEVM_API_KEY;
-
-  return {
-    props: {
-      ALCHEMY_GOERLI_API_KEY,
-      ALCHEMY_SEPOLIA_API_KEY,
-      ALCHEMY_POLYGON_ZKEVM_API_KEY,
-    },
-  };
+  getServerSideProperties();
 }
 
 export default function PotW({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
+}: {
+  ALCHEMY_GOERLI_API_KEY: string;
+  ALCHEMY_SEPOLIA_API_KEY: string;
+  ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
 }) {
-  const { chain, chains } = useNetwork();
-  console.log(chain);
-
   // const [alchemy, setAlchemy] = useState<Alchemy>();
   const [latestBlock, setLatestBlock] = useState(null);
   const [nftList, setNFTList] = useState([]);
@@ -45,9 +36,6 @@ export default function PotW({
   const oneWeekFromNow = new Date();
   oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7); // Adds 7 days to the current date
 
-  // TODO: get NFTs of the current week
-  // TODO: get winning NFT of last week
-
   useEffect(() => {
     console.log("nfts state updated:", nftList);
   }, [nftList]);
@@ -57,6 +45,7 @@ export default function PotW({
   }
 
   useEffect(() => {
+    // TODO: get winning NFT of last week
     const alchemy = new Alchemy({
       apiKey: ALCHEMY_SEPOLIA_API_KEY,
       network: Network.ETH_SEPOLIA,
