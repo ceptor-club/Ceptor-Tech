@@ -34,7 +34,8 @@ contract Prompt is VRFConsumerBaseV2, Ownable {
     string private s_lastPrompt;
     string private s_secondLastPrompt;
     uint256 public lastTimeStamp;
-
+    uint256 public weekTimeStamp;
+    uint256 public weekNumber;
     event CurrentPrompt(string _currentPrompt);
 
     constructor(
@@ -79,7 +80,9 @@ contract Prompt is VRFConsumerBaseV2, Ownable {
 
         // Set the current prompt to the new prompt
         s_currentPrompt = newPrompt;
-
+        // update weekTimeStamp
+        weekTimeStamp = block.timestamp;
+        weekNumber++;
         emit CurrentPrompt(s_currentPrompt);
     }
 
