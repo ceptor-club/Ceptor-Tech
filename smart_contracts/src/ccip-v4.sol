@@ -13,12 +13,12 @@ interface ICeptors {
 contract CCID is Ownable, CCIPReceiver {
     // User stats structure
     struct UserStats {
-        uint256 strength;
-        uint256 dexterity;
-        uint256 constitution;
-        uint256 intelligence;
-        uint256 wisdom;
-        uint256 charisma;
+        uint256 strong;
+        uint256 agile;
+        uint256 tanky;
+        uint256 clever;
+        uint256 wise;
+        uint256 cute;
         uint256 lucky;
     }
 
