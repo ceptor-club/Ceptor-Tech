@@ -36,18 +36,19 @@ contract Prompt is VRFConsumerBaseV2, Ownable {
   uint public lastTimeStamp;
 
   event CurrentPrompt(string _currentPrompt);
-
   constructor(
+    address new_owner,
     address vrfCoordindatorV2,
     bytes32 keyhash /* gasLane */,
     uint64 subscriptionId,
     uint32 callbackGasLimit
-  ) VRFConsumerBaseV2(vrfCoordindatorV2) {
+  ) VRFConsumerBaseV2(vrfCoordindatorV2) Ownable(new_owner) {
     i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordindatorV2);
     i_keyhash = keyhash;
     i_subscriptionId = subscriptionId;
     i_callbackGasLimit = callbackGasLimit;
   }
+
 
   function requestPromptUpdate() public returns (uint256 requestId) {
     requestId = i_vrfCoordinator.requestRandomWords(
