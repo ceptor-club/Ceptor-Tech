@@ -27,7 +27,7 @@ You need to run the backend in conjunction with the frontend to get this to work
 
 ## Now also has endpoints for user creation and lookup!
 
-you can put `mongodb+srv://verinta:BFWmxukoOsNdIx4x@ceptorclub.rq4oohp.mongodb.net/` into mongodb compass and see the db
+you can put `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
 
 GET /user?wallet=<wallet0x> will give you the user
 POST /user with
