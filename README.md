@@ -110,6 +110,32 @@ Link to readme:
 7. Check that the back-end API is functioning by uploading the fastcharacter.com sheet pdf and generating an image.
 
 
+## 🖥️ Let's Setup smart contract 
+
+1. Go to Backend folder
+
+   `cd smart_contracts`
+
+2. Install all the dependencies
+
+   `npm install`
+   `forge install`
+
+3. Clone .env.example to .env
+
+   `cp .env.example .env`
+
+4. Setting up .env variables
+ 
+  - PRIVATE_KEY=
+- ETHEREUM_SEPOLIA_RPC_URL= 
+ - AVALANCHE_FUJI_RPC_URL= 
+
+5. to compile the smart contract
+ `forge compile`
+6. to deploy the smart contract
+ `forge script ./script/deployer.sol -vvv --rpc-url polygonMumbai --broadcast --sig "deployAll()" `
+
 ## 🖥️ Let's Setup Backend
 
 1. Go to Backend folder
