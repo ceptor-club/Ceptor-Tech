@@ -19,8 +19,8 @@ contract Timer is AccessControl{
     // user to timer, 
     mapping(address => UserTimer) public userToTimer;
 
-    function _startTimer(uint256 _time) internal {
-        userToTimer[msg.sender].endTime = block.timestamp + _time;
+    function _startTimer(address to, uint256 _time) internal {
+        userToTimer[to].endTime = block.timestamp + _time;
      }
         // shoud return true if timer is still running and not used in any operation
      function checkTimer(address user) public view returns (bool) {
