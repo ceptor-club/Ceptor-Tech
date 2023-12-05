@@ -102,7 +102,7 @@ export default function GetDice() {
           ))}
         </div>
       </div>
-      <div className="flex flex-row justify-center items-center  space-y-10 flex-auto">
+      <div className="flex flex-row justify-center items-center  space-y-10 flex-auto flex-wrap">
         <div className="flex flex-col w-1/4">
           <p className="font-oswald text-xl">
             Fill your bag. For a limited time only. Free* NFT Dice that do some

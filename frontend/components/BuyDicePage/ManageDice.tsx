@@ -23,11 +23,11 @@ export default function ManageDice() {
   };
 
   return (
-    <div className="mid-part flex flex-col items-center space-y-10 ">
-      <h1 className="font-nothing-you-could-do text-7xl uppercase ">
+    <div className="bottom flex flex-col items-center space-y-10 ">
+      <h1 className="font-nothing-you-could-do text-4xl uppercase ">
         Manage Dice{" "}
       </h1>
-      <h1 className="font-milonga text-black-xl uppercase text-7xl">
+      <h1 className="font-milonga text-black-xl uppercase text-4xl">
         Your Dice{" "}
       </h1>
       <div>
