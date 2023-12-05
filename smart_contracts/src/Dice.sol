@@ -20,14 +20,14 @@ d4, d6, d8, d10, d12, d20
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-
+import "./Timer.sol";
 interface FunctionInterface {
     function setTimer(address, uint256) external;
 }
 
 // TODO: add burnCount where needed ----------------------------<<<<<<
 
-contract CeptorDice is ERC1155 {
+contract CeptorDice is ERC1155 , Timer {
     struct Token {
         uint256 mintCount;
         uint256 burnCount;
@@ -43,8 +43,7 @@ contract CeptorDice is ERC1155 {
     mapping(address => uint256) public addressMinted; //address => amount minted
 
     constructor() ERC1155("CeptorDice") {
-        _grantRole(OWNER, msg.sender);
-        _grantRole(MINTER, msg.sender);
+     
 
         totalTokens = 0;
     }
@@ -121,7 +120,7 @@ contract CeptorDice is ERC1155 {
         uint256[] memory _prices,
         uint256[] memory _times,
         string[] memory _uris
-    ) public onlyRole(OWNER) {
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
         require(
             _ids.length == _uris.length && _ids.length == _prices.length,
             "Arr not same ln" // <-----------------  NEED TO FIX THIS FOR MORE COMPARES
@@ -146,17 +145,28 @@ contract CeptorDice is ERC1155 {
             }
         }
     }
+    function supportsInterface(bytes4 interfaceId) public view virtual override(AccessControl,ERC1155) returns (bool) {
+        return 
+        interfaceId == type(IERC1155).interfaceId || 
+        interfaceId == type(IAccessControl).interfaceId || 
+        super.supportsInterface(interfaceId);
+    }
+
+//         function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, AccessControl, IERC165, ERC1155) returns (bool) {
+//     return super.supportsInterface(interfaceId);
+// }
+
 
     // PAUSING ----------------------------
 
-    function pauseTokens(uint256[] memory _ids) public onlyRole(OWNER) {
+    function pauseTokens(uint256[] memory _ids) public onlyRole(DEFAULT_ADMIN_ROLE) {
         for (uint256 i = 0; i < _ids.length; i++) {
             require(tokens[_ids[i]].exists, "Doesn't exist.");
             tokens[_ids[i]].paused = true;
         }
     }
 
-    function unpauseTokens(uint256[] memory _ids) public onlyRole(OWNER) {
+    function unpauseTokens(uint256[] memory _ids) public onlyRole(DEFAULT_ADMIN_ROLE) {
         for (uint256 i = 0; i < _ids.length; i++) {
             require(tokens[_ids[i]].exists, "Doesn't exist.");
 
@@ -166,17 +176,17 @@ contract CeptorDice is ERC1155 {
 
     // SETTERS ----------------------------
 
-    function setTokenURI(uint256 _id, string memory _uri) public onlyRole(OWNER) {
+    function setTokenURI(uint256 _id, string memory _uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
         require(tokens[_id].exists, "Doesn't exist.");
         tokens[_id].uri = _uri;
     }
 
-    // function setPrice(uint256 _id, uint256 _price) public onlyRole(OWNER) {
+    // function setPrice(uint256 _id, uint256 _price) public onlyRole(DEFAULT_ADMIN_ROLE) {
     //   require(tokens[_id].exists, "Token doesn't exist.");
     //   tokens[_id].price = _price;
     // }
 
-    function setCeptorAddress(address _address) public onlyRole(OWNER) {
+    function setCeptorAddress(address _address) public onlyRole(DEFAULT_ADMIN_ROLE) {
         ceptorContractAddress = _address;
     }
 
@@ -216,44 +226,10 @@ contract CeptorDice is ERC1155 {
     //   return allTokens;
     // }
 
-    // ACCESS CONTROL ----------------------------
-
-    mapping(bytes32 => mapping(address => bool)) public roles;
-    //0xf0887ba65ee2024ea881d91b74c2450ef19e1557f03bed3ea9f16b037cbe2dc9
-    bytes32 public constant MINTER = keccak256(abi.encodePacked("MINTER")); // minter role is for other contracts to mint tokens
-    bytes32 public constant OWNER = keccak256(abi.encodePacked("OWNER")); // owner role is for the owner of the contract
-
-    modifier onlyRole(bytes32 role) {
-        require(roles[role][msg.sender], "Not authorized.");
-        _;
-    }
-
-    function _grantRole(bytes32 role, address account) internal {
-        roles[role][account] = true;
-    }
-
-    function grantRole(bytes32 role, address account) external onlyRole(OWNER) {
-        _grantRole(role, account);
-    }
-
-    function _revokeRole(bytes32 role, address account) internal {
-        roles[role][account] = false;
-    }
-
-    function revokeRole(bytes32 role, address account) external onlyRole(OWNER) {
-        _revokeRole(role, account);
-    }
-
-    function transferOwnership(address newOwner) external onlyRole(OWNER) {
-        _grantRole(OWNER, newOwner);
-        _grantRole(MINTER, newOwner);
-        _revokeRole(OWNER, msg.sender);
-        _revokeRole(MINTER, msg.sender);
-    }
 
     // WITHDRAW ----------------------------
 
-    function withdraw() public onlyRole(OWNER) {
+    function withdraw() public onlyRole(DEFAULT_ADMIN_ROLE) {
         require(address(this).balance > 0, "No funds");
         payable(msg.sender).transfer(address(this).balance);
     }
