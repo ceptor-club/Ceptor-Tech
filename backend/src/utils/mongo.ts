@@ -1,11 +1,11 @@
-import { MongoClient, ObjectId, Filter } from "mongodb"
+import { MongoClient } from "mongodb"
 require("dotenv").config()
 
 const url = process.env.DB_CONN_STRING as string
 const client = new MongoClient(url)
 
 interface User {
-  _id: ObjectId
+  _id: string
   name: string
   email: string | null
   wallet: string
@@ -34,8 +34,7 @@ export async function saveUser(user: any) {
 //function to connect to mongoDB and get a user from the database
 export async function getUserByWallet(wallet: string) {
   try {
-    const user = await usersCollection.findOne({ wallet })
-    return user
+    return usersCollection.findOne({ wallet: wallet })
   } catch (error) {
     console.error(error)
     return error
@@ -45,19 +44,12 @@ export async function getUserByWallet(wallet: string) {
 //function to get user by _id
 export async function getUserById(_id: string) {
   try {
-    const userId = new ObjectId(_id);
-    const user = await usersCollection.findOne({ _id: userId });
-
-    console.log(user);
-
-    return user;
+    return usersCollection.findOne({_id: _id})
   } catch (error) {
-    console.error(error);
-    return error;
+    console.error(error)
+    return error
   }
 }
-
-console.log(getUserById('some_id_here'))
 
 //function to list all users
 export async function getAllUsers() {

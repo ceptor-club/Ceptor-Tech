@@ -12,7 +12,6 @@ import { CharacterContext } from '../CharacterContext'
 import { useContext, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { User } from '../../../backend/src/utils/mongo'
 
 
 export default function CharacterPage() {
@@ -23,24 +22,24 @@ export default function CharacterPage() {
 
     const [user, setUser] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchUserData = async () => {
-    //         try {
-    //             const response = await fetch(`http://localhost:4000/userData/${User._id}`);
-    //             const userData = await response.json();
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/userData/${User._id}`);
+        const userData = await response.json();
 
-    //             if (response.ok) {
-    //                 setUser(userData.user);
-    //             } else {
-    //                 console.error('Error fetching user data:', userData.error);
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching user data:', error);
-    //         }
-    //     };
+        if (response.ok) {
+          setUser(userData.user);
+        } else {
+          console.error('Error fetching user data:', userData.error);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
 
-    //     fetchUserData();
-    // }, [User._id]);
+    fetchUserData();
+  }, [User._id]);
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -215,7 +214,7 @@ export default function CharacterPage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: character.charName, owner: userId })
+                body: JSON.stringify({name: character.charName, owner: userId})
             })
 
             if (response.ok) {
