@@ -46,14 +46,16 @@ app.get("/users", async (req, res) => {
   users ? res.send(users) : res.send("no users in database")
 })
 
-app.get('/userData/:_id', async (req, res) => {
+app.get('/user/:_id', async (req, res) => {
   try {
     const userId = req.params._id;
+    console.log("UserId from URL: ", userId);
 
     // Convert the string _id to ObjectId
-    const userObjectId = new ObjectId(userId);
+    const objectUserId = new ObjectId(userId);
+    console.log("ObjectIdUserId: ", objectUserId);
 
-    const user = await getUserById(userObjectId);
+    const user = await getUserById(objectUserId);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
