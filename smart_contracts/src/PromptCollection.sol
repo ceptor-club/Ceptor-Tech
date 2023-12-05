@@ -3,17 +3,23 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./Prompt.sol";
+import "./Timer.sol";
+
 
 contract PromptCollection is ERC721, Prompt{
+    address public diceContract;
     constructor(
         address new_owner,
         address vrfCoordindatorV2,
+        address _diceContract,
         bytes32 keyhash, /* gasLane */
         uint64 subscriptionId,
         uint32 callbackGasLimit
     ) ERC721("PromptCollection", "PC") Prompt (new_owner, vrfCoordindatorV2, keyhash, subscriptionId, callbackGasLimit)
     
-    {}
+    {
+        diceContract = _diceContract;
+    }
 
    
     mapping(uint256 => uint256[]) public weekNFTs;
@@ -22,8 +28,14 @@ contract PromptCollection is ERC721, Prompt{
         require(weekTimeStamp != 0, "week not set");
         if (block.timestamp < weekTimeStamp + 604800) {
             // check burning timer
+             if (!Timer(diceContract).checkTimer(msg.sender)) {
+                 revert TimerExpired();
+             }
             uint256 tokenId = encodeTokenId(weekTimeStamp, weekNFTs[weekNumber].length);
             weekNFTs[weekTimeStamp].push(tokenId);
+            // stop burning timer
+            Timer(diceContract).makeTimerUsed(msg.sender);
+
             _mint(msg.sender, tokenId);
         }
     }
@@ -49,4 +61,8 @@ contract PromptCollection is ERC721, Prompt{
     //     uint256 num1 = tokenId >> 128;
     //     return (num1, num2);
     // }
+
+    error TimerExpired();
+
+
 }
