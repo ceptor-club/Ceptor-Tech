@@ -45,51 +45,56 @@ export default function GetDice() {
   };
 
   return (
-    <div className="padding-top-10  mid-part flex flex-col items-center space-y-10">
+    <div className=" mid-part flex flex-col items-center space-y-10">
       <div className="flex flex-col justify-center items-center">
-        <h1 className="font-nothing-you-could-do text-4xl uppercase">
+        <h1 className="font-nothing-you-could-do text-4xl uppercase mb-10">
           Buy Dice
         </h1>
-        <h1 className="font-milonga text-7xl uppercase">
+        <h1 className="font-milonga text-2xl uppercase text-light-yellow">
           Limited Edition Free*
         </h1>
-        <h1 className="font-oswald text-7xl uppercase">Ceptor Dice</h1>
+        <h1 className="font-oswald text-7xl uppercase font-bold">
+          Ceptor Dice
+        </h1>
       </div>
       <div className="flex flex-row justify-center items-center">
-        <div className="flex flex-col">
-          <p className="font-oswald">$</p>
-          <p className="font-oswald uppercase">Buy</p>
+        <div className="flex flex-col space-x-5">
+          <div>
+            <p className="font-oswald">$</p>
+            <p className="font-oswald uppercase">Buy</p>
+          </div>
           <p className="font-oswald uppercase m-5">Time</p>
         </div>
         <div className="flex flex-row-reverse space-x-5">
-          {Object.entries(userBag).map(([key, value]) => (
+          {Object.entries(userBag).map(([key, value], index) => (
             <div className="flex flex-col m-5" key={key}>
-              <button className="relative" onClick={() => addValue(key)}>
-                {" "}
-                <Image
-                  src="/images/Buttons/button-up.svg"
-                  alt=""
-                  width={200}
-                  height={10}
-                  className="absolute top-0 left-0  object-cover min-h-full min-w-full"
-                />
-              </button>
-              <p className="font-oswald bg-white text-black p-5 rounded-xl">
-                {value}
-              </p>
-              <button
-                className="relative -mt-4"
-                onClick={() => decreaseValue(key)}
-              >
-                <Image
-                  src="/images/Buttons/button-down.svg"
-                  alt=""
-                  width={200}
-                  height={10}
-                  className="absolute  left-0  object-cover min-h-full min-w-full"
-                />
-              </button>
-
+              <div className={`dice-${index}`}>
+                <button className="relative mb-5" onClick={() => addValue(key)}>
+                  {" "}
+                  <Image
+                    src="/images/CREATE-dice/arrow-up.png"
+                    alt=""
+                    width={15}
+                    height={10}
+                    className="object-cover min-h-full min-w-full m-4"
+                  />
+                </button>
+                <p className="font-oswald bg-white text-black p-5 rounded-xl z-1">
+                  {value}
+                </p>
+                <button
+                  className="relative mt-5"
+                  onClick={() => decreaseValue(key)}
+                >
+                  <Image
+                    src="/images/CREATE-dice/arrow-down.png"
+                    alt=""
+                    width={15}
+                    height={10}
+                    className="  object-cover min-h-full min-w-full m-4"
+                  />
+                </button>
+              </div>
               <p className="font-oswald color-white text-white mt-10 uppercase">
                 {key + "Min"}
               </p>
@@ -110,27 +115,32 @@ export default function GetDice() {
             blockchain they mint to.
           </p>
         </div>
-        <div className="flex flex-col  ">
+        <div className="flex flex-col  justify-center items-center">
           <p className="uppercase font-oswald text-l">Your dice shopping bag</p>
-          <div className=" flex flex-col">
-            <p className="font-oswald text-l uppercase">QTY</p>
+          <div className="backpack-small flex flex-col text-black justify-center items-center">
+            <p className="font-oswald text-xs uppercase">QTY</p>
             <p className="font-oswald text-3xl">{quantity}</p>
-            <p className="font-oswald text-2xl uppercase">{minutes} Min</p>
-            <p className="font-oswald text-grey text-m uppercase">Total Time</p>
+            <p className="font-oswald text-xl uppercase">{minutes} Min</p>
+            <p className="font-oswald text-grey text-xs uppercase">
+              Total Time
+            </p>
           </div>
           <p className="uppercase font-oswald text-m">Max 10 Dice</p>
         </div>
-        <div className="flex flex-col ">
+        <div className="align-center flex flex-col justify-center items-center space-y-3">
           <button
-            className="buy-dice-button-bg font-nothing-you-could-do text-4xl uppercase"
+            className="free-bg font-nothing-you-could-do text-4xl uppercase text-black"
             onClick={() => buyDice()}
           >
             Buy
           </button>
-          <div className=" flex flex-col">
-            <p className="font-oswald text-l uppercase">Price: $0.00 USD </p>
-            <p className="font-oswald text-l ">estimated gas :</p>
-            <p className="font-oswald text-grey text-l uppercase">
+          <div className=" flex flex-col text-lg justify-center items-center mb-1">
+            <div className="flex flex-row">
+              <p className="font-oswald text-l uppercase">Price:&nbsp;</p>
+              <p className="text-light-yellow font-oswald ">$0.00 USD</p>
+            </div>
+            <p className="font-oswald text-l uppercase">estimated gas :</p>
+            <p className="font-oswald text-grey text-xs uppercase font-thin">
               (Less Than $0.01 USD)
             </p>
           </div>

@@ -23,21 +23,22 @@ export default function ManageDice() {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-10 mt-20">
+    <div className="mid-part flex flex-col items-center space-y-10 ">
       <h1 className="font-nothing-you-could-do text-7xl uppercase ">
         Manage Dice{" "}
       </h1>
       <h1 className="font-milonga text-black-xl uppercase text-7xl">
         Your Dice{" "}
       </h1>
-      <Image
-        src="/images/CREATE/flame-burn.jpeg"
-        alt=""
-        width={200}
-        height={200}
-        className="top-0 left-0  object-cover min-h-full min-w-full"
-      />
-
+      <div>
+        <Image
+          src="/images/CREATE/flame-burn.jpeg"
+          alt=""
+          width={200}
+          height={200}
+          className="top-0 left-0  object-cover min-h-full min-w-full"
+        />
+      </div>
       <div className="flex flex-row justify-center items-center">
         <div className="flex flex-col">
           <p className="font-oswald">$</p>
@@ -68,7 +69,7 @@ export default function ManageDice() {
           {minutes + " Minutes"}
         </p>
         <button
-          className="bg-orange-500 pl-3 pr-3 pt-1 pt-1 text-2xl rounded-lg text-black font-nothing-you-could-do"
+          className="bg-orange-500 pl-3 pr-3 pt-1  text-2xl rounded-lg text-black font-nothing-you-could-do"
           onClick={() => burn()}
         >
           Burn

@@ -13,7 +13,7 @@ export default function BuyDiceCover() {
         <Logo setConditionalRender={setConditionalRender} />
       </div>
       <div className="buy-dice-header-bg">
-        <div className="backpack blue">
+        <div className="align-center backpack blue content-center flex flex-col items-center justify-center">
           <h1 className="free-bg font-nothing-you-could-do text-4xl uppercase text-black">
             Free{" "}
           </h1>

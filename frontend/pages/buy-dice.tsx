@@ -5,7 +5,7 @@ import ManageDice from "../components/BuyDicePage/ManageDice";
 
 export default function BuyDice() {
   return (
-    <div className="flex flex-col justify-center items-center ">
+    <div className="flex flex-col justify-center items-center mb-10">
       <BuyDiceCover></BuyDiceCover>
       <GetDice></GetDice>
       <ManageDice></ManageDice>
