@@ -7,7 +7,7 @@ export async function getServerSideProps() {
   getServerSideProperties();
 }
 
-const NFTPage = ({
+export default function NFTPage({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
@@ -15,7 +15,7 @@ const NFTPage = ({
   ALCHEMY_GOERLI_API_KEY: string;
   ALCHEMY_SEPOLIA_API_KEY: string;
   ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
-}) => {
+}) {
   return (
     <div>
       <Link href="/" className="fixed top-4 left-4 z-50">
@@ -31,6 +31,4 @@ const NFTPage = ({
       />
     </div>
   );
-};
-
-export default NFTPage;
+}
