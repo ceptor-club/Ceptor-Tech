@@ -1,54 +1,63 @@
-/// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./Prompt.sol";
 import "./Timer.sol";
 
-
-contract PromptCollection is ERC721, Prompt{
+/// @title PromptCollection Contract
+/// @dev Extends ERC721 and Prompt contracts to manage collections of NFTs with specific functionality.
+contract PromptCollection is ERC721, Prompt {
     address public diceContract;
+
+    /// @dev Constructor initializes the contract with the specified parameters and sets the Dice contract address.
     constructor(
         address new_owner,
         address vrfCoordindatorV2,
         address _diceContract,
-        bytes32 keyhash, /* gasLane */
+        bytes32 keyhash,
         uint64 subscriptionId,
         uint32 callbackGasLimit
-    ) ERC721("PromptCollection", "PC") Prompt (new_owner, vrfCoordindatorV2, keyhash, subscriptionId, callbackGasLimit)
-    
+    )
+        ERC721("PromptCollection", "PC")
+        Prompt(new_owner, vrfCoordindatorV2, keyhash, subscriptionId, callbackGasLimit)
     {
         diceContract = _diceContract;
     }
 
-   
+    // Mapping from a week timestamp to an array of NFT IDs minted during that week
     mapping(uint256 => uint256[]) public weekNFTs;
- 
+
+    /// @notice Mints an NFT if the current timestamp is within the current week.
+    /// @dev Requires the burning timer to be active, checks the week timestamp, and mints a unique NFT ID.
     function mint() public {
         require(weekTimeStamp != 0, "week not set");
         if (block.timestamp < weekTimeStamp + 604800) {
-            // check burning timer
-             if (!Timer(diceContract).checkTimer(msg.sender)) {
-                 revert TimerExpired();
-             }
+            // Check if the burning timer is still active
+            if (!Timer(diceContract).checkTimer(msg.sender)) {
+                revert TimerExpired();
+            }
+
+            // Generate a unique token ID and mint the NFT
             uint256 tokenId = encodeTokenId(weekTimeStamp, weekNFTs[weekNumber].length);
             weekNFTs[weekTimeStamp].push(tokenId);
-            // stop burning timer
+
+            // Stop the burning timer
             Timer(diceContract).makeTimerUsed(msg.sender);
 
+            // Mint the NFT to the sender
             _mint(msg.sender, tokenId);
         }
     }
 
-    /**
-     * This function takes two numbers (num1 and num2) as input parameters.
-     * It shifts the bits of num1 to the left by 128 positions. This effectively places the bits of num1 in the higher-order bits of the resulting token ID.
-     * It then uses the bitwise OR (|) operator to combine the shifted num1 with num2. This creates a 256-bit integer where the higher-order bits represent num1 and the lower-order bits represent num2.
-     * The combined integer is returned as the unique token ID.
-     */
+    /// @dev Encodes two numbers into a unique token ID.
+    /// @param num1 The higher-order bits of the token ID.
+    /// @param num2 The lower-order bits of the token ID.
+    /// @return The unique token ID combining num1 and num2.
     function encodeTokenId(uint256 num1, uint256 num2) internal pure returns (uint256) {
         return (num1 << 128) | num2;
     }
+
 
     /**
      * This function takes a token ID (tokenId) as an input parameter.
@@ -61,8 +70,6 @@ contract PromptCollection is ERC721, Prompt{
     //     uint256 num1 = tokenId >> 128;
     //     return (num1, num2);
     // }
-
+    /// @dev Error thrown when the burning timer has expired.
     error TimerExpired();
-
-
 }
