@@ -309,9 +309,11 @@ export default function CharacterPage() {
                     )}
                 </div>
                 <div className='flex flex-row mt-0'>
-                    <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
-                        Save Character?
-                    </button>
+                    <Link href='/'>
+                        <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
+                            Save Character?
+                        </button>
+                    </Link>
                     <Link href='http://localhost:3000/issuecredentials'>
                         <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={exportCharacter}>
                             Export to Bit Bender
