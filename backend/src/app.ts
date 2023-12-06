@@ -13,7 +13,7 @@ const io = require("socket.io")(server, {
 });
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
-import { getUserByWallet, saveUser, getAllUsers, saveCharacterData, getAllCharacters, getUserById } from "./utils/mongo";
+import { getUserByWallet, saveUser, getAllUsers, saveCharacterData, getAllCharacters, getUserById, getCharacterById } from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
@@ -36,16 +36,19 @@ app.get("/", (req, res) => {
   res.send("test should have been successful");
 });
 
+//see user by wallet
 app.get("/user/:wallet", async (req, res) => {
   const user = await getUserByWallet(req.params.wallet);
   user ? res.send(user) : res.send("user not found");
 });
 
+//see all users
 app.get("/users", async (req, res) => {
   const users = await getAllUsers()
   users ? res.send(users) : res.send("no users in database")
 })
 
+//see user by _id
 app.get('/userData/:_id', async (req, res) => {
   try {
     const userId = req.params._id;
@@ -66,20 +69,47 @@ app.get('/userData/:_id', async (req, res) => {
   }
 });
 
+//save user
 app.post("/user", async (req, res) => {
   const user = await saveUser(req.body);
   res.send(user);
 });
 
-app.post("/characterData", async (req, res) => {
-  const characterData = await saveCharacterData(req.body)
-  res.send(characterData)
-})
+//save character
+//NEEDS WORK TO SAVE TO SPECIFIC USER
+// app.post("/characterData", async (req, res) => {
+//   const userId = req.user._id;
+//   const characterData = req.body;
+//   const savedCharacterData = await saveCharacterData(characterData, userId)
+//   res.send(savedCharacterData)
+// })
 
+//see all characters
 app.get("/characterData", async (req, res) => {
   const characters = await getAllCharacters()
   characters ? res.send(characters) : res.send("no characters in database")
 })
+
+//get character by id
+app.get('/userData/:_id', async (req, res) => {
+  try {
+    const characterId = req.params._id;
+
+    // Convert the string _id to ObjectId
+    const characterObjectId = new ObjectId(characterId);
+
+    const character = await getCharacterById(characterObjectId);
+
+    if (!character) {
+      return res.status(404).json({ error: 'Character not found' });
+    }
+
+    res.json(character);
+  } catch (error) {
+    console.error('Error fetching character data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 io.on("connection", (socket: any) => {
   console.log("A user connected");

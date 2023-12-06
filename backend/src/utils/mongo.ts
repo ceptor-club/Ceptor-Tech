@@ -44,7 +44,7 @@ export async function getUserByWallet(wallet: string) {
 //function to get user by _id
 export async function getUserById(_id: string) {
   try {
-    return usersCollection.findOne({_id: _id})
+    return usersCollection.findOne({ _id: _id })
   } catch (error) {
     console.error(error)
     return error
@@ -65,8 +65,10 @@ export async function getAllUsers() {
 }
 
 //function to save character data
-export async function saveCharacterData(characterData: any) {
+export async function saveCharacterData(characterData: any, userId: string) {
   try {
+
+    characterData.owner = getUserById(userId)
     return characterDataCollection.insertOne(characterData)
   } catch (error) {
     throw new Error("Error saving character data")
@@ -81,5 +83,15 @@ export async function getAllCharacters() {
     return characterDataArry
   } catch (error) {
     throw new Error("Error retrieving character data from the database")
+  }
+}
+
+//function to get character by id
+export async function getCharacterById(_id: string) {
+  try {
+    return characterDataCollection.findOne({ _id: _id })
+  } catch (error) {
+    console.error(error)
+    return error
   }
 }
