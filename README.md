@@ -3,7 +3,7 @@
 Todo:
 - [x] Provide a quick start guide for devs and judges
 - [x] Explain the 3 teams (Art + Tech + Games) and how they work together
-- [ ] High level overview of Ceptor Club and our goal for this hackathon / future
+- [x] High level [overview of Ceptor Club and our goal for this hackathon](https://docs.google.com/document/d/1tzb8Nj6E7Tyr8YrIWLrJBskozBuCecXe3IotgcpygKo/edit?usp=sharing) / future
 - [ ] Onboard all 3 teams to this repo
 - [ ] Add Art, Tech, and Games pages to the navbar and front-end.
 
@@ -27,10 +27,10 @@ Each team will have their own narrative, demo video, internal page and readme li
 
 > Team Art (Artour) will support overall branding and help with our demo videos/team narratives, in addition to creating an end-to-end session zero experience following character creation. They are making sure our app and images generation looks good.
 
-- Michael Finney
-- Melinda McClimans
-- Spencer Kinney
-- leomofthings.eth (Front End Development)
+- Michael Finney (Design & Video)
+- Melinda McClimans (Product & Research)
+- Spencer Kinney (Engineer)
+- Sam Yeh (boy wonder, and unofficial mascot -- creator of the AI prompt battler)
 
 Link to readme:
 
@@ -38,7 +38,7 @@ Link to readme:
 
 > Team Games will make sure our overall project is fun and usable.  They are building a couple small games and activities: Improved character creation and fun quiz, rollable 3D Big Dice, AI Prompt Battler, to make our app more “sticky.”
 
-- Sam Yeh
+- leomofthings.eth (Front End Development)
 - Jason A
 - Vince
 - Alan Barry

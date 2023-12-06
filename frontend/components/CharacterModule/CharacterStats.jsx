@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { createPrompt } from '../../utils/promptGen';
@@ -12,7 +11,6 @@ import InfoIcon from "../InfoIcon";
 const characterStatsTT =
   "Here's what we're working with from your stat sheet. You can customize it prior to generating, or edit it later in \"Advanced\"";
 
-
 const CharacterStats = ({
   pdfData,
   prompt,
@@ -22,10 +20,12 @@ const CharacterStats = ({
   imageResult,
   advanced,
 }) => {
-  const { characterData } = useContext(CharacterContext)
+  const { characterData } = useContext(CharacterContext);
+  const allRaces = [...CONSTANTS.humanoidCharacterRaces, ...CONSTANTS.exoticCharacterRaces]
+
   useEffect(() => {
     if (!advanced && pdfData) {
-       console.log("pdfData: ", pdfData); 
+      console.log("pdfData: ", pdfData);
       //create text prompt using pdfData and other data
       const prompt = createPrompt(pdfData);
       setPrompt(prompt);
@@ -34,19 +34,22 @@ const CharacterStats = ({
     if (characterData.myClass !== pdfData.class) {
       setPdfData({ ...pdfData, class: characterData.myClass })
     }
+    if (characterData.species !== pdfData.race) {
+      setPdfData({ ...pdfData, race: characterData.species })
+    }
     if (characterData.background !== pdfData.background) {
       setPdfData({ ...pdfData, background: characterData.background })
     }
     if (characterData.myAlignment !== pdfData.alignment) {
-      setPdfData({...pdfData, alignment: characterData.myAlignment})
+      setPdfData({ ...pdfData, alignment: characterData.myAlignment })
     }
-    if(characterData.gender !== pdfData.gender) {
+    if (characterData.gender !== pdfData.gender) {
       if (characterData.gender === "He" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "He / Him"})
+        setPdfData({ ...pdfData, gender: "He / Him" })
       } else if (characterData.gender === "She" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "She / Hers"})
+        setPdfData({ ...pdfData, gender: "She / Hers" })
       } else if (characterData.gender === "They" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "They / Them"})
+        setPdfData({ ...pdfData, gender: "They / Them" })
       }
     }
     console.log(pdfData)
@@ -63,6 +66,18 @@ const CharacterStats = ({
       setPdfData({ ...pdfData, class: "" });
     }
   };
+
+  const handleRaceSelect = (e) => {
+    const input = document.getElementById("raceInput");
+    if (
+      document.getElementById("raceCheck").checked === true &&
+      input.value !== ""
+    ) {
+      setPdfData({ ...pdfData, race: input.value })
+    } else {
+      setPdfData({ ...pdfData, race: "" })
+    }
+  }
 
   const handleArmorSelect = (e) => {
     const input = document.getElementById("armorInput");
@@ -142,9 +157,8 @@ const CharacterStats = ({
               className="absolute top-0 left-0 -z-10 object-cover min-h-full min-w-full"
             />
             <div
-              className={`${
-                imageResult ? "grayscale" : ""
-              } text-sm relative top-0 text-white sm:w-full opacity-in opacity-load`}
+              className={`${imageResult ? "grayscale" : ""
+                } text-sm relative top-0 text-white sm:w-full opacity-in opacity-load`}
             >
               <h4 className="text-center text-2xl pt-4">Character Stats</h4>
 
@@ -162,13 +176,26 @@ const CharacterStats = ({
                 </div>
                 <div className="flex items-center mx-[48px] mt-2 mb-4">
                   <input
+                    id="raceCheck"
                     type="checkbox"
                     className="checkbox-stats"
-                    checked
-                    readOnly
+                    onChange={handleRaceSelect}
+                    defaultChecked
                     disabled={imageResult}
                   ></input>
-                  <p className="mx-4">(LOCKED) RACE: Dragonborn</p>
+                  <p className="mx-4">RACE: </p>
+                  <select
+                    id="raceInput"
+                    className="bg-transparent resize-none h-6  bg-slate-200 text-black flex-grow"
+                    onChange={handleRaceSelect}
+                  >
+                    <option value=''>
+                      {pdfData.race ? pdfData.race : "Select a Race"}
+                    </option>
+                    {allRaces.map((characterRace) => (
+                      <option key={characterRace}>{characterRace}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="flex items-center mx-[48px] mt-2 mb-4">
                   <input
@@ -340,7 +367,7 @@ const CharacterStats = ({
               </div>
               <h4 className="text-center">EDIT THIS LATER IN ADVANCED</h4>
             </div>
-            
+
             <Tooltip content={characterStatsTT}>
             </Tooltip>
           </div>

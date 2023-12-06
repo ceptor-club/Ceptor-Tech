@@ -1,17 +1,16 @@
-import Image from 'next/image';
-import React from 'react';
+import React from "react";
 import {
   useContractRead,
   useContractReads,
   useContractWrite,
   usePrepareContractWrite,
   useWaitForTransaction,
-} from 'wagmi';
-import { CONSTANTS } from '../utils/CONSTANTS';
-import { useEffect, useState } from 'react';
-import { useAccount, useDisconnect } from 'wagmi';
-import { useWeb3Modal } from '@web3modal/react';
-import Countdown from 'react-countdown';
+} from "wagmi";
+import { CONSTANTS } from "../utils/CONSTANTS";
+import { useEffect, useState } from "react";
+import { useAccount, useDisconnect } from "wagmi";
+import { useWeb3Modal } from "@web3modal/react";
+import Countdown from "react-countdown";
 
 const DiceDashboard = ({}) => {
   const [diceBalance, setDiceBalance] = useState({
@@ -22,7 +21,7 @@ const DiceDashboard = ({}) => {
     4: null,
     5: null,
   });
-  const [userTimer, setUserTimer] = useState('');
+  const [userTimer, setUserTimer] = useState("");
 
   const { address, isConnected } = useAccount();
 
@@ -34,7 +33,7 @@ const DiceDashboard = ({}) => {
   const { data: userTimerRead } = useContractRead({
     address: CONSTANTS.ceptorAddress,
     abi: CONSTANTS.ceptorABI,
-    functionName: 'userTimers',
+    functionName: "userTimers",
     args: [address],
     watch: true,
   });
@@ -56,32 +55,32 @@ const DiceDashboard = ({}) => {
     contracts: [
       {
         ...diceContract,
-        functionName: 'balanceOf',
+        functionName: "balanceOf",
         args: [address, 0],
       },
       {
         ...diceContract,
-        functionName: 'balanceOf',
+        functionName: "balanceOf",
         args: [address, 1],
       },
       {
         ...diceContract,
-        functionName: 'balanceOf',
+        functionName: "balanceOf",
         args: [address, 2],
       },
       {
         ...diceContract,
-        functionName: 'balanceOf',
+        functionName: "balanceOf",
         args: [address, 3],
       },
       {
         ...diceContract,
-        functionName: 'balanceOf',
+        functionName: "balanceOf",
         args: [address, 4],
       },
       {
         ...diceContract,
-        functionName: 'balanceOf',
+        functionName: "balanceOf",
         args: [address, 5],
       },
     ],
@@ -96,7 +95,7 @@ const DiceDashboard = ({}) => {
   const { config: configMint } = usePrepareContractWrite({
     address: CONSTANTS.diceAddress,
     abi: CONSTANTS.diceABI,
-    functionName: 'mintBatch',
+    functionName: "mintBatch",
     args: [_ids, _amounts],
   });
 
@@ -114,9 +113,9 @@ const DiceDashboard = ({}) => {
       if (!isConnected) {
         open();
       } else if (isConnected) {
-        console.log('wallet is connected');
+        console.log("wallet is connected");
       }
-      console.log('mint dice');
+      console.log("mint dice");
 
       writeMint();
     } catch (error) {
@@ -133,7 +132,7 @@ const DiceDashboard = ({}) => {
   const { config: configBurn } = usePrepareContractWrite({
     address: CONSTANTS.diceAddress,
     abi: CONSTANTS.diceABI,
-    functionName: 'timerBurn',
+    functionName: "timerBurn",
     args: [address, _idsBurn, _amountsBurn],
   });
 
@@ -151,9 +150,9 @@ const DiceDashboard = ({}) => {
       if (!isConnected) {
         open();
       } else if (isConnected) {
-        console.log('wallet is connected');
+        console.log("wallet is connected");
       }
-      console.log('burn dice');
+      console.log("burn dice");
 
       writeBurn();
     } catch (error) {
@@ -163,13 +162,13 @@ const DiceDashboard = ({}) => {
 
   useEffect(() => {
     if (isSuccessMinting || isSuccessBurn) {
-      console.log('success burn', isSuccessBurn);
+      console.log("success burn", isSuccessBurn);
       refetch();
     }
     if (isConnected && diceData) {
       const newDiceBalance = {};
       diceData.forEach((balance, i) => {
-        console.log('balance: ', i, parseInt(balance));
+        console.log("balance: ", i, parseInt(balance));
         newDiceBalance[i] = parseInt(balance);
       });
 
@@ -186,7 +185,7 @@ const DiceDashboard = ({}) => {
 
   return (
     <>
-      <div className='mb-2'>
+      <div className="mb-2">
         {address ? (
           <>
             <p>Dice Balance</p>
@@ -198,15 +197,15 @@ const DiceDashboard = ({}) => {
             <p>5: {diceBalance[5]}</p>
             <button
               onClick={mintDice}
-              className='block text-center p-2 bg-white text-black rounded-lg my-2 active:bg-gray-200'
+              className="block text-center p-2 bg-white text-black rounded-lg my-2 active:bg-gray-200"
             >
-              {txnLoadingMinting ? 'Minting Dice...' : 'Mint Dice'}
+              {txnLoadingMinting ? "Minting Dice..." : "Mint Dice"}
             </button>
             <button
               onClick={burnDice}
-              className='block text-center p-2 bg-orange-200 text-black rounded-lg my-2 active:bg-gray-200'
+              className="block text-center p-2 bg-orange-200 text-black rounded-lg my-2 active:bg-gray-200"
             >
-              {txnLoadingBurn ? 'Burning Dice...' : 'Burn Dice'}
+              {txnLoadingBurn ? "Burning Dice..." : "Burn Dice"}
             </button>
             {userTimer && (
               <>
