@@ -2,6 +2,10 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 require("dotenv").config();
 import ethers from "ethers";
+import { runMiddleware } from "./auth";
+import { getImages } from "./utils/getImages";
+import { getUser, saveUser, updateNFTVotes, getHighestVotedNFT } from "./utils/mongo";
+ 
 const app: Application = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
@@ -10,18 +14,14 @@ const io = require("socket.io")(server, {
     methods: ["GET", "POST"],
   },
 });
-import { runMiddleware } from "./auth";
-import { getImages } from "./utils/getImages";
-import { getUser, saveUser } from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
 app.use(runMiddleware);
 
-//use middleware with socket.io to parse incoming requests with JSON payloads
+// use middleware with socket.io to parse incoming requests with JSON payloads
 io.use((socket: any, next: any) => {
   const token = socket.handshake.auth.token;
-  // console.log("token in middleware", token);
   if (token !== process.env.API_KEY) {
     return next(new Error("unauthorized"));
   }
@@ -29,9 +29,9 @@ io.use((socket: any, next: any) => {
   next();
 });
 
-//test socket
+// test socket
 app.get("/", (req, res) => {
-  io.emit("test", "test"); //using io sends to all clients
+  io.emit("test", "test");
   res.send("test should have been successful");
 });
 
@@ -43,6 +43,30 @@ app.get("/user", async (req, res) => {
 app.post("/user", async (req, res) => {
   const user = await saveUser(req.body);
   res.send(user);
+});
+
+// new endpoint to update NFT votes
+app.put("/update-nft-votes", async (req: Request, res: Response) => {
+  try {
+    const nft_id = req.body as string;
+    const modifiedCount = await updateNFTVotes(nft_id);
+    res.json({ modifiedCount });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to update NFT votes" });
+  }
+});
+
+// new endpoint to get the highest-voted NFT
+app.get("/highest-voted-nft/:weekTimestamp", async (req: Request, res: Response) => {
+  try {
+    const weekTimestamp = parseInt(req.params.weekTimestamp, 10);
+    const highestVotedNFT = await getHighestVotedNFT(weekTimestamp);
+    res.json(highestVotedNFT);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to retrieve highest-voted NFT" });
+  }
 });
 
 io.on("connection", (socket: any) => {
@@ -60,16 +84,10 @@ io.on("connection", (socket: any) => {
     console.log("image request received", data);
     getImages(data).then((response: any) => {
       console.log("response from getImages", response);
-      socket.emit("imageResponse", response); //using socket instead of IO to send to only the client that requested the images
+      socket.emit("imageResponse", response);
     });
   });
 });
-
-//listen for mintevents
-// const webSocketProvider = new ethers.providers.AlchemyWebSocketProvider(
-//   process.env.ETH_NETWORK,
-//   process.env.ALCHEMY_API_KEY
-// )
 
 server.listen(process.env.PORT, () =>
   console.log(`Server Running on ${process.env.PORT}`)
