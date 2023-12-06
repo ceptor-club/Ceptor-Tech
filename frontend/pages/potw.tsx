@@ -6,10 +6,21 @@ import Link from "next/link";
 import { Countdown } from "../components/Countdown";
 import { sepolia, useNetwork } from "wagmi";
 import NftCard from "../components/NftCard";
-import { getServerSideProperties } from "../utils/getServerSideProps";
+// import { getServerSideProperties } from "../utils/getServerSideProps";
 
-export async function getServerSideProps() {
-  getServerSideProperties();
+export async function getServerSideProperties() {
+  const ALCHEMY_GOERLI_API_KEY = process.env.ALCHEMY_GOERLI_API_KEY;
+  const ALCHEMY_SEPOLIA_API_KEY = process.env.ALCHEMY_SEPOLIA_API_KEY;
+  const ALCHEMY_POLYGON_ZKEVM_API_KEY =
+    process.env.ALCHEMY_POLYGON_ZKEVM_API_KEY;
+
+  return {
+    props: {
+      ALCHEMY_GOERLI_API_KEY,
+      ALCHEMY_SEPOLIA_API_KEY,
+      ALCHEMY_POLYGON_ZKEVM_API_KEY,
+    },
+  };
 }
 
 export default function PotW({

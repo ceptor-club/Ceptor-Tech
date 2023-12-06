@@ -39,10 +39,10 @@ export const Countdown = ({ deadline }: { deadline: Date }) => {
 
   return (
     <div>
-      <h3 color="gray" variant="h4" className="ml-3 mt-4">
+      <h3 color="gray" className="ml-3 mt-4">
         Deadline
       </h3>
-      <h3 variant="h3" id="deadline" className="ml-3">
+      <h3 id="deadline" className="ml-3">
         {countdown}
       </h3>
     </div>

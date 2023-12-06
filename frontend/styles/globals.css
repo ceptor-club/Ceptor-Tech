@@ -261,7 +261,7 @@ option {
   width: 30vw; /* Full width */
 }
 
-.dice-0 {
+.dice-0::before {
   margin: 0;
   padding: 0;
   z-index: 2;
