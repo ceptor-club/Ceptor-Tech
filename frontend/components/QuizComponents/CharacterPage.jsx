@@ -22,24 +22,24 @@ export default function CharacterPage() {
 
     const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(`http://localhost:4000/userData/${User._id}`);
-        const userData = await response.json();
+    //   useEffect(() => {
+    //     const fetchUserData = async () => {
+    //       try {
+    //         const response = await fetch(`http://localhost:4000/userData/${User._id}`);
+    //         const userData = await response.json();
 
-        if (response.ok) {
-          setUser(userData.user);
-        } else {
-          console.error('Error fetching user data:', userData.error);
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
+    //         if (response.ok) {
+    //           setUser(userData.user);
+    //         } else {
+    //           console.error('Error fetching user data:', userData.error);
+    //         }
+    //       } catch (error) {
+    //         console.error('Error fetching user data:', error);
+    //       }
+    //     };
 
-    fetchUserData();
-  }, [User._id]);
+    //     fetchUserData();
+    //   }, [User._id]);
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -208,13 +208,13 @@ export default function CharacterPage() {
         setCharacterData(character)
         try {
 
-            const userId = User._id
+            // const userId = User._id
             const response = await fetch('http://localhost:4000/characterData', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({name: character.charName, owner: userId})
+                body: JSON.stringify({ name: character.charName })
             })
 
             if (response.ok) {
