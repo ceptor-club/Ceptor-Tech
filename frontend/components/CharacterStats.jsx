@@ -21,6 +21,8 @@ const CharacterStats = ({
   advanced,
 }) => {
   const { characterData } = useContext(CharacterContext);
+  const allRaces = [...CONSTANTS.humanoidCharacterRaces, ...CONSTANTS.exoticCharacterRaces]
+
   useEffect(() => {
     if (!advanced && pdfData) {
       console.log("pdfData: ", pdfData);
@@ -31,6 +33,9 @@ const CharacterStats = ({
     }
     if (characterData.myClass !== pdfData.class) {
       setPdfData({ ...pdfData, class: characterData.myClass });
+    }
+    if (characterData.species !== pdfData.race) {
+      setPdfData({ ...pdfData, race: characterData.species })
     }
     if (characterData.background !== pdfData.background) {
       setPdfData({ ...pdfData, background: characterData.background });
@@ -61,6 +66,18 @@ const CharacterStats = ({
       setPdfData({ ...pdfData, class: "" });
     }
   };
+
+  const handleRaceSelect = (e) => {
+    const input = document.getElementById("raceInput");
+    if (
+      document.getElementById("raceCheck").checked === true &&
+      input.value !== ""
+    ) {
+      setPdfData({ ...pdfData, race: input.value })
+    } else {
+      setPdfData({ ...pdfData, race: "" })
+    }
+  }
 
   const handleArmorSelect = (e) => {
     const input = document.getElementById("armorInput");
@@ -140,9 +157,8 @@ const CharacterStats = ({
               className="absolute top-0 left-0 -z-10 object-cover min-h-full min-w-full"
             />
             <div
-              className={`${
-                imageResult ? "grayscale" : ""
-              } text-sm relative top-0 text-white sm:w-full opacity-in opacity-load`}
+              className={`${imageResult ? "grayscale" : ""
+                } text-sm relative top-0 text-white sm:w-full opacity-in opacity-load`}
             >
               <h4 className="text-center text-2xl pt-4">Character Stats</h4>
 
@@ -160,13 +176,26 @@ const CharacterStats = ({
                 </div>
                 <div className="flex items-center mx-[48px] mt-2 mb-4">
                   <input
+                    id="raceCheck"
                     type="checkbox"
                     className="checkbox-stats"
-                    checked
-                    readOnly
+                    onChange={handleRaceSelect}
+                    defaultChecked
                     disabled={imageResult}
                   ></input>
-                  <p className="mx-4">(LOCKED) RACE: Dragonborn</p>
+                  <p className="mx-4">RACE: </p>
+                  <select
+                    id="raceInput"
+                    className="bg-transparent resize-none h-6  bg-slate-200 text-black flex-grow"
+                    onChange={handleRaceSelect}
+                  >
+                    <option value=''>
+                      {pdfData.race ? pdfData.race : "Select a Race"}
+                    </option>
+                    {allRaces.map((characterRace) => (
+                      <option key={characterRace}>{characterRace}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="flex items-center mx-[48px] mt-2 mb-4">
                   <input

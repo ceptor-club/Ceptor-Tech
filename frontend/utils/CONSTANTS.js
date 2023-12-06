@@ -79,7 +79,13 @@ export const CONSTANTS = {
     "Neutral Evil",
     "Chaotic Evil",
   ],
-  humanoidCharacterRaces: ["Elf", "Half-Elf", "Halfling", "Dwarf", "Human"],
+  humanoidCharacterRaces: [
+    "Elf", 
+    "Half-Elf", 
+    "Halfling", 
+    "Dwarf", 
+    "Human"
+  ],
   exoticCharacterRaces: [
     "Centaur",
     "Bugbear",
