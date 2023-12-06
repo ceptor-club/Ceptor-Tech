@@ -3,8 +3,8 @@ pragma solidity ^0.8.19;
 
 import "forge-std/Script.sol";
 import "./Helper.sol";
-import {CeptorDice} from  "../src/Dice.sol";
-import {Ceptors} from "../src/Ceptor.sol";
+import {CeptorDice} from  "../src/CeptorDice.sol";
+import {Ceptors} from "../src/Ceptors.sol";
 import "../src/PromptCollection.sol";
 // import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
 // import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
