@@ -1,16 +1,13 @@
 // import Head from "next/head";
 import { useState, useEffect, useContext } from "react";
-import CreateHero from '../components/CreateHero';
-import { Create } from '../components/Create';
-import { Logo } from '../components/Logo';
-import HamburgerMenu from '../components/HamburgerMenu';
-import VectorImage from '../components/VectorImage';
-import Meta from '../components/Meta';
-import Image from 'next/image';
-import { NavbarMdUp, NavbarSmUp } from '../components/NavBar/index';
+import CreateHero from "../components/CreateHero";
+import { Create } from "../components/Create";
+import { Logo } from "../components/Logo";
+import HamburgerMenu from "../components/HamburgerMenu";
+import VectorImage from "../components/VectorImage";
+import Image from "next/image";
 import Link from "next/link";
 import { SocketContext } from "../utils/socketContext";
-
 
 export default function Home() {
   const socket = useContext(SocketContext);
@@ -45,11 +42,7 @@ export default function Home() {
 
   return (
     <>
-      <Meta />
-      <NavbarMdUp />
-      <NavbarSmUp />
-      <div className='fixed top-0 h-screen w-screen'>
-
+      <div className="fixed top-0 h-screen w-screen">
         <Image
           src="/images/CREATE-midpage/midPageImage.png"
           width={1000}

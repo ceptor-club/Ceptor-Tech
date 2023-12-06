@@ -8,7 +8,7 @@ import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { sepolia, goerli } from "wagmi/chains";
 import Layout from "../components/Layout";
-import { CharacterProvider } from '../components/CharacterContext';
+import { CharacterProvider } from "../components/CharacterContext";
 import SocketProvider from "../utils/socketContext";
 
 const chains = [sepolia, goerli];
@@ -33,15 +33,15 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <CharacterProvider>
-      <SocketProvider>
-        <WagmiConfig config={wagmiConfig}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </WagmiConfig>
-        <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
-      </SocketProvider>
-          </CharacterProvider>
+        <SocketProvider>
+          <WagmiConfig config={wagmiConfig}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </WagmiConfig>
+          <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+        </SocketProvider>
+      </CharacterProvider>
     </>
   );
 }

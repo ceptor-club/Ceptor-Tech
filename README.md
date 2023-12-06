@@ -3,7 +3,7 @@
 Todo:
 - [x] Provide a quick start guide for devs and judges
 - [x] Explain the 3 teams (Art + Tech + Games) and how they work together
-- [ ] High level overview of Ceptor Club and our goal for this hackathon / future
+- [x] High level [overview of Ceptor Club and our goal for this hackathon](https://docs.google.com/document/d/1tzb8Nj6E7Tyr8YrIWLrJBskozBuCecXe3IotgcpygKo/edit?usp=sharing) / future
 - [ ] Onboard all 3 teams to this repo
 - [ ] Add Art, Tech, and Games pages to the navbar and front-end.
 
@@ -27,10 +27,10 @@ Each team will have their own narrative, demo video, internal page and readme li
 
 > Team Art (Artour) will support overall branding and help with our demo videos/team narratives, in addition to creating an end-to-end session zero experience following character creation. They are making sure our app and images generation looks good.
 
-- Michael Finney
-- Melinda McClimans
-- Spencer Kinney
-- leomofthings.eth (Front End Development)
+- Michael Finney (Design & Video)
+- Melinda McClimans (Product & Research)
+- Spencer Kinney (Engineer)
+- Sam Yeh (boy wonder, and unofficial mascot -- creator of the AI prompt battler)
 
 Link to readme:
 
@@ -38,7 +38,7 @@ Link to readme:
 
 > Team Games will make sure our overall project is fun and usable.  They are building a couple small games and activities: Improved character creation and fun quiz, rollable 3D Big Dice, AI Prompt Battler, to make our app more “sticky.”
 
-- Sam Yeh
+- leomofthings.eth (Front End Development)
 - Jason A
 - Vince
 - Alan Barry
@@ -128,9 +128,9 @@ Link to readme:
  
    - For ALCHEMY_API_KEY use the same key as in frontend
    - Setup API_KEY="testKey" for Socket io connections
+   - Setup DB_CONN_STRING=mongodb+srv://verinta:BFWmxukoOsNdIx4x@ceptorclub.rq4oohp.mongodb.net/ for db connection
 
 5. Renable CORS object 
-
 
 6. Run the backend
 
@@ -140,7 +140,7 @@ Link to readme:
 
 ## **🛠️ MongoDB Setup: Endpoints for user creation and lookup!**
 
-Put `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
+Put the connection string: `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
 
 GET /user?wallet=<wallet0x> will give you the user
 POST /user with
