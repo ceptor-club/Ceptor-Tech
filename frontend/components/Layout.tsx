@@ -9,6 +9,7 @@ const Layout = ({ children }) => {
       <NavbarMdUp />
       <NavbarSmUp />
       <main>{children}</main>
+      <footer className="mb-10"></footer>
     </>
   );
 };

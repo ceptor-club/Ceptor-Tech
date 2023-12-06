@@ -185,9 +185,7 @@ option {
   background-repeat: no-repeat; /* Do not repeat the image */
   height: 100vh; /* Full height */
   width: 100vw; /* Full width */
-  padding-top: 100px;
-  margin-bottom: 5%;
-  margin-top: -100px;
+  padding-top: 50px;
 }
 
 .bottom {
@@ -199,8 +197,7 @@ option {
   background-repeat: no-repeat; /* Do not repeat the image */
   height: 100vh; /* Full height */
   width: 100vw; /* Full width */
-  margin-bottom: 5%;
-  margin-top: 200px;
+  padding-top: 50px;
 }
 
 .buy-dice-header-bg {

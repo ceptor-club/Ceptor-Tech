@@ -45,6 +45,12 @@ export default function NavbarSmUp() {
                 <Link className="uppercase" href="/buy-dice">
                   Buy Dice{" "}
                 </Link>
+                <Link className="uppercase" href="/free-dice">
+                  Free Dice{" "}
+                </Link>
+                <Link className="uppercase" href="/burn-dice">
+                  Burn Dice{" "}
+                </Link>
               </div>
             </>
           ) : null}

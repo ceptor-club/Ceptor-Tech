@@ -54,6 +54,12 @@ export default function NavbarMdUp() {
                 <Link className="uppercase" href="/buy-dice">
                   Buy Dice{" "}
                 </Link>
+                <Link className="uppercase" href="/free-dice">
+                  Free Dice{" "}
+                </Link>
+                <Link className="uppercase" href="/burn-dice">
+                  Burn Dice{" "}
+                </Link>
               </div>
               <div className="fixed bottom-6 ml-6">
                 <DiceDashboard />
