@@ -31,29 +31,32 @@ const CharacterStats = ({
       setPrompt(prompt);
       setError(null);
     }
-    if (characterData.myClass !== pdfData.class) {
-      setPdfData({ ...pdfData, class: characterData.myClass });
-    }
-    if (characterData.species !== pdfData.race) {
-      setPdfData({ ...pdfData, race: characterData.species })
-    }
-    if (characterData.background !== pdfData.background) {
-      setPdfData({ ...pdfData, background: characterData.background });
-    }
-    if (characterData.myAlignment !== pdfData.alignment) {
-      setPdfData({ ...pdfData, alignment: characterData.myAlignment });
-    }
-    if (characterData.gender !== pdfData.gender) {
-      if (characterData.gender === "He" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "He / Him" });
-      } else if (characterData.gender === "She" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "She / Hers" });
-      } else if (characterData.gender === "They" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "They / Them" });
+    console.log("characterdata: ", characterData)
+    if (characterData) {
+      if (characterData.myClass !== pdfData.class && characterData.myClass !== "") {
+        setPdfData({ ...pdfData, class: characterData.myClass });
+      }
+      if (characterData.species !== pdfData.race && characterData.species !== "") {
+        setPdfData({ ...pdfData, race: characterData.species })
+      }
+      if (characterData.background !== pdfData.background && characterData.background !== "") {
+        setPdfData({ ...pdfData, background: characterData.background });
+      }
+      if (characterData.myAlignment !== pdfData.alignment && characterData.myAlignment !== "") {
+        setPdfData({ ...pdfData, alignment: characterData.myAlignment });
+      }
+      if (characterData.gender !== pdfData.gender) {
+        if (characterData.gender === "He" && pdfData.gender === "") {
+          setPdfData({ ...pdfData, gender: "He / Him" });
+        } else if (characterData.gender === "She" && pdfData.gender === "") {
+          setPdfData({ ...pdfData, gender: "She / Hers" });
+        } else if (characterData.gender === "They" && pdfData.gender === "") {
+          setPdfData({ ...pdfData, gender: "They / Them" });
+        }
       }
     }
     console.log(pdfData);
-  });
+  }, [characterData, pdfData, setPdfData]);
 
   const handleClassSelect = (e) => {
     const input = document.getElementById("classInput");
