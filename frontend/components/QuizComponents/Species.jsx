@@ -10,8 +10,10 @@ export default function Species({ humanoidOrNo, species, setSpecies }) {
                     humanoidOrNo
                         ?
                         <>
-                            <h3 id='species-header'>Which humanoid sounds coolest to you?</h3>
-                            <div className='flex flex-col mt-12 text-xl space-y-8 > * + *' >
+                            <div className="bg-slate-600 text-white p-3 mb-6">
+                                <h3 id='species-header'>Which humanoid sounds coolest to you?</h3>
+                            </div>
+                            <div className="grid grid-cols-2 mt-8 text-xl gap-10 mb-32 text-white" >
                                 {humanoidRaces.map((race, raceIndex) => {
                                     return (
                                         <div key={raceIndex}>
@@ -22,7 +24,7 @@ export default function Species({ humanoidOrNo, species, setSpecies }) {
                                                     id={raceIndex}
                                                     checked={species === race}
                                                     onChange={(e) => setSpecies(e.target.value)}
-                                                    className="hidden"
+                                                    className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                                                 />
                                                 <label
                                                     htmlFor={raceIndex}
@@ -51,7 +53,7 @@ export default function Species({ humanoidOrNo, species, setSpecies }) {
                                                     id={raceIndex}
                                                     checked={species === race}
                                                     onChange={(e) => setSpecies(e.target.value)}
-                                                    className="hidden"
+                                                    className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                                                 />
                                                 <label
                                                     htmlFor={raceIndex}
