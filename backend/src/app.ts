@@ -4,8 +4,9 @@ require("dotenv").config();
 import ethers from "ethers";
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
-import { getUser, saveUser, updateNFTVotes, getHighestVotedNFT } from "./utils/mongo";
- 
+import { getUserById, saveUser, updateNFTVotes, getHighestVotedNFT, getUserByWallet, getAllUsers } from "./utils/mongo";
+const { ObjectId } = require('mongodb')
+
 const app: Application = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
@@ -35,15 +36,45 @@ app.get("/", (req, res) => {
   res.send("test should have been successful");
 });
 
-app.get("/user", async (req, res) => {
-  const user = await getUser(req.query.wallet as string);
+//see user by wallet
+app.get("/user/:wallet", async (req, res) => {
+  const user = await getUserByWallet(req.params.wallet);
   user ? res.send(user) : res.send("user not found");
 });
 
+//see all users
+app.get("/users", async (req, res) => {
+  const users = await getAllUsers()
+  users ? res.send(users) : res.send("no users in database")
+})
+
+//see user by _id
+app.get('/userData/:_id', async (req, res) => {
+  try {
+    const userId = req.params._id;
+
+    // Convert the string _id to ObjectId
+    const userObjectId = new ObjectId(userId);
+
+    const user = await getUserById(userObjectId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+//save user
 app.post("/user", async (req, res) => {
   const user = await saveUser(req.body);
   res.send(user);
 });
+
 
 // new endpoint to update NFT votes
 app.put("/update-nft-votes", async (req: Request, res: Response) => {
