@@ -31,6 +31,7 @@ const CharacterStats = ({
       setPrompt(prompt);
       setError(null);
     }
+
     console.log("characterdata: ", characterData)
     if (characterData) {
       if (characterData.myClass !== pdfData.class && characterData.myClass !== "") {
@@ -45,14 +46,13 @@ const CharacterStats = ({
       if (characterData.myAlignment !== pdfData.alignment && characterData.myAlignment !== "") {
         setPdfData({ ...pdfData, alignment: characterData.myAlignment });
       }
-      if (characterData.gender !== pdfData.gender) {
-        if (characterData.gender === "He" && pdfData.gender === "") {
-          setPdfData({ ...pdfData, gender: "He / Him" });
-        } else if (characterData.gender === "She" && pdfData.gender === "") {
-          setPdfData({ ...pdfData, gender: "She / Hers" });
-        } else if (characterData.gender === "They" && pdfData.gender === "") {
-          setPdfData({ ...pdfData, gender: "They / Them" });
-        }
+    if (characterData.gender !== pdfData.gender) {
+      if (characterData.gender === "He" && pdfData.gender === "") {
+        setPdfData({ ...pdfData, gender: "male" });
+      } else if (characterData.gender === "She" && pdfData.gender === "") {
+        setPdfData({ ...pdfData, gender: "female" });
+      } else if (characterData.gender === "They" && pdfData.gender === "") {
+        setPdfData({ ...pdfData, gender: "nonbinary" });
       }
     }
     console.log(pdfData);
@@ -70,18 +70,17 @@ const CharacterStats = ({
     }
   };
 
-  const handleRaceSelect = (e) => {
-    const input = document.getElementById("raceInput");
+  const handleSpeciesSelect = (e) => {
+    const input = document.getElementById("speciesInput");
     if (
       document.getElementById("raceCheck").checked === true &&
       input.value !== ""
     ) {
-      setPdfData({ ...pdfData, race: input.value })
+      setPdfData({ ...pdfData, race: input.value });
     } else {
-      setPdfData({ ...pdfData, race: "" })
+      setPdfData({ ...pdfData, race: "" });
     }
-  }
-
+  };
   const handleArmorSelect = (e) => {
     const input = document.getElementById("armorInput");
     if (
@@ -186,19 +185,15 @@ const CharacterStats = ({
                     defaultChecked
                     disabled={imageResult}
                   ></input>
-                  <p className="mx-4">RACE: </p>
-                  <select
-                    id="raceInput"
-                    className="bg-transparent resize-none h-6  bg-slate-200 text-black flex-grow"
-                    onChange={handleRaceSelect}
-                  >
-                    <option value=''>
-                      {pdfData.race ? pdfData.race : "Select a Race"}
-                    </option>
-                    {allRaces.map((characterRace) => (
-                      <option key={characterRace}>{characterRace}</option>
-                    ))}
-                  </select>
+                  <p className="mx-4">SPECIES of CEPTOR: </p>
+                  <textarea
+                    id="speciesInput"
+                    placeholder="eg. centaur"
+                    className="bg-transparent resize-none h-6 overflow-hidden"
+                    onChange={handleSpeciesSelect}
+                    defaultValue={pdfData.race ? pdfData.race : ""}
+                    disabled={imageResult}
+                  ></textarea>
                 </div>
                 <div className="flex items-center mx-[48px] mt-2 mb-4">
                   <input
@@ -212,7 +207,7 @@ const CharacterStats = ({
                   <p className="mx-4">CLASS: </p>
                   <select
                     id="classInput"
-                    className="bg-transparent resize-none h-6  bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6  bg-slate-200 flex-grow"
                     onChange={handleClassSelect}
                     disabled={imageResult}
                   >
@@ -256,7 +251,7 @@ const CharacterStats = ({
                   <select
                     id="backgroundInput"
                     placeholder="Background"
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black  flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200  flex-grow"
                     onChange={handleBackgroundSelect}
                     disabled={imageResult}
                   >
@@ -287,7 +282,7 @@ const CharacterStats = ({
                   <select
                     id="alignmentInput"
                     placeholder="Neutral Good"
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 flex-grow"
                     onChange={handleAlignmentSelect}
                     disabled={imageResult}
                   >
@@ -333,7 +328,7 @@ const CharacterStats = ({
                   <select
                     id="colorInput"
                     placeholder=""
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 flex-grow"
                     onChange={handleColorSelect}
                     disabled={imageResult}
                   >

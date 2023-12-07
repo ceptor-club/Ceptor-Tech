@@ -12,7 +12,7 @@ interface ICeptors {
 
 contract CCID is Ownable, CCIPReceiver {
     // User stats structure
-    struct UserStats {
+    struct Stats {
         uint256 strong;
         uint256 agile;
         uint256 tanky;
@@ -22,10 +22,28 @@ contract CCID is Ownable, CCIPReceiver {
         uint256 lucky;
     }
 
+    struct UserBody {
+        uint256 head;
+        uint256 body;
+        uint256 legs;
+        uint256 feet;
+        uint256 weapon;
+        uint256 shield;
+        uint256 pet;
+    }
+
+    struct UserMind {
+        uint8 artXP;
+        uint8 techXP;
+        uint8 gamesXP;
+        // ipfs link to their "theme song"
+        string themeSong;
+    }
+
     // State variables
     address[] public users;
     mapping(address => string) public usernames;
-    mapping(address => UserStats) public userStats;
+    mapping(address => Stats) public userStats;
     mapping(address => string[]) public userLoot; // Mapping to store loot
     address public ceptorsContractAddress;
     AggregatorV3Interface internal priceFeed;
@@ -36,10 +54,7 @@ contract CCID is Ownable, CCIPReceiver {
     event LootReceived(address indexed user, string loot);
 
     // Constructor
-    constructor(address _ceptorsAddress, address _priceFeed, address _router)
-        CCIPReceiver(_router)
-        Ownable(msg.sender)
-    {
+    constructor(address _ceptorsAddress, address _priceFeed, address _router) CCIPReceiver(_router) Ownable(msg.sender) {
         ceptorsContractAddress = _ceptorsAddress;
         priceFeed = AggregatorV3Interface(_priceFeed);
     }
@@ -56,19 +71,19 @@ contract CCID is Ownable, CCIPReceiver {
         emit UsernameRegistered(msg.sender, _username, msg.sender == owner());
     }
 
-    // Helper function to check username availability
-    function usernameAvailable(string memory _username) private view returns (bool) {
-        for (uint256 i = 0; i < users.length; i++) {
-            if (keccak256(bytes(usernames[users[i]])) == keccak256(bytes(_username))) {
-                return false;
-            }
+ // Helper function to check username availability
+function usernameAvailable(string memory _username) private view returns (bool) {
+    for (uint i = 0; i < users.length; i++) {
+        if (keccak256(bytes(usernames[users[i]])) == keccak256(bytes(_username))) {
+            return false;
         }
-        return true;
     }
+    return true;
+}
 
     // Function to get registration cost
     function getRegistrationCost() public view returns (uint256) {
-        (, int256 price,,,) = priceFeed.latestRoundData();
+        (, int price,,,) = priceFeed.latestRoundData();
         // Adjust the calculation as needed based on the Chainlink price feed
         return uint256(price) * 1e18; // Placeholder calculation
     }
@@ -103,6 +118,7 @@ contract CCID is Ownable, CCIPReceiver {
         // Not sure about how we can have security based on making sure that the Loot and Stats are from the right contract
         // I guess we can have an allowlist of contracts that can send data to this contract
         // And depending on the structure of the message we can update the stats or store the loot
+
     }
 
     // Additional functions and logic as needed...

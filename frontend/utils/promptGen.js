@@ -18,18 +18,6 @@ const conversions = {
 
   //races
   // Non-Dragonborn Solution 1.  -- Front end displays warning if not dragonborn
-  // dragonborn: "dragon-person",
-  // dwarf: "dwarf",
-  // elf: "elf",
-  // gnome: "gnome",
-  // human: "human",
-  // halfling: "thing that's half a human",
-  // halfelf: "half-elf half-human, long ears",
-  // halforc: "half-orc half-human, big teeth",
-  // tiefling: "horned forest demon",
-  // "wood elf": "wood elf",
-  // aarakocra: "humanoid bird",
-
   // Dragonborn Solution 1.
   dragonborn: "Dragonborn",
   dwarf: "Dwarf",
@@ -46,7 +34,7 @@ const conversions = {
   bubear: "Bugbear",
   zombie: "Zombie",
 
-  //backgrounds used to put the character in a scene
+   //backgrounds used to put the character in a scene
   entertainer: "performing a song in a tavern",
   hermit: "meditating in a cave",
   criminal: "stealing from a shop",
