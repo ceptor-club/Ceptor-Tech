@@ -1,8 +1,8 @@
 export default function Interest({ interest, setInterest }) {
     return (
         <div >
-            <h3 className="text-3xl">Which activity sounds like the most fun?</h3>
-            <div className='flex flex-col mt-8 text-xl space-y-8 > * + *' >
+            <h3 className="bg-slate-600 text-white p-3 mb-16">Which activity sounds like the most fun?</h3>
+            <div className='grid grid-cols-2 mt-8 text-xl gap-10 mb-24 text-white' >
                 <div>
                     <input
                         type="radio"
@@ -10,7 +10,7 @@ export default function Interest({ interest, setInterest }) {
                         id="interestStr"
                         checked={interest === "interestStr"}
                         onChange={(e) => setInterest(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="interestStr"
@@ -28,7 +28,7 @@ export default function Interest({ interest, setInterest }) {
                         id="interestDex"
                         checked={interest === "interestDex"}
                         onChange={(e) => setInterest(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="interestDex"
@@ -46,7 +46,7 @@ export default function Interest({ interest, setInterest }) {
                         id="interestCon"
                         checked={interest === "interestCon"}
                         onChange={(e) => setInterest(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="interestCon"
@@ -64,7 +64,7 @@ export default function Interest({ interest, setInterest }) {
                         id="interestInt"
                         checked={interest === "interestInt"}
                         onChange={(e) => setInterest(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="interestInt"
@@ -82,7 +82,7 @@ export default function Interest({ interest, setInterest }) {
                         id="interestWis"
                         checked={interest === "interestWis"}
                         onChange={(e) => setInterest(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="interestWis"
@@ -100,7 +100,7 @@ export default function Interest({ interest, setInterest }) {
                         id="interestCha"
                         checked={interest === "interestCha"}
                         onChange={(e) => setInterest(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="interestCha"
