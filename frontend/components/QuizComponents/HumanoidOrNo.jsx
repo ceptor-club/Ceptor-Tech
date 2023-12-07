@@ -7,10 +7,11 @@ export default function HumanoidOrNo({ humanoidOrNo, setHumanoidOrNo, setSpecies
     }
 
     return (
-        <div >
-            <h3 className="text-3xl mb-4">Are you interested in playing a human or humanoid character </h3>
-            <h3 className="text-3xl mb-4">or something more exotic?</h3>
-            <div className='flex flex-col mt-12 text-xl space-y-8 > * + *' >
+        <div>
+            <div className="bg-slate-600 text-white p-3 mb-16">
+                <h3 className="text-3xl mb-4">Are you interested in playing a human or humanoid character <br />or something more exotic? </h3>
+            </div>
+            <div className='grid grid-cols-2 mt-8 text-xl gap-10 mb-24 text-white' >
                 <div>
                     <input
                         type="radio"
@@ -18,7 +19,7 @@ export default function HumanoidOrNo({ humanoidOrNo, setHumanoidOrNo, setSpecies
                         id="humanoidYes"
                         checked={humanoidOrNo}
                         onChange={handleHumanoid}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="humanoidYes"
@@ -36,7 +37,7 @@ export default function HumanoidOrNo({ humanoidOrNo, setHumanoidOrNo, setSpecies
                         id="humanoidNo"
                         checked={!humanoidOrNo}
                         onChange={handleHumanoid}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="humanoidNo"
