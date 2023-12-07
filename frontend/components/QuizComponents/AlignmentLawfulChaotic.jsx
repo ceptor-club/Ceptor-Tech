@@ -2,7 +2,7 @@ export default function AlignmentLawfulChaotic({ myAlignment, setMyAlignment }) 
     return (
         <div>
             <h3 className="bg-slate-600 text-white p-3 mb-16">Is it ok to steal from the rich to feed the poor?</h3>
-            <div className='grid grid-cols-2 mt-8 text-xl gap-10 mb-20 text-white' >
+            <div className="grid grid-cols-2 mt-8 text-xl gap-10 mb-20 text-white">
 
                 <div>
                     <input
