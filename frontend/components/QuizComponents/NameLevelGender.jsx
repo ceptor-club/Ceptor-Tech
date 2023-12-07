@@ -21,12 +21,12 @@ export default function NameLevelGender({ charName, setCharName, level, setLevel
                     <div className="custom-child-box2 flex flex-col">
                         <div className="m-4 inline-flex p">
                             <label className="mx-2 text-xl dFont text-white mr-5">Character Gender: </label>
-                            <div className="flex flex-row">
+                            <div className="flex flex-row gap-6">
                                 <div>
                                     <input type="radio" value="He" id="He"
                                         checked={gender === "He"} onChange={(e) => setGender(e.target.value)}
-                                        className=""/>
-                                    <label htmlFor="He" className={`cursor-pointer p-2 rounded-md ${gender === "He" ? "border-4 border-solid border-ceptor p-2" : "" }`} >
+                                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"/>
+                                    <label htmlFor="He" className={`cursor-pointer p-2 rounded-md border-customYellow ${gender === "He" ? "border-4 border-solid text-white p-2" : "text-white" }`} >
                                         He / Him
                                     </label>
                                 </div>
@@ -34,25 +34,25 @@ export default function NameLevelGender({ charName, setCharName, level, setLevel
                                 <div>
                                     <input type="radio" value="She" id="She"
                                         checked={gender === "She"} onChange={(e) => setGender(e.target.value)}
-                                        className="hidden" />
-                                    <label htmlFor="She" className={`cursor-pointer p-2 rounded-md ${gender === "She" ? "border-4 border-solid border-ceptor p-2" : "" }`} >
+                                        className="mr-4 w-6 h-6 align-middle accent-radioYellow" />
+                                    <label htmlFor="She" className={`cursor-pointer p-2 rounded-md border-customYellow ${gender === "She" ? "border-4 border-solid text-white p-2" : "text-white" }`} >
                                         She / Her
                                     </label>
                                 </div>
 
                                 <div>
                                     <input type="radio" value="They" id="They" checked={gender === "They"}
-                                        onChange={(e) => setGender(e.target.value)} className="hidden"/>
-                                    <label htmlFor="They" className={`cursor-pointer p-2 rounded-md ${gender === "They" ? "border-4 border-solid border-ceptor p-2" : ""}`}>
+                                        onChange={(e) => setGender(e.target.value)} className="mr-4 w-6 h-6 align-middle accent-radioYellow"/>
+                                    <label htmlFor="They" className={`cursor-pointer p-2 rounded-md border-customYellow ${gender === "They" ? "border-4 border-solid text-white p-2" : "text-white"}`}>
                                         They / Them
                                     </label>
                                 </div>
 
                             </div>
                         </div>
-                        <div className='flex m-4 flex-row' id='pLevel-div'>
-                            <label className="text-xl dFont text-white mr-5">Starting Level:</label>
-                            <input className="text-base text-black p-8 m-4" type="number" value={level} min={1} max={20} onChange={(e) => setLevel(e.target.value)} />
+                        <div className='m-4' id='pLevel-div'>
+                            <label className="text-xl dFont text-white mr-5 align-middle">Level:</label>
+                            <input className="text-base text-black py-3 px-4 w-32 h-10 border-4 border-customOrange" type="number" value={level} min={1} max={20} onChange={(e) => setLevel(e.target.value)} />
                         </div>
                     </div>
                 </div>
