@@ -1,15 +1,19 @@
 import React from "react"
 import { RandomName } from "../RandomName"
-
+import Image from 'next/image';
+import pagination from '../../public/images/pagination.png'
 export default function NameLevelGender({ charName, setCharName, level, setLevel, gender, setGender }) {
 
 
 
     return (
         <>
-            <div className="custom-container">
+            
+            <div className="character-bg">
                 <h3 className="mt-12 leading-8 text-2xl mb-12 text-white">What do you want to name your character?</h3>
-                <div className="custom-child-parent">
+            </div>
+            <div className="custom-container">
+                    <div className="custom-child-parent">
                     <div className='custom-child-box1 gap-5' id='pName-div'>
                         <div className="flex w-4/5 relative">
                             <label className="text-xl dFont text-white mr-5 mt-3">Character Name: </label>
@@ -55,7 +59,7 @@ export default function NameLevelGender({ charName, setCharName, level, setLevel
                             <input className="text-base text-black py-3 px-4 w-32 h-10 border-4 border-customOrange" type="number" value={level} min={1} max={20} onChange={(e) => setLevel(e.target.value)} />
                         </div>
                     </div>
-                </div>
+                    </div>
             </div>
         </>
         

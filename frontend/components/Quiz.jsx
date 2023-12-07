@@ -1,11 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { RandomName } from './RandomName';
-// import Image from 'next/image';
-// import nextImg from '../public/images/next.png';
-// import backImg from '../public/images/back.png'
-import backBtn from '../public/images/Buttons/backBtn.svg';
-import nextBtn from '../public/images/Buttons/nextBtn.svg';
 
 
 import {

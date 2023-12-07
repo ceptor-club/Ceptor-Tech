@@ -165,10 +165,22 @@ option {
 }
 
 /* new styles addition by leom */
+
+/* sidebar menu style */
 .sidebar {
   background: rgba(26, 26, 26, 0.95);
+  padding-top: 50px;
+  padding-left: 40px;
+  height: 620px;
+}
+.sidebar::after{
+  content: url(../public/images/Vectornav.png);
+  margin-left: 130px;
+  margin-top: -263px;
+
 }
 
+/* the ceprot club font (Milonga) */
 .ceptor-font {
   font-family: var(--quiz-page-font);
   color: #fff;
@@ -195,9 +207,15 @@ option {
 /* Quiz page custom container sizing */
 .custom-container {
   width: 1920px;
-  height: 1209px;
+  height: 580px;
   box-sizing: border-box;
   position: relative;
+}
+
+.quiz-container-bg {
+  background-image: url(../public/images/quizbg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .custom-child-parent{
   width: 962px;
@@ -224,4 +242,14 @@ option {
 
 .iBorder{
   border: 6px solid #ED670B;
+}
+
+/* background for what do you want to name your character */
+.character-bg{
+  background: linear-gradient(#221F26, #2C2930);
+  width: 600px;
+  height: 32px;
+  position: relative;
+  top: 0;
+  right: -780px;
 }
