@@ -223,6 +223,17 @@ option {
   padding-top: 20px;
 }
 
+.bags-button {
+  margin: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 8vh; /* Full height */
+  width: 40vw; /* Full width */
+  padding-top: 20px;
+}
+
 .backpack {
   margin: 0;
   padding: 5;
