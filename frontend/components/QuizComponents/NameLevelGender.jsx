@@ -23,7 +23,7 @@ export default function NameLevelGender({ charName, setCharName, level, setLevel
                         </div>
                     </div>
                     <div className="custom-child-box2 flex flex-col">
-                        <div className="m-4 inline-flex p">
+                        <div className="m-4 inline-flex">
                             <label className="mx-2 text-xl dFont text-white mr-5">Character Gender: </label>
                             <div className="flex flex-row gap-6">
                                 <div>

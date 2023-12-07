@@ -176,7 +176,7 @@ export default function Quiz() {
                         </linearGradient>
                     </defs>
                 </svg>
-                    <span className="relative z-10 px-4 py-3 btn-text">Back</span>
+                    <span className="relative z-10 px-4 py-3 btn-text text-white">Back</span>
                     </button> : null}
                 {currentState !== State.GENERATE_CHARACTER && currentState !== State.CHARACTER_PAGE ? <button className='relative border-0 px-4 py-3 text-center no-underline inline-flex m-4 overflow-hidden' id='next-button' onClick={(e) => next(e.target.value)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226 80" fill="none" className="absolute inset-0 w-full h-full">
@@ -191,7 +191,7 @@ export default function Quiz() {
                         </linearGradient>
                     </defs>
                 </svg>
-                    <span className="relative z-10 px-4 py-3 btn-text">Next</span>
+                    <span className="relative z-10 px-4 py-3 btn-text text-black">Next</span>
                     </button> : null}
             </div>
 

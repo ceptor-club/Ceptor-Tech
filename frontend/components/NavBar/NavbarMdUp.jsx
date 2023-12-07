@@ -20,10 +20,10 @@ export default function NavbarMdUp() {
             navMenuVisible ? `w-48` : 'w-12'
           } h-12 fixed z-20 md:h-full left-0 bg-black bg-opacity-80`}
         >
-          {/* <div
+          <div
             className='bg-white w-8 h-8 rounded-full absolute -right-4 top-6 cursor-pointer'
             onClick={toggleNavMenu}
-          ></div> */}
+          ></div>
 
           {navMenuVisible ? (
             <>
