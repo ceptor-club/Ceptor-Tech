@@ -180,10 +180,10 @@ export default function CharacterPage() {
 
     return (
         <>
-            <div className='text-lg'>
+            <div className='text-lg mx-16 mb-4'>
                 {characterDescription}
             </div>
-            <div className='flex flex-row mx-4'>
+            <div className='flex flex-row mx-16'>
                 <div className='flex flex-col m-2 text-base'>
                     <div className='' id="alignment-div">
                         <div id='Character-Alignment'>My Alignment: {character.myAlignment}</div>
