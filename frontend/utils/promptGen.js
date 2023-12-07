@@ -31,17 +31,20 @@ const conversions = {
   // aarakocra: "humanoid bird",
 
   // Dragonborn Solution 1.
-  dragonborn: "DnDDragonbornGeneral",
-  dwarf: "DnDDragonbornGeneral",
-  elf: "DnDDragonbornGeneral",
-  gnome: "DnDDragonbornGeneral",
-  human: "DnDDragonbornGeneral",
-  halfling: "DnDDragonbornGeneral",
-  halfelf: "DnDDragonbornGeneral",
-  halforc: "DnDDragonbornGeneral",
-  tiefling: "DnDDragonbornGeneral",
-  "wood elf": "DnDDragonbornGeneral",
-  aarakocra: "DnDDragonbornGeneral",
+  dragonborn: "Dragonborn",
+  dwarf: "Dwarf",
+  elf: "Elf",
+  gnome: "Gnome",
+  human: "Human",
+  halfling: "Halfling",
+  "Half-Elf": "Half-Elf",
+  "Half-Orc": "Half-Orc",
+  tiefling: "Tiefling",
+  "Wood Elf": "Wood Elf",
+  aarakocra: "Aarakocra",
+  centaur: "Centaur",
+  bubear: "Bugbear",
+  zombie: "Zombie",
 
   //backgrounds used to put the character in a scene
   entertainer: "performing a song in a tavern",
@@ -98,25 +101,20 @@ const createPrompt = (data) => {
   // returns a prompt with:
   // alignment, race (converted to prompt language or our unique identifier such as DnDDragonborn),
   // class, armorWorn, background & scene, descriptives
-  return `${styleOf} of ${data.feature} ${data.gender ? data.gender : ""} ${
-    data.color ? data.color : ""
-  } ${
-    conversions[data.race.toLowerCase()]
+  return `${styleOf} of ${data.feature} ${data.gender ? data.gender : ""} ${data.color ? data.color : ""
+    } ${conversions[data.race.toLowerCase()]
       ? conversions[data.race.toLowerCase()]
       : data.race
-  }, ${
-    conversions[data.class.toLowerCase()]
+    }, ${conversions[data.class.toLowerCase()]
       ? `${conversions[data.class.toLowerCase()]},`
       : data.class
-  } ${data.armorWorn ? `wearing ${data.armorWorn} armor` : data.armorWorn} ${
-    conversions[data.background.toLowerCase()]
+    } ${data.armorWorn ? `wearing ${data.armorWorn} armor` : data.armorWorn} ${conversions[data.background.toLowerCase()]
       ? conversions[data.background.toLowerCase()]
       : data.background // or "in a cavern" or "in a mine"
-  }, ${
-    conversions[data.alignment.toLowerCase()]
+    }, ${conversions[data.alignment.toLowerCase()]
       ? `${conversions[data.alignment.toLowerCase()]},`
       : ""
-  } ${descriptives}.`;
+    } ${descriptives}.`;
 
   // Non-Dragonborn Solution 1.
   // return `${ styleOf } of(${ data.alignment }) ${ data.race } ${

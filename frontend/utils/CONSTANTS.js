@@ -80,17 +80,21 @@ export const CONSTANTS = {
     "Chaotic Evil",
   ],
   humanoidCharacterRaces: [
+    "Dwarf", 
     "Elf", 
+    "Gnome",
     "Half-Elf", 
     "Halfling", 
-    "Dwarf", 
-    "Human"
+    "Human",
+    "Wood Elf",
   ],
   exoticCharacterRaces: [
-    "Centaur",
+    "Aarakocra",
     "Bugbear",
+    "Centaur",
     "Dragonborn",
     "Half-Orc",
+    "Tiefling",
     "Zombie",
   ],
   // contractABI: [
