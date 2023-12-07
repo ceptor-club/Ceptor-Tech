@@ -40,11 +40,11 @@ const CharacterStats = ({
     }
     if (characterData.gender !== pdfData.gender) {
       if (characterData.gender === "He" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "He / Him" });
+        setPdfData({ ...pdfData, gender: "male" });
       } else if (characterData.gender === "She" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "She / Hers" });
+        setPdfData({ ...pdfData, gender: "female" });
       } else if (characterData.gender === "They" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "They / Them" });
+        setPdfData({ ...pdfData, gender: "nonbinary" });
       }
     }
     console.log(pdfData);
@@ -61,6 +61,16 @@ const CharacterStats = ({
       setPdfData({ ...pdfData, class: "" });
     }
   };
+
+  const handleSpeciesSelect = (e) => {
+    const input = document.getElementById("speciesInput");
+    if (input.value !== "") {
+      setPdfData({ ...pdfData, race: input.value });
+    } else {
+      setPdfData({ ...pdfData, race: "" });
+    }
+  };
+    
 
   const handleArmorSelect = (e) => {
     const input = document.getElementById("armorInput");
@@ -166,7 +176,15 @@ const CharacterStats = ({
                     readOnly
                     disabled={imageResult}
                   ></input>
-                  <p className="mx-4">(LOCKED) RACE: Dragonborn</p>
+                  <p className="mx-4">SPECIES of CEPTOR: </p>
+                  <textarea
+                    id="speciesInput"
+                    placeholder="eg. centaur"
+                    className="bg-transparent resize-none h-6 overflow-hidden"
+                    onChange={handleSpeciesSelect}
+                    defaultValue={pdfData.race ? pdfData.race : ""}
+                    disabled={imageResult}
+                  ></textarea>
                 </div>
                 <div className="flex items-center mx-[48px] mt-2 mb-4">
                   <input
@@ -180,7 +198,7 @@ const CharacterStats = ({
                   <p className="mx-4">CLASS: </p>
                   <select
                     id="classInput"
-                    className="bg-transparent resize-none h-6  bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6  bg-slate-200 flex-grow"
                     onChange={handleClassSelect}
                     disabled={imageResult}
                   >
@@ -224,7 +242,7 @@ const CharacterStats = ({
                   <select
                     id="backgroundInput"
                     placeholder="Background"
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black  flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200  flex-grow"
                     onChange={handleBackgroundSelect}
                     disabled={imageResult}
                   >
@@ -255,7 +273,7 @@ const CharacterStats = ({
                   <select
                     id="alignmentInput"
                     placeholder="Neutral Good"
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 flex-grow"
                     onChange={handleAlignmentSelect}
                     disabled={imageResult}
                   >
@@ -301,7 +319,7 @@ const CharacterStats = ({
                   <select
                     id="colorInput"
                     placeholder=""
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 flex-grow"
                     onChange={handleColorSelect}
                     disabled={imageResult}
                   >

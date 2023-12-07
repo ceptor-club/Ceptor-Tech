@@ -78,7 +78,7 @@ export const Create = () => {
   const [userDice, setUserDice] = useState([0, 0, 0, 0, 0, 0]); //dice balance
   const [pdfData, setPdfData] = useState({
 
-    race: "DnDDragonbornGeneral",
+    race: "",
     class: "",
     armorWorn: "",
     background: "",
