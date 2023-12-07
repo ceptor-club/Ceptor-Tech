@@ -1,8 +1,8 @@
 export default function AlignmentLawfulChaotic({ myAlignment, setMyAlignment }) {
     return (
         <div>
-            <h3 className="text-3xl">Is it ok to steal from the rich to feed the poor?</h3>
-            <div className='flex flex-col mt-8 text-xl space-y-8 > * + *' >
+            <h3 className="bg-slate-600 text-white p-3 mb-16">Is it ok to steal from the rich to feed the poor?</h3>
+            <div className='grid grid-cols-2 mt-8 text-xl gap-10 mb-20 text-white' >
 
                 <div>
                     <input
@@ -11,7 +11,7 @@ export default function AlignmentLawfulChaotic({ myAlignment, setMyAlignment }) 
                         id="Chaotic"
                         checked={myAlignment === "Chaotic"}
                         onChange={(e) => setMyAlignment(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="Chaotic"
@@ -29,7 +29,7 @@ export default function AlignmentLawfulChaotic({ myAlignment, setMyAlignment }) 
                         id="Lawful"
                         checked={myAlignment === "Lawful"}
                         onChange={(e) => setMyAlignment(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="Lawful"
@@ -47,7 +47,7 @@ export default function AlignmentLawfulChaotic({ myAlignment, setMyAlignment }) 
                         id="Neutral"
                         checked={myAlignment === "Neutral"}
                         onChange={(e) => setMyAlignment(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-radioYellow"
                     />
                     <label
                         htmlFor="Neutral"
