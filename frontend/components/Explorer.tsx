@@ -153,7 +153,7 @@ const Explorer = ({
   };
 
   return (
-    <div className="bg-light-grey space-y-2 flex flex-wrap justify-center p-12 ">
+    <div className="bg-black space-y-2 flex flex-wrap justify-center p-12 ">
       <NftModal
         modalOpen={modalOpen}
         setModalOpen={closeModal}

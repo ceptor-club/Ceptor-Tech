@@ -12,7 +12,7 @@ export async function getServerSideProps() {
   return getServerSideProperties();
 }
 
-export default function PotW({
+export default function WeeklyChallenge({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
@@ -62,7 +62,7 @@ export default function PotW({
   }, []);
 
   return (
-    <div className="bg-light-grey flex flex-col items-center  min-h-screen py-5 space-y-10">
+    <div className="bg-black flex flex-col items-center  min-h-screen py-5 space-y-10">
       <div className="flex flex-col justify-center items-center ">
         <h1 className="font-milonga text-4xl uppercase text-light-yellow mb-5">
           Challenge of the Week{" "}

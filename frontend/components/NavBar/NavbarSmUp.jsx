@@ -39,7 +39,7 @@ export default function NavbarSmUp() {
                 <Link className="uppercase" href="/profile">
                   Profile{" "}
                 </Link>
-                <Link className="uppercase" href="/potw">
+                <Link className="uppercase" href="/weekly-challenge">
                   Weekly Challenge
                 </Link>
                 <Link className="uppercase" href="/buy-dice">

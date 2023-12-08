@@ -284,7 +284,7 @@ option {
 .nft-card {
   margin: 0;
   padding: 0;
-  background-image: url("../public/images/CREATE/char-stat-bg.svg"); /* Replace with your image path */
+  background-image: url("../public/images/CREATE-hero/Vector4.png"); /* Replace with your image path */
   background-size: contain; /* Contains the whole image */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
