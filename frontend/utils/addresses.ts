@@ -15,9 +15,9 @@ export const addresses = {
   },
   mumbai: {
     prompt: "",
-    promtCollection: "",
-    ceptorDice: "",
-    ceptors: "",
+        promtCollection: "0x425c05E479C94227f6CeBB52aF899330B542de88",
+    ceptorDice: "0x71B80d94645ddF04BAa56d8D3c92792496A23B27",
+    ceptors: "0x6A0730A779d8545dEf782439Fd6971ed2038123D",
     ccipV4: "",
   },
   polygonZkEVM: {
