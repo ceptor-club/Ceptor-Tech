@@ -49,7 +49,7 @@ export default function NavbarMdUp() {
                   Profile{" "}
                 </Link>
                 <Link className="uppercase" href="/potw">
-                  Promt of the Week
+                  Weekly Challenge
                 </Link>
                 <Link className="uppercase" href="/buy-dice">
                   Buy Dice{" "}

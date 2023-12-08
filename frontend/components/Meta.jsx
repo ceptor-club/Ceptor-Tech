@@ -33,6 +33,10 @@ const Meta = () => (
         href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap"
         rel="stylesheet"
       />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      />
     </Head>
     <Script
       src="https://www.googletagmanager.com/gtag/js?id=G-37VQF6EBG7"
