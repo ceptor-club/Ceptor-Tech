@@ -59,12 +59,14 @@ app.get("/user/:wallet", async (req, res) => {
 
 //see all users
 app.get("/users", async (req, res) => {
+  console.log('getting all users')
   const users = await getAllUsers()
   users ? res.send(users) : res.send("no users in database")
 })
 
 //see user by _id
 app.get('/userData/:_id', async (req, res) => {
+  console.log('getting a user by id')
   try {
     const userId = req.params._id;
 
@@ -86,27 +88,32 @@ app.get('/userData/:_id', async (req, res) => {
 
 
 app.get("/COWSubmissions", async (req, res) => {
+  console.log('getting all submissions')
   const submissions = await getSubmissions();
   res.send(submissions);
 });
 
 app.get("/mostLikedSubmission", async (req, res) => {
+  console.log('getting most liked submission')
   const mostLikedSubmission = await getMostLikedSubmission();
   res.send(mostLikedSubmission);
 });
 
 app.post("/voteForSubmission", async (req, res) => {
+  console.log('voting for submission')
   const vote = await voteForSubmission(req.body.tokenID as number, req.body.wallet as string);
   res.send(vote);
 });
 
 app.post("/submit", async (req, res) => {
+  console.log('submitting submission')
   const submission = await saveSubmission(req.body);
   res.send(submission);
 });
 
 //save user
 app.post("/user", async (req, res) => {
+  console.log('adding a user')
   const user = await saveUser(req.body);
   res.send(user);
 });
@@ -122,12 +129,14 @@ app.post("/user", async (req, res) => {
 
 //see all characters
 app.get("/characterData", async (req, res) => {
+  console.log('getting characters')
   const characters = await getAllCharacters()
   characters ? res.send(characters) : res.send("no characters in database")
 })
 
 //get character by id
-app.get('/userData/:_id', async (req, res) => {
+app.get('/characterData/:_id', async (req, res) => {
+  console.log('getting character by id')
   try {
     const characterId = req.params._id;
 
