@@ -1,14 +1,17 @@
 import { SubmitData } from "../../utils/types";
 
 export async function submit(data: SubmitData): Promise<string> {
-  const response = await fetch("http://localhost:4000/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      apikey: "testKey",
-    },
-    body: JSON.stringify(data),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/submit`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: process.env.NEXT_PUBLIC_API_KEY,
+      },
+      body: JSON.stringify(data),
+    }
+  );
 
   console.log(response);
 

@@ -7,6 +7,7 @@ import { Countdown } from "../components/Countdown";
 import { sepolia, useNetwork } from "wagmi";
 import NftCard from "../components/NftCard";
 import { getServerSideProperties } from "../utils/getServerSideProps";
+import { getMostLikedSubmission } from "./api/getMostLikedSubmission";
 
 export async function getServerSideProps() {
   return getServerSideProperties();
@@ -52,11 +53,10 @@ export default function WeeklyChallenge({
     });
 
     const getNFTofTheWeek = async () => {
-      const response = await alchemy.nft.getNftsForContract(
-        "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A"
-      );
+      const response = await getMostLikedSubmission();
+      console.log(response);
 
-      setWinnerNFT(response.nfts[1]);
+      // setWinnerNFT(response.nfts[1]);
     };
     getNFTofTheWeek();
   }, []);

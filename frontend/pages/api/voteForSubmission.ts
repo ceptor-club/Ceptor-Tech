@@ -2,13 +2,13 @@ import { error } from "console";
 import { VoteData } from "../../utils/types";
 
 export async function voteForSubmission(data: VoteData): Promise<string> {
-  export const response = await fetch(
-    "http://localhost:4000/voteForSubmission",
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/voteForSubmission`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        apikey: "testKey",
+        apikey: process.env.NEXT_PUBLIC_API_KEY,
       },
       body: JSON.stringify(data),
     }

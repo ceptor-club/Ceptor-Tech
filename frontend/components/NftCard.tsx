@@ -1,14 +1,23 @@
 import React from "react";
 import Image from "next/image";
+import { voteForSubmission } from "../pages/api/voteForSubmission";
+import { useAccount } from "wagmi";
 
 const NftCard = ({ nft, onCardClick, winner }) => {
+  const { address, isConnected } = useAccount();
+
   const { rawMetadata } = nft;
 
   const handleClick = () => {
     onCardClick(nft);
   };
 
-  const like = () => {};
+  const like = (tokenID: number) => {
+    console.log(address);
+    tokenID = tokenID ? tokenID : 1;
+
+    voteForSubmission({ tokenID, wallet: address });
+  };
 
   const DefaultView = () => (
     <div className="flex flex-col justify-center items-center mt-10">
@@ -25,7 +34,7 @@ const NftCard = ({ nft, onCardClick, winner }) => {
       />
       <div className="flex flex-row justify-start items-start p-3">
         {winner || (
-          <button onClick={() => like()}>
+          <button onClick={() => like(rawMetadata.tokenID)}>
             <span className="material-symbols-outlined pr-2 ">favorite</span>
           </button>
         )}

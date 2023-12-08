@@ -2,12 +2,15 @@ import { SubmitData } from "../../utils/types";
 
 export async function getMostLikedSubmission(): Promise<SubmitData> {
   // Replace 'any' with the actual type of response
-  const response = await fetch("http://localhost:4000/mostLikedSubmission", {
-    method: "GET",
-    headers: {
-      apikey: "testKey",
-    },
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/mostLikedSubmission`,
+    {
+      method: "GET",
+      headers: {
+        apikey: "testKey",
+      },
+    }
+  );
 
   console.log(response);
 
