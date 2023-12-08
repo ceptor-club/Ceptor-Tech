@@ -119,8 +119,6 @@ const Explorer = ({
     let allNfts = [];
 
     for (const { network, address } of exploreCeptor) {
-      console.log(network);
-      console.log(alchemy);
       const currentAlchemy = alchemy[network];
 
       const response = await currentAlchemy?.nft.getNftsForContract(address);
@@ -138,7 +136,7 @@ const Explorer = ({
     }
 
     updateNfts(allNfts);
-  }, [alchemy]);
+  }, [alchemy, nftList]);
 
   useEffect(() => {
     getNfts();

@@ -6,21 +6,10 @@ import Link from "next/link";
 import { Countdown } from "../components/Countdown";
 import { sepolia, useNetwork } from "wagmi";
 import NftCard from "../components/NftCard";
-// import { getServerSideProperties } from "../utils/getServerSideProps";
+import { getServerSideProperties } from "../utils/getServerSideProps";
 
-export async function getServerSideProperties() {
-  const ALCHEMY_GOERLI_API_KEY = process.env.ALCHEMY_GOERLI_API_KEY;
-  const ALCHEMY_SEPOLIA_API_KEY = process.env.ALCHEMY_SEPOLIA_API_KEY;
-  const ALCHEMY_POLYGON_ZKEVM_API_KEY =
-    process.env.ALCHEMY_POLYGON_ZKEVM_API_KEY;
-
-  return {
-    props: {
-      ALCHEMY_GOERLI_API_KEY,
-      ALCHEMY_SEPOLIA_API_KEY,
-      ALCHEMY_POLYGON_ZKEVM_API_KEY,
-    },
-  };
+export async function getServerSideProps() {
+  return getServerSideProperties();
 }
 
 export default function PotW({
@@ -61,7 +50,6 @@ export default function PotW({
       apiKey: ALCHEMY_SEPOLIA_API_KEY,
       network: Network.ETH_SEPOLIA,
     });
-    console.log(alchemy);
 
     const getNFTofTheWeek = async () => {
       const response = await alchemy.nft.getNftsForContract(
