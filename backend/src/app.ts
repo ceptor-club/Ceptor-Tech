@@ -12,7 +12,7 @@ const io = require("socket.io")(server, {
 });
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
-import { getUser, saveUser } from "./utils/mongo";
+import { getUser, saveUser, getMostLikedSubmission, getSubmissions, voteForSubmission, saveSubmission, Submission } from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
@@ -38,6 +38,26 @@ app.get("/", (req, res) => {
 app.get("/user", async (req, res) => {
   const user = await getUser(req.query.wallet as string);
   user ? res.send(user) : res.send("user not found");
+});
+
+app.get("/COWSubmissions", async (req, res) => {
+  const submissions = await getSubmissions();
+  res.send(submissions);
+});
+
+app.get("/mostLikedSubmission", async (req, res) => {
+  const mostLikedSubmission = await getMostLikedSubmission();
+  res.send(mostLikedSubmission);
+});
+
+app.post("/voteForSubmission", async (req, res) => {
+  const vote = await voteForSubmission(req.body.data as Submission, req.body.wallet as string);
+  res.send(vote);
+});
+
+app.post("/submit", async (req, res) => {
+  const submission = await saveSubmission(req.body);
+  res.send(submission);
 });
 
 app.post("/user", async (req, res) => {
