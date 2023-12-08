@@ -2,19 +2,10 @@ import React from "react";
 import Link from "next/link";
 import Explorer from "../components/Explorer";
 
-export async function getServerSideProperties() {
-  const ALCHEMY_GOERLI_API_KEY = process.env.ALCHEMY_GOERLI_API_KEY;
-  const ALCHEMY_SEPOLIA_API_KEY = process.env.ALCHEMY_SEPOLIA_API_KEY;
-  const ALCHEMY_POLYGON_ZKEVM_API_KEY =
-    process.env.ALCHEMY_POLYGON_ZKEVM_API_KEY;
+import { getServerSideProperties } from "../utils/getServerSideProps";
 
-  return {
-    props: {
-      ALCHEMY_GOERLI_API_KEY,
-      ALCHEMY_SEPOLIA_API_KEY,
-      ALCHEMY_POLYGON_ZKEVM_API_KEY,
-    },
-  };
+export async function getServerSideProps() {
+  return getServerSideProperties();
 }
 export default function NFTPage({
   ALCHEMY_GOERLI_API_KEY,
