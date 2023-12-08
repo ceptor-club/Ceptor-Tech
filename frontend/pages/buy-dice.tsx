@@ -67,6 +67,15 @@ export default function BuyDice() {
     userBag[key] -= 1;
   };
 
+  const setBag = (size: string) => {
+    Object.keys(userBag).map((key) => {
+      setUserBag((userBag) => ({
+        ...userBag,
+        [key]: size === "small" ? 1 : 5,
+      }));
+    });
+  };
+
   useEffect(() => {
     const resultMinutes = Object.keys(userBag).reduce((accumulator, key) => {
       const numericKey = Number(key);
@@ -138,6 +147,20 @@ export default function BuyDice() {
             </div>
           ))}
         </div>
+      </div>
+      <div className="flex flex-row justify-center items-center flex-auto flex-wrap">
+        <button
+          className="bags-button font-nothing-you-could-do text-xl uppercase text-black"
+          onClick={() => setBag("small")}
+        >
+          Small Bag
+        </button>
+        <button
+          className="bags-button font-nothing-you-could-do text-xl uppercase text-black"
+          onClick={() => setBag("big")}
+        >
+          Big Bag
+        </button>
       </div>
       <div className="flex flex-row justify-center items-center  space-y-10 flex-auto flex-wrap">
         <div className="flex flex-col w-1/4">
