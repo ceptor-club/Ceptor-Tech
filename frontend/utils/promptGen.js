@@ -1,5 +1,5 @@
-const styleOf = "Medieval hero portrait";
-const descriptives = "fantasy illustration, unreal 5 render, 8k";
+const styleOf = "Medieval hero portrait, fantasy illustration";
+const descriptives = "unreal 5 render, 8k";
 
 //TODO: dont use positive negative, use -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 MAYBE
 
@@ -18,30 +18,30 @@ const conversions = {
 
   //races
   // Non-Dragonborn Solution 1.  -- Front end displays warning if not dragonborn
-  // dragonborn: "dragon-person",
-  // dwarf: "dwarf",
-  // elf: "elf",
-  // gnome: "gnome",
-  // human: "human",
-  // halfling: "thing that's half a human",
-  // halfelf: "half-elf half-human, long ears",
-  // halforc: "half-orc half-human, big teeth",
-  // tiefling: "horned forest demon",
-  // "wood elf": "wood elf",
-  // aarakocra: "humanoid bird",
+  dragonborn: "Dungeons and dragons, dragonborn",
+  dwarf: "dwarf",
+  elf: "elf",
+  gnome: "gnome",
+  human: "human",
+  halfling: "thing that's half a human",
+  halfelf: "half-elf half-human, long ears",
+  halforc: "half-orc half-human, big teeth",
+  tiefling: "horned forest demon",
+  "wood elf": "wood elf",
+  aarakocra: "humanoid bird",
 
   // Dragonborn Solution 1.
-  dragonborn: "DnDDragonbornGeneral",
-  dwarf: "DnDDragonbornGeneral",
-  elf: "DnDDragonbornGeneral",
-  gnome: "DnDDragonbornGeneral",
-  human: "DnDDragonbornGeneral",
-  halfling: "DnDDragonbornGeneral",
-  halfelf: "DnDDragonbornGeneral",
-  halforc: "DnDDragonbornGeneral",
-  tiefling: "DnDDragonbornGeneral",
-  "wood elf": "DnDDragonbornGeneral",
-  aarakocra: "DnDDragonbornGeneral",
+  // dragonborn: "DnDDragonbornGeneral",
+  // dwarf: "DnDDragonbornGeneral",
+  // elf: "DnDDragonbornGeneral",
+  // gnome: "DnDDragonbornGeneral",
+  // human: "DnDDragonbornGeneral",
+  // halfling: "DnDDragonbornGeneral",
+  // halfelf: "DnDDragonbornGeneral",
+  // halforc: "DnDDragonbornGeneral",
+  // tiefling: "DnDDragonbornGeneral",
+  // "wood elf": "DnDDragonbornGeneral",
+  // aarakocra: "DnDDragonbornGeneral",
 
   //backgrounds used to put the character in a scene
   entertainer: "performing a song in a tavern",
