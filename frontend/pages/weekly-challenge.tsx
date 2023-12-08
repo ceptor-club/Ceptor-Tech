@@ -53,13 +53,14 @@ export default function WeeklyChallenge({
     });
 
     const getNFTofTheWeek = async () => {
-      const response = await getMostLikedSubmission();
-      console.log(response);
-
-      // setWinnerNFT(response.nfts[1]);
+      // const response = await getMostLikedSubmission();
+      const response = await alchemy.nft.getNftsForContract(
+        "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A"
+      );
+      setWinnerNFT(response.nfts[1]);
     };
     getNFTofTheWeek();
-  }, []);
+  }, [ALCHEMY_SEPOLIA_API_KEY]);
 
   return (
     <div className="bg-black flex flex-col items-center  min-h-screen py-5 space-y-10">

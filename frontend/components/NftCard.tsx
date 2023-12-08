@@ -29,7 +29,7 @@ const NftCard = ({ nft, onCardClick, winner }) => {
         alt={rawMetadata.name}
         width={250}
         height={250}
-        className="rounded-md w-40 h-40 mt-2"
+        className="rounded-md "
         onClick={handleClick}
       />
       <div className="flex flex-row justify-start items-start p-3">

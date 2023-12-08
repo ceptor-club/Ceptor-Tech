@@ -288,8 +288,8 @@ option {
   background-size: contain; /* Contains the whole image */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  height: 35vh; /* Full height */
-  width: 20vw; /* Full width */
+  height: 360px;
+  width: 340px;
 }
 
 .material-symbols-outlined {
