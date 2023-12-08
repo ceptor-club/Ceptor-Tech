@@ -412,7 +412,7 @@ export const Create = () => {
                       <p className="">https://discord.gg/kPC8GMK5</p>
                     </a>
                   </div>
-                  <Link href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' className="text-black hover:text-white w-4">
+                  <Link href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' className="text-transparent hover:text-white w-4">
                       {"What's this?"}
                   </Link>
                 </>

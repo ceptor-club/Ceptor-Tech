@@ -1,4 +1,6 @@
 import { NFTStorage, File } from 'nft.storage';
+import { useContext } from 'react';
+import { CharacterContext } from '../components/CharacterContext';
 
 const token = process.env.NEXT_PUBLIC_NFT_STORAGE;
 
@@ -30,6 +32,7 @@ async function createStructuredMetadata(pdfData, prompt, someBinaryImageData) {
   //make binary image data into blob
   // const blob = new Blob([someBinaryImageData], { type: "image/png" })
   // console.log("imageFile", blob)
+  const characterData = useContext(CharacterContext)
 
   const imageFile = await base64EncodedImage(someBinaryImageData);
 
@@ -44,11 +47,11 @@ async function createStructuredMetadata(pdfData, prompt, someBinaryImageData) {
     attributes: [
       {
         trait_type: 'Class',
-        value: 'Wizard',
+        value: characterData.myClass,
       },
       {
         trait_type: 'Race',
-        value: 'Dragonborn!',
+        value: characterData.species,
       },
       {
         trait_type: 'Prompt',
@@ -56,39 +59,39 @@ async function createStructuredMetadata(pdfData, prompt, someBinaryImageData) {
       },
       {
         trait_type: 'Level',
-        value: 1,
+        value: characterData.level,
         max_value: 20,
       },
       {
         trait_type: 'Strength',
-        value: 5,
+        value: characterData.strength,
       },
       {
         trait_type: 'Dexterity',
-        value: 5,
+        value: characterData.dexterity,
       },
       {
         trait_type: 'Constitution',
-        value: 5,
+        value: characterData.constitution,
       },
       {
         trait_type: 'Intelligence',
-        value: 5,
+        value: characterData.inteligence,
       },
       {
         trait_type: 'Wisdom',
-        value: 5,
+        value: characterData.wisdom,
       },
       {
         trait_type: 'Charisma',
-        value: 5,
+        value: characterData.charisma,
       },
       {
         value: pdfData.playerName ? pdfData.playerName : pdfData.name,
       },
       {
         trait_type: 'Background',
-        value: pdfData.background,
+        value: characterData.background,
       },
     ],
   };
