@@ -17,7 +17,8 @@ contract Receiver is CCIPReceiver {
         bytes32 indexed messageId, // The unique ID of the message.
         uint64 indexed sourceChainSelector, // The chain selector of the source chain.
         address sender, // The address of the sender from the source chain.
-        string text // The text that was received.
+        address whoGotLoot, // the address sent in with the message
+        string loot // The text that was received
     );
 
     bytes32 private s_lastReceivedMessageId; // Store the last received messageId.
@@ -43,18 +44,19 @@ contract Receiver is CCIPReceiver {
             any2EvmMessage.messageId,
             any2EvmMessage.sourceChainSelector, // fetch the source chain identifier (aka selector)
             abi.decode(any2EvmMessage.sender, (address)), // abi-decoding of the sender address,
-            abi.decode(any2EvmMessage.data, (string))
+            userAddress,
+            s_lootMessage.lootText // are there different gas costs for these
         );
     }
 
     /// @notice Fetches the details of the last received loot.
     /// @return messageId The ID of the last received message.
     /// @return userAddress The address of the user who got the loot.
-    /// @return text The last received text.
+    /// @return loot The last received text loot.
     function getLastReceivedMessageDetails()
         external
         view
-        returns (bytes32 messageId, address userAddress, string memory text)
+        returns (bytes32 messageId, address userAddress, string memory loot)
     {
         return (s_lastReceivedMessageId, s_lootMessage.userAddress, s_lootMessage.lootText);
     }
