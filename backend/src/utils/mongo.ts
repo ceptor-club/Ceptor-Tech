@@ -1,15 +1,15 @@
-import { MongoClient } from "mongodb"
-require("dotenv").config()
+import { MongoClient } from "mongodb";
+require("dotenv").config();
 
 const url = process.env.DB_CONN_STRING as string
 const client = new MongoClient(url)
 
 interface User {
-  _id: string
-  name: string
-  email: string | null
-  wallet: string
-  mailingList: boolean
+  _id: string;
+  name: string;
+  email: string | null;
+  wallet: string;
+  mailingList: boolean;
 }
 
 interface CharacterData {
@@ -18,16 +18,28 @@ interface CharacterData {
   owner: User["_id"]
 }
 
+export interface Submission {
+  addressOfCreator: string;
+  image: string;
+  likesAmount: number;
+  tokenID: number;
+  chainId: number;
+  voterWallets: string[];
+}
+
 const collectionNames = process.env.DB_COLLECTION?.split(',') || []
 const usersCollection = client.db(process.env.DB_NAME!).collection<User>(collectionNames[0]);
 const characterDataCollection = client.db(process.env.DB_NAME!).collection<CharacterData>(collectionNames[1]);
+const submissionCollection = client.db(process.env.DB_NAME!).collection<Submission>(collectionNames[2]);
+
 
 //function to connect to mongoDB and save a user to the database
 export async function saveUser(user: any) {
   try {
     return usersCollection.insertOne(user)
   } catch (e) {
-    console.error(e)
+    console.error(e);
+    return e;
   }
 }
 
@@ -46,8 +58,63 @@ export async function getUserById(_id: string) {
   try {
     return usersCollection.findOne({ _id: _id })
   } catch (error) {
-    console.error(error)
-    return error
+    console.error(error);
+    return error;
+  }
+}
+
+export async function saveSubmission(submission: Submission) {
+  try {
+    return submissionCollection.insertOne(submission);
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+export async function getSubmissions() {
+  try {
+    return submissionCollection.find().toArray();
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+// returning the most liked submission
+export async function getMostLikedSubmission() {
+  try {
+    return submissionCollection
+      .find()
+      .sort({ likesAmount: -1 })
+      .limit(1)
+      .toArray();
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+// vote for a submission, only  one vote per wallet
+export async function voteForSubmission(
+  tokenID: number,
+  wallet: string
+) {
+  try {
+    // check if the wallet already voted
+    const submissionAlreadyVoted = await submissionCollection
+      .findOne({ tokenID, voterWallets: wallet });
+    if (submissionAlreadyVoted) {
+      return "already voted";
+    }
+    return submissionCollection
+      .updateOne(
+        { tokenID },
+        { $addToSet: { voterWallets: wallet }, $inc: { likesAmount: 1 } }
+      );
+  } catch (error) {
+    console.error(error);
+    return error;
   }
 }
 

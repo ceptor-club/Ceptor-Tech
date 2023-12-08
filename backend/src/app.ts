@@ -13,7 +13,21 @@ const io = require("socket.io")(server, {
 });
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
-import { getUserByWallet, saveUser, getAllUsers, saveCharacterData, getAllCharacters, getUserById, getCharacterById } from "./utils/mongo";
+
+import { 
+  getUserByWallet, 
+  saveUser, 
+  getAllUsers, 
+  saveCharacterData, 
+  getAllCharacters, 
+  getUserById, 
+  getCharacterById, 
+  getMostLikedSubmission, 
+  getSubmissions, 
+  voteForSubmission, 
+  saveSubmission, 
+  Submission 
+} from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
@@ -42,6 +56,7 @@ app.get("/user/:wallet", async (req, res) => {
   user ? res.send(user) : res.send("user not found");
 });
 
+
 //see all users
 app.get("/users", async (req, res) => {
   const users = await getAllUsers()
@@ -67,6 +82,27 @@ app.get('/userData/:_id', async (req, res) => {
     console.error('Error fetching user data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+});
+
+
+app.get("/COWSubmissions", async (req, res) => {
+  const submissions = await getSubmissions();
+  res.send(submissions);
+});
+
+app.get("/mostLikedSubmission", async (req, res) => {
+  const mostLikedSubmission = await getMostLikedSubmission();
+  res.send(mostLikedSubmission);
+});
+
+app.post("/voteForSubmission", async (req, res) => {
+  const vote = await voteForSubmission(req.body.tokenID as number, req.body.wallet as string);
+  res.send(vote);
+});
+
+app.post("/submit", async (req, res) => {
+  const submission = await saveSubmission(req.body);
+  res.send(submission);
 });
 
 //save user
