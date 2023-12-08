@@ -7,14 +7,19 @@ const conversions = {
   // these are distractions to our sprint goal of getting a dragonborn to work, but they are good to have for the future
   // it's also a little confusing how these are used, so we should probably clean this up
   //classes
-  cleric: "DnDCleric",
-  druid: "druid",
-  bard: "bard",
-  warlock: "warlock",
-  paladin: "paladin",
-  artificer: "engineer and tinkerer",
-  ranger: "archer",
-  rogue: "rogue",
+  artificer: 'magical inventor, technology, equipment, Artificer',
+  barbarian: 'no armor, frontline hand-to-hand fighter, Barbarian',
+  bard: 'mandolin, singer, Bard',
+  cleric: 'healer, spiritual, Cleric',
+  druid: 'nature, plants, Druid',
+  fighter: 'light armor, handheld weapon, Fighter',
+  monk: 'robes, tunic, martial artist, Monk',
+  paladin: 'heavy plate armor, two-handed weapon, holy warrior, Paladin',
+  ranger: 'archer, cloak, tracker, Ranger',
+  rogue: 'stealth, sneaky attacker, Rogue',
+  sorcerer: 'spellcaster, conjurer, runes, Sorcerer',
+  warlock: 'dark spellcaster, powerful, evil spirits, Warlock',
+  wizard: 'book, spellcaster, runes, Wizard',
 
   //races
   // Non-Dragonborn Solution 1.  -- Front end displays warning if not dragonborn
@@ -25,10 +30,10 @@ const conversions = {
   gnome: "Gnome",
   human: "Human",
   halfling: "Halfling",
-  "Half-Elf": "Half-Elf",
-  "Half-Orc": "Half-Orc",
+  "half-elf": "Half-Elf",
+  "half-orc": "Half-Orc",
   tiefling: "Tiefling",
-  "Wood Elf": "Wood Elf",
+  "wood elf": "Wood Elf",
   aarakocra: "Aarakocra",
   centaur: "Centaur",
   bubear: "Bugbear",
