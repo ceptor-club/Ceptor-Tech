@@ -90,7 +90,7 @@ export async function getMostLikedSubmission() {
 
 // vote for a submission, only  one vote per wallet
 export async function voteForSubmission(
-  submission: Submission,
+  tokenID: number,
   wallet: string
 ) {
   try {
@@ -98,7 +98,7 @@ export async function voteForSubmission(
     const submissionAlreadyVoted = await client
       .db(process.env.DB_NAME!)
       .collection("submissions")
-      .findOne({ tokenID: submission.tokenID, voterWallets: wallet });
+      .findOne({ tokenID, voterWallets: wallet });
     if (submissionAlreadyVoted) {
       return "already voted";
     }
@@ -106,7 +106,7 @@ export async function voteForSubmission(
       .db(process.env.DB_NAME!)
       .collection("submissions")
       .updateOne(
-        { tokenID: submission.tokenID },
+        { tokenID },
         { $addToSet: { voterWallets: wallet }, $inc: { likesAmount: 1 } }
       );
   } catch (error) {

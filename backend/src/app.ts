@@ -51,7 +51,7 @@ app.get("/mostLikedSubmission", async (req, res) => {
 });
 
 app.post("/voteForSubmission", async (req, res) => {
-  const vote = await voteForSubmission(req.body.data as Submission, req.body.wallet as string);
+  const vote = await voteForSubmission(req.body.tokenID as number, req.body.wallet as string);
   res.send(vote);
 });
 
