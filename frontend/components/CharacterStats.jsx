@@ -46,13 +46,14 @@ const CharacterStats = ({
       if (characterData.myAlignment !== pdfData.alignment && characterData.myAlignment !== "") {
         setPdfData({ ...pdfData, alignment: characterData.myAlignment });
       }
-    if (characterData.gender !== pdfData.gender) {
-      if (characterData.gender === "He" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "male" });
-      } else if (characterData.gender === "She" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "female" });
-      } else if (characterData.gender === "They" && pdfData.gender === "") {
-        setPdfData({ ...pdfData, gender: "nonbinary" });
+      if (characterData.gender !== pdfData.gender) {
+        if (characterData.gender === "He" && pdfData.gender === "") {
+          setPdfData({ ...pdfData, gender: "male" });
+        } else if (characterData.gender === "She" && pdfData.gender === "") {
+          setPdfData({ ...pdfData, gender: "female" });
+        } else if (characterData.gender === "They" && pdfData.gender === "") {
+          setPdfData({ ...pdfData, gender: "nonbinary" });
+        }
       }
     }
     console.log(pdfData);
@@ -81,6 +82,7 @@ const CharacterStats = ({
       setPdfData({ ...pdfData, race: "" });
     }
   };
+
   const handleArmorSelect = (e) => {
     const input = document.getElementById("armorInput");
     if (
@@ -181,7 +183,7 @@ const CharacterStats = ({
                     id="raceCheck"
                     type="checkbox"
                     className="checkbox-stats"
-                    onChange={handleRaceSelect}
+                    onChange={handleSpeciesSelect}
                     defaultChecked
                     disabled={imageResult}
                   ></input>
