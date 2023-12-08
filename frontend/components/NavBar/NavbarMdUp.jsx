@@ -37,7 +37,7 @@ export default function NavbarMdUp() {
                 />
                 {/* TODO: Check all hrefs */}
                 <Link href='/QuizPage'>QUIZ</Link> 
-                <Link href='/'>CREATE </Link>
+                <Link href='/CCID'>CREATE </Link>
                 <Link href='/nftpage'>EXPLORE </Link>
                 <Link href='/profile'>PROFILE </Link>
               </div>

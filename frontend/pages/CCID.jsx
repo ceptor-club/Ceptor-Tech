@@ -1,5 +1,8 @@
+// CCID.jsx
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import WalletConnectButton from '../components/WalletConnectButton';
 
 const StyledDiv = styled.div`
   background-color: #d9d9d9;
@@ -56,13 +59,59 @@ const StyledButton = styled.button`
   font-size: 18px;
   width: 25%;
   box-sizing: border-box;
+  cursor: pointer;
+`;
+
+const ModalOverlay = styled.div`
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+const NetworkDropdown = styled.select`
+  margin-bottom: 10px;
+  padding: 8px;
+`;
+
+const StyledWalletConnectButton = styled(WalletConnectButton)`
+  margin-top: 10px;
 `;
 
 const CCID = () => {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCreateIDClick = () => {
-    router.push('/uploadpage');
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -77,6 +126,22 @@ const CCID = () => {
       </StyledTextContainer>
       <StyledButtonContainer>
         <StyledButton onClick={handleCreateIDClick}>Create ID</StyledButton>
+        {isModalOpen && (
+          <ModalOverlay>
+            <ModalContent>
+              <CloseButton onClick={handleModalClose}>x</CloseButton>
+              <NetworkDropdown>
+                <option value="" disabled selected>
+                  Choose the network
+                </option>
+                <option value="ethereum">Ethereum Sepolia</option>
+                <option value="polygon">Polygon Mumbai</option>
+                <option value="avalanche">Avalanche Fuji</option>
+              </NetworkDropdown>
+              <StyledWalletConnectButton />
+            </ModalContent>
+          </ModalOverlay>
+        )}
         <StyledButton>Log-in</StyledButton>
       </StyledButtonContainer>
     </StyledDiv>
