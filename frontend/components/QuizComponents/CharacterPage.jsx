@@ -205,7 +205,6 @@ export default function CharacterPage() {
     }
 
     async function saveCharacter() {
-        setCharacterData(character)
         try {
 
             // const userId = User._id
@@ -219,6 +218,10 @@ export default function CharacterPage() {
 
             if (response.ok) {
                 setSaveStatus({ success: 'Character saved successfully', error: null })
+                setCharacterData(character)
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
             } else {
                 setSaveStatus({ success: null, error: 'Error saving character' })
             }
@@ -309,11 +312,11 @@ export default function CharacterPage() {
                     )}
                 </div>
                 <div className='flex flex-row mt-0'>
-                    <Link href='/'>
+                    {/* <Link href='/'> */}
                         <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
                             Save Character?
                         </button>
-                    </Link>
+                    {/* </Link> */}
                     <Link href='http://localhost:3000/issuecredentials'>
                         <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={exportCharacter}>
                             Export to Bit Bender

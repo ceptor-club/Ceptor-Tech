@@ -120,12 +120,12 @@ app.post("/user", async (req, res) => {
 
 //save character
 //NEEDS WORK TO SAVE TO SPECIFIC USER
-// app.post("/characterData", async (req, res) => {
-//   const userId = req.user._id;
-//   const characterData = req.body;
-//   const savedCharacterData = await saveCharacterData(characterData, userId)
-//   res.send(savedCharacterData)
-// })
+app.post("/characterData", async (req, res) => {
+  // const userId = req.user._id;
+  const characterData = req.body;
+  const savedCharacterData = await saveCharacterData(characterData, '')
+  res.send(savedCharacterData)
+})
 
 //see all characters
 app.get("/characterData", async (req, res) => {
