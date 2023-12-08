@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
-
-const StyledUploadPhoto = styled.div`
-  cursor: pointer;
-`;
 
 const StyledSignUpContainer = styled.div`
   background-color: #d9d9d9;
@@ -20,6 +17,7 @@ const StyledSignUpContainer = styled.div`
 
 const StyledPhotoUpload = styled.div`
   cursor: pointer;
+  /* Add the photo upload style*/
 `;
 
 const StyledUsernameInput = styled.input`
@@ -29,6 +27,7 @@ const StyledUsernameInput = styled.input`
   margin: 20px 0;
   width: 25%;
   text-align: center;
+  color: #2F0213;
 
   &:hover::placeholder {
     color: transparent;
@@ -51,6 +50,7 @@ const StyledButtonsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  width: 25%;
 `;
 
 const StyledButton = styled.button`
@@ -62,20 +62,33 @@ const StyledButton = styled.button`
   font-size: 18px;
   width: 100%;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 const UploadPage = () => {
+  const router = useRouter();
+  const [username, setUsername] = useState('');
+
+  const handleRoleSelection = (role) => {
+    router.push(`/IDcreated?username=${encodeURIComponent(username)}&role=${encodeURIComponent(role)}`);
+  };
+
   return (
     <StyledSignUpContainer>
       <StyledPhotoUpload>
         <label htmlFor="photo-upload">Upload Photo</label>
         <input type="file" id="photo-upload" accept="image/*" />
       </StyledPhotoUpload>
-      <StyledUsernameInput type="text" placeholder="enter username" />
+      <StyledUsernameInput
+        type="text"
+        placeholder="enter username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
       <StyledRoleText>Choose your role!</StyledRoleText>
       <StyledButtonsContainer>
-        <StyledButton>Gamemaster</StyledButton>
-        <StyledButton>Player</StyledButton>
+        <StyledButton onClick={() => handleRoleSelection('Gamemaster')}>Gamemaster</StyledButton>
+        <StyledButton onClick={() => handleRoleSelection('Player')}>Player</StyledButton>
       </StyledButtonsContainer>
     </StyledSignUpContainer>
   );
