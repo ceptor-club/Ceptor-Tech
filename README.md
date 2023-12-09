@@ -134,7 +134,9 @@ Link to readme:
 5. to compile the smart contract
  `forge compile`
 6. to deploy the smart contract
- `forge script ./script/deployer.sol -vvv --rpc-url polygonMumbai --broadcast --sig "deployAll()" `
+ `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "deployAll()" `
+ `npx hardhat deploy --network sepolia `
+ `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "postDeploy(address,address)" -- 0x9C28052c9dD62d43bbFe3084a14ACC1c24944b20 0x557d4b0a566613f344E2F5a9bc4FC52F6897B372  `
 
 ## 🖥️ Let's Setup Backend
 
