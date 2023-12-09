@@ -91,18 +91,18 @@ contract CeptorClubID is Ownable, CCIPReceiver {
         if (msg.sender != owner()) {
             require(msg.value >= getRegistrationCost(), "Insufficient funds for registration");
         }
-        users.push(msg.sender);
-        usernames[msg.sender] = _username;
+        // users.push(msg.sender);
+        // usernames[msg.sender] = _username;
         emit UsernameRegistered(msg.sender, _username, msg.sender == owner());
     }
 
     // Helper function to check username availability
     function usernameAvailable(string memory _username) private view returns (bool) {
-        for (uint i = 0; i < users.length; i++) {
-            if (keccak256(bytes(usernames[users[i]])) == keccak256(bytes(_username))) {
-                return false;
-            }
-        }
+        // for (uint i = 0; i < users.length; i++) {
+        //     // if (keccak256(bytes(usernames[users[i]])) == keccak256(bytes(_username))) {
+        //     //     return false;
+        //     // }
+        // }
         return true;
     }
 
@@ -114,22 +114,22 @@ contract CeptorClubID is Ownable, CCIPReceiver {
 
     // Function to update user stats
     function updateBigStats(uint256 statId, uint256 value) public onlyOwner {
-        if (statId == 0) userStats[msg.sender].strong = uint8(value);
-        else if (statId == 1) userStats[msg.sender].agile = uint8(value);
-        else if (statId == 2) userStats[msg.sender].tanky = uint8(value);
-        else if (statId == 3) userStats[msg.sender].clever = uint8(value);
-        else if (statId == 4) userStats[msg.sender].wise = uint8(value);
-        else if (statId == 5) userStats[msg.sender].cute = uint8(value);
-        else if (statId == 6) userStats[msg.sender].lucky = uint8(value);
+        // if (statId == 0) userStats[msg.sender].strong = uint8(value);
+        // else if (statId == 1) userStats[msg.sender].agile = uint8(value);
+        // else if (statId == 2) userStats[msg.sender].tanky = uint8(value);
+        // else if (statId == 3) userStats[msg.sender].clever = uint8(value);
+        // else if (statId == 4) userStats[msg.sender].wise = uint8(value);
+        // else if (statId == 5) userStats[msg.sender].cute = uint8(value);
+        // else if (statId == 6) userStats[msg.sender].lucky = uint8(value);
         emit StatsUpdated(msg.sender, statId, value);
     }
 
     // Function to store loot
     function storeLoot(string memory loot) public onlyOwner {
-        for (uint256 i = 0; i < amount; i++) {
-            userLoot[msg.sender].push(loot);
-            emit LootReceived(msg.sender, loot);
-        }
+        // for (uint256 i = 0; i < amount; i++) {
+        //     //userLoot[msg.sender].push(loot);
+        //     emit LootReceived(msg.sender, loot);
+        // }
     }
 
     // CCIP Receive function -- have a seperate contract for each recieve (Loot and Stats)
@@ -152,9 +152,9 @@ contract CeptorClubID is Ownable, CCIPReceiver {
 
     // Function to check the blockchain this CCID is deployed to
     function checkDeployedChain() public view returns (string memory) {
-        if (chainSelectors.length > 0) {
-            return chainSelectors[chainSelectors.length - 1];
-        }
+        // if (chainSelectors.length > 0) {
+        //     return chainSelectors[chainSelector.length - 1];
+        // }
         return "Chain selector not found";
     }
 
