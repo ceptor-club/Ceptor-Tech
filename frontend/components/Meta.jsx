@@ -1,5 +1,11 @@
+<<<<<<< HEAD
+// Metadata for the website used by the browser and search engines
+import Head from 'next/head';
+import Script from 'next/script';
+=======
 import Head from "next/head";
 import Script from "next/script";
+>>>>>>> tech-dev
 
 const Meta = () => (
   // const Head = ({ title, desc, canonical, image, props }) => (
@@ -21,6 +27,14 @@ const Meta = () => (
     <meta name="twitter:creator" content="@dynamiccryptog" />
     <link rel="icon" type="image/png" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.ico" /> */}
+<<<<<<< HEAD
+    </Head>
+    <Script
+      src='https://www.googletagmanager.com/gtag/js?id=G-37VQF6EBG7'
+      strategy='afterInteractive'
+    />
+    <Script id='google-analytics' strategy='afterInteractive'>
+=======
       <link
         href="https://fonts.googleapis.com/css2?family=Milonga&display=swap"
         rel="stylesheet"
@@ -43,6 +57,7 @@ const Meta = () => (
       strategy="afterInteractive"
     />
     <Script id="google-analytics" strategy="afterInteractive">
+>>>>>>> tech-dev
       {`
       window.dataLayer = window.dataLayer || [];
       function gtag(){window.dataLayer.push(arguments);}

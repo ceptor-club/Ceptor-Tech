@@ -6,13 +6,21 @@ const app: Application = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
+<<<<<<< HEAD
+    origin: process.env.FRONTEND_URL, // allow to server to accept request from different origin
+=======
     origin: process.env.FRONTEND_URL,
+>>>>>>> tech-dev
     methods: ["GET", "POST"],
   },
 });
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
 import { getUser, saveUser } from "./utils/mongo";
+<<<<<<< HEAD
+import { env } from "process";
+=======
+>>>>>>> tech-dev
 
 app.use(cors()); // Open requests
 app.use(express.json());
@@ -31,6 +39,10 @@ io.use((socket: any, next: any) => {
 
 //test socket
 app.get("/", (req, res) => {
+<<<<<<< HEAD
+  console.log(req.path)
+=======
+>>>>>>> tech-dev
   io.emit("test", "test"); //using io sends to all clients
   res.send("test should have been successful");
 });
@@ -58,10 +70,16 @@ io.on("connection", (socket: any) => {
 
   socket.on("imageRequest", (data: any) => {
     console.log("image request received", data);
+<<<<<<< HEAD
+    getImages(data).then((response: any) => {
+      console.log("response from getImages", response);
+      socket.emit("imageResponse", response); //using socket instead of IO to send to only the client that requested the images
+=======
     getImages(data).then((responseData: any) => {
       // console.log("response from getImages", response);
       console.log("best practice", responseData.images.length)
       socket.emit("imageResponse", responseData); //using socket instead of IO to send to only the client that requested the images
+>>>>>>> tech-dev
     });
   });
 });

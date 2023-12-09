@@ -41,7 +41,11 @@ a {
 } */
 
 h1 {
+<<<<<<< HEAD
+  margin: auto;
+=======
   /* margin: auto; */
+>>>>>>> tech-dev
   text-align: center;
 }
 
@@ -158,6 +162,8 @@ option {
 
   border-top: 20px solid #fff;
 }
+<<<<<<< HEAD
+=======
 
 .scrollableDiv {
   overflow: auto;
@@ -296,3 +302,4 @@ option {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   color: red;
 }
+>>>>>>> tech-dev

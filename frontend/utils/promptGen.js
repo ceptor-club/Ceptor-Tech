@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+const styleOf = "Medieval hero portrait, fantasy illustration";
+const descriptives = "unreal 5 render, 8k";
+=======
 const styleOf = "Medieval hero portrait";
 const descriptives = "fantasy illustration, unreal 5 render, 8k";
+>>>>>>> tech-dev
 
 //TODO: dont use positive negative, use -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 MAYBE
 
@@ -18,7 +23,11 @@ const conversions = {
 
   //races
   // Non-Dragonborn Solution 1.  -- Front end displays warning if not dragonborn
+<<<<<<< HEAD
+  dragonborn: "Dungeons and dragons, dragonborn",
+=======
   dragonborn: "Dragonborn",
+>>>>>>> tech-dev
   dwarf: "dwarf",
   elf: "elf",
   gnome: "gnome",
@@ -87,6 +96,16 @@ const createPrompt = (data) => {
   Object.keys(data).forEach((key) => {
     //handle stats
     if (data[key][0] > 3) {
+<<<<<<< HEAD
+      // console.log("pos", key, data[key]);
+      adjectives.push(conversions[key].positive);
+    } else if (data[key][0] < 0) {
+      // console.log("neg", key, data[key]);
+      adjectives.push(conversions[key].negative);
+    }
+  });
+  // console.log("adjectives: ", adjectives);
+=======
       console.log("pos", key, data[key]);
       adjectives.push(conversions[key].positive);
     } else if (data[key][0] < 0) {
@@ -95,6 +114,7 @@ const createPrompt = (data) => {
     }
   });
   console.log("adjectives: ", adjectives);
+>>>>>>> tech-dev
   // returns a prompt with:
   // alignment, race (converted to prompt language or our unique identifier such as DnDDragonborn),
   // class, armorWorn, background & scene, descriptives

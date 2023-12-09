@@ -38,6 +38,10 @@ notes
 next-env.d.ts
 
 .vscode
+<<<<<<< HEAD
+.history
+=======
 .history
 package-lock.json
 
+>>>>>>> tech-dev

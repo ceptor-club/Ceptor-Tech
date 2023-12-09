@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+import Image from 'next/image';
+import React, { useState, useRef } from 'react';
+import Link from 'next/link';
+=======
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 import Link from "next/link";
+>>>>>>> tech-dev
 
 export default function NavbarSmUp() {
   const [navMenuVisible, setNavMenuVisible] = useState(true);
@@ -12,6 +18,16 @@ export default function NavbarSmUp() {
   return (
     <>
       {/* Small screens */}
+<<<<<<< HEAD
+      <div className='md:hidden border'>
+        <nav
+          className={`${
+            navMenuVisible ? `h-32` : 'h-8'
+          } w-full fixed z-20 bottom-0 left-0 bg-black bg-opacity-90`}
+        >
+          <div
+            className='bg-white w-8 h-8 rounded-full absolute left-4 -top-4'
+=======
       <div className=" md:hidden border">
         <nav
           className={`${
@@ -20,11 +36,20 @@ export default function NavbarSmUp() {
         >
           <div
             className="bg-white w-8 h-8 rounded-full  left-4 -top-4"
+>>>>>>> tech-dev
             onClick={toggleNavMenu}
           ></div>
 
           {navMenuVisible ? (
             <>
+<<<<<<< HEAD
+              <div className='w-full h-24 flex flex-col ml-6 mt-6'>
+                {/* TODO: Check all hrefs */}
+                <Link href='/QuizPage'>QUIZ</Link>
+                <Link href='/'>CREATE </Link>
+                <Link href='/nftpage'>EXPLORE </Link>
+                <Link href='/profile'>PROFILE </Link>
+=======
               <div className="w-full h-24 flex flex-col ml-6 mt-6">
                 {/* TODO: Check all hrefs */}
                 <Link className="uppercase" href="/QuizPage">
@@ -51,6 +76,7 @@ export default function NavbarSmUp() {
                 <Link className="uppercase" href="/burn-dice">
                   Burn Dice{" "}
                 </Link>
+>>>>>>> tech-dev
               </div>
             </>
           ) : null}

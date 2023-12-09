@@ -1,5 +1,9 @@
 import React from "react"
+<<<<<<< HEAD
+import { RandomName } from "../CharacterModule/RandomName"
+=======
 import { RandomName } from "../RandomName"
+>>>>>>> tech-dev
 
 export default function NameLevelGender({ charName, setCharName, level, setLevel, gender, setGender }) {
 

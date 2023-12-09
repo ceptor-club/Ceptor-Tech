@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+// This is the root component that wraps all other components
+=======
+>>>>>>> tech-dev
 import "../styles/globals.css";
 import {
   EthereumClient,
@@ -6,6 +10,14 @@ import {
 } from "@web3modal/ethereum";
 import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
+<<<<<<< HEAD
+import { sepolia, goerli } from "wagmi/chains";
+import Layout from "../components/Layout";
+import { CharacterProvider } from '../components//CharacterModule/CharacterContext';
+import SocketProvider from "../utils/socketContext";
+
+const chains = [sepolia, goerli];
+=======
 import {
   sepolia,
   goerli,
@@ -24,6 +36,7 @@ const chains = [
   polygonZkEvmTestnet,
   avalancheFuji,
 ];
+>>>>>>> tech-dev
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
 const { publicClient } = configureChains(chains, [
@@ -45,6 +58,17 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <CharacterProvider>
+<<<<<<< HEAD
+      <SocketProvider>
+        <WagmiConfig config={wagmiConfig}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </WagmiConfig>
+        <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      </SocketProvider>
+          </CharacterProvider>
+=======
         <SocketProvider>
           <WagmiConfig config={wagmiConfig}>
             <Layout>
@@ -60,6 +84,7 @@ function MyApp({ Component, pageProps }) {
           />
         </SocketProvider>
       </CharacterProvider>
+>>>>>>> tech-dev
     </>
   );
 }
