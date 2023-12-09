@@ -5,6 +5,11 @@ const BurnDiePage = () => {
   const router = useRouter();
   const { username } = router.query;
 
+  // Function to navigate to the characterPage
+  const navigateToCharacterPage = () => {
+    router.push('/characterPage'); // Replace '/characterPage' with the actual route path
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-200 p-4">
       <div className="text-center p-4 bg-black text-white w-full max-w-xs">
@@ -13,7 +18,7 @@ const BurnDiePage = () => {
       <button
         style={{ backgroundColor: '#2F0213' }}
         className="mt-4 text-white font-bold py-2 px-4 rounded w-full max-w-xs hover:bg-opacity-90"
-        onClick={() => { /* logic to burn a die */ }}
+        onClick={navigateToCharacterPage}
       >
         Burn a Die to Create a Ceptor
       </button>
@@ -22,7 +27,9 @@ const BurnDiePage = () => {
       </p>
       <button
         className="mt-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full max-w-xs"
-        onClick={() => { /* logic to explore characters */ }}
+        onClick={() => {
+          /* logic to explore characters */
+        }}
       >
         Explore characters
       </button>
