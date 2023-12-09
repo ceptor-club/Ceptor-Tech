@@ -1,6 +1,6 @@
 export const addresses = {
   sepolia: {
-    promtCollection: "0x557d4b0a566613f344E2F5a9bc4FC52F6897B372",
+    promptCollection: "0x557d4b0a566613f344E2F5a9bc4FC52F6897B372",
     ceptorDice: "0xB4e5136F4BADDdF23a720A14a6a0D0d60A5ee9ee",
     ceptors: "0xf965217a040cc52354d55ed6D41112bb5f9Bf9D2",
     ccipV4: "",
