@@ -7,7 +7,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deployer } = await getNamedAccounts()
     let prompt =  "0x425c05E479C94227f6CeBB52aF899330B542de88"
     let dice =  "0x71B80d94645ddF04BAa56d8D3c92792496A23B27"
-    const oracle = "0xA9d587a00A31A52Ed70D6026794a8FC5E2F5dCb0";
+    const oracle = "0x6E2dc0F9DB014aE19888F539E59285D2Ea04244C";
     const subscriptionId = 20;
     const _checkLogic = await fs.readFile("./source.js", "utf8");
 
