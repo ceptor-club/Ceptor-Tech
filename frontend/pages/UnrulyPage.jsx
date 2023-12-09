@@ -1,6 +1,7 @@
 // import Head from "next/head";
 import { useState, useEffect, createContext, useContext } from 'react';
 import { Logo } from '../components/Logo';
+<<<<<<< HEAD
 import VectorImage from '../components/VectorImage';
 import Meta from '../components/Meta';
 import Image from 'next/image';
@@ -9,6 +10,17 @@ import NavbarSmUp from '../components/NavBar/NavbarSmUp';
 import Quiz from '../components/Quiz';
 import Unruly from '../components/Unruly/Unruly';
 import { CharacterContext } from '../components/CharacterModule/CharacterContext';
+=======
+import HamburgerMenu from '../components/HamburgerMenu';
+import VectorImage from '../components/VectorImage';
+import Meta from '../components/Meta';
+import Image from 'next/image';
+import NavbarMdUp from '../components/NavbarMdUp';
+import NavbarSmUp from '../components/NavbarSmUp';
+import Quiz from '../components/Quiz';
+import Unruly from '../components/Unruly/Unruly';
+import { CharacterContext } from '../components/CharacterContext';
+>>>>>>> tech-dev
 
 
 

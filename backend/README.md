@@ -13,8 +13,13 @@ frontend with sockets in context ready to be used: https://github.com/DnDnDiffus
 ## installation
 
 1. npm install
+<<<<<<< HEAD
 2. create a .env with the proper variables
 3. reenable the cors object
+=======
+2. create a .env with the proper variables (SD_ENDPOINT: https://stable-diffusion10.p.rapidapi.com/generate-image) *thanks to Team Art (Spencer!)*
+3. reenable the cors object (maybe)
+>>>>>>> tech-dev
 4. npm run dev
 
 ## other stuff
@@ -27,7 +32,11 @@ You need to run the backend in conjunction with the frontend to get this to work
 
 ## Now also has endpoints for user creation and lookup!
 
+<<<<<<< HEAD
 you can put `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
+=======
+you can put `mongodb+srv://verinta:BFWmxukoOsNdIx4x@ceptorclub.rq4oohp.mongodb.net/` into mongodb compass and see the db
+>>>>>>> tech-dev
 
 GET /user?wallet=<wallet0x> will give you the user
 POST /user with

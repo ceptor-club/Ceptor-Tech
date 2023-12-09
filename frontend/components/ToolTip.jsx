@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // Component for displaying a tooltip
 // Set its content when calling it with the content prop
+=======
+>>>>>>> tech-dev
 import Image from "next/image";
 import tooltipIcon from "../public/images/tooltip-icon.png";
 import Tippy from "@tippyjs/react";
@@ -20,15 +23,25 @@ export default function Tooltip({ content, children, defaultContainerClass, ...p
       content={
         <div className="oswald flex flex-row items-center text-left">
           <Image className="mr-4 h-8" src={tooltipIcon} width={31} height={77} alt="" />
+<<<<<<< HEAD
 
+=======
+          
+>>>>>>> tech-dev
           {content}
         </div>
       }
       {...props}
     >
+<<<<<<< HEAD
 
       <div className={`absolute top-3 right-6 flex items-center justify-center w-8 h-8 rounded-full bg-purple-700 ${defaultContainerClass}`}>
         <InfoIcon />
+=======
+      
+      <div className={`absolute top-3 right-6 flex items-center justify-center w-8 h-8 rounded-full bg-purple-700 ${defaultContainerClass}`}>
+      <InfoIcon />
+>>>>>>> tech-dev
         {children}
       </div>
     </Tippy>

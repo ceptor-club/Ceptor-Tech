@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import Logo from '../public/images/CREATE-hero/logo.png';
 import React, { useState, useRef } from 'react';
+<<<<<<< HEAD
 import WalletConnectButton from '../WalletConnectButton';
+=======
+import WalletConnectButton from './WalletConnectButton';
+>>>>>>> tech-dev
 import Link from 'next/link';
 
 export default function Navbar() {

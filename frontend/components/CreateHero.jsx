@@ -1,9 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
+<<<<<<< HEAD
 import Navbar from './NavBar/NavbarMdUp';
 import Logo2 from '../public/images/CREATE-hero/Logo2.jpeg';
 import VectorImage from './VectorImage';
 import StartButton from './Buttons/StartButton';
+=======
+import Navbar from './NavbarMdUp';
+import Logo2 from '../public/images/CREATE-hero/Logo2.jpeg';
+import HamburgerMenu from './HamburgerMenu';
+import VectorImage from './VectorImage';
+import StartButton from './StartButton';
+>>>>>>> tech-dev
 import landingpage from '../public/images/CREATE-hero/LandingPage.jpeg';
 
 export default function CreateHero({ setConditionalRender }) {

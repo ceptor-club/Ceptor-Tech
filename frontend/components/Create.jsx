@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> tech-dev
 import React from "react";
 import Link from 'next/link';
 import { useEffect, useState, useContext } from "react";
 import { createPrompt } from "../utils/promptGen";
+<<<<<<< HEAD
 import { CharacterBackstory } from "./CharacterModule/CharacterBackstory";
 import { CreateImageGrid } from "./CreateImageGrid";
 import PDFParser from "./PDFParser";
@@ -15,6 +19,22 @@ import MintButton from "./Buttons/MintButton";
 import GenerateButton from "./Buttons/GenerateButton";
 import Image from "next/image";
 import AdvancedButton from "./Buttons/AdvancedButton";
+=======
+import { CharacterBackstory } from "./CharacterBackstory";
+import { CreateImageGrid } from "./CreateImageGrid";
+import PDFParser from "./PDFParser";
+import Placeholder from "../public/images/CREATE/placeholder.png";
+import HelpToggle from "./HelpToggle";
+import SaveButton from "./SaveButton";
+import CopyButton from "./CopyButton";
+import CharacterStats from "./CharacterStats";
+import ToolTip from "./ToolTip";
+import MintButton from "./MintButton";
+import GenerateButton from "./GenerateButton";
+import GenerateLoading from "./GenerateLoading";
+import Image from "next/image";
+import AdvancedButton from "./AdvancedButton";
+>>>>>>> tech-dev
 import OCRParser from "./OCRParser";
 import SuccessModal from "./SuccessModal";
 
@@ -51,7 +71,11 @@ const promptBoxTT =
   "This is the prompt our Creator AI Artist used to draw your character based on your character sheet and your stats.";
 
 
+<<<<<<< HEAD
 import { CharacterContext } from './CharacterModule/CharacterContext';
+=======
+import { CharacterContext } from './CharacterContext';
+>>>>>>> tech-dev
 
 // wallet connect
 // buy dice/ display dice + timer
@@ -223,6 +247,22 @@ export const Create = () => {
             <div className="flex flex-col w-full justify-center items-center">
               {imageProcessing ? (
                 <>
+<<<<<<< HEAD
+=======
+                  <div className="flex flex-col items-center justify-center stats text-white md:3/6 h-[300px] p-16 mt-8">
+                  <div className="text-sm">The Creator is evolving. If you don&#39;t see your artwork in the first 30 seconds please retry.</div>
+                    <progress min="0" max="100" value="44">44</progress>
+                    {/* retry button (back to Create start) */}
+                    <button
+                      className="bg-black bg-opacity-50 rounded-sm text-white hover:text-[#e137b1] cursor-pointer w-full text-center py-2 mt-4"
+                      onClick={retry}
+                    >
+                      Retry
+                    </button>
+                    
+                    
+                  </div>
+>>>>>>> tech-dev
                   <LoadingTips />
                 </>
               ) : !imageProcessing ? (

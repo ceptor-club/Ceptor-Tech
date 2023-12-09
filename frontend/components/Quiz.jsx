@@ -1,6 +1,11 @@
 import React from "react";
 import { useState } from "react";
+<<<<<<< HEAD
 import { RandomName } from './CharacterModule/RandomName'
+=======
+import { RandomName } from './RandomName'
+
+>>>>>>> tech-dev
 import {
     NameLevelGender,
     Weapon,
@@ -13,7 +18,11 @@ import {
     Background,
     GenerateCharacter,
     CharacterPage
+<<<<<<< HEAD
 } from "./QuizComponents/index.jsx";
+=======
+} from "./QuizComponents/QuizComponentsExports";
+>>>>>>> tech-dev
 
 const State = {
     QUESTION1: 'question1',

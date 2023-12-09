@@ -1,5 +1,6 @@
 // import Head from "next/head";
 import { useState, useEffect, useContext } from "react";
+<<<<<<< HEAD
 import CreateHero from '../components/CreateHero';
 import { Create } from '../components/Create';
 import { Logo } from '../components/Logo';
@@ -7,6 +8,14 @@ import VectorImage from '../components/VectorImage';
 import Meta from '../components/Meta';
 import Image from 'next/image';
 import { NavbarMdUp, NavbarSmUp } from '../components/NavBar/index';
+=======
+import CreateHero from "../components/CreateHero";
+import { Create } from "../components/Create";
+import { Logo } from "../components/Logo";
+import HamburgerMenu from "../components/HamburgerMenu";
+import VectorImage from "../components/VectorImage";
+import Image from "next/image";
+>>>>>>> tech-dev
 import Link from "next/link";
 import { SocketContext } from "../utils/socketContext";
 
@@ -27,7 +36,11 @@ export default function Home() {
     }
   }, [socket]);
 
+<<<<<<< HEAD
   const [imageProcessing, setImageProcessing] = useState(false); // processing state ie. loading...
+=======
+  const [imageProcessing, setImageProcessing] = useState(false); //processing state ie. loading...
+>>>>>>> tech-dev
   const [conditionalRender, setConditionalRender] = useState("");
 
   const toggleImageProcessing = async () => {
@@ -43,11 +56,15 @@ export default function Home() {
 
   return (
     <>
+<<<<<<< HEAD
       <Meta />
       <NavbarMdUp />
       <NavbarSmUp />
       <div className='fixed top-0 h-screen w-screen'>
 
+=======
+      <div className="fixed top-0 h-screen w-screen">
+>>>>>>> tech-dev
         <Image
           src="/images/CREATE-midpage/midPageImage.png"
           width={1000}
@@ -65,6 +82,7 @@ export default function Home() {
             NFT Explorer
           </span>
         </Link>
+<<<<<<< HEAD
 
         {/* Add the link to the "CCID" page */}
         <Link href="/CCID">
@@ -73,6 +91,8 @@ export default function Home() {
           </span>
         </Link>
 
+=======
+>>>>>>> tech-dev
         <Logo setConditionalRender={setConditionalRender} />
 
         <div className="z-10 flex w-full justify-center">
@@ -81,7 +101,10 @@ export default function Home() {
           </div> */}
 
           <div className=" z-10">
+<<<<<<< HEAD
             {/* Include your Create component */}
+=======
+>>>>>>> tech-dev
             <Create />
           </div>
         </div>

@@ -8,6 +8,10 @@ export const CONSTANTS = {
   diceABI: diceABI,
   // Sepolia
   diceAddress: "0xEd1dbc1f6E5e9f4066AAa341c87e157Ad40328A9",
+<<<<<<< HEAD
+=======
+  diceUpdatedAddress: "0x7b958df42778255643734f4b3ea81d2e2c2b5195",
+>>>>>>> tech-dev
   //Goerli
   /* diceAddress: '0x15B48433F420ab4Eec2F232Ddaeb8d718Fd8dce9', */
   ceptorABI: ceptorABI,
@@ -46,6 +50,7 @@ export const CONSTANTS = {
     "Wizard",
   ],
   characterBackground: [
+<<<<<<< HEAD
     'Acolyte',
     'Circus Performer',
     'Charlatan',
@@ -66,6 +71,28 @@ export const CONSTANTS = {
     'Soldier',
     'Spy',
     'Urchin',
+=======
+    "Acolyte",
+    "Circus Performer",
+    "Charlatan",
+    "Criminal",
+    "Entertainer",
+    "Fartraveller",
+    "FolkHero",
+    "Gladiator",
+    "Guild Artisan",
+    "Guild Merchant",
+    "Hermit",
+    "Knight",
+    "Noble",
+    "Outlander",
+    "Pirate",
+    "Sage",
+    "Sailor",
+    "Soldier",
+    "Spy",
+    "Urchin",
+>>>>>>> tech-dev
   ],
   characterAlignment: [
     "Lawful Good",
@@ -78,6 +105,7 @@ export const CONSTANTS = {
     "Neutral Evil",
     "Chaotic Evil",
   ],
+<<<<<<< HEAD
   humanoidCharacterRaces: [
     'Elf',
     'Half-Elf',
@@ -91,6 +119,15 @@ export const CONSTANTS = {
     'Dragonborn',
     'Half-Orc',
     'Zombie',
+=======
+  humanoidCharacterRaces: ["Elf", "Half-Elf", "Halfling", "Dwarf", "Human"],
+  exoticCharacterRaces: [
+    "Centaur",
+    "Bugbear",
+    "Dragonborn",
+    "Half-Orc",
+    "Zombie",
+>>>>>>> tech-dev
   ],
   // contractABI: [
   //   { inputs: [], stateMutability: "nonpayable", type: "constructor" },

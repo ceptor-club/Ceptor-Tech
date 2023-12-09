@@ -2,10 +2,17 @@
 import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { createPrompt } from '../../utils/promptGen';
+<<<<<<< HEAD
 import AdvancedButton from '../Buttons/AdvancedButton';
 import { CONSTANTS } from '../../utils/CONSTANTS';
 import Image from 'next/image';
 import { CharacterContext } from './CharacterContext';
+=======
+import AdvancedButton from '../AdvancedButton';
+import { CONSTANTS } from '../../utils/CONSTANTS';
+import Image from 'next/image';
+import { CharacterContext } from '../CharacterContext';
+>>>>>>> tech-dev
 import Tooltip from "../ToolTip";
 import InfoIcon from "../InfoIcon";
 
@@ -25,11 +32,17 @@ const CharacterStats = ({
   const { characterData } = useContext(CharacterContext)
   useEffect(() => {
     if (!advanced && pdfData) {
+<<<<<<< HEAD
       console.log("pdfData: ", pdfData); 
+=======
+       console.log("pdfData: ", pdfData); 
+      //create text prompt using pdfData and other data
+>>>>>>> tech-dev
       const prompt = createPrompt(pdfData);
       setPrompt(prompt);
       setError(null);
     }
+<<<<<<< HEAD
   
     let updatedPdfData = { ...pdfData };
   
@@ -57,6 +70,28 @@ const CharacterStats = ({
     setPdfData(updatedPdfData);
     console.log(updatedPdfData);
   }, [advanced, pdfData, characterData]);
+=======
+    if (characterData.myClass !== pdfData.class) {
+      setPdfData({ ...pdfData, class: characterData.myClass })
+    }
+    if (characterData.background !== pdfData.background) {
+      setPdfData({ ...pdfData, background: characterData.background })
+    }
+    if (characterData.myAlignment !== pdfData.alignment) {
+      setPdfData({...pdfData, alignment: characterData.myAlignment})
+    }
+    if(characterData.gender !== pdfData.gender) {
+      if (characterData.gender === "He" && pdfData.gender === '') {
+        setPdfData({...pdfData, gender: "He / Him"})
+      } else if (characterData.gender === "She" && pdfData.gender === '') {
+        setPdfData({...pdfData, gender: "She / Hers"})
+      } else if (characterData.gender === "They" && pdfData.gender === '') {
+        setPdfData({...pdfData, gender: "They / Them"})
+      }
+    }
+    console.log(pdfData)
+  });
+>>>>>>> tech-dev
 
   const handleClassSelect = (e) => {
     const input = document.getElementById("classInput");
@@ -188,7 +223,11 @@ const CharacterStats = ({
                   <p className="mx-4">CLASS: </p>
                   <select
                     id="classInput"
+<<<<<<< HEAD
                     className="bg-transparent resize-none h-6  bg-slate-200 text-white flex-grow"
+=======
+                    className="bg-transparent resize-none h-6  bg-slate-200 text-black flex-grow"
+>>>>>>> tech-dev
                     onChange={handleClassSelect}
                     disabled={imageResult}
                   >
@@ -233,7 +272,11 @@ const CharacterStats = ({
                   <select
                     id="backgroundInput"
                     placeholder="Background"
+<<<<<<< HEAD
                     className="bg-transparent resize-none h-6 bg-slate-200 text-white  flex-grow"
+=======
+                    className="bg-transparent resize-none h-6 bg-slate-200 text-black  flex-grow"
+>>>>>>> tech-dev
                     onChange={handleBackgroundSelect}
                     disabled={imageResult}
                   >
@@ -264,7 +307,11 @@ const CharacterStats = ({
                   <select
                     id="alignmentInput"
                     placeholder="Neutral Good"
+<<<<<<< HEAD
                     className="bg-transparent resize-none h-6 bg-slate-200 text-white flex-grow"
+=======
+                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+>>>>>>> tech-dev
                     onChange={handleAlignmentSelect}
                     disabled={imageResult}
                   >
@@ -311,7 +358,11 @@ const CharacterStats = ({
                   <select
                     id="colorInput"
                     placeholder=""
+<<<<<<< HEAD
                     className="bg-transparent resize-none h-6 bg-slate-200 text-white flex-grow"
+=======
+                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+>>>>>>> tech-dev
                     onChange={handleColorSelect}
                     disabled={imageResult}
                   >

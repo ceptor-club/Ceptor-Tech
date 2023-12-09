@@ -41,7 +41,11 @@ a {
 } */
 
 h1 {
+<<<<<<< HEAD
   margin: auto;
+=======
+  /* margin: auto; */
+>>>>>>> tech-dev
   text-align: center;
 }
 
@@ -158,3 +162,144 @@ option {
 
   border-top: 20px solid #fff;
 }
+<<<<<<< HEAD
+=======
+
+.scrollableDiv {
+  overflow: auto;
+  width: 300px;
+  height: 500px;
+}
+
+.cover {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-midpage/midPageImage.png"); /* Replace with your image path */
+  background-size: cover; /* Cover the entire screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
+}
+
+.mid-part {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-dice/Black-square.png"); /* Replace with your image path */
+  background-size: cover; /* Contains the whole image */
+  /* background-position: bottom; Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
+  padding-top: 50px;
+}
+
+.bottom {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-dice/Black-square.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  /* background-position: bottom; Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
+  padding-top: 50px;
+}
+
+.buy-dice-header-bg {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-dice/Black-square.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 40vh; /* Full height */
+  width: 40vw; /* Full width */
+}
+
+.free-bg {
+  margin: 0;
+  padding: 5;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 10vh; /* Full height */
+  width: 40vw; /* Full width */
+  padding-top: 20px;
+}
+
+.bags-button {
+  margin: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 8vh; /* Full height */
+  width: 40vw; /* Full width */
+  padding-top: 20px;
+}
+
+.backpack {
+  margin: 0;
+  padding: 5;
+  background-image: url("../public/images/CREATE-dice/Backpack.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 30vh; /* Full height */
+  width: 40vw; /* Full width */
+  margin-top: 50px;
+}
+
+.backpack-small {
+  margin: 0;
+  padding: 5;
+  background-image: url("../public/images/CREATE-dice/Backpack.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 20vh; /* Full height */
+  width: 13vw; /* Full width */
+  margin-top: 50px;
+}
+
+.buy-dice-button-bg {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 10vh; /* Full height */
+  width: 30vw; /* Full width */
+}
+
+.dice-0::before {
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  background-image: url("../public/images/CREATE-dice/Dice-0.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  /* height: 10vh; Full  */
+  width: 5vw; /* Full width */
+}
+
+.nft-card {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-hero/Vector4.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 360px;
+  width: 340px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  color: red;
+}
+>>>>>>> tech-dev
