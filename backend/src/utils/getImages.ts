@@ -21,6 +21,8 @@ export async function getImages(data: any) {
     url: process.env.SD_API_ENDPOINT,
     headers: {
       "Content-Type": "application/json",
+      'X-RapidAPI-Key': '86b88a2dc1mshd611d568ecd2738p1ea496jsncf8335dc2d11',
+      'X-RapidAPI-Host': 'stable-diffusion10.p.rapidapi.com'
     },
     data: JSON.stringify(obj),
   };
