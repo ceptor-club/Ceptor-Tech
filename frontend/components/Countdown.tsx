@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const Countdown = ({ deadline }: { deadline: Date }) => {
+export const Countdown = ({ deadline }: { deadline: number }) => {
   // const [deadline, setDeadline] = useState<Date>();
   const [countdown, setCountdown] = useState("");
 
   // countdown until next powt is
-  const updateCountdown = useCallback((deadline) => {
+  const updateCountdown = useCallback((deadline: number) => {
     const now = new Date();
-    const timeDifference = deadline.getTime() - now.getTime();
+    const timeDifference = deadline - now.getTime();
 
     if (timeDifference <= 0) {
       // The deadline has passed.
@@ -34,7 +34,7 @@ export const Countdown = ({ deadline }: { deadline: Date }) => {
 
   useEffect(() => {
     // Start the countdown initially.
-    updateCountdown(new Date(deadline));
+    updateCountdown(deadline);
   }, [updateCountdown, deadline]);
 
   return (
