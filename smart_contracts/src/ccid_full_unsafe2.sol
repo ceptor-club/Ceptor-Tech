@@ -63,6 +63,10 @@ contract CeptorClubID is Ownable, CCIPReceiver {
     // approved list of sender addresses for CCIP messages
     mapping(address => bool) public approvedSenders;
 
+    // set prices in USD for player (.05$) and gamemaster (.2$) registration  [as a temporary price]
+    uint256 public playerRegistrationCost = 50 * 10 ** 16; // for a 5 dollar we change 16 to 18
+    uint256 public gamemasterRegistrationCost = 200 * 10 ** 16; // for a 20 dollar we change 16 to 18
+    
     // Events
     event UsernameRegistered(address indexed user, string username, bool isFree);
     event StatsUpdated(address indexed user, uint256 statId, uint256 value);

@@ -37,6 +37,28 @@ The contract is marked as an example and should not be used in production as it 
 
 ## Foundry
 
+# CeptorClubID: A DAOist Poem
+
+In the realm of **CeptorClubID**, where DAOs hold sway,
+Blockchain whispers echo, in a decentralized ballet.
+Smart contracts dance, with **Foundry** as the stage,
+Solving problems, in the DAOist age.
+
+In the silence of nodes, under the blockchain's light,
+**CeptorClubID** works tirelessly, into the digital night.
+With each transaction, a new story unfurls,
+In this DAOist world, where imagination whirls.
+
+From the chaos of data, order takes form,
+In the heart of the network, **CeptorClubID** is warm.
+Creating, solving, in the digital sea,
+In the world of **CeptorClubID**, we are truly free.
+
+So here's to **CeptorClubID**, where dreams come alive,
+In the world of blockchain, we thrive.
+**CeptorClubID**, we're the new sensation,
+Welcome to the future of decentralization.
+
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
 Foundry consists of:
