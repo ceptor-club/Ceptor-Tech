@@ -70,12 +70,14 @@ contract Reward is AccessControl, FunctionsClient {
         _ids[1] = 1;
         _ids[2] = 2;
         _ids[3] = 3;
+        _ids[4] = 4;
 
         uint256[] memory _amounts = new uint256[](4);
-        _amounts[0] = 5;
-        _amounts[1] = 5;
-        _amounts[2] = 5;
-        _amounts[3] = 5;
+        _amounts[0] = 1;
+        _amounts[1] = 1;
+        _amounts[2] = 1;
+        _amounts[3] = 1;
+        _amounts[4] = 1;
 
         // Mint NFTs using the Dices contract
         dice.minterMintBatch(_to, _ids, _amounts, "");
