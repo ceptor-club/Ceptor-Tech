@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import WalletConnectButton from '../components/WalletConnectButton';
+import { useRouter } from 'next/router';
 
 const StyledDiv = styled.div`
   background-color: #d9d9d9;
@@ -107,6 +108,35 @@ const StyledWalletConnectButton = styled(WalletConnectButton)`
 const CCID = () => {
   const [isCreateIDModalOpen, setIsCreateIDModalOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const router = useRouter();
+
+  const [walletIsConnected, setWalletIsConnected] = useState(false);
+
+  // Function to check if the wallet is connected
+  const checkWalletConnection = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const web3 = new Web3(window.ethereum);
+
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+        // Check if an account is now connected
+        const accounts = await web3.eth.getAccounts();
+        if (accounts.length > 0) {
+          setWalletIsConnected(true);
+        } else {
+          setWalletIsConnected(false);
+        }
+      } catch (error) {
+        console.error('Wallet connection error:', error);
+        setWalletIsConnected(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkWalletConnection();
+  }, []);
 
   const handleCreateIDClick = () => {
     setIsCreateIDModalOpen(true);
@@ -114,7 +144,11 @@ const CCID = () => {
   };
 
   const handleCreateIDModalClose = () => {
-    setIsCreateIDModalOpen(false);
+    if (walletIsConnected) {
+      setIsCreateIDModalOpen(false);
+      // Automatically direct users to uploadpage.jsx once they connect their wallet
+      router.push('/uploadpage');
+    }
   };
 
   const handleLoginClick = () => {

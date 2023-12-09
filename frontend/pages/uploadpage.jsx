@@ -1,96 +1,51 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
-
-const StyledSignUpContainer = styled.div`
-  background-color: #d9d9d9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-
-  @media (max-width: 768px) {
-    padding: 20px 10px;
-  }
-`;
-
-const StyledPhotoUpload = styled.div`
-  cursor: pointer;
-  /* Add the photo upload style*/
-`;
-
-const StyledUsernameInput = styled.input`
-  border: 2px solid black;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 20px 0;
-  width: 25%;
-  text-align: center;
-  color: #2F0213;
-
-  &:hover::placeholder {
-    color: transparent;
-  }
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const StyledRoleText = styled.p`
-  color: #2F0213;
-  font-weight: bold;
-  font-size: 18px;
-  margin: 10px 0;
-`;
-
-const StyledButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  width: 25%;
-`;
-
-const StyledButton = styled.button`
-  background-color: #2F0213;
-  color: white;
-  padding: 15px;
-  margin: 5px;
-  border-radius: 8px;
-  font-size: 18px;
-  width: 100%;
-  box-sizing: border-box;
-  cursor: pointer;
-`;
 
 const UploadPage = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');
 
   const handleRoleSelection = (role) => {
-    router.push(`/IDcreated?username=${encodeURIComponent(username)}&role=${encodeURIComponent(role)}`);
+    router.push(`/burnDie?username=${encodeURIComponent(username)}&role=${encodeURIComponent(role)}`);
   };
 
   return (
-    <StyledSignUpContainer>
-      <StyledPhotoUpload>
-        <label htmlFor="photo-upload">Upload Photo</label>
-        <input type="file" id="photo-upload" accept="image/*" />
-      </StyledPhotoUpload>
-      <StyledUsernameInput
-        type="text"
-        placeholder="enter username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <StyledRoleText>Choose your role!</StyledRoleText>
-      <StyledButtonsContainer>
-        <StyledButton onClick={() => handleRoleSelection('Gamemaster')}>Gamemaster</StyledButton>
-        <StyledButton onClick={() => handleRoleSelection('Player')}>Player</StyledButton>
-      </StyledButtonsContainer>
-    </StyledSignUpContainer>
+    <div className="bg-gray-200 min-h-screen flex flex-col justify-center items-center">
+      <div className="bg-black text-white py-4 px-2 text-center absolute top-0 left-0 right-0">
+        <h1 className="cursor-pointer" onClick={() => handleRoleSelection('Gamemaster')}>hackathon!</h1>
+        <h2>0.11.30</h2>
+      </div>
+      <div className="bg-gray-200 text-center">
+        <p className="text-2xl text-black font-bold mb-4">Welcome to Ceptor Club</p>
+        <p className="text-4xl text-black font-bold mb-8">Create D&D character and storyline onchain!</p>
+      </div>
+      <div className="bg-gray-200 text-center">
+        <label htmlFor="photo-upload" className="cursor-pointer">Upload Photo</label>
+        <input type="file" id="photo-upload" className="hidden" accept="image/*" />
+        <input
+          type="text"
+          placeholder="Enter username"
+          className="border-2 border-black rounded-lg p-2 m-4 w-64 text-center text-black"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <p className="text-black font-bold text-xl mb-4">Choose your role!</p>
+        <div className="flex flex-col items-center">
+          <button
+            className="bg-black text-white p-4 m-2 rounded-lg font-bold text-xl w-64 cursor-pointer hover:bg-opacity-90"
+            onClick={() => handleRoleSelection('Gamemaster')}
+          >
+            Gamemaster
+          </button>
+          <button
+            className="bg-black text-white p-4 m-2 rounded-lg font-bold text-xl w-64 cursor-pointer hover:bg-opacity-90"
+            onClick={() => handleRoleSelection('Player')}
+          >
+            Player
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

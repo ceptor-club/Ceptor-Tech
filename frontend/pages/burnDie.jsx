@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 
 const BurnDiePage = () => {
   const router = useRouter();
-  const { username } = router.query; 
+  const { username } = router.query;
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-200 p-4">
       <div className="text-center p-4 bg-black text-white w-full max-w-xs">
