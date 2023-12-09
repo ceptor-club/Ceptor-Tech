@@ -53,8 +53,8 @@ function MyApp({ Component, pageProps }) {
           </WagmiConfig>
           <Web3Modal
             // w3m-network-button={true}
-            w3m-account-button={true}
-            w3m-connect-button={true}
+            // w3m-account-button={true}
+            // w3m-connect-button={true}
             projectId={projectId}
             ethereumClient={ethereumClient}
           />
