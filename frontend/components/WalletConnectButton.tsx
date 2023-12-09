@@ -32,8 +32,8 @@ const WalletConnectButton = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      {/* <w3m-network-button /> */}
-      {/* <w3m-account-button />
+      {/* <w3m-network-button /> 
+      <w3m-account-button />
       <w3m-connect-button label="Connected" loadingLabel="Connected" /> */}
       {isConnected ? (
         <button
