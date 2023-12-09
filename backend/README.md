@@ -13,8 +13,8 @@ frontend with sockets in context ready to be used: https://github.com/DnDnDiffus
 ## installation
 
 1. npm install
-2. create a .env with the proper variables (SD_ENDPOINT: https://stablediff-664a3266e9c5.herokuapp.com/generate-image)
-3. reenable the cors object
+2. create a .env with the proper variables (SD_ENDPOINT: https://stable-diffusion10.p.rapidapi.com/generate-image) *thanks to Team Art (Spencer!)*
+3. reenable the cors object (maybe)
 4. npm run dev
 
 ## other stuff
