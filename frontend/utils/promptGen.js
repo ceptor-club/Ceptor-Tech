@@ -87,14 +87,14 @@ const createPrompt = (data) => {
   Object.keys(data).forEach((key) => {
     //handle stats
     if (data[key][0] > 3) {
-      console.log("pos", key, data[key]);
+      // console.log("pos", key, data[key]);
       adjectives.push(conversions[key].positive);
     } else if (data[key][0] < 0) {
-      console.log("neg", key, data[key]);
+      // console.log("neg", key, data[key]);
       adjectives.push(conversions[key].negative);
     }
   });
-  console.log("adjectives: ", adjectives);
+  // console.log("adjectives: ", adjectives);
   // returns a prompt with:
   // alignment, race (converted to prompt language or our unique identifier such as DnDDragonborn),
   // class, armorWorn, background & scene, descriptives

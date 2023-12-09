@@ -1,6 +1,4 @@
-// CCID.jsx
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import WalletConnectButton from '../components/WalletConnectButton';
 
@@ -62,6 +60,10 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
+const StyledCreateNowButton = styled(StyledButton)`
+  width: 75%;
+`;
+
 const ModalOverlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -103,15 +105,24 @@ const StyledWalletConnectButton = styled(WalletConnectButton)`
 `;
 
 const CCID = () => {
-  const router = useRouter();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateIDModalOpen, setIsCreateIDModalOpen] = useState(false);
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
 
   const handleCreateIDClick = () => {
-    setIsModalOpen(true);
+    setIsCreateIDModalOpen(true);
+    setIsLoginPopupOpen(false);
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
+  const handleCreateIDModalClose = () => {
+    setIsCreateIDModalOpen(false);
+  };
+
+  const handleLoginClick = () => {
+    setIsLoginPopupOpen(true);
+  };
+
+  const handleLoginPopupClose = () => {
+    setIsLoginPopupOpen(false);
   };
 
   return (
@@ -126,14 +137,12 @@ const CCID = () => {
       </StyledTextContainer>
       <StyledButtonContainer>
         <StyledButton onClick={handleCreateIDClick}>Create ID</StyledButton>
-        {isModalOpen && (
+        {isCreateIDModalOpen && (
           <ModalOverlay>
             <ModalContent>
-              <CloseButton onClick={handleModalClose}>x</CloseButton>
-              <NetworkDropdown>
-                <option value="" disabled selected>
-                  Choose the network
-                </option>
+              <CloseButton onClick={handleCreateIDModalClose}>x</CloseButton>
+              <NetworkDropdown defaultValue="">
+                <option value="" disabled>Choose the network</option>
                 <option value="ethereum">Ethereum Sepolia</option>
                 <option value="polygon">Polygon Mumbai</option>
                 <option value="avalanche">Avalanche Fuji</option>
@@ -142,7 +151,16 @@ const CCID = () => {
             </ModalContent>
           </ModalOverlay>
         )}
-        <StyledButton>Log-in</StyledButton>
+        <StyledButton onClick={handleLoginClick}>Log-in</StyledButton>
+        {isLoginPopupOpen && (
+          <ModalOverlay>
+            <ModalContent>
+              <CloseButton onClick={handleLoginPopupClose}>x</CloseButton>
+              <p>Please create the CCID first</p>
+              <StyledCreateNowButton onClick={handleCreateIDClick}>Create Now</StyledCreateNowButton>
+            </ModalContent>
+          </ModalOverlay>
+        )}
       </StyledButtonContainer>
     </StyledDiv>
   );
