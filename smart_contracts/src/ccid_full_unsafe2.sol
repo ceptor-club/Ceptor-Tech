@@ -83,10 +83,9 @@ contract CeptorClubID is Ownable, CCIPReceiver {
 
     // Function to register or update a username
     function registerUsername(string memory _username) public payable {
-        require(usernameAvailable(_username), "Username is taken");
-        uint256 cost = getRegistrationCost(); 
+        require(usernameAvailable(_username), "Username is taken"); 
         if (msg.sender != owner()) {
-            require(msg.value >= cost, "Insufficient funds for registration");
+            require(msg.value >= getRegistrationCost(), "Insufficient funds for registration");
         }
         users.push(msg.sender);
         usernames[msg.sender] = _username;

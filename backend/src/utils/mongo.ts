@@ -27,11 +27,11 @@ export interface Submission {
   voterWallets: string[];
 }
 
+
 const collectionNames = process.env.DB_COLLECTION?.split(',') || []
 const usersCollection = client.db(process.env.DB_NAME!).collection<User>(collectionNames[0]);
 const characterDataCollection = client.db(process.env.DB_NAME!).collection<CharacterData>(collectionNames[1]);
 const submissionCollection = client.db(process.env.DB_NAME!).collection<Submission>(collectionNames[2]);
-
 
 //function to connect to mongoDB and save a user to the database
 export async function saveUser(user: any) {
@@ -96,10 +96,7 @@ export async function getMostLikedSubmission() {
 }
 
 // vote for a submission, only  one vote per wallet
-export async function voteForSubmission(
-  tokenID: number,
-  wallet: string
-) {
+export async function voteForSubmission(tokenID: number, wallet: string) {
   try {
     // check if the wallet already voted
     const submissionAlreadyVoted = await submissionCollection

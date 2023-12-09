@@ -1,3 +1,12 @@
+# Constellation of Smart Contracts
+
+> Eman Herawy, Tippi Fifestarr, and Danjo the 0x all helped out with this
+
+## Overview
+
+This is a constellation of smart contracts that work together to create a decentralized application. The contracts are written in Solidity and tested using the Framework of Hackathon Testing (FOHT).
+
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
