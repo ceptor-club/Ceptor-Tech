@@ -31,7 +31,7 @@ import {
 
 app.use(cors()); // Open requests
 app.use(express.json());
-app.use(runMiddleware);
+// app.use(runMiddleware);
 
 //use middleware with socket.io to parse incoming requests with JSON payloads
 io.use((socket: any, next: any) => {

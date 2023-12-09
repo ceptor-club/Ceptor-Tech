@@ -1,3 +1,4 @@
+
 import { NFTStorage, File } from 'nft.storage';
 import { useContext } from 'react';
 import { CharacterContext } from '../components/CharacterContext';
@@ -18,9 +19,9 @@ async function avatarNFTSTORAGE(someBinaryImageData, prompt, pdfData) {
 
 const base64EncodedImage = async (base64ImageString) => {
   const fetchImage = await fetch(base64ImageString);
-  console.log('fetchImage', fetchImage);
+  console.log("fetchImage", fetchImage);
   const blob = await fetchImage.blob();
-  const file = new File([blob], 'something.png', { type: 'image/png' });
+  const file = new File([blob], "something.png", { type: "image/png" });
   return file;
 };
 
@@ -36,14 +37,16 @@ async function createStructuredMetadata(pdfData, prompt, someBinaryImageData) {
 
   const imageFile = await base64EncodedImage(someBinaryImageData);
 
-  console.log('imageFile', imageFile);
+  console.log("imageFile", imageFile);
 
   const structuredMetadata = {
-    name: 'Wizard NFT!',
+    name: "Wizard NFT!",
+    likesAmount: "2",
+    tokenID: 2,
     description:
       "This is a wizard NFT, created during 'Operation Dragonborn' by our fearless heroes and the Scope Creeper! Just try to funge it. You can't do it.",
     image: imageFile,
-    external_url: 'https://operation-dragonborn.vercel.app/',
+    external_url: "https://operation-dragonborn.vercel.app/",
     attributes: [
       {
         trait_type: 'Class',
@@ -54,10 +57,9 @@ async function createStructuredMetadata(pdfData, prompt, someBinaryImageData) {
         value: characterData.species,
       },
       {
-        trait_type: 'Prompt',
+        trait_type: "Prompt",
         value: prompt,
       },
-      {
         trait_type: 'Level',
         value: characterData.level,
         max_value: 20,

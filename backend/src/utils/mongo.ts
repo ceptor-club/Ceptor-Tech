@@ -118,7 +118,7 @@ export async function voteForSubmission(
   }
 }
 
-console.log(getUserById('656cae1617b89fde18bfc726'))
+
 
 //function to list all users
 export async function getAllUsers() {
