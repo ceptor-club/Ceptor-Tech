@@ -21,8 +21,8 @@ if (apiResponse.error) {
 const { data } = apiResponse;
 
 console.log("API response data:", JSON.stringify(data, null, 2));
-
-const { tokenID } = data;
+// function returns array of objects, we only need the first one
+const { tokenID } = data[0];
 
 if (!tokenID) {
     throw new Error('No token ID found in response:'+ JSON.stringify(data));
