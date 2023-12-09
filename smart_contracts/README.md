@@ -6,6 +6,34 @@
 
 This is a constellation of smart contracts that work together to create a decentralized application. The contracts are written in Solidity and tested using the Framework of Hackathon Testing (FOHT).
 
+### Contracts
+
+**CCID_Full_unsafe2.sol**
+Below is an overview of its functionality:
+
+- User Registration: Users can register a username with the registerUsername function, which requires a payment unless the sender is the contract owner.
+- Stats Management: The contract allows updating user stats through the updateBigStats function, which is restricted to the owner.
+- Loot Handling: It includes functionality to store and manage loot associated with users. Loot can be added to a user's account via the _ccipReceive function, which is designed to handle cross-chain messages.
+- Chain Interaction: The contract can check the blockchain it's deployed on with checkDeployedChain and handle cross-chain messages with _ccipReceive.
+- Access Control: There's a mechanism to approve or disapprove senders for cross-chain interaction using setApprovedSender.
+TODO List for ccid_full_unsafe2.sol
+
+- [ ] Implement security checks to ensure that Loot and Stats are received from the correct contracts.
+- [ ] Consider adding a function to allow users to leave the system and retrieve a portion of their funds.
+- [ ] Review and possibly refactor the getRegistrationCost function as it's marked as "crap".
+- [ ] Address the question about whether CCIP libraries work with proxy contracts.
+- [ ] Determine the XP multiplier logic based on user levels.
+
+**Explanation of LootGetter.sol**
+
+LootGetter.sol is a contract that demonstrates how to receive string data across chains using Chainlink's Cross-Chain Interoperability Protocol (CCIP). It includes:
+
+- An event MessageReceived that logs the details of the received message.
+- A function _ccipReceive that handles the incoming CCIP message, decodes it, and stores the details in a LootMessage struct.
+- A function getLastReceivedMessageDetails that allows retrieval of the last received message's details.
+
+The contract is marked as an example and should not be used in production as it uses hardcoded values and un-audited code.
+
 
 ## Foundry
 
