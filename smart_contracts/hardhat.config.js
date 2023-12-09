@@ -19,6 +19,11 @@ module.exports = {
       accounts: [process.env.PRIVATE_KEY || ''],
       saveDeployments: true,
     },
+    sepolia: {
+      url: process.env.ETHEREUM_SEPOLIA_RPC_URL || "UNSET",
+      accounts: [process.env.PRIVATE_KEY || ''],
+      saveDeployments: true,
+    },
     fuji: {
       url: 'https://api.avax-test.network/ext/bc/C/rpc',
       accounts: [process.env.PRIVATE_KEY || ''],
