@@ -20,6 +20,27 @@ export default function CharacterPage() {
     const [saveStatus, setSaveStatus] = useState({ success: null, error: null })
     const [isMessageVisible, setIsMessageVisible] = useState(false)
 
+    const [user, setUser] = useState(null);
+
+    //   useEffect(() => {
+    //     const fetchUserData = async () => {
+    //       try {
+    //         const response = await fetch(`http://localhost:4000/userData/${User._id}`);
+    //         const userData = await response.json();
+
+    //         if (response.ok) {
+    //           setUser(userData.user);
+    //         } else {
+    //           console.error('Error fetching user data:', userData.error);
+    //         }
+    //       } catch (error) {
+    //         console.error('Error fetching user data:', error);
+    //       }
+    //     };
+
+    //     fetchUserData();
+    //   }, [User._id]);
+
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setIsMessageVisible(false)
@@ -184,18 +205,23 @@ export default function CharacterPage() {
     }
 
     async function saveCharacter() {
-        setCharacterData(character)
         try {
+
+            // const userId = User._id
             const response = await fetch('http://localhost:4000/characterData', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(characterData)
+                body: JSON.stringify({ name: character.charName })
             })
 
             if (response.ok) {
                 setSaveStatus({ success: 'Character saved successfully', error: null })
+                setCharacterData(character)
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
             } else {
                 setSaveStatus({ success: null, error: 'Error saving character' })
             }
@@ -286,9 +312,11 @@ export default function CharacterPage() {
                     )}
                 </div>
                 <div className='flex flex-row mt-0'>
-                    <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
-                        Save Character?
-                    </button>
+                    {/* <Link href='/'> */}
+                        <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
+                            Save Character?
+                        </button>
+                    {/* </Link> */}
                     <Link href='http://localhost:3000/issuecredentials'>
                         <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={exportCharacter}>
                             Export to Bit Bender
