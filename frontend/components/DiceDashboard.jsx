@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useAccount, useDisconnect } from "wagmi";
 import { useWeb3Modal } from "@web3modal/react";
 import Countdown from "react-countdown";
+import { ceptorDiceABI } from "../utils/abis";
 
 const DiceDashboard = ({}) => {
   const [diceBalance, setDiceBalance] = useState({
@@ -30,20 +31,20 @@ const DiceDashboard = ({}) => {
     abi: CONSTANTS.diceABI,
   };
 
-  const { data: userTimerRead } = useContractRead({
-    address: CONSTANTS.ceptorAddress,
-    abi: CONSTANTS.ceptorABI,
-    functionName: "userTimers",
-    args: [address],
-    watch: true,
-  });
+  // const { data: userTimerRead } = useContractRead({
+  //   address: CONSTANTS.ceptorAddress,
+  //   abi: ceptorDiceABI,
+  //   functionName: "userTimers",
+  //   args: [address],
+  //   watch: true,
+  // });
 
-  useEffect(() => {
-    if (userTimerRead) {
-      const unixTimestamp = parseInt(userTimerRead) * 1000;
-      setUserTimer(unixTimestamp);
-    }
-  }, [userTimerRead]);
+  // useEffect(() => {
+  //   if (userTimerRead) {
+  //     const unixTimestamp = parseInt(userTimerRead) * 1000;
+  //     setUserTimer(unixTimestamp);
+  //   }
+  // }, [userTimerRead]);
 
   // Get user dice balances
   const {

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { voteForSubmission } from "../pages/api/voteForSubmission";
 import { useAccount } from "wagmi";
+import { VoteData } from "../utils/types";
 
 const NftCard = ({ nft, onCardClick, winner }) => {
   const { address, isConnected } = useAccount();
+  const [vote, setVote] = useState<VoteData>();
 
   const { rawMetadata } = nft;
 
@@ -12,11 +14,10 @@ const NftCard = ({ nft, onCardClick, winner }) => {
     onCardClick(nft);
   };
 
-  const like = (tokenID: number) => {
-    console.log(address);
-    tokenID = tokenID ? tokenID : 1;
-
-    voteForSubmission({ tokenID, wallet: address });
+  const like = async (tokenID: number) => {
+    setVote({ wallet: address, tokenID: tokenID ? tokenID : 1 });
+    voteForSubmission(vote);
+    // TODO: just send vote to data base  - already in the NFTCard component
   };
 
   const DefaultView = () => (
