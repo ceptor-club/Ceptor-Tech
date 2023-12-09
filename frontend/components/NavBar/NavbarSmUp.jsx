@@ -27,9 +27,6 @@ export default function NavbarSmUp() {
             <>
               <div className="w-full h-24 flex flex-col ml-6 mt-6">
                 {/* TODO: Check all hrefs */}
-                <Link className="uppercase" href="/CCID">
-                  Create CCID
-                </Link>
                 <Link className="uppercase" href="/QuizPage">
                   Quiz
                 </Link>

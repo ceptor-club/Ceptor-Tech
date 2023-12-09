@@ -36,9 +36,6 @@ export default function NavbarMdUp() {
                   className="mb-6"
                 />
                 {/* TODO: Check all hrefs */}
-                <Link className="uppercase" href="/CCID">
-                  Create CCID
-                </Link>
                 <Link className="uppercase" href="/QuizPage">
                   Quiz
                 </Link>

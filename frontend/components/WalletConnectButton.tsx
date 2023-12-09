@@ -1,55 +1,112 @@
 import React, { useEffect } from "react";
-import { useAccount, useDisconnect, useSignMessage } from "wagmi";
-import { useWeb3Modal } from "@web3modal/react";
+import Image from "next/image";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 // type Props = {}
 
 const WalletConnectButton = () => {
-  const { address, isConnected } = useAccount();
-  const { open, isOpen, close } = useWeb3Modal();
-  const { disconnect } = useDisconnect();
-  // const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
-  //   message: "",
-  // })
-
-  const handleConnect = (e) => {
-    e.preventDefault();
-    if (!isConnected) return open();
-    console.log("already connected to wallet", address);
-  };
-
-  const handleDisconnect = (e) => {
-    e.preventDefault();
-    if (isConnected) return disconnect();
-    console.log("not connected to wallet", address);
-  };
-
-  useEffect(() => {
-    if (isConnected) {
-      console.log("connected to wallet", address);
-    }
-  }, [isConnected, address]);
-
   return (
-    <div className="flex flex-col space-y-2">
-      {/* <w3m-network-button /> 
-      <w3m-account-button />
-      <w3m-connect-button label="Connected" loadingLabel="Connected" /> */}
-      {isConnected ? (
-        <button
-          className="text-black bg-red-700  focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 hover:bg-[#F87171] hover:text-white dark:focus:ring-red-800"
-          onClick={handleDisconnect}
-        >
-          Wallet Disconnect
-        </button>
-      ) : (
-        <button
-          className="text-black bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-red-600 hover:bg-[#F87171] hover:text-white dark:focus:ring-red-800"
-          onClick={handleConnect}
-        >
-          Wallet Connect
-        </button>
-      )}
+    <div className="flex flex-col ">
+      <ConnectButton.Custom>
+        {({
+          account,
+          chain,
+          openAccountModal,
+          openChainModal,
+          openConnectModal,
+          authenticationStatus,
+          mounted,
+        }) => {
+          // Note: If your app doesn't use authentication, you
+          // can remove all 'authenticationStatus' checks
+          const ready = mounted && authenticationStatus !== "loading";
+          const connected =
+            ready &&
+            account &&
+            chain &&
+            (!authenticationStatus || authenticationStatus === "authenticated");
+
+          return (
+            <div
+              {...(!ready && {
+                "aria-hidden": true,
+                style: {
+                  opacity: 0,
+                  pointerEvents: "none",
+                  userSelect: "none",
+                },
+              })}
+            >
+              {(() => {
+                if (!connected) {
+                  return (
+                    <button
+                      className="wallet-xs text-black pt-7"
+                      onClick={openConnectModal}
+                      type="button"
+                    >
+                      Connect Wallet
+                    </button>
+                  );
+                }
+
+                if (chain.unsupported) {
+                  return (
+                    <button onClick={openChainModal} type="button">
+                      Wrong network
+                    </button>
+                  );
+                }
+
+                return (
+                  <div style={{ display: "flex", gap: 12 }}>
+                    <button
+                      onClick={openChainModal}
+                      style={{ display: "flex", alignItems: "center" }}
+                      type="button"
+                      className="wallet-xs text-black"
+                    >
+                      {chain.hasIcon && (
+                        <div
+                          style={{
+                            background: chain.iconBackground,
+                            width: 12,
+                            height: 12,
+                            borderRadius: 999,
+                            overflow: "hidden",
+                            marginRight: 4,
+                          }}
+                        >
+                          {chain.iconUrl && (
+                            <Image
+                              alt={chain.name ?? "Chain icon"}
+                              src={chain.iconUrl}
+                              width={12}
+                              height={12}
+                            />
+                          )}
+                        </div>
+                      )}
+                      {chain.name}
+                    </button>
+
+                    <button
+                      className="wallet-xs text-black text-sm pt-7"
+                      onClick={openAccountModal}
+                      type="button"
+                    >
+                      {account.displayName}
+                      {account.displayBalance
+                        ? ` (${account.displayBalance})`
+                        : ""}
+                    </button>
+                  </div>
+                );
+              })()}
+            </div>
+          );
+        }}
+      </ConnectButton.Custom>
     </div>
   );
 };
