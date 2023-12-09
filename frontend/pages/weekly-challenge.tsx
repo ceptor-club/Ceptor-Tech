@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { ethers } from "ethers";
+import { Contract, ethers, providers } from "ethers";
 import { Alchemy, Network, Nft } from "alchemy-sdk";
 import Explorer from "../components/Explorer";
 import Link from "next/link";
 import { Countdown } from "../components/Countdown";
-import { sepolia, useNetwork } from "wagmi";
+import {
+  sepolia,
+  useAccount,
+  useContractRead,
+  useContractReads,
+  useContractWrite,
+  useNetwork,
+  usePrepareContractWrite,
+} from "wagmi";
 import NftCard from "../components/NftCard";
 import { getServerSideProperties } from "../utils/getServerSideProps";
 import { getMostLikedSubmission } from "./api/getMostLikedSubmission";
+import { addresses } from "../utils/addresses";
+import { ceptorDiceABI, promptCollectionABI, timerABI } from "../utils/abis";
+import { useEthersProvider } from "../utils/ethers";
+import { voteForSubmission } from "./api/voteForSubmission";
+import { VoteData } from "../utils/types";
+
+// For the user to submit the timer  (of burned/used dice) has to be running,
+// for presentation we burn the 5, which is 20 minutes.
 
 export async function getServerSideProps() {
   return getServerSideProperties();
@@ -22,31 +38,111 @@ export default function WeeklyChallenge({
   ALCHEMY_SEPOLIA_API_KEY: string;
   ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
 }) {
+  const { chain, chains } = useNetwork();
+  const provider = useEthersProvider({ chainId: chain?.id });
+  const { address, isConnecting, isDisconnected } = useAccount();
+
   // const [alchemy, setAlchemy] = useState<Alchemy>();
   const [latestBlock, setLatestBlock] = useState(null);
   const [nftList, setNFTList] = useState([]);
   const [deadline, setDeadline] = useState<Date>();
-  const [promptOfTheMoment, setPromptOfTheMoment] = useState(
-    "Your initial prompt"
-  );
-  const [account, setAccount] = useState("");
+  const [weeklyChallenge, setWeeklyChallenge] = useState("Weekly Challenge");
   const [isConnected, setIsConnected] = useState(false);
   const [winnerNFT, setWinnerNFT] = useState<Nft>();
+  const [diceId, setDiceId] = useState(5);
+  const [currentTimer, setCurrentTimer] = useState();
 
-  // TODO: remove this temp variable once we get the deadline for powt from the smart contract
-  const oneWeekFromNow = new Date();
-  oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7); // Adds 7 days to the current date
+  // TODO: move logic to burn dice to navbar
+  // Config for burning Dice
+  const { config: configBurnDice } = usePrepareContractWrite({
+    address: addresses[chain?.network]?.ceptorDice,
+    abi: ceptorDiceABI,
+    functionName: "timerBurn",
+    args: [address, diceId, 1],
+  });
+
+  // // Hook for burning Dice
+  const {
+    isLoading: isLoadingDice,
+    data: dataBurnDice,
+    write: writeBurnDice,
+  } = useContractWrite(configBurnDice);
+
+  const burnDice = async () => {
+    writeBurnDice();
+  };
+
+  // // Config for sending user submission
+  // const { config: configSendSubmission } = usePrepareContractWrite({
+  //   address: addresses[chain?.network]?.promptCollection,
+  //   abi: promptCollectionABI,
+  //   functionName: "mint",
+  //   args: [address, diceId, 1],
+  // });
+
+  // // Hook for sending user submission
+  // const { data: dataSendSubmission, write: writeSendSubmission } =
+  //   useContractWrite(configSendSubmission);
+
+  // useEffect(() => {
+  //   //  get this weeks challenge
+  //   const getWeeklyChallenge = async () => {
+  //     const temp = promptCollectionContract.s_currentPrompt();
+  //     setWeeklyChallenge(temp);
+  //   };
+
+  //   // get weekTimeStamp form dealing of weekly challenge
+  //   const getWeekDeadline = async () => {
+  //     const temp = promptCollectionContract.weekTimeStamp();
+  //     setDeadline(temp);
+  //   };
+
+  //   getWeeklyChallenge();
+  //   getWeekDeadline();
+  // }, [promptCollectionContract]);
+
+  const {
+    data: dataTimer,
+    isError,
+    isLoading,
+  } = useContractRead({
+    address: addresses[chain?.network]?.address,
+    abi: timerABI,
+    functionName: "checkTimer",
+    args: [address],
+  });
+
+  console.log(dataTimer);
+
+  // useEffect(() => {
+  //   // getting the left time to play after burning a dice
+
+  //   dataTimer && setCurrentTimer(dataTimer);
+  // }, [dataTimer]);
+
+  // // TODO: remove this temp variable once we get the deadline for powt from the smart contract
+  // const oneWeekFromNow = new Date();
+  // oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7); // Adds 7 days to the current date
+
+  // const burnDice = async () => {
+  //   writeBurnDice();
+  // };
+
+  // // TODO: create my submission using AI - component needs to be added in new branch
+  // const sendSubmission = async () => {
+  //   // TODO: call mint from promptCollection submit() -return tokenID
+  //   // TODO: sned data to Mongo db with the tokenID
+  //   writeSendSubmission();
+  // };
 
   useEffect(() => {
     console.log("nfts state updated:", nftList);
   }, [nftList]);
 
-  function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   useEffect(() => {
-    // TODO: get winning NFT of last week
+    // TODO: replace with winning NFT of last week
+    // getMostLikedSubmission();
+
     const alchemy = new Alchemy({
       apiKey: ALCHEMY_SEPOLIA_API_KEY,
       network: Network.ETH_SEPOLIA,
@@ -90,18 +186,19 @@ export default function WeeklyChallenge({
             Winner of last weeks challenge
           </h1>
         </div>
+        <button onClick={() => burnDice()}>burn</button>
         <div className="flex flex-wrap justify-center items-center">
           <div className="mt-4 bg-light-pink mx-auto min-w-max p-4 px-4 rounded-xl shadow-lg">
             <h1 className="font-oswald text-xl uppercase text-light-yellow">
               This week’s challenge:
             </h1>
             <p className="text-2xl font-nothing-you-could-do">
-              {promptOfTheMoment}
+              {weeklyChallenge}
             </p>
           </div>
           <div className="text-light-pink font-oswald m-5">
             {/* TODO: add real deadline from smart contract */}
-            <Countdown deadline={oneWeekFromNow} />
+            <Countdown deadline={deadline} />
           </div>
         </div>
       </div>

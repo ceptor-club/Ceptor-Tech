@@ -1,10 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
-import { CONSTANTS } from "../utils/CONSTANTS";
-import CeptorDice from "../abis/CeptorDice.json";
+import {
+  useAccount,
+  useContractWrite,
+  useNetwork,
+  usePrepareContractWrite,
+} from "wagmi";
+import { ceptorDiceABI } from "../utils/abis";
+import { addresses } from "../utils/addresses";
 
 export default function BuyDice() {
+  const { chain, chains } = useNetwork();
   const { address, isConnected } = useAccount();
   const [quantity, setQuantity] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -28,8 +34,8 @@ export default function BuyDice() {
 
   // Config for minting dice
   const { config: configMint } = usePrepareContractWrite({
-    address: CONSTANTS.diceUpdatedAddress as any,
-    abi: CeptorDice.abi,
+    address: addresses[chain?.network].ceptorDice as any,
+    abi: ceptorDiceABI,
     functionName: "mintBatch",
     args: [ids, amounts],
   });
