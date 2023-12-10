@@ -1,15 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import { Logo } from "../components/Logo";
 import {
   useAccount,
-  useContractRead,
   useContractWrite,
+  useNetwork,
   usePrepareContractWrite,
 } from "wagmi";
-import { CONSTANTS } from "../utils/CONSTANTS";
-import CeptorDice from "../abis/CeptorDice.json";
+import { Logo } from "../components/Logo";
+import { ceptorDiceABI } from "../utils/abis";
+import { addresses } from "../utils/addresses";
 
 export default function FreeDice() {
+  const { chain, chains } = useNetwork();
   const { address, isConnected } = useAccount();
   const [conditionalRender, setConditionalRender] = useState("");
   const [user, setUser] = useState<"gm" | "player">();
@@ -22,8 +23,8 @@ export default function FreeDice() {
 
   // Config for minting dice
   const { config: configMint } = usePrepareContractWrite({
-    address: CONSTANTS.diceUpdatedAddress as any,
-    abi: CeptorDice.abi,
+    address: addresses[chain?.network]?.ceptorDice,
+    abi: ceptorDiceABI,
     functionName: "mintBatch",
     args: [ids, amounts],
   });

@@ -234,6 +234,26 @@ option {
   padding-top: 20px;
 }
 
+.button-xs {
+  margin: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 8vh; /* Full height */
+  width: 10vw; /* Full width */
+}
+
+.wallet-xs {
+  margin: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 10vh; /* Full height */
+  width: 12vw; /* Full width */
+}
+
 .backpack {
   margin: 0;
   padding: 5;
@@ -256,6 +276,17 @@ option {
   height: 20vh; /* Full height */
   width: 13vw; /* Full width */
   margin-top: 50px;
+}
+
+.backpack-tiny {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-dice/Backpack.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 10vh; /* Full height */
+  width: 6vw; /* Full width */
 }
 
 .buy-dice-button-bg {
@@ -295,4 +326,15 @@ option {
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   color: red;
+}
+
+.dice-bar {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE/dice-bar.svg"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 18px;
+  width: 150px;
 }
