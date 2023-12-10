@@ -1,11 +1,11 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "./ccid/CrossChainRegisteration.sol";
+import "./ccid/CrossChainRegistration.sol";
 import "./ccid/PriceFeedCCID.sol";
 import "./interfaces/ICeptorDice.sol";
 
-contract CeptorCCID is PriceFeedCCID, CrossChainRegisteration {
+contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
     ICeptorDice public dice;
 
     struct Stats {
@@ -52,7 +52,7 @@ contract CeptorCCID is PriceFeedCCID, CrossChainRegisteration {
     /// @dev @notice  Should be in minter role at dice contract to mint
 
     constructor(address _priceFeed, address _router, address dice_)
-        CrossChainRegisteration(_router)
+        CrossChainRegistration(_router)
         PriceFeedCCID(_priceFeed)
     {
         dice = ICeptorDice(dice_);
