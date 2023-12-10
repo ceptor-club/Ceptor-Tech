@@ -1,9 +1,9 @@
 export const addresses = {
   sepolia: {
-    promptCollection: "0xEc2df342d40D46fae8407F24f078138ec6d77FbA",
-    ceptorDice: "0x45DB01904b51857F6279FE9006De25bf6dE8d136",
-    ceptors: "0xDA38118B32394748f7b720E5CBad719EfD02da0B",
-    ccipV4: "0x4Eb23215D4d8802d10BAf06A3e9d3935E9bdf630",
+    promptCollection: "0x0E39cA6B772Db545e65fEfC7195481547118AbAA",
+    ceptorDice: "0x7285ebEf3F09311231Eb65A5Cf068FDBab530D66",
+    ceptors: "0x44849B2F272A3b434f8bce6EEC583DF672f98Dd9",
+    ccipV4: "0x7557812ebEa02D39d507BC114275dE5ee22F241E",
   },
   goerli: {
     promptCollection: "",
