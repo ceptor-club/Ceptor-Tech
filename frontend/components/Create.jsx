@@ -1,6 +1,5 @@
-
 import React from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { createPrompt } from "../utils/promptGen";
 import { CharacterBackstory } from "./CharacterBackstory";
@@ -19,7 +18,6 @@ import Image from "next/image";
 import AdvancedButton from "./AdvancedButton";
 import OCRParser from "./OCRParser";
 import SuccessModal from "./SuccessModal";
-
 
 import {
   useAccount,
@@ -52,8 +50,7 @@ const editPromptTT =
 const promptBoxTT =
   "This is the prompt our Creator AI Artist used to draw your character based on your character sheet and your stats.";
 
-
-import { CharacterContext } from './CharacterContext';
+import { CharacterContext } from "./CharacterContext";
 
 // wallet connect
 // buy dice/ display dice + timer
@@ -66,8 +63,8 @@ import { CharacterContext } from './CharacterContext';
 //time dongxi:   const timeLeft = userTimer - Math.floor(Date.now() / 1000)
 
 export const Create = () => {
-  const { characterData } = useContext(CharacterContext)
-  console.log(characterData)
+  const { characterData } = useContext(CharacterContext);
+  console.log(characterData);
   const [prompt, setPrompt] = useState(null); //url
   const [imageProcessing, setImageProcessing] = useState(false); //processing state ie. loading...
   const [error, setError] = useState(null); //error msg
@@ -77,8 +74,7 @@ export const Create = () => {
   const [isMinting, setIsMinting] = useState(false); //minting nft state ie. loading...
   const [userDice, setUserDice] = useState([0, 0, 0, 0, 0, 0]); //dice balance
   const [pdfData, setPdfData] = useState({
-
-    race: "DnDDragonbornGeneral",
+    race: "",
     class: "",
     armorWorn: "",
     background: "",
@@ -87,7 +83,7 @@ export const Create = () => {
     gender: "",
     color: "",
     weapon: "",
-  });//stretch goal! Update these values based on character quiz
+  }); //stretch goal! Update these values based on character quiz
 
   const [advanced, setAdvanced] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -212,7 +208,7 @@ export const Create = () => {
                 theres an error
               </p>
               <Tooltip content={errorTT}>
-                <div className='absolute right-10 bottom-1/2'>
+                <div className="absolute right-10 bottom-1/2">
                   <InfoIcon />
                 </div>
               </Tooltip>
@@ -271,13 +267,13 @@ export const Create = () => {
 
               {imageResult && !imageProcessing ? (
                 <>
-                  <div className='flex flex-col items-center bg-black mt-8'>
+                  <div className="flex flex-col items-center bg-black mt-8">
                     <Tooltip content={resultsTT}>
-                      <div className='ml-auto'>
+                      <div className="ml-auto">
                         <InfoIcon />
                       </div>
                     </Tooltip>
-                    <h3 id='results' className='text-4xl mb-4'>
+                    <h3 id="results" className="text-4xl mb-4">
                       RESULTS
                     </h3>
                     <p>Select an image to save or mint</p>
@@ -311,9 +307,9 @@ export const Create = () => {
                     setStoredNFTImage={setStoredNFTImage}
                     storedNFTImage={storedNFTImage}
                   />
-                  <div className='relative'>
+                  <div className="relative">
                     <Tooltip content={mintButtonTT}>
-                      <div className='absolute right-10 bottom-0'>
+                      <div className="absolute right-10 bottom-0">
                         <InfoIcon />
                       </div>
                     </Tooltip>
@@ -323,9 +319,9 @@ export const Create = () => {
                     setModalOpen={setModalOpen}
                     setModalMessage={setModalMessage}
                   />
-                  <div className='relative'>
+                  <div className="relative">
                     <Tooltip content={saveButtonTT}>
-                      <div className='absolute right-10 bottom-0'>
+                      <div className="absolute right-10 bottom-0">
                         <InfoIcon />
                       </div>
                     </Tooltip>
@@ -365,27 +361,27 @@ export const Create = () => {
 
               {advanced && !imageProcessing ? (
                 <>
-                  <div className='w-full h-[150px] md:w-[400px]'>
-                    <h3 className='mt-8 text-2xl'>PROMPT SMITH</h3>
+                  <div className="w-full h-[150px] md:w-[400px]">
+                    <h3 className="mt-8 text-2xl">PROMPT SMITH</h3>
                     <h3>Edit Your Prompt Manually</h3>
                     <Tooltip content={editPromptTT}>
-                      <div className='float-right'>
+                      <div className="float-right">
                         <InfoIcon />
                       </div>
                     </Tooltip>
                   </div>
-                  <div className='bg-black text-left text-sm p-2'>
-                    <h3 className='mb-4'>
+                  <div className="bg-black text-left text-sm p-2">
+                    <h3 className="mb-4">
                       Your Prompt Was Recovered from the Fires of the Forge!
                     </h3>
                     <textarea
                       onChange={(e) => setPrompt(e.target.value)}
-                      className='w-full h-[150px] bg-transparent resize-none'
+                      className="w-full h-[150px] bg-transparent resize-none"
                       value={prompt ? prompt : ""}
-                      id='manualInput'
+                      id="manualInput"
                     ></textarea>
                     <Tooltip content={promptBoxTT}>
-                      <div className='float-right'>
+                      <div className="float-right">
                         <InfoIcon />
                       </div>
                     </Tooltip>
@@ -412,8 +408,11 @@ export const Create = () => {
                       <p className="">https://discord.gg/kPC8GMK5</p>
                     </a>
                   </div>
-                  <Link href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' className="text-black hover:text-white w-4">
-                      {"What's this?"}
+                  <Link
+                    href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    className="text-transparent hover:text-white w-4"
+                  >
+                    {"What's this?"}
                   </Link>
                 </>
               )}

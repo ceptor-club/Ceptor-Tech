@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Oswald&family=Poppins&family=Raleway:wght@500&family=Source+Code+Pro&display=swap");
-/* font for "ceptor club character generator" */
-@import url('https://fonts.googleapis.com/css2?family=Milonga&display=swap');
-:root {
-  --quiz-page-font: 'Milonga', cursive;;
-}
 
 @font-face {
   font-family: "Oswald";
@@ -46,7 +41,7 @@ a {
 } */
 
 h1 {
-  margin: auto;
+  /* margin: auto; */
   text-align: center;
 }
 
@@ -164,91 +159,124 @@ option {
   border-top: 20px solid #fff;
 }
 
-/* new styles addition by leom */
+.scrollableDiv {
+  overflow: auto;
+  width: 300px;
+  height: 500px;
+}
 
-/* sidebar menu style */
-.sidebar {
-  background: rgba(26, 26, 26, 0.95);
+.cover {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-midpage/midPageImage.png"); /* Replace with your image path */
+  background-size: cover; /* Cover the entire screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
+}
+
+.mid-part {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-dice/Black-square.png"); /* Replace with your image path */
+  background-size: cover; /* Contains the whole image */
+  /* background-position: bottom; Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
   padding-top: 50px;
-  padding-left: 40px;
-  height: 620px;
-}
-.sidebar::after{
-  content: url(../public/images/Vectornav.png);
-  margin-left: 130px;
-  margin-top: -263px;
-
 }
 
-/* the ceprot club font (Milonga) */
-.ceptor-font {
-  font-family: var(--quiz-page-font);
-  color: #fff;
-  font-size: 60px;
-  font-weight: 400;
-  line-height: 96px;
+.bottom {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-dice/Black-square.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  /* background-position: bottom; Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
+  padding-top: 50px;
 }
 
-.btn-text {
-  text-align: center;
-  text-shadow: 0px 2.051px 2.051px rgba(0, 0, 0, 0.25);
-  font-family: var(--quiz-page-font);
-  font-size: 30.77px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 160%;
-}
-/* default font "Milonga */
-.dFont {
-  font-family: var(--quiz-page-font);
+.buy-dice-header-bg {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-dice/Black-square.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 40vh; /* Full height */
+  width: 40vw; /* Full width */
 }
 
-/* Quiz page custom container sizing */
-.custom-container {
-  width: 1920px;
-  height: 580px;
-  box-sizing: border-box;
-  position: relative;
+.free-bg {
+  margin: 0;
+  padding: 5;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 10vh; /* Full height */
+  width: 40vw; /* Full width */
+  padding-top: 20px;
 }
 
-.quiz-container-bg {
-  background-image: url(../public/images/quizbg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.custom-child-parent{
-  width: 962px;
-  height: 497px;
-  position: absolute;
-  top: 60px;
-  left: 550px;
-}
-.custom-child-box1 {
-  width: 956px;
-  height: 122px;
-  position: absolute;
-  top: 10px;
-  left: 60px;
+.bags-button {
+  margin: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 8vh; /* Full height */
+  width: 40vw; /* Full width */
+  padding-top: 20px;
 }
 
-.custom-child-box2{
-  width: 884px;
-  height: 575px;
-  position: relative;
-  bottom: -80px;
-  right: -20px;
+.backpack {
+  margin: 0;
+  padding: 5;
+  background-image: url("../public/images/CREATE-dice/Backpack.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 30vh; /* Full height */
+  width: 40vw; /* Full width */
+  margin-top: 50px;
 }
 
-.iBorder{
-  border: 6px solid #ED670B;
+.backpack-small {
+  margin: 0;
+  padding: 5;
+  background-image: url("../public/images/CREATE-dice/Backpack.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 20vh; /* Full height */
+  width: 13vw; /* Full width */
+  margin-top: 50px;
 }
 
-/* background for what do you want to name your character */
-.character-bg{
-  background: linear-gradient(#221F26, #2C2930);
-  width: 600px;
-  height: 32px;
-  position: relative;
-  top: 0;
-  right: -780px;
+.buy-dice-button-bg {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 10vh; /* Full height */
+  width: 30vw; /* Full width */
+}
+
+.dice-0::before {
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  background-image: url("../public/images/CREATE-dice/Dice-0.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  /* height: 10vh; Full  */
+  width: 5vw; /* Full width */
 }
