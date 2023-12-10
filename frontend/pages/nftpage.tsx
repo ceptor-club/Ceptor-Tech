@@ -11,10 +11,12 @@ export default function NFTPage({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
+  PUBLIC_URL,
 }: {
   ALCHEMY_GOERLI_API_KEY: string;
   ALCHEMY_SEPOLIA_API_KEY: string;
   ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
+  PUBLIC_URL: string;
 }) {
   return (
     <div>
@@ -27,6 +29,7 @@ export default function NFTPage({
         ALCHEMY_GOERLI_API_KEY={ALCHEMY_GOERLI_API_KEY}
         ALCHEMY_SEPOLIA_API_KEY={ALCHEMY_SEPOLIA_API_KEY}
         ALCHEMY_POLYGON_ZKEVM_API_KEY={ALCHEMY_POLYGON_ZKEVM_API_KEY}
+        PUBLIC_URL={PUBLIC_URL}
         nftList={[]}
       />
     </div>

@@ -2,17 +2,20 @@ import React, { useState, useEffect, useCallback } from "react";
 import NftCard from "./NftCard";
 import NftModal from "./NftModal";
 import { Alchemy, Network, Nft } from "alchemy-sdk";
+import { SubmitData } from "../utils/types";
 
 const Explorer = ({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
+  PUBLIC_URL,
   nftList,
 }: {
   ALCHEMY_GOERLI_API_KEY: string;
   ALCHEMY_SEPOLIA_API_KEY: string;
   ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
-  nftList: Nft[];
+  PUBLIC_URL: string;
+  nftList: SubmitData[];
 }) => {
   const [alchemy, setAlchemy] = useState(null);
   const [nfts, setNfts] = useState([]);
@@ -83,9 +86,9 @@ const Explorer = ({
   };
 
   const getNfts = useCallback(async () => {
-    if (!alchemy) {
-      return;
-    }
+    // if (!alchemy) {
+    //   return;
+    // }
 
     // either nftList is input or standard collection is queried
     if (nftList?.length > 0) {
@@ -93,49 +96,49 @@ const Explorer = ({
       return;
     }
 
-    const exploreCeptor = [
-      {
-        network: "goerli",
-        address: "0x4379044facb5f0879de15e70b45afd495a197674",
-      },
-      {
-        network: "goerli",
-        address: "0x60fAF5FAe9F2EA10504d505B50104E783bf505B1",
-      },
-      {
-        network: "sepolia", //Sep Ceptors
-        address: "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A",
-      },
-      {
-        network: "sepolia", //Sep Dice
-        address: "0xEd1dbc1f6E5e9f4066AAa341c87e157Ad40328A9",
-      },
-    ];
+    // const exploreCeptor = [
+    //   {
+    //     network: "goerli",
+    //     address: "0x4379044facb5f0879de15e70b45afd495a197674",
+    //   },
+    //   {
+    //     network: "goerli",
+    //     address: "0x60fAF5FAe9F2EA10504d505B50104E783bf505B1",
+    //   },
+    //   {
+    //     network: "sepolia", //Sep Ceptors
+    //     address: "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A",
+    //   },
+    //   {
+    //     network: "sepolia", //Sep Dice
+    //     address: "0xEd1dbc1f6E5e9f4066AAa341c87e157Ad40328A9",
+    //   },
+    // ];
 
-    const invalidTokenIds = [4, 5, 8, 18]; // Token IDs in targetAddress with no image
-    // Diffuse Contract on Goerli
-    const targetAddress = "0x4379044facb5f0879de15e70b45afd495a197674";
+    // const invalidTokenIds = [4, 5, 8, 18]; // Token IDs in targetAddress with no image
+    // // Diffuse Contract on Goerli
+    // const targetAddress = "0x4379044facb5f0879de15e70b45afd495a197674";
 
-    let allNfts = [];
+    // let allNfts = [];
 
-    for (const { network, address } of exploreCeptor) {
-      const currentAlchemy = alchemy[network];
+    // for (const { network, address } of exploreCeptor) {
+    //   const currentAlchemy = alchemy[network];
 
-      const response = await currentAlchemy?.nft.getNftsForContract(address);
+    //   const response = await currentAlchemy?.nft.getNftsForContract(address);
 
-      let nfts = response.nfts;
+    //   let nfts = response.nfts;
 
-      // Filter is only for the targetAddress
-      if (address === targetAddress) {
-        nfts = nfts.filter(
-          (nft) => !invalidTokenIds.includes(parseInt(nft.tokenId))
-        );
-      }
+    //   // Filter is only for the targetAddress
+    //   if (address === targetAddress) {
+    //     nfts = nfts.filter(
+    //       (nft) => !invalidTokenIds.includes(parseInt(nft.tokenId))
+    //     );
+    //   }
 
-      allNfts = allNfts.concat(nfts);
-    }
+    //   allNfts = allNfts.concat(nfts);
+    // }
 
-    updateNfts(allNfts);
+    // updateNfts(allNfts);
   }, [alchemy, nftList]);
 
   useEffect(() => {
@@ -163,10 +166,11 @@ const Explorer = ({
         nfts.slice(0, displayedCards).map((nft) => {
           return (
             <NftCard
-              key={nft.tokenId}
+              key={nft.tokenID}
               nft={nft}
               winner={false}
               onCardClick={() => handleCardClick(nft)}
+              PUBLIC_URL={PUBLIC_URL}
             />
           );
         })}

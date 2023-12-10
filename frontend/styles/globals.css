@@ -244,16 +244,6 @@ option {
   width: 10vw; /* Full width */
 }
 
-.wallet-xs {
-  margin: 0;
-  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
-  background-size: contain; /* Contains the whole image */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  height: 10vh; /* Full height */
-  width: 12vw; /* Full width */
-}
-
 .backpack {
   margin: 0;
   padding: 5;

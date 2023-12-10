@@ -50,9 +50,6 @@ export default function BuyDice() {
       } else if (isConnected) {
         console.log("wallet is connected");
       }
-      console.log("mint dice");
-
-      console.log(ids, amounts, userBag);
 
       writeMint();
     } catch (error) {
@@ -61,9 +58,6 @@ export default function BuyDice() {
   };
 
   const addValue = (key: string) => {
-    console.log(key);
-    console.log(userBag[key]);
-
     const newValue = userBag[key] + 1;
     setUserBag((userBag) => ({ ...userBag, [key]: newValue }));
     console.log(userBag);

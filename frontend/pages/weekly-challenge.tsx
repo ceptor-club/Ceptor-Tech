@@ -14,14 +14,14 @@ import {
 import NftCard from "../components/NftCard";
 import { getServerSideProperties } from "../utils/getServerSideProps";
 import { getMostLikedSubmission } from "./api/getMostLikedSubmission";
+import { getCOWSubmissions } from "./api/getCOWSubmissions";
 import { addresses } from "../utils/addresses";
 import { ceptorDiceABI, promptCollectionABI, timerABI } from "../utils/abis";
 import { useEthersProvider } from "../utils/ethers";
 import { submit } from "./api/submit";
 import PromptCollection from "../abis/PromptCollection.json";
-import { submissionMock } from "../utils/mock";
+import { COWsubmissionsMock, winningSubmissionMock } from "../utils/mock";
 import { SubmitData } from "../utils/types";
-import { getCOWSubmissions } from "./api/getCOWSubmissions";
 
 // For the user to submit the timer  (of burned/used dice) has to be running,
 // for presentation we burn the 5, which is 20 minutes.
@@ -34,10 +34,12 @@ export default function WeeklyChallenge({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
+  PUBLIC_URL,
 }: {
   ALCHEMY_GOERLI_API_KEY: string;
   ALCHEMY_SEPOLIA_API_KEY: string;
   ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
+  PUBLIC_URL: string;
 }) {
   const { chain, chains } = useNetwork();
   const provider = useEthersProvider({ chainId: chain?.id });
@@ -45,11 +47,11 @@ export default function WeeklyChallenge({
 
   // const [alchemy, setAlchemy] = useState<Alchemy>();
   const [latestBlock, setLatestBlock] = useState(null);
-  const [nftList, setNFTList] = useState([]);
+  const [nftList, setNFTList] = useState<SubmitData[]>([]);
   const [deadline, setDeadline] = useState<number>();
   const [weeklyChallenge, setWeeklyChallenge] = useState("Weekly Challenge");
   const [isConnected, setIsConnected] = useState(false);
-  const [winnerNFT, setWinnerNFT] = useState<Nft>();
+  const [winnerNFT, setWinnerNFT] = useState<SubmitData>();
   const [diceId, setDiceId] = useState(5);
   const [currentTimer, setCurrentTimer] = useState();
 
@@ -72,7 +74,7 @@ export default function WeeklyChallenge({
   } = useContractWrite(configBurnDice);
 
   const burnDice = async () => {
-    if (address) {
+    if (!address) {
       alert("connect your wallet");
       return;
     }
@@ -111,17 +113,20 @@ export default function WeeklyChallenge({
    */
 
   const getWinningSubmission = async () => {
-    const result = await getMostLikedSubmission();
+    // TODO: replace mock data
+    // const result = await getMostLikedSubmission();
+    const result = [winningSubmissionMock];
     console.log(result);
 
-    // setWinnerNFT(result);
+    setWinnerNFT(result[0]);
   };
 
   const getAllSubmission = async () => {
-    const result = await getCOWSubmissions();
+    // TODO: replace mock data
+    // const result = await getCOWSubmissions();
+    const result = COWsubmissionsMock;
     console.log(result);
-
-    // setWinnerNFT(result);
+    setNFTList(result);
   };
 
   useEffect(() => {
@@ -144,12 +149,27 @@ export default function WeeklyChallenge({
 
   /**
    * -------------------------------------------------------------------------------
-   * SEND SUBMISSIONS: User submissions can only be sent, when a dics is being  burned
+   * SEND SUBMISSIONS: User submissions can only be sent, when a discs is being  burned
    * so we need to check if dice timer is running
    * -------------------------------------------------------------------------------
    */
 
-  // // Config for sending user submission
+  // check if user has a dice burning or needs to buy one.
+  const {
+    data: dataTimer,
+    isError,
+    isLoading,
+  } = useContractRead({
+    // remove sepolia
+    address: addresses[chain?.network || "sepolia"].timer,
+    abi: timerABI,
+    functionName: "checkTimer",
+    args: [address],
+  });
+
+  console.log("User has game time", dataTimer);
+
+  // Config for sending user submission
   const { config: configSendSubmission } = usePrepareContractWrite({
     address: addresses[chain?.network]?.promptCollection,
     abi: promptCollectionABI,
@@ -164,28 +184,14 @@ export default function WeeklyChallenge({
   const sendSubmission = async () => {
     // TODO: call mint from promptCollection submit() -return tokenID
     // TODO: send data to Mongo db with the tokenID
-    if (address) {
+    if (!address) {
       alert("connect your wallet");
       return;
     }
 
+    submit(winningSubmissionMock);
     writeSendSubmission();
-    submit(submissionMock);
   };
-
-  // check if user has a dice burning or needs to buy one.
-  const {
-    data: dataTimer,
-    isError,
-    isLoading,
-  } = useContractRead({
-    address: addresses[chain?.network || "sepolia"].timer,
-    abi: timerABI,
-    functionName: "checkTimer",
-    args: [address],
-  });
-
-  console.log("User has game time", dataTimer);
 
   useEffect(() => {
     console.log("nfts state updated:", nftList);
@@ -205,7 +211,7 @@ export default function WeeklyChallenge({
       const response = await alchemy.nft.getNftsForContract(
         "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A"
       );
-      setWinnerNFT(response.nfts[1]);
+      // setWinnerNFT(response.nfts[1]);
     };
     getNFTofTheWeek();
   }, [ALCHEMY_SEPOLIA_API_KEY]);
@@ -228,10 +234,11 @@ export default function WeeklyChallenge({
         <div className="flex flex-col justify-center items-center mt-10">
           {winnerNFT && (
             <NftCard
-              key={winnerNFT.tokenId}
+              key={winnerNFT.tokenID}
               nft={winnerNFT}
               winner={true}
               onCardClick={() => console.log("nothing")}
+              PUBLIC_URL={PUBLIC_URL}
             />
           )}
           <h1 className="font-oswald text-sm uppercase font-bold">
@@ -256,12 +263,13 @@ export default function WeeklyChallenge({
         </div>
       </div>
 
-      {/* <Explorer
+      <Explorer
         ALCHEMY_GOERLI_API_KEY={ALCHEMY_GOERLI_API_KEY}
         ALCHEMY_SEPOLIA_API_KEY={ALCHEMY_SEPOLIA_API_KEY}
         ALCHEMY_POLYGON_ZKEVM_API_KEY={ALCHEMY_POLYGON_ZKEVM_API_KEY}
-        nftList={[]}
-      /> */}
+        PUBLIC_URL={PUBLIC_URL}
+        nftList={nftList}
+      />
     </div>
   );
 }
