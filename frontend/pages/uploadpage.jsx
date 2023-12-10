@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
-const UploadPage = () => {
+const Userpage = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [user, setUser] = useState('');
+  const [isUsernameErrorPopupOpen, setIsUsernameErrorPopupOpen] = useState(false);
 
   const handleRoleSelection = (role) => {
+    if (username.trim() === '') {
+      setIsUsernameErrorPopupOpen(true);
+      return;
+    }
+  
     const userValue = role === 'Gamemaster' ? 'gm' : 'player';
     setUser(userValue);
     router.push(`/burnDie?username=${encodeURIComponent(username)}&user=${encodeURIComponent(userValue)}`);
+  };
+
+  const handleClosePopup = () => {
+    setIsUsernameErrorPopupOpen(false);
   };
 
   return (
@@ -43,8 +53,17 @@ const UploadPage = () => {
           </button>
         </div>
       </div>
+      
+      {isUsernameErrorPopupOpen && (
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg text-center relative">
+            <button onClick={handleClosePopup} className="absolute top-0 right-0 text-black text-lg cursor-pointer p-2">x</button>
+            <p className="font-oswald text-black">Please enter your username first</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default UploadPage;
+export default Userpage;

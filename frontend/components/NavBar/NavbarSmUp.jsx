@@ -29,7 +29,7 @@ export default function NavbarSmUp() {
                 <Link className="uppercase" href="/QuizPage">
                   Quiz
                 </Link>
-                <Link className="uppercase" href="/">
+                <Link className="uppercase" href="/create">
                   Create{" "}
                 </Link>
                 <Link className="uppercase" href="/nftpage">
