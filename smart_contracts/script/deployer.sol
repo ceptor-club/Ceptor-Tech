@@ -68,7 +68,30 @@ contract Deployer is Script, Helper {
         // timer management role for dice contract
         diceContract.grantRole(diceContract.TIMER_MANAGEMENT_ROLE(), prompt);
         diceContract.grantRole(diceContract.TIMER_MANAGEMENT_ROLE(), ceptor);
-
+        // setup tokens 
+              uint256[] memory _ids = new uint256[](4);
+        _ids[0] = 0;
+        _ids[1] = 1;
+        _ids[2] = 2;
+        _ids[3] = 3;
+ 
+        uint256[] memory _prices = new uint256[](4);
+        _prices[0] = 1;
+        _prices[1] = 5;
+        _prices[2] = 15;
+        _prices[3] = 25;
+         uint256[] memory _times = new uint256[](4);
+        _times[0] = 3 minutes;
+        _times[1] = 10 minutes;
+        _times[2] = 15 minutes;
+        _times[3] = 20 minutes;
+         string[] memory _uris = new string[](4);
+        _uris[0] = "https://cdn.discordapp.com/attachments/1082779671369887798/1082780320153214986/logo.png";
+        _uris[1] = " https://cdn.discordapp.com/attachments/1082779671369887798/1082780320153214986/logo.png";
+        _uris[2] = " https://cdn.discordapp.com/attachments/1082779671369887798/1082780320153214986/logo.png";
+        _uris[3] = " https://cdn.discordapp.com/attachments/1082779671369887798/1082780320153214986/logo.png";
+       
+      diceContract.addNewTokens(_ids,_prices,_times,_uris);
         promptContract.setRewardContract(reward);
         vm.stopBroadcast();
 
