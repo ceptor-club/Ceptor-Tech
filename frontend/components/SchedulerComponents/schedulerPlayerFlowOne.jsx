@@ -1,47 +1,36 @@
 import React, { useState } from 'react';
 
-const ChoiceBox = ({ title, subtitle, description, onClick }) => (
-  <div onClick={onClick} className="border-2 border-white p-2 m-2 inline-block text-center">
-    <h2>{title}</h2>
-    <p>{subtitle}</p>
-    <p>{description}</p>
+const ChoiceBox = ({ gameMasterID, nameOfWorld, worldDescription, onClick, isSelected }) => (
+  <div 
+    onClick={onClick} 
+    className={`border-2 ${isSelected ? 'border-yellow-300' : 'border-gray-800'} p-2 m-2 inline-block text-center w-1/3 bg-gray-800 opacity-50`}
+  >
+    <h2>{gameMasterID}</h2>
+    <p>{nameOfWorld}</p>
+    <p>{worldDescription}</p>
   </div>
 );
 
 function PlayerFlowPageOne({ onNext }) {
   const [selectedChoice, setSelectedChoice] = useState(null);
-
   const choices = [
     {
       id: 1,
-      title: 'Jason A.',
-      subtitle: 'CeptorLand',
-      description: 'Lorem ipsum, lorem ipsum lorem ispum.',
+      gameMasterID: 'Jason A.',
+      nameOfWorld: 'CeptorLand',
+      worldDescription: 'A mystical world of enchanted forests and ancient ruins, where magic is as common as the air we breathe.',
     },
     {
       id: 2,
-      title: 'Jason D.',
-      subtitle: 'Legends of Moria',
-      description: 'Lorem ipsum, lorem ipsum lorem ispum.',
+      gameMasterID: 'Jason D.',
+      nameOfWorld: 'Legends of Moria',
+      worldDescription: 'A realm of towering mountains and deep mines, where dwarves and dragons vie for control of precious gems.',
     },
   ];
 
   const handleChoiceSelect = (choiceId) => {
     setSelectedChoice(choiceId);
   };
-
-  const choiceBoxStyle = {
-  '@media (min-width: 640px)': {
-    textAlign: 'center',
-  },
-  '@media (min-width: 768px)': {
-    textAlign: 'center',
-  },
-  border: '2px solid white',
-  padding: '10px',
-  margin: '10px',
-  display: 'inline-block',
-};
 
   const nextButtonStyle = {
     position: 'absolute',
@@ -55,11 +44,11 @@ return (
     {choices.map((choice) => (
       <ChoiceBox
         key={choice.id}
-        title={choice.title}
-        subtitle={choice.subtitle}
-        description={choice.description}
+        gameMasterID={choice.gameMasterID}
+        nameOfWorld={choice.nameOfWorld}
+        worldDescription={choice.worldDescription}
         onClick={() => handleChoiceSelect(choice.id)}
-        style={choiceBoxStyle}
+        isSelected={selectedChoice === choice.id}
       />
     ))}
     {selectedChoice && (

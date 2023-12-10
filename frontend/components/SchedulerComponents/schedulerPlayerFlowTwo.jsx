@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 
-const SubChoiceBox = ({ body, onClick }) => (
-  <div onClick={onClick} className="border-2 border-white p-2 m-2 inline-block text-center">
-    <p>{body}</p>
+const SubChoiceBox = ({ dayOfWeek, time, onClick, isSelected }) => (
+  <div 
+    onClick={onClick} 
+    className={`border-2 ${isSelected ? 'border-yellow-300' : 'border-gray-800'} p-2 m-2 inline-block text-center bg-gray-800 opacity-50`}
+  >
+    <p>{dayOfWeek} {time}</p>
   </div>
 );
 
@@ -12,33 +15,23 @@ function PlayerFlowPageTwo({ onPrevious, onNext }) {
   const subChoices = [
     {
       id: 1,
-      body: 'Sunday 6 - 9 pm CST',
+      dayOfWeek: 'Sunday',
+      time: '2 - 5 pm CST',
     },
     {
       id: 2,
-      body: 'Tuesday 7 - 10 pm EST',
+      dayOfWeek: 'Tuesday',
+      time: '6 - 9 pm CST',
     },
     {
       id: 3,
-      body: 'Thursday 4 - 7 pm PST',
+      dayOfWeek: 'Thursday',
+      time: '7 - 10 pm CST',
     },
   ];
 
   const handleSubChoiceSelect = (subChoiceId) => {
     setSelectedSubChoice(subChoiceId);
-  };
-
-  const subChoiceBoxStyle = {
-    '@media (min-width: 640px)': {
-      textAlign: 'center',
-    },
-    '@media (min-width: 768px)': {
-      textAlign: 'center',
-    },
-    border: '2px solid white',
-    padding: '10px',
-    margin: '10px',
-    display: 'inline-block',
   };
 
   const backButtonStyle = {
@@ -59,15 +52,14 @@ function PlayerFlowPageTwo({ onPrevious, onNext }) {
       {subChoices.map((subChoice) => (
         <SubChoiceBox
           key={subChoice.id}
-          body={subChoice.body}
+          dayOfWeek={subChoice.dayOfWeek}
+          time={subChoice.time}
           onClick={() => handleSubChoiceSelect(subChoice.id)}
-          style={subChoiceBoxStyle}
+          isSelected={selectedSubChoice === subChoice.id}
         />
       ))}
       <button style={backButtonStyle} onClick={onPrevious}>Back</button>
-      {selectedSubChoice && (
-        <button style={nextButtonStyle} onClick={() => onNext({ selectedTime: selectedSubChoice })}>Next</button>
-      )}
+      <button style={nextButtonStyle} onClick={onNext} disabled={!selectedSubChoice}>Next</button>
     </div>
   );
 }
