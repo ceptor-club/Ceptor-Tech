@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Alchemy, Network, Nft } from "alchemy-sdk";
 import Explorer from "../components/Explorer";
-import Link from "next/link";
 import { Countdown } from "../components/Countdown";
 import {
   useAccount,
@@ -12,6 +11,8 @@ import {
   usePrepareContractWrite,
 } from "wagmi";
 import NftCard from "../components/NftCard";
+import GenerateButton from "../components/GenerateButton";
+
 import { getServerSideProperties } from "../utils/getServerSideProps";
 import { getMostLikedSubmission } from "./api/getMostLikedSubmission";
 import { getCOWSubmissions } from "./api/getCOWSubmissions";
@@ -34,18 +35,17 @@ export default function WeeklyChallenge({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
-  PUBLIC_URL,
+  PUBLIC_IMAGE_URL,
 }: {
   ALCHEMY_GOERLI_API_KEY: string;
   ALCHEMY_SEPOLIA_API_KEY: string;
   ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
-  PUBLIC_URL: string;
+  PUBLIC_IMAGE_URL: string;
 }) {
   const { chain, chains } = useNetwork();
   const provider = useEthersProvider({ chainId: chain?.id });
   const { address, isConnecting, isDisconnected } = useAccount();
 
-  // const [alchemy, setAlchemy] = useState<Alchemy>();
   const [latestBlock, setLatestBlock] = useState(null);
   const [nftList, setNFTList] = useState<SubmitData[]>([]);
   const [deadline, setDeadline] = useState<number>();
@@ -55,6 +55,26 @@ export default function WeeklyChallenge({
   const [diceId, setDiceId] = useState(5);
   const [currentTimer, setCurrentTimer] = useState();
   const [userPrompt, setUserPrompt] = useState("");
+
+  // Generate Button States
+  const [imageProcessing, setImageProcessing] = useState(false); //processing state ie. loading...
+  const [error, setError] = useState(null); //error msg
+  const [imageResult, setImageResult] = useState(null); //url
+  const [selectedImage, setSelectedImage] = useState(null); //image chosen by user
+  const [conditionalCreate, setConditionalCreate] = useState("");
+  const [isMinting, setIsMinting] = useState(false); //minting nft state ie. loading...
+  const [userDice, setUserDice] = useState([0, 0, 0, 0, 0, 0]); //dice balance
+  const [pdfData, setPdfData] = useState({
+    race: "",
+    class: "",
+    armorWorn: "",
+    background: "",
+    alignment: "",
+    feature: "",
+    gender: "",
+    color: "",
+    weapon: "",
+  }); //stretch goal! Update these values based on character quiz
 
   console.log(addresses[chain?.network]?.ceptorDice);
 
@@ -194,29 +214,6 @@ export default function WeeklyChallenge({
     writeSendSubmission();
   };
 
-  useEffect(() => {
-    console.log("nfts state updated:", nftList);
-  }, [nftList]);
-
-  useEffect(() => {
-    // TODO: replace with winning NFT of last week
-    // getMostLikedSubmission();
-
-    const alchemy = new Alchemy({
-      apiKey: ALCHEMY_SEPOLIA_API_KEY,
-      network: Network.ETH_SEPOLIA,
-    });
-
-    const getNFTofTheWeek = async () => {
-      // const response = await getMostLikedSubmission();
-      const response = await alchemy.nft.getNftsForContract(
-        "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A"
-      );
-      // setWinnerNFT(response.nfts[1]);
-    };
-    getNFTofTheWeek();
-  }, [ALCHEMY_SEPOLIA_API_KEY]);
-
   return (
     <div className="bg-black flex flex-col items-center  min-h-screen py-5 space-y-10">
       <div className="flex flex-col justify-center items-center ">
@@ -239,7 +236,7 @@ export default function WeeklyChallenge({
               nft={winnerNFT}
               winner={true}
               onCardClick={() => console.log("nothing")}
-              PUBLIC_URL={PUBLIC_URL}
+              PUBLIC_IMAGE_URL={PUBLIC_IMAGE_URL}
             />
           )}
           <h1 className="font-oswald text-sm uppercase font-bold">
@@ -274,6 +271,20 @@ export default function WeeklyChallenge({
           />
         </div>
 
+        {!error && !imageProcessing ? (
+          <GenerateButton
+            setConditionalCreate={setConditionalCreate}
+            setImageProcessing={setImageProcessing}
+            setError={setError}
+            setImageResult={setImageResult}
+            imageResult={imageResult}
+            pdfData={pdfData}
+            isMinting={isMinting}
+            imageProcessing={imageProcessing}
+            prompt={userPrompt}
+          />
+        ) : null}
+
         <div className="flex flex-row">
           <button
             className="button-xs text-black pt-5"
@@ -294,7 +305,7 @@ export default function WeeklyChallenge({
         ALCHEMY_GOERLI_API_KEY={ALCHEMY_GOERLI_API_KEY}
         ALCHEMY_SEPOLIA_API_KEY={ALCHEMY_SEPOLIA_API_KEY}
         ALCHEMY_POLYGON_ZKEVM_API_KEY={ALCHEMY_POLYGON_ZKEVM_API_KEY}
-        PUBLIC_URL={PUBLIC_URL}
+        PUBLIC_IMAGE_URL={PUBLIC_IMAGE_URL}
         nftList={nftList}
       />
     </div>

@@ -4,7 +4,7 @@ import { voteForSubmission } from "../pages/api/voteForSubmission";
 import { useAccount } from "wagmi";
 import { VoteData } from "../utils/types";
 
-const NftCard = ({ nft, onCardClick, winner, PUBLIC_URL }) => {
+const NftCard = ({ nft, onCardClick, winner, PUBLIC_IMAGE_URL }) => {
   const { address, isConnected } = useAccount();
   const [vote, setVote] = useState<VoteData>();
 
