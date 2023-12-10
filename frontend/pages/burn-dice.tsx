@@ -2,39 +2,48 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import {
   useAccount,
+  useContractRead,
   useContractWrite,
   useNetwork,
   usePrepareContractWrite,
 } from "wagmi";
-import { ceptorDiceABI } from "../utils/abis";
+import { ceptorABI, ceptorDiceABI } from "../utils/abis";
 import { addresses } from "../utils/addresses";
 
 export default function BurnDice() {
   const { chain, chains } = useNetwork();
   const { address, isConnected } = useAccount();
   const [minutes, setMinutes] = useState(0);
-  const [dice, setDice] = useState(0);
+  const [dice, setDice] = useState("");
+  const [userBag, setUserBag] = useState({
+    "4": 0,
+    "6": 0,
+    "8": 0,
+    "10": 0,
+    "12": 0,
+    "20": 0,
+  });
   // TODO: get the amount of dice of user
   // TODO: replace with real user data
-  const [userBag, setUserBag] = useState({
-    "4": 8,
-    "6": 2,
-    "8": 2,
-    "10": 2,
-    "12": 1,
-    "20": 2,
+
+  const { data: userTimerRead } = useContractRead({
+    address: addresses[chain?.network]?.ceptors,
+    abi: ceptorABI,
+    functionName: "userTimers",
+    args: [address],
+    watch: true,
   });
 
-  // Config for minting dice
-  const { config: configMint } = usePrepareContractWrite({
+  // Config for burning dice
+  const { config: configBurn } = usePrepareContractWrite({
     address: addresses[chain?.network]?.ceptorDice as any,
     abi: ceptorDiceABI,
     functionName: "burn",
-    args: [address, "1", "1"],
+    args: [address, dice, "1"],
   });
 
-  // Hook for minting dice
-  const { data, write: writeMint } = useContractWrite(configMint);
+  // Hook for burning dice
+  const { data, write: writeBurn } = useContractWrite(configBurn);
 
   const burn = () => {
     try {
@@ -45,7 +54,7 @@ export default function BurnDice() {
       }
       console.log("mint dice");
 
-      writeMint();
+      writeBurn();
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +64,7 @@ export default function BurnDice() {
     if (minutes === 0) {
       setUserBag((userBag) => ({ ...userBag, [key]: userBag[key] - 1 }));
       setMinutes(minutes + Number(key));
+      setDice(key);
     }
   };
 
@@ -63,7 +73,7 @@ export default function BurnDice() {
       <h1 className="font-nothing-you-could-do text-4xl uppercase ">
         Manage Dice{" "}
       </h1>
-      <h1 className="font-milonga text-black-xl uppercase text-4xl">
+      <h1 className="font-milonga text-light-yellow uppercase text-4xl">
         Your Dice{" "}
       </h1>
       <div>
@@ -81,9 +91,9 @@ export default function BurnDice() {
           <p className="font-oswald uppercase">Buy</p>
           <p className="font-oswald uppercase m-5 pt-5">Time</p>
         </div>
-        <div className="flex flex-row space-x-5 ">
+        <div className="flex flex-row  ">
           {Object.entries(userBag).map(([key, value]) => (
-            <div className="flex flex-col m-5" key={key}>
+            <div className="flex flex-col m-2" key={key}>
               <button onClick={() => selectDice(key)} className="">
                 <p className="font-oswald bg-white text-black p-5 rounded-xl">
                   {value}
