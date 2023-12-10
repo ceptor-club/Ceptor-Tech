@@ -21,6 +21,7 @@ import { submit } from "./api/submit";
 import PromptCollection from "../abis/PromptCollection.json";
 import { submissionMock } from "../utils/mock";
 import { SubmitData } from "../utils/types";
+import { getCOWSubmissions } from "./api/getCOWSubmissions";
 
 // For the user to submit the timer  (of burned/used dice) has to be running,
 // for presentation we burn the 5, which is 20 minutes.
@@ -48,7 +49,7 @@ export default function WeeklyChallenge({
   const [deadline, setDeadline] = useState<number>();
   const [weeklyChallenge, setWeeklyChallenge] = useState("Weekly Challenge");
   const [isConnected, setIsConnected] = useState(false);
-  const [winnerNFT, setWinnerNFT] = useState<SubmitData>();
+  const [winnerNFT, setWinnerNFT] = useState<Nft>();
   const [diceId, setDiceId] = useState(5);
   const [currentTimer, setCurrentTimer] = useState();
 
@@ -60,7 +61,7 @@ export default function WeeklyChallenge({
     address: addresses[chain?.network]?.ceptorDice,
     abi: ceptorDiceABI,
     functionName: "timerBurn",
-    args: [address, diceId, 1],
+    args: [address, 5, 1],
   });
 
   // // Hook for burning Dice
@@ -99,11 +100,24 @@ export default function WeeklyChallenge({
     ],
   });
 
+  /**
+   * ---------------------------------------------------------------------------------------
+   *  LAST WINNING SUBMISSION AND ALL CURRENT  SUBMISSIONS
+   * ---------------------------------------------------------------------------------------
+   */
+
   const getWinningSubmission = async () => {
     const result = await getMostLikedSubmission();
     console.log(result);
 
-    setWinnerNFT(result);
+    // setWinnerNFT(result);
+  };
+
+  const getAllSubmission = async () => {
+    const result = await getCOWSubmissions();
+    console.log(result);
+
+    // setWinnerNFT(result);
   };
 
   useEffect(() => {
@@ -117,6 +131,7 @@ export default function WeeklyChallenge({
     }
 
     getWinningSubmission();
+    getAllSubmission();
   }, [readData]);
 
   // // TODO: remove this temp variable once we get the deadline for powt from the smart contract
@@ -135,7 +150,6 @@ export default function WeeklyChallenge({
     address: addresses[chain?.network]?.promptCollection,
     abi: promptCollectionABI,
     functionName: "mint",
-    args: [address, diceId, 1],
   });
 
   // Hook for sending user submission
@@ -179,10 +193,10 @@ export default function WeeklyChallenge({
 
     const getNFTofTheWeek = async () => {
       // const response = await getMostLikedSubmission();
-      // const response = await alchemy.nft.getNftsForContract(
-      //   "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A"
-      // );
-      // setWinnerNFT(response.nfts[1]);
+      const response = await alchemy.nft.getNftsForContract(
+        "0x4dBe3E96d429b9fE5F2Bb89728E39138aC4F817A"
+      );
+      setWinnerNFT(response.nfts[1]);
     };
     getNFTofTheWeek();
   }, [ALCHEMY_SEPOLIA_API_KEY]);
@@ -202,7 +216,7 @@ export default function WeeklyChallenge({
         <h1 className="font-oswald text-xl uppercase font-bold">
           Burn a die and mint your ChallengerNFT
         </h1>
-        {/* <div className="flex flex-col justify-center items-center mt-10">
+        <div className="flex flex-col justify-center items-center mt-10">
           {winnerNFT && (
             <NftCard
               key={winnerNFT.tokenId}
@@ -214,7 +228,7 @@ export default function WeeklyChallenge({
           <h1 className="font-oswald text-sm uppercase font-bold">
             Winner of last weeks challenge
           </h1>
-        </div> */}
+        </div>
         <button onClick={() => burnDice()}>burn</button>
         <button onClick={() => sendSubmission()}>submit prompt</button>
         <div className="flex flex-wrap justify-center items-center">
