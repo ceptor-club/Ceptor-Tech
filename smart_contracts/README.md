@@ -123,3 +123,7 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+forge verify-contract 0xEc2df342d40D46fae8407F24f078138ec6d77FbA  PromptCollection  --constructor-args $(cast abi-encode "constructor(address ,address,bytes32,uint64,uint32 callbackGasLimit)" 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625 0x45DB01904b51857F6279FE9006De25bf6dE8d136 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c 7650 2500000 ) --watch   --chain-id  11155111
+
+
+forge verify-contract 0xDA38118B32394748f7b720E5CBad719EfD02da0B  Ceptors  --constructor-args $(cast abi-encode "constructor(address)" 0x45DB01904b51857F6279FE9006De25bf6dE8d136 ) --watch   --chain-id  11155111
