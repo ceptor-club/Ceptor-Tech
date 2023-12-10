@@ -74,7 +74,13 @@ function GameScheduler() {
       case State.chooseEvent:
         return <SchedulerPlayerFlowTwo onPrevious={prevStep} onNext={nextStep} />;
       case State.confirmEvent:
-        return <SchedulerPlayerFlowThree onPrevious={prevStep} onNext={nextStep} eventDate={eventDate} eventTime={eventTime} />;
+        return <SchedulerPlayerFlowThree 
+  onPrevious={prevStep} 
+  onNext={nextStep} 
+  eventDate={eventDate} 
+  eventTime={eventTime} 
+  nameOfWorld={userChoices.nameOfWorld}
+/>;
       case State.eventConfirmed:
         return <SchedulerPlayerConfirmed eventConfirmed={eventConfirmed} setEventConfirmed={setEventConfirmed} onConfirm={confirmChoices} userChoices={userChoices} />;
       default:

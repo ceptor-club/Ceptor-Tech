@@ -20,7 +20,7 @@ const ButtonContainer = ({ onPrevious, onNext }) => (
   </div>
 );
 
-function PlayerFlowStep3({ onPrevious, onNext }) {
+function PlayerFlowStep3({ onPrevious, onNext, nameOfWorld }) {
   const headerStyle = {
     textAlign: 'center',
     fontSize: '24px',
@@ -80,7 +80,7 @@ function PlayerFlowStep3({ onPrevious, onNext }) {
 
   return (
   <div className="relative flex flex-col items-center pb-12">
-    <Header text="Jason A.'s Game" style={headerStyle} />
+    <Header text={nameOfWorld} style={headerStyle} />
     <Rectangle text="CeptorLand" style={rectangleStyle} />
     <TextBox text="Confirm your game" style={textBoxStyle} />
     <div style={squareContainerStyle}>

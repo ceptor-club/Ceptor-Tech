@@ -1,37 +1,41 @@
 import React, { useState } from 'react';
 
-const SubChoiceBox = ({ dayOfWeek, time, onClick, isSelected }) => (
+const SubChoiceBox = ({ id, date, startTime, onClick, isSelected }) => (
   <div 
     onClick={onClick} 
-    className={`border-2 ${isSelected ? 'border-yellow-300' : 'border-gray-800'} p-2 m-2 inline-block text-center bg-gray-800 opacity-50`}
+    className={`border-2 ${isSelected ? 'border-yellow-300' : 'border-gray-800'} p-2 m-2 block text-center bg-gray-800 opacity-50`}
   >
-    <p>{dayOfWeek} {time}</p>
+    <p>{date} {startTime}</p>
   </div>
 );
 
 function PlayerFlowPageTwo({ onPrevious, onNext }) {
   const [selectedSubChoice, setSelectedSubChoice] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedStartTime, setSelectedStartTime] = useState(null);
 
   const subChoices = [
     {
       id: 1,
-      dayOfWeek: 'Sunday',
-      time: '2 - 5 pm CST',
+      date: 'January 10, 2024',
+      startTime: '10:00 AM',
     },
     {
       id: 2,
-      dayOfWeek: 'Tuesday',
-      time: '6 - 9 pm CST',
+      date: 'January 10, 2024',
+      startTime: '10:00 AM',
     },
     {
       id: 3,
-      dayOfWeek: 'Thursday',
-      time: '7 - 10 pm CST',
+      date: 'January 10, 2024',
+      startTime: '10:00 AM',
     },
   ];
 
-  const handleSubChoiceSelect = (subChoiceId) => {
-    setSelectedSubChoice(subChoiceId);
+  const handleSubChoiceSelect = (id, date, startTime) => {
+    setSelectedSubChoice(id);
+    setSelectedDate(date);
+    setSelectedStartTime(startTime);
   };
 
   const backButtonStyle = {
@@ -47,19 +51,26 @@ function PlayerFlowPageTwo({ onPrevious, onNext }) {
   };
 
   return (
-    <div className="relative flex flex-col items-center pb-12">
+    <div>
       <h2>Choose When To Start Your Adventure</h2>
-      {subChoices.map((subChoice) => (
-        <SubChoiceBox
-          key={subChoice.id}
-          dayOfWeek={subChoice.dayOfWeek}
-          time={subChoice.time}
-          onClick={() => handleSubChoiceSelect(subChoice.id)}
-          isSelected={selectedSubChoice === subChoice.id}
-        />
-      ))}
-      <button style={backButtonStyle} onClick={onPrevious}>Back</button>
-      <button style={nextButtonStyle} onClick={onNext} disabled={!selectedSubChoice}>Next</button>
+      <div style={{ position: 'relative' }} className="flex flex-col items-center pb-12">
+        <div style={{ marginBottom: '40px' }}>
+          {subChoices.map((subChoice) => (
+            <SubChoiceBox
+              key={subChoice.id}
+              id={subChoice.id}
+              date={subChoice.date}
+              startTime={subChoice.startTime}
+              onClick={() => handleSubChoiceSelect(subChoice.id, subChoice.date, subChoice.startTime)}
+              isSelected={selectedSubChoice === subChoice.id}
+            />
+          ))}
+        </div>
+        <div>
+          <button style={backButtonStyle} onClick={onPrevious}>Back</button>
+          <button style={nextButtonStyle} onClick={() => onNext({ selectedSubChoice, selectedDate, selectedStartTime })} disabled={!selectedSubChoice}>Next</button>
+        </div>
+      </div>
     </div>
   );
 }

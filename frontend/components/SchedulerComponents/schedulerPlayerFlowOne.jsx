@@ -28,9 +28,10 @@ function PlayerFlowPageOne({ onNext }) {
     },
   ];
 
-  const handleChoiceSelect = (choiceId) => {
-    setSelectedChoice(choiceId);
-  };
+  const handleChoiceSelect = (choice) => {
+  console.log(choice.nameOfWorld);
+  setSelectedChoice(choice.nameOfWorld);
+};
 
   const nextButtonStyle = {
     position: 'absolute',
@@ -47,8 +48,8 @@ return (
         gameMasterID={choice.gameMasterID}
         nameOfWorld={choice.nameOfWorld}
         worldDescription={choice.worldDescription}
-        onClick={() => handleChoiceSelect(choice.id)}
-        isSelected={selectedChoice === choice.id}
+        onClick={() => handleChoiceSelect(choice)}
+        isSelected={selectedChoice === choice.nameOfWorld}
       />
     ))}
     {selectedChoice && (
