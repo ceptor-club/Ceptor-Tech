@@ -2,15 +2,19 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['media.tenor.com','ipfs.io'],
+    domains: ["media.tenor.com", "ipfs.io", "github.com"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'media.tenor.com',
+        protocol: "https",
+        hostname: "media.tenor.com",
       },
       {
-        protocol: 'https',
-        hostname: 'picsum.photos',
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+      {
+        protocol: "https",
+        hostname: "github.com",
       },
     ],
   },
