@@ -21,11 +21,10 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "./Timer.sol";
- 
 
 // TODO: add burnCount where needed ----------------------------<<<<<<
 
-contract CeptorDice is ERC1155 , Timer {
+contract CeptorDice is ERC1155, Timer {
     struct Token {
         uint256 mintCount;
         uint256 burnCount;
@@ -41,25 +40,28 @@ contract CeptorDice is ERC1155 , Timer {
     mapping(address => uint256) public addressMinted; //address => amount minted
 
     constructor() ERC1155("CeptorDice") {
-     
-
         totalTokens = 0;
     }
 
     // MINTING ----------------------------
 
     //dev batch mint
-    function minterMintBatch(address _to, uint256[] memory _ids, uint256[] memory _amounts, bytes memory _data)
-        public
-        onlyRole(MINTER)
-    {
+    function minterMintBatch(
+        address _to,
+        uint256[] memory _ids,
+        uint256[] memory _amounts,
+        bytes memory _data
+    ) public onlyRole(MINTER) {
         for (uint256 i = 0; i < _ids.length; i++) {
             _mint(_to, _ids[i], _amounts[i], _data);
         }
     }
 
     //bulk mint
-    function mintBatch(uint256[] memory _ids, uint256[] memory _amounts) public payable {
+    function mintBatch(
+        uint256[] memory _ids,
+        uint256[] memory _amounts
+    ) public payable {
         // require(msg.sender == burnAndMintAddress, "Not authorized.");
         require(_ids.length == _amounts.length, "Arr not same ln");
 
@@ -89,23 +91,33 @@ contract CeptorDice is ERC1155 , Timer {
 
     address public ceptorContractAddress;
 
-/// @dev Todo: remove the amount if we only  minit one at a time or support this logic amount * time = total time
+    /// @dev Todo: remove the amount if we only  minit one at a time or support this logic amount * time = total time
     function timerBurn(address _address, uint256 _id, uint256 _amount) public {
         require(tokens[_id].exists, "Doesn't exist.");
         require(_amount > 0, "Amount must be greater than 0.");
-        require(balanceOf(_address, _id) >= _amount, "Not enough tokens to burn.");
+        require(
+            balanceOf(_address, _id) >= _amount,
+            "Not enough tokens to burn."
+        );
 
         _burn(_address, _id, _amount);
         // start timer on avatar contract to mint avatar
         //FunctionInterface(ceptorContractAddress).setTimer(_address, tokens[_id].time);
-        _startTimer(_address,tokens[_id].time);
+        _startTimer(_address, tokens[_id].time);
         tokens[_id].burnCount += _amount;
     }
 
-    function burn(address _address, uint256 _id, uint256 _amount) public onlyRole(MINTER) {
+    function burn(
+        address _address,
+        uint256 _id,
+        uint256 _amount
+    ) public onlyRole(MINTER) {
         require(tokens[_id].exists, "Doesn't exist.");
         require(_amount > 0, "Amount must be greater than 0.");
-        require(balanceOf(_address, _id) >= _amount, "Not enough tokens to burn.");
+        require(
+            balanceOf(_address, _id) >= _amount,
+            "Not enough tokens to burn."
+        );
 
         _burn(_address, _id, _amount);
         tokens[_id].burnCount += _amount;
@@ -144,28 +156,34 @@ contract CeptorDice is ERC1155 , Timer {
             }
         }
     }
-    function supportsInterface(bytes4 interfaceId) public view virtual override(AccessControl,ERC1155) returns (bool) {
-        return 
-        interfaceId == type(IERC1155).interfaceId || 
-        interfaceId == type(IAccessControl).interfaceId || 
-        super.supportsInterface(interfaceId);
+
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view virtual override(AccessControl, ERC1155) returns (bool) {
+        return
+            interfaceId == type(IERC1155).interfaceId ||
+            interfaceId == type(IAccessControl).interfaceId ||
+            super.supportsInterface(interfaceId);
     }
 
-//         function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, AccessControl, IERC165, ERC1155) returns (bool) {
-//     return super.supportsInterface(interfaceId);
-// }
-
+    //         function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, AccessControl, IERC165, ERC1155) returns (bool) {
+    //     return super.supportsInterface(interfaceId);
+    // }
 
     // PAUSING ----------------------------
 
-    function pauseTokens(uint256[] memory _ids) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function pauseTokens(
+        uint256[] memory _ids
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
         for (uint256 i = 0; i < _ids.length; i++) {
             require(tokens[_ids[i]].exists, "Doesn't exist.");
             tokens[_ids[i]].paused = true;
         }
     }
 
-    function unpauseTokens(uint256[] memory _ids) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function unpauseTokens(
+        uint256[] memory _ids
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
         for (uint256 i = 0; i < _ids.length; i++) {
             require(tokens[_ids[i]].exists, "Doesn't exist.");
 
@@ -175,7 +193,10 @@ contract CeptorDice is ERC1155 , Timer {
 
     // SETTERS ----------------------------
 
-    function setTokenURI(uint256 _id, string memory _uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function setTokenURI(
+        uint256 _id,
+        string memory _uri
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
         require(tokens[_id].exists, "Doesn't exist.");
         tokens[_id].uri = _uri;
     }
@@ -185,7 +206,9 @@ contract CeptorDice is ERC1155 , Timer {
     //   tokens[_id].price = _price;
     // }
 
-    function setCeptorAddress(address _address) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function setCeptorAddress(
+        address _address
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
         ceptorContractAddress = _address;
     }
 
@@ -196,7 +219,10 @@ contract CeptorDice is ERC1155 , Timer {
         return tokens[_id].uri;
     }
 
-    function balanceOf(address _owner, uint256 _id) public view override returns (uint256) {
+    function balanceOf(
+        address _owner,
+        uint256 _id
+    ) public view override returns (uint256) {
         require(tokens[_id].exists, "Doesn't exist.");
         return super.balanceOf(_owner, _id);
     }
@@ -224,7 +250,6 @@ contract CeptorDice is ERC1155 , Timer {
     //   }
     //   return allTokens;
     // }
-
 
     // WITHDRAW ----------------------------
 

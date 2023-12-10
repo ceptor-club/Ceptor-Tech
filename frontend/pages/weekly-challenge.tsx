@@ -72,6 +72,10 @@ export default function WeeklyChallenge({
   } = useContractWrite(configBurnDice);
 
   const burnDice = async () => {
+    if (address) {
+      alert("connect your wallet");
+      return;
+    }
     writeBurnDice();
   };
 
@@ -159,7 +163,12 @@ export default function WeeklyChallenge({
   // TODO: create my submission using AI - component needs to be added in new branch
   const sendSubmission = async () => {
     // TODO: call mint from promptCollection submit() -return tokenID
-    // TODO: sned data to Mongo db with the tokenID
+    // TODO: send data to Mongo db with the tokenID
+    if (address) {
+      alert("connect your wallet");
+      return;
+    }
+
     writeSendSubmission();
     submit(submissionMock);
   };
