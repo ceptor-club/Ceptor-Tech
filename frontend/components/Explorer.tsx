@@ -8,13 +8,13 @@ const Explorer = ({
   ALCHEMY_GOERLI_API_KEY,
   ALCHEMY_SEPOLIA_API_KEY,
   ALCHEMY_POLYGON_ZKEVM_API_KEY,
-  PUBLIC_URL,
+  PUBLIC_IMAGE_URL,
   nftList,
 }: {
   ALCHEMY_GOERLI_API_KEY: string;
   ALCHEMY_SEPOLIA_API_KEY: string;
   ALCHEMY_POLYGON_ZKEVM_API_KEY: string;
-  PUBLIC_URL: string;
+  PUBLIC_IMAGE_URL: string;
   nftList: SubmitData[];
 }) => {
   const [alchemy, setAlchemy] = useState(null);
@@ -170,7 +170,7 @@ const Explorer = ({
               nft={nft}
               winner={false}
               onCardClick={() => handleCardClick(nft)}
-              PUBLIC_URL={PUBLIC_URL}
+              PUBLIC_IMAGE_URL={PUBLIC_IMAGE_URL}
             />
           );
         })}
