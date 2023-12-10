@@ -3,13 +3,13 @@ import Meta from "./Meta";
 import { NavbarMdUp, NavbarSmUp } from "./NavBar/index";
 
 const Layout = ({ children }) => {
-  const isHomePage = window.location.pathname === "/";
+  const isBrowser = typeof window !== "undefined";
 
   return (
     <>
       <Meta />
-      {!isHomePage && <NavbarMdUp />}
-      {!isHomePage && <NavbarSmUp />}
+      {isBrowser && window.location.pathname === "/" && <NavbarMdUp />}
+      {isBrowser && window.location.pathname === "/" && <NavbarSmUp />}
       <main>{children}</main>
       <footer className="mb-10"></footer>
     </>
