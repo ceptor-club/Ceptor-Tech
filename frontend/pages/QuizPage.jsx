@@ -40,7 +40,7 @@ export default function QuizPage() {
 
                 <Logo setConditionalRender={setConditionalRender} />
 
-                <div className='z-10 flex w-full justify-center mdCover'>
+                <div className='z-10 flex w-full justify-center mdCover m-2'>
                     {/* <div className="w-1/6 h-screen bg-slate-300">
             <p className="">SIDEBAR</p>
           </div> */}
