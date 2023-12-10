@@ -3,11 +3,6 @@ export const promptCollectionABI = [
     inputs: [
       {
         internalType: "address",
-        name: "new_owner",
-        type: "address",
-      },
-      {
-        internalType: "address",
         name: "vrfCoordindatorV2",
         type: "address",
       },
@@ -544,6 +539,19 @@ export const promptCollectionABI = [
   },
   {
     inputs: [],
+    name: "rewardContract",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "s_currentPrompt",
     outputs: [
       {
@@ -633,6 +641,19 @@ export const promptCollectionABI = [
       },
     ],
     name: "setNewTenPrompts",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_rewardContract",
+        type: "address",
+      },
+    ],
+    name: "setRewardContract",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -2883,6 +2904,1208 @@ export const ceptorABI = [
       {
         internalType: "uint256",
         name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+];
+
+export const promptABI = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "vrfCoordindatorV2",
+        type: "address",
+      },
+      {
+        internalType: "bytes32",
+        name: "keyhash",
+        type: "bytes32",
+      },
+      {
+        internalType: "uint64",
+        name: "subscriptionId",
+        type: "uint64",
+      },
+      {
+        internalType: "uint32",
+        name: "callbackGasLimit",
+        type: "uint32",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "have",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "want",
+        type: "address",
+      },
+    ],
+    name: "OnlyCoordinatorCanFulfill",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+    ],
+    name: "OwnableInvalidOwner",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "OwnableUnauthorizedAccount",
+    type: "error",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "string",
+        name: "_currentPrompt",
+        type: "string",
+      },
+    ],
+    name: "CurrentPrompt",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "getCurrentPrompt",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint8",
+        name: "index",
+        type: "uint8",
+      },
+    ],
+    name: "getPrompt",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getTotalPromptCount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "lastTimeStamp",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "lastUpdated",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "requestId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256[]",
+        name: "randomWords",
+        type: "uint256[]",
+      },
+    ],
+    name: "rawFulfillRandomWords",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "requestPromptUpdate",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "requestId",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "rewardContract",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "s_currentPrompt",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string[10]",
+        name: "newPrompts",
+        type: "string[10]",
+      },
+    ],
+    name: "setNewTenPrompts",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_rewardContract",
+        type: "address",
+      },
+    ],
+    name: "setRewardContract",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "weekNumber",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "weekTimeStamp",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+];
+
+export const CeptorCCIDABI = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_priceFeed",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_router",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "dice_",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint64",
+        name: "destinationChainSelector",
+        type: "uint64",
+      },
+    ],
+    name: "DestinationChainNotAllowlisted",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "router",
+        type: "address",
+      },
+    ],
+    name: "InvalidRouter",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+    ],
+    name: "OwnableInvalidOwner",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "OwnableUnauthorizedAccount",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+    ],
+    name: "SenderNotAllowed",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "statId",
+        type: "uint256",
+      },
+    ],
+    name: "StatIdOutOfRange",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "UserIsNotRegistered",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "username",
+        type: "string",
+      },
+    ],
+    name: "UsernameAlreadySet",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "UsernameNotSet",
+    type: "error",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "loot",
+        type: "string",
+      },
+    ],
+    name: "LootReceived",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "messageId",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "uint64",
+        name: "sourceChainSelector",
+        type: "uint64",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "text",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenAmount",
+        type: "uint256",
+      },
+    ],
+    name: "MessageReceived",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "statId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "StatsUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "username",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isFree",
+        type: "bool",
+      },
+    ],
+    name: "UsernameRegistered",
+    type: "event",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "approvedSenders",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "bytes32",
+            name: "messageId",
+            type: "bytes32",
+          },
+          {
+            internalType: "uint64",
+            name: "sourceChainSelector",
+            type: "uint64",
+          },
+          {
+            internalType: "bytes",
+            name: "sender",
+            type: "bytes",
+          },
+          {
+            internalType: "bytes",
+            name: "data",
+            type: "bytes",
+          },
+          {
+            components: [
+              {
+                internalType: "address",
+                name: "token",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "amount",
+                type: "uint256",
+              },
+            ],
+            internalType: "struct Client.EVMTokenAmount[]",
+            name: "destTokenAmounts",
+            type: "tuple[]",
+          },
+        ],
+        internalType: "struct Client.Any2EVMMessage",
+        name: "message",
+        type: "tuple",
+      },
+    ],
+    name: "ccipReceive",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "dice",
+    outputs: [
+      {
+        internalType: "contract ICeptorDice",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "gameMasterPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getLatestPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getRouter",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "playerPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_username",
+        type: "string",
+      },
+    ],
+    name: "registerGameMaster",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_username",
+        type: "string",
+      },
+    ],
+    name: "registerPlayer",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_sender",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "_approved",
+        type: "bool",
+      },
+    ],
+    name: "setApprovedSender",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4",
+      },
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "users",
+    outputs: [
+      {
+        internalType: "string",
+        name: "username",
+        type: "string",
+      },
+      {
+        internalType: "bool",
+        name: "isGamemaster",
+        type: "bool",
+      },
+      {
+        components: [
+          {
+            internalType: "uint8",
+            name: "strong",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "agile",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "tanky",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "clever",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "wise",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "cute",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "lucky",
+            type: "uint8",
+          },
+        ],
+        internalType: "struct CeptorCCID.Stats",
+        name: "stats",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            components: [
+              {
+                internalType: "uint8",
+                name: "strong",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "agile",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "tanky",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "clever",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "wise",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "cute",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "lucky",
+                type: "uint8",
+              },
+            ],
+            internalType: "struct CeptorCCID.Stats",
+            name: "head",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint8",
+                name: "strong",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "agile",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "tanky",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "clever",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "wise",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "cute",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "lucky",
+                type: "uint8",
+              },
+            ],
+            internalType: "struct CeptorCCID.Stats",
+            name: "body",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint8",
+                name: "strong",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "agile",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "tanky",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "clever",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "wise",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "cute",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "lucky",
+                type: "uint8",
+              },
+            ],
+            internalType: "struct CeptorCCID.Stats",
+            name: "legs",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint8",
+                name: "strong",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "agile",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "tanky",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "clever",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "wise",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "cute",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "lucky",
+                type: "uint8",
+              },
+            ],
+            internalType: "struct CeptorCCID.Stats",
+            name: "feet",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint8",
+                name: "strong",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "agile",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "tanky",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "clever",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "wise",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "cute",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "lucky",
+                type: "uint8",
+              },
+            ],
+            internalType: "struct CeptorCCID.Stats",
+            name: "weapon",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint8",
+                name: "strong",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "agile",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "tanky",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "clever",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "wise",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "cute",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "lucky",
+                type: "uint8",
+              },
+            ],
+            internalType: "struct CeptorCCID.Stats",
+            name: "shield",
+            type: "tuple",
+          },
+          {
+            components: [
+              {
+                internalType: "uint8",
+                name: "strong",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "agile",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "tanky",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "clever",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "wise",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "cute",
+                type: "uint8",
+              },
+              {
+                internalType: "uint8",
+                name: "lucky",
+                type: "uint8",
+              },
+            ],
+            internalType: "struct CeptorCCID.Stats",
+            name: "pet",
+            type: "tuple",
+          },
+        ],
+        internalType: "struct CeptorCCID.UserBody",
+        name: "body",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            internalType: "uint8",
+            name: "artXP",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "techXP",
+            type: "uint8",
+          },
+          {
+            internalType: "uint8",
+            name: "gamesXP",
+            type: "uint8",
+          },
+          {
+            internalType: "string",
+            name: "themeSong",
+            type: "string",
+          },
+        ],
+        internalType: "struct CeptorCCID.UserMind",
+        name: "mind",
+        type: "tuple",
+      },
+      {
+        internalType: "uint256",
+        name: "level",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "availableXP",
         type: "uint256",
       },
     ],
