@@ -39,6 +39,9 @@ export default function NavbarSmUp() {
                 <Link className="uppercase" href="/profile">
                   Profile{" "}
                 </Link>
+                <Link className="uppercase" href="/gameScheduler">
+                  Game Scheduler
+                </Link>
                 <Link className="uppercase" href="/potw">
                   Promt of the Week
                 </Link>
