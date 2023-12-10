@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { Logo } from "../components/Logo";
 import {
   useAccount,
   useContractWrite,
   useNetwork,
   usePrepareContractWrite,
 } from "wagmi";
+import { Logo } from "../components/Logo";
 import { ceptorDiceABI } from "../utils/abis";
 import { addresses } from "../utils/addresses";
 
