@@ -60,11 +60,15 @@ contract Helper {
     address constant clCcipLnMAvalancheFuji = 0x70F5c5C40b873EA597776DA2C21929A8282A3b35;
     address constant clCcipLnMPolygonMumbai = 0xc1c76a8c5bFDE1Be034bbcD930c668726E7C1987;
     // PRiceFeed addresses, need to update them 
-    address constant priceFeedEthereumSepolia = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
+    // ETH / USD
+     address constant priceFeedEthereumSepolia = 0x694AA1769357215DE4FAC081bf1f309aDC325306;
     address constant priceFeedOptimismGoerli = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
     address constant priceFeedArbitrumTestnet = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
+    // AVAX/USD
     address constant priceFeedAvalancheFuji = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
-    address constant priceFeedPolygonMumbai = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
+    // MATIC / USD
+
+    address constant priceFeedPolygonMumbai = 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada;
 
     constructor() {
         networks[SupportedNetworks.ETHEREUM_SEPOLIA] = "Ethereum Sepolia";

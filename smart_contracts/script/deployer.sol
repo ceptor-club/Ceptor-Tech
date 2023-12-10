@@ -62,11 +62,8 @@ contract Deployer is Script, Helper {
         uint256 senderPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(senderPrivateKey);
         Reward rewardContract = Reward(reward);
-        CeptorDice diceContract = CeptorDice(reward);
+        CeptorDice diceContract = CeptorDice(dice);
         PromptCollection promptContract = PromptCollection(prompt);
-
-
-        
         rewardContract.grantRole(rewardContract.WINNER_MANAGEMENT_ROLE(), prompt);
 
         /// minter role for dice contract
