@@ -7,7 +7,7 @@ import {
   useNetwork,
   usePrepareContractWrite,
 } from "wagmi";
-import { ceptorABI, ceptorDiceABI } from "../utils/abis";
+import { ceptorDiceABI } from "../utils/abis";
 import { addresses } from "../utils/addresses";
 
 export default function BurnDice() {
