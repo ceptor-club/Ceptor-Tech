@@ -18,13 +18,18 @@ contract Sender is OwnerIsCreator {
     error NotEnoughBalance(uint256 currentBalance, uint256 calculatedFees); // Used to make sure contract has enough balance.
 
     // Event emitted when a message is sent to another chain.
-    event MessageSent(
-        bytes32 indexed messageId, // The unique ID of the CCIP message.
-        uint64 indexed destinationChainSelector, // The chain selector of the destination chain.
-        address receiver, // The address of the receiver on the destination chain.
-        string lootMessage, // The text being sent.
-        address feeToken, // the token address used to pay CCIP fees.
-        uint256 fees // The fees paid for sending the CCIP message.
+    event MessageSent( // The unique ID of the CCIP message.
+        // The chain selector of the destination chain.
+        // The address of the receiver on the destination chain.
+        // The text being sent.
+        // the token address used to pay CCIP fees.
+        // The fees paid for sending the CCIP message.
+        bytes32 indexed messageId,
+        uint64 indexed destinationChainSelector,
+        address receiver,
+        string lootMessage,
+        address feeToken,
+        uint256 fees
     );
 
     IRouterClient private s_router;
@@ -59,19 +64,17 @@ contract Sender is OwnerIsCreator {
             extraArgs: Client._argsToBytes(
                 // Additional arguments, setting gas limit and non-strict sequencing mode
                 Client.EVMExtraArgsV1({gasLimit: 200_000, strict: false})
-            ),
+                ),
             // Set the feeToken  address, indicating LINK will be used for fees
             feeToken: address(s_linkToken)
         });
 
         // Get the fee required to send the message
-        uint256 fees = s_router.getFee(
-            destinationChainSelector,
-            evm2AnyMessage
-        );
+        uint256 fees = s_router.getFee(destinationChainSelector, evm2AnyMessage);
 
-        if (fees > s_linkToken.balanceOf(address(this)))
+        if (fees > s_linkToken.balanceOf(address(this))) {
             revert NotEnoughBalance(s_linkToken.balanceOf(address(this)), fees);
+        }
 
         // approve the Router to transfer LINK tokens on contract's behalf. It will spend the fees in LINK
         s_linkToken.approve(address(s_router), fees);
@@ -80,14 +83,7 @@ contract Sender is OwnerIsCreator {
         messageId = s_router.ccipSend(destinationChainSelector, evm2AnyMessage);
 
         // Emit an event with message details
-        emit MessageSent(
-            messageId,
-            destinationChainSelector,
-            receiver,
-            lootMessage,
-            address(s_linkToken),
-            fees
-        );
+        emit MessageSent(messageId, destinationChainSelector, receiver, lootMessage, address(s_linkToken), fees);
 
         // Return the message ID
         return messageId;

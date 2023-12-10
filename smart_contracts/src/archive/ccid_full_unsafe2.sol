@@ -52,11 +52,11 @@ contract CeptorClubID is Ownable, CCIPReceiver {
     }
 
     // State variables
-    mapping (address => UserStruct) public users;
+    mapping(address => UserStruct) public users;
     // i think we should let users leave the system and get their money back or 80%
 
     // XP multiplier based on Level. Level will be based on something.
-    
+
     // address public ceptorsContractAddress; // ceptors might have to be deployed on each chain.
     AggregatorV3Interface internal priceFeed;
     string public chainSelector;
@@ -66,7 +66,7 @@ contract CeptorClubID is Ownable, CCIPReceiver {
     // set prices in USD for player (.05$) and gamemaster (.2$) registration  [as a temporary price]
     uint256 public playerRegistrationCost = 50 * 10 ** 16; // for a 5 dollar we change 16 to 18
     uint256 public gamemasterRegistrationCost = 200 * 10 ** 16; // for a 20 dollar we change 16 to 18
-    
+
     // Events
     event UsernameRegistered(address indexed user, string username, bool isFree);
     event StatsUpdated(address indexed user, uint256 statId, uint256 value);
@@ -75,7 +75,10 @@ contract CeptorClubID is Ownable, CCIPReceiver {
     // Constructor for a non-proxy version, change to initializer if we want to do proxy
     // constructor(address _ceptorsAddress, address _priceFeed, address _router, string memory _chainSelector) CCIPReceiver(_router) Ownable(msg.sender) {
     //     ceptorsContractAddress = _ceptorsAddress;
-    constructor(address _priceFeed, address _router, string memory _chainSelector) CCIPReceiver(_router) Ownable(msg.sender) {
+    constructor(address _priceFeed, address _router, string memory _chainSelector)
+        CCIPReceiver(_router)
+        Ownable(msg.sender)
+    {
         priceFeed = AggregatorV3Interface(_priceFeed);
         chainSelector = _chainSelector;
     }
@@ -87,7 +90,7 @@ contract CeptorClubID is Ownable, CCIPReceiver {
 
     // Function to register or update a username
     function registerUsername(string memory _username) public payable {
-        require(usernameAvailable(_username), "Username is taken"); 
+        require(usernameAvailable(_username), "Username is taken");
         if (msg.sender != owner()) {
             require(msg.value >= getRegistrationCost(), "Insufficient funds for registration");
         }
@@ -108,7 +111,7 @@ contract CeptorClubID is Ownable, CCIPReceiver {
 
     // Function to get registration cost -- its crap
     function getRegistrationCost() public view returns (uint256) {
-        (, int price,,,) = priceFeed.latestRoundData();
+        (, int256 price,,,) = priceFeed.latestRoundData();
         return uint256(price) * 1e18;
     }
 
@@ -133,11 +136,11 @@ contract CeptorClubID is Ownable, CCIPReceiver {
     }
 
     // CCIP Receive function -- have a seperate contract for each recieve (Loot and Stats)
-    
+
     function _ccipReceive(Client.Any2EVMMessage memory any2EvmMessage) internal override {
         // Does this work? @Chainlink Dev Experts
         require(approvedSenders[abi.decode(any2EvmMessage.sender, (address))], "Sender not approved");
-        
+
         // Example: Update stats or perform other actions based on received data
         // Not sure about how we can have security based on making sure that the Loot and Stats are from the right contract
         // I guess we can have an allowlist of contracts that can send data to this contract
