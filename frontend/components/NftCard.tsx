@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { voteForSubmission } from "../pages/api/voteForSubmission";
 import { useAccount } from "wagmi";
+import { VoteData } from "../utils/types";
 
-const NftCard = ({ nft, onCardClick, winner }) => {
+const NftCard = ({ nft, onCardClick, winner, PUBLIC_IMAGE_URL }) => {
   const { address, isConnected } = useAccount();
-
-  const { rawMetadata } = nft;
+  const [vote, setVote] = useState<VoteData>();
 
   const handleClick = () => {
     onCardClick(nft);
   };
 
-  const like = (tokenID: number) => {
-    console.log(address);
-    tokenID = tokenID ? tokenID : 1;
-
-    voteForSubmission({ tokenID, wallet: address });
+  const like = async (tokenID: number) => {
+    setVote({ wallet: address, tokenID: tokenID ? tokenID : 1 });
+    voteForSubmission(vote);
+    // TODO: just send vote to data base  - already in the NFTCard component
   };
 
   const DefaultView = () => (
@@ -24,9 +23,10 @@ const NftCard = ({ nft, onCardClick, winner }) => {
       {/* <h3 className="text-lg font-bold mb-2">{rawMetadata.name}</h3> */}
       {/* <p>Token ID: {nft.tokenId}</p>
       <p>LV: {rawMetadata.attributes.find(attr => attr.trait_type === "Level").value}</p> */}
+      {/* src={nft.image.replace("ipfs://", "https://ipfs.io/ipfs/")} */}
       <Image
-        src={rawMetadata.image.replace("ipfs://", "https://ipfs.io/ipfs/")}
-        alt={rawMetadata.name}
+        src={nft.image}
+        alt={nft.addressOfCreator || ""}
         width={250}
         height={250}
         className="rounded-md "
@@ -34,21 +34,21 @@ const NftCard = ({ nft, onCardClick, winner }) => {
       />
       <div className="flex flex-row justify-start items-start p-3">
         {winner || (
-          <button onClick={() => like(rawMetadata.tokenID)}>
+          <button onClick={() => like(nft.tokenID)}>
             <span className="material-symbols-outlined pr-2 ">favorite</span>
           </button>
         )}
-        <p className="text-white">3</p>
+        <p className="text-white">{nft.likesAmount}</p>
       </div>
     </div>
   );
 
   return (
-    rawMetadata.image && (
+    nft.image && (
       <div
         className={`nft-card text-black rounded-md  transition-transform ease-in-out duration-30`}
       >
-        {rawMetadata.name ? (
+        {nft.addressOfCreator ? (
           <DefaultView />
         ) : (
           <div className="loading">

@@ -59,12 +59,16 @@ contract Helper {
     address constant clCcipLnMArbitrumTestnet = 0x0E14dBe2c8e1121902208be173A3fb91Bb125CDB;
     address constant clCcipLnMAvalancheFuji = 0x70F5c5C40b873EA597776DA2C21929A8282A3b35;
     address constant clCcipLnMPolygonMumbai = 0xc1c76a8c5bFDE1Be034bbcD930c668726E7C1987;
-    // PRiceFeed addresses, need to update them 
-    address constant priceFeedEthereumSepolia = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
+    // PRiceFeed addresses, need to update them
+    // ETH / USD
+    address constant priceFeedEthereumSepolia = 0x694AA1769357215DE4FAC081bf1f309aDC325306;
     address constant priceFeedOptimismGoerli = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
     address constant priceFeedArbitrumTestnet = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
+    // AVAX/USD
     address constant priceFeedAvalancheFuji = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
-    address constant priceFeedPolygonMumbai = 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD;
+    // MATIC / USD
+
+    address constant priceFeedPolygonMumbai = 0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada;
 
     constructor() {
         networks[SupportedNetworks.ETHEREUM_SEPOLIA] = "Ethereum Sepolia";
@@ -98,15 +102,41 @@ contract Helper {
         returns (address router, address linkToken, address wrappedNative, uint64 chainId, address priceFeed)
     {
         if (network == SupportedNetworks.ETHEREUM_SEPOLIA) {
-            return (routerEthereumSepolia, linkEthereumSepolia, wethEthereumSepolia, chainIdEthereumSepolia,priceFeedEthereumSepolia);
+            return (
+                routerEthereumSepolia,
+                linkEthereumSepolia,
+                wethEthereumSepolia,
+                chainIdEthereumSepolia,
+                priceFeedEthereumSepolia
+            );
         } else if (network == SupportedNetworks.OPTIMISM_GOERLI) {
-            return (routerOptimismGoerli, linkOptimismGoerli, wethOptimismGoerli, chainIdOptimismGoerli, priceFeedOptimismGoerli);
+            return (
+                routerOptimismGoerli,
+                linkOptimismGoerli,
+                wethOptimismGoerli,
+                chainIdOptimismGoerli,
+                priceFeedOptimismGoerli
+            );
         } else if (network == SupportedNetworks.ARBITRUM_GOERLI) {
-            return (routerArbitrumTestnet, linkArbitrumTestnet, wethArbitrumTestnet, chainIdArbitrumTestnet, priceFeedArbitrumTestnet);
+            return (
+                routerArbitrumTestnet,
+                linkArbitrumTestnet,
+                wethArbitrumTestnet,
+                chainIdArbitrumTestnet,
+                priceFeedArbitrumTestnet
+            );
         } else if (network == SupportedNetworks.AVALANCHE_FUJI) {
-            return (routerAvalancheFuji, linkAvalancheFuji, wavaxAvalancheFuji, chainIdAvalancheFuji, priceFeedAvalancheFuji);
+            return (
+                routerAvalancheFuji, linkAvalancheFuji, wavaxAvalancheFuji, chainIdAvalancheFuji, priceFeedAvalancheFuji
+            );
         } else if (network == SupportedNetworks.POLYGON_MUMBAI) {
-            return (routerPolygonMumbai, linkPolygonMumbai, wmaticPolygonMumbai, chainIdPolygonMumbai, priceFeedPolygonMumbai);
+            return (
+                routerPolygonMumbai,
+                linkPolygonMumbai,
+                wmaticPolygonMumbai,
+                chainIdPolygonMumbai,
+                priceFeedPolygonMumbai
+            );
         }
     }
 }
