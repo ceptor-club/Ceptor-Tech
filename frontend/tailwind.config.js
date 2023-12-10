@@ -10,13 +10,6 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-oswald)", ...fontFamily.sans],
-<<<<<<< HEAD
-      },
-      colors: {
-        'ceptor': '#FFFF00'
-      },
-    }
-=======
         milonga: ["Milonga", "cursive"],
         oswald: ["Oswald", "sans-serif"],
         "nothing-you-could-do": ['"Nothing You Could Do"', "cursive"],
@@ -29,7 +22,6 @@ module.exports = {
         "light-pink": "#F55082",
       },
     },
->>>>>>> tech-dev
   },
   plugins: [],
 };

@@ -3,11 +3,14 @@ import { useRouter } from 'next/router';
 
 const BurnDiePage = () => {
   const router = useRouter();
-  const { username } = router.query;
+  const { username, pfp } = router.query;
 
-  // Function to navigate to the characterPage
+  const navigateToBurnDiePage = () => {
+    router.push('/burn-dice');
+  };
+
   const navigateToCharacterPage = () => {
-    router.push('/characterPage'); // Replace '/characterPage' with the actual route path
+    router.push('/characterPage');
   };
 
   return (
@@ -18,23 +21,30 @@ const BurnDiePage = () => {
       <div className="text-center">
         <p className="text-2xl font-oswald text-white">You have a CCID</p>
       </div>
+      {pfp && (
+        <div className="mt-4 text-center">
+          <img
+            src={pfp}
+            alt="Uploaded PFP"
+            className="rounded-full w-32 h-32 mx-auto"
+          />
+        </div>
+      )}
       <div className="flex justify-center mt-5">
         <button
           className="bg-orange-500 pl-3 pr-3 pt-1 text-2xl rounded-lg text-black font-nothing-you-could-do"
-          onClick={navigateToCharacterPage}
+          onClick={navigateToBurnDiePage}
         >
           Burn a Die to Create a Ceptor
         </button>
       </div>
-      <p className="text-white font-oswald text-1xl mt-4">
+      <p className="text-white font-oswald text-1xl mt-10">
         New to D&D - Learn about characters
       </p>
       <div className="flex justify-center">
         <button
-          className="bg-white pl-3 pr-3 pt-1 text-2xl rounded-lg text-black font-nothing-you-could-do"
-          onClick={() => {
-            /* logic to explore characters */
-          }}
+          className="bg-white pl-3 pr-3 pt-1 text-2l mt-2 rounded-lg text-black font-nothing-you-could-do"
+          onClick={navigateToCharacterPage}
         >
           Explore characters
         </button>

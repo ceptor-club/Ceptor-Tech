@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { CharacterContext } from "../CharacterModule/CharacterContext";
-=======
 import { CharacterContext } from "../CharacterContext";
->>>>>>> tech-dev
 import { useContext } from "react";
 import Link from "next/link";
 

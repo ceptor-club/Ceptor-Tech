@@ -8,11 +8,7 @@ import {
     calculateHitPoint,
     calculateSkill
 } from '../QuizFunctions'
-<<<<<<< HEAD
-import { CharacterContext } from '../CharacterModule/CharacterContext'
-=======
 import { CharacterContext } from '../CharacterContext'
->>>>>>> tech-dev
 import { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
