@@ -41,12 +41,17 @@ contract Deployer is Script, Helper {
         vm.stopBroadcast();
          
     }
-       function postDeploy(address reward, address prompt) external  returns (bytes32) {
+       function postDeploy(address reward, address prompt, address dice, address ccid) external  returns (bytes32) {
         uint256 senderPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(senderPrivateKey);
         Reward rewardContract = Reward(reward);
+        CeptorDice diceContract = CeptorDice(reward);
         PromptCollection promptContract = PromptCollection(prompt);
         rewardContract.grantRole(rewardContract.WINNER_MANAGEMENT_ROLE(), prompt);
+
+        /// minter role for dice contract
+        diceContract.grantRole(diceContract.MINTER(), ccid);
+        diceContract.grantRole(diceContract.MINTER(), reward);
         promptContract.setRewardContract(reward);
         vm.stopBroadcast();
         
