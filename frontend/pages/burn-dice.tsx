@@ -27,7 +27,7 @@ export default function BurnDice() {
 
   // Config for minting dice
   const { config: configMint } = usePrepareContractWrite({
-    address: addresses[chain?.network].ceptorDice as any,
+    address: addresses[chain?.network]?.ceptorDice as any,
     abi: ceptorDiceABI,
     functionName: "burn",
     args: [address, "1", "1"],

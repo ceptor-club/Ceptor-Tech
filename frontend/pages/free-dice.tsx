@@ -23,7 +23,7 @@ export default function FreeDice() {
 
   // Config for minting dice
   const { config: configMint } = usePrepareContractWrite({
-    address: addresses[chain?.network].ceptorDice,
+    address: addresses[chain?.network]?.ceptorDice,
     abi: ceptorDiceABI,
     functionName: "mintBatch",
     args: [ids, amounts],

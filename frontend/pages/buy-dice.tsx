@@ -34,7 +34,7 @@ export default function BuyDice() {
 
   // Config for minting dice
   const { config: configMint } = usePrepareContractWrite({
-    address: addresses[chain?.network].ceptorDice as any,
+    address: addresses[chain?.network]?.ceptorDice as any,
     abi: ceptorDiceABI,
     functionName: "mintBatch",
     args: [ids, amounts],
