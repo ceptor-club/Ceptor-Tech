@@ -11,28 +11,34 @@ const BurnDiePage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-200 p-4">
-      <div className="text-center p-4 bg-black text-white w-full max-w-xs">
-        <p className="mb-2">congrats, {username}! you have a CCID</p>
+    <div className="bg-black text-white text-center py-20 px-10 relative h-screen">
+      <div className="text-light-yellow mt-40">
+        <p className="text-2xl font-milonga mb-2">Congrats, {username}!</p>
       </div>
-      <button
-        style={{ backgroundColor: '#2F0213' }}
-        className="mt-4 text-white font-bold py-2 px-4 rounded w-full max-w-xs hover:bg-opacity-90"
-        onClick={navigateToCharacterPage}
-      >
-        Burn a Die to Create a Ceptor
-      </button>
-      <p className="mt-4" style={{ color: '#2F0213' }}>
+      <div className="text-center">
+        <p className="text-2xl font-oswald text-white">You have a CCID</p>
+      </div>
+      <div className="flex justify-center mt-5">
+        <button
+          className="bg-orange-500 pl-3 pr-3 pt-1 text-2xl rounded-lg text-black font-nothing-you-could-do"
+          onClick={navigateToCharacterPage}
+        >
+          Burn a Die to Create a Ceptor
+        </button>
+      </div>
+      <p className="text-white font-oswald text-1xl mt-4">
         New to D&D - Learn about characters
       </p>
-      <button
-        className="mt-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full max-w-xs"
-        onClick={() => {
-          /* logic to explore characters */
-        }}
-      >
-        Explore characters
-      </button>
+      <div className="flex justify-center">
+        <button
+          className="bg-white pl-3 pr-3 pt-1 text-2xl rounded-lg text-black font-nothing-you-could-do"
+          onClick={() => {
+            /* logic to explore characters */
+          }}
+        >
+          Explore characters
+        </button>
+      </div>
     </div>
   );
 };

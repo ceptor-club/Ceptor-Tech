@@ -1,154 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import WalletConnectButton from '../components/WalletConnectButton';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-
-const StyledDiv = styled.div`
-  background-color: #d9d9d9;
-  color: black;
-  text-align: center;
-  padding: 40px 20px;
-  position: relative;
-  height: 100vh;
-
-  @media (max-width: 768px) {
-    padding: 20px 10px;
-  }
-`;
-
-const StyledBanner = styled.div`
-  background-color: black;
-  color: white;
-  padding: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-`;
-
-const StyledTextContainer = styled.div`
-  color: #2F0213;
-  margin-top: 80px;
-`;
-
-const StyledWelcomeText = styled.p`
-  font-size: 16px;
-  margin-bottom: 10px;
-`;
-
-const StyledMainText = styled.p`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-const StyledButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-`;
-
-const StyledButton = styled.button`
-  background-color: #2F0213;
-  color: white;
-  padding: 15px;
-  margin: 5px;
-  border-radius: 8px;
-  font-size: 18px;
-  width: 25%;
-  box-sizing: border-box;
-  cursor: pointer;
-`;
-
-const StyledCreateNowButton = styled(StyledButton)`
-  width: 75%;
-`;
-
-const ModalOverlay = styled.div`
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 16px;
-  cursor: pointer;
-`;
-
-const NetworkDropdown = styled.select`
-  margin-bottom: 10px;
-  padding: 8px;
-`;
-
-const StyledWalletConnectButton = styled(WalletConnectButton)`
-  margin-top: 10px;
-`;
 
 const CCID = () => {
   const [isCreateIDModalOpen, setIsCreateIDModalOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const router = useRouter();
 
-  const [walletIsConnected, setWalletIsConnected] = useState(false);
-
-  // Function to check if the wallet is connected
-  const checkWalletConnection = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        const web3 = new Web3(window.ethereum);
-
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-        // Check if an account is now connected
-        const accounts = await web3.eth.getAccounts();
-        if (accounts.length > 0) {
-          setWalletIsConnected(true);
-        } else {
-          setWalletIsConnected(false);
-        }
-      } catch (error) {
-        console.error('Wallet connection error:', error);
-        setWalletIsConnected(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    checkWalletConnection();
-  }, []);
-
   const handleCreateIDClick = () => {
-    setIsCreateIDModalOpen(true);
-    setIsLoginPopupOpen(false);
+    // Direct users to uploadpage.jsx when they click "Create ID"
+    router.push('/uploadpage');
   };
 
   const handleCreateIDModalClose = () => {
-    if (walletIsConnected) {
-      setIsCreateIDModalOpen(false);
-      // Automatically direct users to uploadpage.jsx once they connect their wallet
-      router.push('/uploadpage');
-    }
+    setIsCreateIDModalOpen(false);
   };
 
   const handleLoginClick = () => {
@@ -160,43 +24,48 @@ const CCID = () => {
   };
 
   return (
-    <StyledDiv>
-      <StyledBanner>
-        <h1 onClick={handleCreateIDClick}>hackathon!</h1>
+    <div className="bg-black text-white text-center py-20 px-10 relative h-screen">
+      <div className="bg-black font-oswald text-white py-4 absolute top-0 left-0 right-0 text-center">
+        <h1 onClick={handleCreateIDClick} className="cursor-pointer text-2xl uppercase mb-2">hackathon!</h1>
         <h2>0.11.30</h2>
-      </StyledBanner>
-      <StyledTextContainer>
-        <StyledWelcomeText>Welcome to Ceptor Club</StyledWelcomeText>
-        <StyledMainText>Create D&D character and storyline onchain!</StyledMainText>
-      </StyledTextContainer>
-      <StyledButtonContainer>
-        <StyledButton onClick={handleCreateIDClick}>Create ID</StyledButton>
+      </div>
+      <div className="text-light-yellow mt-40">
+        <p className="text-2xl font-milonga mb-2">Welcome to the Ceptor Club</p>
+        <p className="text-3xl font-oswald text-white">Create D&D character and storyline onchain!</p>
+      </div>
+      <div className="flex flex-col items-center mt-20">
+        <button onClick={handleCreateIDClick} className="bags-button font-nothing-you-could-do text-xl uppercase text-black py-4 px-6 mb-5 rounded-lg w-1/4 cursor-pointer">
+          Create ID
+        </button>
         {isCreateIDModalOpen && (
-          <ModalOverlay>
-            <ModalContent>
-              <CloseButton onClick={handleCreateIDModalClose}>x</CloseButton>
-              <NetworkDropdown defaultValue="">
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded-lg text-center">
+              <button onClick={handleCreateIDModalClose} className="absolute top-2 right-2 text-lg cursor-pointer">x</button>
+              <select className="mb-2 p-2">
                 <option value="" disabled>Choose the network</option>
                 <option value="ethereum">Ethereum Sepolia</option>
                 <option value="polygon">Polygon Mumbai</option>
                 <option value="avalanche">Avalanche Fuji</option>
-              </NetworkDropdown>
-              <StyledWalletConnectButton />
-            </ModalContent>
-          </ModalOverlay>
+              </select>
+            </div>
+          </div>
         )}
-        <StyledButton onClick={handleLoginClick}>Log-in</StyledButton>
+        <button onClick={handleLoginClick} className="bags-button font-nothing-you-could-do text-xl uppercase text-black py-4 px-6 mb-5 rounded-lg w-1/4 cursor-pointer">
+          Log-in
+        </button>
         {isLoginPopupOpen && (
-          <ModalOverlay>
-            <ModalContent>
-              <CloseButton onClick={handleLoginPopupClose}>x</CloseButton>
-              <p>Please create the CCID first</p>
-              <StyledCreateNowButton onClick={handleCreateIDClick}>Create Now</StyledCreateNowButton>
-            </ModalContent>
-          </ModalOverlay>
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded-lg text-center relative">
+              <button onClick={handleLoginPopupClose} className="absolute top-2 right-2 text-black text-lg cursor-pointer">x</button>
+              <p className="font-oswald text-black">Please create the CCID first</p>
+              <button onClick={handleCreateIDClick} className="bags-button font-nothing-you-could-do text-xl uppercase text-black py-4 px-6 rounded-lg w-3/4 cursor-pointer">
+                <a href="#" onClick={handleCreateIDClick} className="text-black">Create Now</a>
+              </button>
+            </div>
+          </div>
         )}
-      </StyledButtonContainer>
-    </StyledDiv>
+      </div>
+    </div>
   );
 };
 
