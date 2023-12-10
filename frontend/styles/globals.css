@@ -158,6 +158,8 @@ option {
 
   border-top: 20px solid #fff;
 }
+<<<<<<< HEAD
+=======
 
 .scrollableDiv {
   overflow: auto;
@@ -295,4 +297,9 @@ option {
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   color: red;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> tech-dev
+>>>>>>> tech-dev
