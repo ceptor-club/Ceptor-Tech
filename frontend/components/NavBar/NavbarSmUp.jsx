@@ -42,8 +42,8 @@ export default function NavbarSmUp() {
                 <Link className="uppercase" href="/gameScheduler">
                   Game Scheduler
                 </Link>
-                <Link className="uppercase" href="/potw">
-                  Prompt of the Week
+                <Link className="uppercase" href="/weekly-challenge">
+                  Weekly Challenge
                 </Link>
                 <Link className="uppercase" href="/buy-dice">
                   Buy Dice{" "}

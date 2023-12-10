@@ -17,8 +17,10 @@ module.exports = {
       colors: {
         ceptor: "#FFFF00",
         "light-yellow": "#FED481",
+        "light-orange": "#FF9D0A",
+        "light-grey": "#2a2727",
+        "light-pink": "#F55082",
       },
-      "light-orange": "#FF9D0A",
     },
   },
   plugins: [],

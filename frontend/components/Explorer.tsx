@@ -153,7 +153,7 @@ const Explorer = ({
   };
 
   return (
-    <div className="flex flex-wrap justify-center px-12">
+    <div className="bg-black space-y-2 flex flex-wrap justify-center p-12 ">
       <NftModal
         modalOpen={modalOpen}
         setModalOpen={closeModal}
@@ -165,6 +165,7 @@ const Explorer = ({
             <NftCard
               key={nft.tokenId}
               nft={nft}
+              winner={false}
               onCardClick={() => handleCardClick(nft)}
             />
           );

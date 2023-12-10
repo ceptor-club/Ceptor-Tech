@@ -4,6 +4,7 @@ require("dotenv").config();
 import ethers from "ethers";
 const app: Application = express();
 const server = require("http").createServer(app);
+const {ObjectId} = require('mongodb')
 const io = require("socket.io")(server, {
   cors: {
     origin: process.env.FRONTEND_URL,
@@ -12,11 +13,25 @@ const io = require("socket.io")(server, {
 });
 import { runMiddleware } from "./auth";
 import { getImages } from "./utils/getImages";
-import { getUser, saveUser, getMostLikedSubmission, getSubmissions, voteForSubmission, saveSubmission, Submission } from "./utils/mongo";
+
+import { 
+  getUserByWallet, 
+  saveUser, 
+  getAllUsers, 
+  saveCharacterData, 
+  getAllCharacters, 
+  getUserById, 
+  getCharacterById, 
+  getMostLikedSubmission, 
+  getSubmissions, 
+  voteForSubmission, 
+  saveSubmission, 
+  Submission 
+} from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
-app.use(runMiddleware);
+// app.use(runMiddleware);
 
 //use middleware with socket.io to parse incoming requests with JSON payloads
 io.use((socket: any, next: any) => {
@@ -35,34 +50,110 @@ app.get("/", (req, res) => {
   res.send("test should have been successful");
 });
 
-app.get("/user", async (req, res) => {
-  const user = await getUser(req.query.wallet as string);
+//see user by wallet
+app.get("/user/:wallet", async (req, res) => {
+  const user = await getUserByWallet(req.params.wallet);
   user ? res.send(user) : res.send("user not found");
 });
 
+
+//see all users
+app.get("/users", async (req, res) => {
+  console.log('getting all users')
+  const users = await getAllUsers()
+  users ? res.send(users) : res.send("no users in database")
+})
+
+//see user by _id
+app.get('/userData/:_id', async (req, res) => {
+  console.log('getting a user by id')
+  try {
+    const userId = req.params._id;
+
+    // Convert the string _id to ObjectId
+    const userObjectId = new ObjectId(userId);
+
+    const user = await getUserById(userObjectId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 app.get("/COWSubmissions", async (req, res) => {
+  console.log('getting all submissions')
   const submissions = await getSubmissions();
   res.send(submissions);
 });
 
 app.get("/mostLikedSubmission", async (req, res) => {
+  console.log('getting most liked submission')
   const mostLikedSubmission = await getMostLikedSubmission();
   res.send(mostLikedSubmission);
 });
 
 app.post("/voteForSubmission", async (req, res) => {
+  console.log('voting for submission')
   const vote = await voteForSubmission(req.body.tokenID as number, req.body.wallet as string);
   res.send(vote);
 });
 
 app.post("/submit", async (req, res) => {
+  console.log('submitting submission')
   const submission = await saveSubmission(req.body);
   res.send(submission);
 });
 
+//save user
 app.post("/user", async (req, res) => {
+  console.log('adding a user')
   const user = await saveUser(req.body);
   res.send(user);
+});
+
+//save character
+//NEEDS WORK TO SAVE TO SPECIFIC USER
+app.post("/characterData", async (req, res) => {
+  // const userId = req.user._id;
+  const characterData = req.body;
+  const savedCharacterData = await saveCharacterData(characterData, '')
+  res.send(savedCharacterData)
+})
+
+//see all characters
+app.get("/characterData", async (req, res) => {
+  console.log('getting characters')
+  const characters = await getAllCharacters()
+  characters ? res.send(characters) : res.send("no characters in database")
+})
+
+//get character by id
+app.get('/characterData/:_id', async (req, res) => {
+  console.log('getting character by id')
+  try {
+    const characterId = req.params._id;
+
+    // Convert the string _id to ObjectId
+    const characterObjectId = new ObjectId(characterId);
+
+    const character = await getCharacterById(characterObjectId);
+
+    if (!character) {
+      return res.status(404).json({ error: 'Character not found' });
+    }
+
+    res.json(character);
+  } catch (error) {
+    console.error('Error fetching character data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 io.on("connection", (socket: any) => {
@@ -80,7 +171,7 @@ io.on("connection", (socket: any) => {
     console.log("image request received", data);
     getImages(data).then((responseData: any) => {
       // console.log("response from getImages", response);
-      console.log("best practice", responseData.images.length)
+      // console.log("best practice", responseData.images.length)
       socket.emit("imageResponse", responseData); //using socket instead of IO to send to only the client that requested the images
     });
   });

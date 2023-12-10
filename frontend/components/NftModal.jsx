@@ -13,10 +13,10 @@ const NftModal = ({ modalOpen, setModalOpen, nft }) => {
     <>
       {modalOpen && nft && (
         <div
-          className="modal fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-80 flex items-center justify-center text-black"
+          className="modal fixed top-0 left-0 w-full h-full z-50  bg-opacity-80 flex items-center justify-center text-white"
           onClick={closeModal}
         >
-          <div className="scrollableDiv p-6 pt-2 bg-blue-900 text-center rounded-lg flex flex-col items-center max-w-md mx-auto">
+          <div className="scrollableDiv p-6 pt-2 bg-black border text-center rounded-lg flex flex-col items-center max-w-md mx-auto">
             {" "}
             {/* Changed max-w-lg to max-w-md */}
             <p className="w-full text-right text-4xl">

@@ -5,7 +5,7 @@ export default function Background({ background, setBackground }) {
     return (
         <div >
             <h3 className="text-3xl">Which background sounds most interesting to you?</h3>
-            <div className='flex flex-col mt-12 text-xl space-y-8 > * + *' >
+            <div className="grid grid-cols-2 gap-4 mt-12 text-xl">
 
                 {characterBackgrounds.map((characterBackground, backgroundIndex) => {
                     return (

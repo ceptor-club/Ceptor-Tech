@@ -9,7 +9,7 @@ import {
     calculateSkill
 } from '../QuizFunctions'
 import { CharacterContext } from '../CharacterContext'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -17,11 +17,44 @@ import Link from 'next/link'
 export default function CharacterPage() {
 
     const { characterData, setCharacterData } = useContext(CharacterContext)
+    const [saveStatus, setSaveStatus] = useState({ success: null, error: null })
+    const [isMessageVisible, setIsMessageVisible] = useState(false)
+
+    const [user, setUser] = useState(null);
+
+    //   useEffect(() => {
+    //     const fetchUserData = async () => {
+    //       try {
+    //         const response = await fetch(`http://localhost:4000/userData/${User._id}`);
+    //         const userData = await response.json();
+
+    //         if (response.ok) {
+    //           setUser(userData.user);
+    //         } else {
+    //           console.error('Error fetching user data:', userData.error);
+    //         }
+    //       } catch (error) {
+    //         console.error('Error fetching user data:', error);
+    //       }
+    //     };
+
+    //     fetchUserData();
+    //   }, [User._id]);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setIsMessageVisible(false)
+            setSaveStatus({ success: null, error: null })
+        }, 2000)
+        return () => clearTimeout(timeoutId)
+    }, [isMessageVisible])
+
     console.log(characterData)
     let character = characterData
 
     // character.myAlignment = setAlignment(character.alignmentLawfulChaotic, character.alignmentGoodEvil)
     character.myClass = setClass(character.interest, character.weapon)
+    console.log(character)
     let speciesAdj = character.species.toLowerCase()
     let genderPos = character.gender
     let genderObj = character.gender
@@ -92,9 +125,6 @@ export default function CharacterPage() {
     let ltModifier = setLTModifier(lowestScore)
     let htModifier = setHTModifier(highestScore)
 
-
-
-
     // Find High Trait
     function setHTModifier(highestTrait) {
         let value
@@ -159,11 +189,11 @@ export default function CharacterPage() {
         character.partyPos = " support " + genderPos + " team from the back.";
     }
 
-    let characterDescription = ''
+    let characterDescription = '';
     if (character.gender === 'They') {
-        characterDescription = `${character.charName} is a level ${character.level} ${speciesAdj} ${character.myClass.toLowerCase()}. ${character.gender} have a background as a ${character.background.toLowerCase()} and maintain a ${character.myAlignment.toLowerCase()} alignment. ${character.charName} is known for ${genderPos} ${htModifier} ${highestTrait} but is not well-regarded for ${genderPos} ${lowestTrait}, which is ${ltModifier}. ${character.gender} prefer to use the ${character.weapon.toLowerCase()} in battle and like to ${character.partyPos}`
+        characterDescription = `${character.charName} is a level ${character.level} ${speciesAdj} ${character.myClass.toLowerCase()}.\n${character.gender} have a background as a ${character.background.toLowerCase()} and maintain a ${character.myAlignment.toLowerCase()} alignment.\n${character.charName} is known for ${genderPos} ${htModifier} ${highestTrait} but is not well-regarded for ${genderPos} ${lowestTrait}, which is ${ltModifier}.\n${character.gender} prefer to use the ${character.weapon.toLowerCase()} in battle and like to ${character.partyPos}`;
     } else {
-        characterDescription = `${character.charName} is a level ${character.level} ${speciesAdj} ${character.myClass.toLowerCase()}. ${character.gender} has a background as a ${character.background.toLowerCase()} and maintains a ${character.myAlignment.toLowerCase()} alignment. ${character.charName} is known for ${genderPos} ${htModifier} ${highestTrait} but is not well-regarded for ${genderPos} ${lowestTrait}, which is ${ltModifier}. ${character.gender} prefers to use the ${character.weapon.toLowerCase()} in battle and likes to ${character.partyPos}`
+        characterDescription = `${character.charName} is a level ${character.level} ${speciesAdj} ${character.myClass.toLowerCase()}.\n${character.gender} has a background as a ${character.background.toLowerCase()} and maintains a ${character.myAlignment.toLowerCase()} alignment.\n${character.charName} is known for ${genderPos} ${htModifier} ${highestTrait} but is not well-regarded for ${genderPos} ${lowestTrait}, which is ${ltModifier}.\n${character.gender} prefers to use the ${character.weapon.toLowerCase()} in battle and likes to ${character.partyPos}`;
     }
 
 
@@ -174,16 +204,56 @@ export default function CharacterPage() {
 
     }
 
-    function saveCharacter() {
-        setCharacterData(character)
+    async function saveCharacter() {
+        try {
+
+            // const userId = User._id
+            const response = await fetch('http://localhost:4000/characterData', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: character.charName })
+            })
+
+            if (response.ok) {
+                setSaveStatus({ success: 'Character saved successfully', error: null })
+                setCharacterData(character)
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
+            } else {
+                setSaveStatus({ success: null, error: 'Error saving character' })
+            }
+        } catch (error) {
+            console.error('Error saving character data: ', error)
+            setSaveStatus({ success: null, error: 'Error saving character' })
+        }
+        setIsMessageVisible(true)
+    }
+
+    function exportCharacter() {
+        let characterObject = {
+            strength: character.strength,
+            dexterity: character.dexterity,
+            constitution: character.constitution,
+            intelligence: character.intelligence,
+            wisdom: character.wisdom,
+            charisma: character.charisma,
+            alignment: character.myAlignment,
+            characterClass: character.myClass,
+            species: character.species
+        }
+        localStorage.setItem('character', JSON.stringify(characterObject))
+        console.log(characterObject, "this is the character object")
     }
 
     return (
         <>
-            <div className='text-lg'>
+            <div className='text-lg text-center' style={{ whiteSpace: 'pre-line' }}>
                 {characterDescription}
             </div>
-            <div className='flex flex-row mx-4'>
+            <div className='flex flex-row mx-auto items-center justify-center'>
                 <div className='flex flex-col m-2 text-base'>
                     <div className='' id="alignment-div">
                         <div id='Character-Alignment'>My Alignment: {character.myAlignment}</div>
@@ -228,21 +298,38 @@ export default function CharacterPage() {
                         <div id="Character-Charisma">Charisma / Ability Modifier: {character.charisma} / {character.charismaMod}</div>
                     </div>
                 </div>
-                <Image src='/images/CREATE/placeholder.png' alt='' width={1000} height={1000} className='ml-32 w-1/3 h-1/3' />
+                <div className='ml-4'>
+                    <Image src='/images/CREATE/placeholder.png' alt='' width={300} height={300} className='' />
+                </div>
             </div>
 
-            <br /><br />
-            <div className="fixed bottom-0 right-64">
-                <Link href='/'>
-                    <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>Save Character?</button>
-                </Link>
+            <div className="flex justify-center flex-col items-center">
+                <div className="message-container" style={{ height: isMessageVisible ? '30px' : '30px', overflow: 'hidden' }}>
+                    {isMessageVisible && (
+                        <div className={`text-${saveStatus.success ? 'green' : 'red'}-500 mt-0 mb-0`}>
+                            {saveStatus.success || saveStatus.error}
+                        </div>
+                    )}
+                </div>
+                <div className='flex flex-row mt-0'>
+                    {/* <Link href='/'> */}
+                        <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
+                            Save Character?
+                        </button>
+                    {/* </Link> */}
+                    <Link href='http://localhost:3000/issuecredentials'>
+                        <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={exportCharacter}>
+                            Export to Bit Bender
+                        </button>
+                    </Link>
+                </div>
             </div>
-
-            {/* <button className='button' id='print-button' onClick={printCharacter()} >Print Character Sheet</button>
-
-            <div id='web3-button'>
-                <button className='button' id='next-button' onClick={connectWallet()} >Connect Wallet</button>
-            </div> */}
         </>
     )
+
+    {/* <button className='button' id='print-button' onClick={printCharacter()} >Print Character Sheet</button>
+    
+    <div id='web3-button'>
+    <button className='button' id='next-button' onClick={connectWallet()} >Connect Wallet</button>
+</div> */}
 }

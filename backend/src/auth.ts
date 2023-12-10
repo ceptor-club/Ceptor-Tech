@@ -2,7 +2,8 @@ import express, { Application, Request, Response } from "express"
 
 //middleware to parse incoming requests with JSON payloads
 export async function runMiddleware(req: Request, res: Response, next: any) {
-  const token = req.headers.apikey
+  // const token = req.headers.apikey
+  const token = "testkey"
   // console.log("still getting here")
   if (token !== process.env.API_KEY) {
     console.log("invalid api key")

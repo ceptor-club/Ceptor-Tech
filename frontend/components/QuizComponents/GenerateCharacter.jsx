@@ -52,18 +52,20 @@ export default function GenerateCharacter(
     }
 
     return (
-        <div >
-            <button
-                type='submit'
-                className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4"
-                onClick={() => newChar()}
-            >
-                Generate Character?
-            </button>
-            <div className="text-black hover:text-white w-4">
-                <Link href='/UnrulyPage'>
-                    {"What's this?"}
-                </Link>
+        <div className="flex justify-center items-center ">
+            <div className="mx-auto">
+                <button
+                    type='submit'
+                    className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-lg font-bold m-4"
+                    onClick={() => newChar()}
+                >
+                    <span role="img" aria-label="character">👤</span> Generate New Character
+                </button>
+                <div className="text-transparent hover:text-white w-4">
+                    <Link href='/UnrulyPage'>
+                        {"What's this?"}
+                    </Link>
+                </div>
             </div>
         </div>
     )
