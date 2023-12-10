@@ -7,7 +7,9 @@ import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
+import "./interfaces/IReward.sol";
 contract Prompt is VRFConsumerBaseV2, Ownable {
     VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
     bytes32 private immutable i_keyhash; //gas Lane
@@ -36,19 +38,24 @@ contract Prompt is VRFConsumerBaseV2, Ownable {
     uint256 public lastTimeStamp;
     uint256 public weekTimeStamp;
     uint256 public weekNumber;
+    address public rewardContract;
     event CurrentPrompt(string _currentPrompt);
 
+
     constructor(
-        address new_owner,
-        address vrfCoordindatorV2,
+         address vrfCoordindatorV2,
         bytes32 keyhash, /* gasLane */
         uint64 subscriptionId,
         uint32 callbackGasLimit
-    ) VRFConsumerBaseV2(vrfCoordindatorV2) Ownable(new_owner) {
+    ) VRFConsumerBaseV2(vrfCoordindatorV2) Ownable(msg.sender) {
         i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordindatorV2);
         i_keyhash = keyhash;
         i_subscriptionId = subscriptionId;
         i_callbackGasLimit = callbackGasLimit;
+     }
+
+    function setRewardContract(address _rewardContract) external onlyOwner {
+        rewardContract = _rewardContract;
     }
 
     function requestPromptUpdate() public returns (uint256 requestId) {
@@ -80,7 +87,14 @@ contract Prompt is VRFConsumerBaseV2, Ownable {
 
         // Set the current prompt to the new prompt
         s_currentPrompt = newPrompt;
+        // call getWinner function from Reward contract
+        // check first to make sure this is not the fist week of the game
+        if (weekTimeStamp != 0) {
+           IReward(rewardContract).getWinner(Strings.toString(weekTimeStamp)
+);
+        }
         // update weekTimeStamp
+
         weekTimeStamp = block.timestamp;
         weekNumber++;
         emit CurrentPrompt(s_currentPrompt);

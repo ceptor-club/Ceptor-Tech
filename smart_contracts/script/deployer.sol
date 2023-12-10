@@ -6,6 +6,7 @@ import "./Helper.sol";
 import {CeptorDice} from  "../src/CeptorDice.sol";
 import {Ceptors} from "../src/Ceptors.sol";
 import "../src/PromptCollection.sol";
+import "../src/Reward.sol";
 // import {IRouterClient} from "@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol";
 // import {Client} from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 // import {IERC20} from "@chainlink/contracts-ccip/src/v0.8/vendor/openzeppelin-solidity/v4.8.0/token/ERC20/IERC20.sol";
@@ -25,20 +26,32 @@ contract Deployer is Script, Helper {
 
      // deploy the prompt collection contract
 
-           address new_owner = msg.sender;
-        address vrfCoordindatorV2=0x7a1BaC17Ccc5b313516C5E16fb24f7659aA5ebed;
+        address vrfCoordindatorV2 = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
+
         address _diceContract =address(dice);
-        bytes32 keyhash=0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f;
+        bytes32 keyhash=0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
          /* gasLane */
-        uint64 subscriptionId=6627;
+        uint64 subscriptionId=7650;
         uint32 callbackGasLimit =	2500000;
 
         
-         PromptCollection prompt = new PromptCollection(new_owner, vrfCoordindatorV2, _diceContract, keyhash, subscriptionId, callbackGasLimit);
+         PromptCollection prompt = new PromptCollection( vrfCoordindatorV2, _diceContract, keyhash, subscriptionId, callbackGasLimit);
     
 
         vm.stopBroadcast();
          
     }
+       function postDeploy(address reward, address prompt) external  returns (bytes32) {
+        uint256 senderPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(senderPrivateKey);
+        Reward rewardContract = Reward(reward);
+        PromptCollection promptContract = PromptCollection(prompt);
+        rewardContract.grantRole(rewardContract.WINNER_MANAGEMENT_ROLE(), prompt);
+        promptContract.setRewardContract(reward);
+        vm.stopBroadcast();
+        
+   return  keccak256("WINNER_MANAGEMENT_ROLE");
+
+}
 
 }
