@@ -328,9 +328,14 @@ option {
 
 .mdCover {
   background-image: url("../public/images/CREATE-hero/Vector4.png"); /* Replace with your image path */
-  background-size: cover; /* Cover the entire screen */
+  background-size: cover; /* Cover the entire quiz section */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   height: 75vh; /* Full height */
   width: 70vw; /* Full width */
+}
+
+/* quiz input button border color */
+.iBorder{
+  border: 6px solid #ED670B;
 }
