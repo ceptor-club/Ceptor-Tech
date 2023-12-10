@@ -27,11 +27,18 @@ interface Submission {
   voterWallets: string[];
 }
 
+interface Scheduler {
+  gmWallet: string;
+  pcWallets: string[];
+  availableTimes: Date[];
+}
+
 
 const collectionNames = process.env.DB_COLLECTION?.split(',') || []
 const usersCollection = client.db(process.env.DB_NAME!).collection<User>(collectionNames[0]);
 const characterDataCollection = client.db(process.env.DB_NAME!).collection<CharacterData>(collectionNames[1]);
 const submissionCollection = client.db(process.env.DB_NAME!).collection<Submission>(collectionNames[2]);
+const schedulerCollection = client.db(process.env.DB_NAME!).collection<Scheduler>(collectionNames[3])
 
 //function to connect to mongoDB and save a user to the database
 export async function saveUser(user: any) {
@@ -63,6 +70,7 @@ export async function getUserById(_id: string) {
   }
 }
 
+//function to add submission
 export async function saveSubmission(submission: Submission, addressOfCreator: string) {
   try {
     submission.addressOfCreator = addressOfCreator
@@ -73,6 +81,7 @@ export async function saveSubmission(submission: Submission, addressOfCreator: s
   }
 }
 
+//function to see all submissions
 export async function getSubmissions() {
   try {
     return submissionCollection.find().toArray();
@@ -153,6 +162,27 @@ export async function getAllCharacters() {
 export async function getCharacterById(_id: string) {
   try {
     return characterDataCollection.findOne({ _id: _id })
+  } catch (error) {
+    console.error(error)
+    return error
+  }
+}
+
+//function to get all availble dates
+export async function getAvailableDates() {
+  try {
+    return schedulerCollection.find().toArray()
+  } catch (error) {
+    console.error(error)
+    return error
+  }
+}
+
+//function to add new availibility
+export async function addAvailableDates(scheduler: any, gmWallet: string) {
+  try {
+    scheduler.gmWallet = gmWallet
+    return schedulerCollection.insertOne(scheduler)
   } catch (error) {
     console.error(error)
     return error

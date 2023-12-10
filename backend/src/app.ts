@@ -5,7 +5,7 @@ require("dotenv").config();
 import ethers from "ethers";
 const app: Application = express();
 const server = require("http").createServer(app);
-const {ObjectId} = require('mongodb')
+const { ObjectId } = require('mongodb')
 const io = require("socket.io")(server, {
   cors: {
     origin: process.env.FRONTEND_URL,
@@ -15,18 +15,20 @@ const io = require("socket.io")(server, {
 import { runMiddleware } from "./auth"; //needs work
 import { getImages } from "./utils/getImages";
 
-import { 
-  getUserByWallet, 
-  saveUser, 
-  getAllUsers, 
-  saveCharacterData, 
-  getAllCharacters, 
-  getUserById, 
-  getCharacterById, 
-  getMostLikedSubmission, 
-  getSubmissions, 
-  voteForSubmission, 
+import {
+  getUserByWallet,
+  saveUser,
+  getAllUsers,
+  saveCharacterData,
+  getAllCharacters,
+  getUserById,
+  getCharacterById,
+  getMostLikedSubmission,
+  getSubmissions,
+  voteForSubmission,
   saveSubmission,
+  getAvailableDates,
+  addAvailableDates,
 } from "./utils/mongo";
 
 app.use(cors()); // Open requests
@@ -158,6 +160,21 @@ app.get('/characterData/:_id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+//get available dates
+app.get('/availability', async (req, res) => {
+  console.log('getting available dates')
+  const dates = await getAvailableDates()
+  dates ? res.send(dates) : res.send("no available dates in database")
+})
+
+app.post('/availability', async (req, res) => {
+  console.log('adding new dates')
+  const gmWallet = req.body.gmWallet
+  const scheduler = req.body
+  const newDate = await addAvailableDates(scheduler, gmWallet)
+  res.send(newDate)
+})
 
 io.on("connection", (socket: any) => {
   console.log("A user connected");
