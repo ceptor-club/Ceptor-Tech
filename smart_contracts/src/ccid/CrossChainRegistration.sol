@@ -5,7 +5,7 @@ import "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol";
 import "@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-abstract contract CrossChainRegisteration is CCIPReceiver, Ownable {
+abstract contract CrossChainRegistration is CCIPReceiver, Ownable {
     //  uint64 constant chainIdEthereumSepolia = 16015286601757825753;
     uint64 constant chainIdAvalancheFuji = 14767482510784806043;
     uint64 constant chainIdPolygonMumbai = 12532609583862916517;
