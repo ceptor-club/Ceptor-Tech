@@ -1,25 +1,54 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-contract PriceFeedCCID{
-  // i think we should let users leave the system and get their money back or 80%
+contract PriceFeedCCID {
+    AggregatorV3Interface internal dataFeed;
 
-    // XP multiplier based on Level. Level will be based on something.
-    
-    // address public ceptorsContractAddress; // ceptors might have to be deployed on each chain.
-    AggregatorV3Interface internal priceFeed;
+    // Base costs in USD with 3 decimal places
+    uint256 private constant BASE_PLAYER_REGISTRATION_COST = 50; // $0.05
+    uint256 private constant BASE_GAMEMASTER_REGISTRATION_COST = 200; // $0.20
 
-    // set prices in USD for player (.05$) and gamemaster (.2$) registration  [as a temporary price]
-    uint256 public playerRegistrationCost = 50 * 10 ** 16; // for a 5 dollar we change 16 to 18
-    uint256 public gamemasterRegistrationCost = 200 * 10 ** 16; // for a 20 dollar we change 16 to 18
-      // Function to get registration cost -- its crap
-    function getRegistrationCost() public view returns (uint256) {
-        (, int price,,,) = priceFeed.latestRoundData();
-        return uint256(price) * 1e18;
-    }
     constructor(address _priceFeed) {
-        priceFeed = AggregatorV3Interface(_priceFeed);
+        // Avalanche Fuji AVAX/USD price feed 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD
+        dataFeed = AggregatorV3Interface(_priceFeed);
+
     }
+
+    // Returns the latest AVAX/USD price
+    function getLatestPrice() public view returns (uint256) {
+        (, int256 price,,,) = dataFeed.latestRoundData();
+        return uint256(price);
+    }
+
+    // Calculate and return the player registration cost in Wei
+    function playerPrice() public view returns (uint256) {
+        uint256 latestPrice = getLatestPrice();
+        return calculateCostInWei(BASE_PLAYER_REGISTRATION_COST, latestPrice);
+    }
+
+    // Calculate and return the gamemaster registration cost in Wei
+    function gameMasterPrice() public view returns (uint256) {
+        uint256 latestPrice = getLatestPrice();
+        return calculateCostInWei(BASE_GAMEMASTER_REGISTRATION_COST, latestPrice);
+    }
+
+    function calculateCostInWei(uint256 baseCost, uint256 price) private pure returns (uint256) {
+    // Convert base cost from cents to USD and then to AVAX units, taking into account the 8 decimal places from the price feed
+    // The goal is to first multiply before dividing to avoid rounding down to zero
+
+    // Convert base cost to full USD amount with 18 decimals
+    uint256 baseCostInUSD = baseCost * 1e15;
+
+    // Adjust the price to 18 decimals for calculation
+    uint256 priceAdjusted = price * 1e10;
+
+    // Calculate cost in AVAX (convert USD cost to AVAX, both represented with 18 decimals)
+    uint256 costInAVAX = (baseCostInUSD * 1e18) / priceAdjusted;
+
+    return costInAVAX;
+}
+
+
 }

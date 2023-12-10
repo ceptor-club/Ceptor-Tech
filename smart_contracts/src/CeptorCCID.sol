@@ -35,6 +35,7 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
     // what is a "user"?
     struct UserStruct {
         string username;
+          bool isGamemaster;
         Stats stats;
         UserBody body;
         UserMind mind;
@@ -51,7 +52,34 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
     }
 
 
+    // a new player can register with a username and pay the registration fee
+    // if they don't pay enough they get an error
+    function registerPlayer(string memory _username) public payable {
+        uint256 _playerPrice = playerPrice();
+        require(msg.value >= _playerPrice, "Insufficient funds for player registration");
 
+        // construct a temporary user struct to write into the mapping
+        UserStruct memory newUser;
+        newUser.username = _username;
+        newUser.level = 1; // default level for a player
+
+        users[msg.sender] = newUser;
+    }
+
+
+    // a new game master can register with a username and pay the registration fee: 20
+    // if they don't pay enough they get an error
+    function registerGameMaster(string memory _username) public payable {
+        uint256 _gameMasterPrice = gameMasterPrice();
+        require(msg.value >= _gameMasterPrice, "Insufficient funds for game master registration");
+
+        UserStruct memory newUser;
+        newUser.username = _username;
+        newUser.isGamemaster = true;
+        newUser.level = 1; // default level for a game master
+
+        users[msg.sender] = newUser;
+    }
         // Function to update user stats, only called _ccipReceive
     function _updateBigStats(uint256 statId, uint256 value, address _user) internal {
        
@@ -67,7 +95,7 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
 
     // Function to store loot. Only called by _ccipReceive
     function _storeLoot(string memory loot, address user) internal  {
-        require(bytes(users[user].username).length != 0, "User must have a username");
+         require(bytes(users[user].username).length != 0, "User must have a username");
         users[user].loot.push(loot);
         emit LootReceived(user, loot);
     }
