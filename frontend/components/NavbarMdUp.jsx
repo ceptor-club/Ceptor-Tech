@@ -49,6 +49,9 @@ export default function NavbarMdUp() {
                 <Link className="uppercase" href="/profile">
                   Profile{" "}
                 </Link>
+                <Link className="uppercase" href="/gameScheduler">
+                  Game Scheduler
+                </Link>
                 <Link className="uppercase" href="/weekly-challenge">
                   Weekly Challenge
                 </Link>
