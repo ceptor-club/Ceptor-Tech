@@ -53,6 +53,10 @@ contract Prompt is VRFConsumerBaseV2, Ownable {
         i_keyhash = keyhash;
         i_subscriptionId = subscriptionId;
         i_callbackGasLimit = callbackGasLimit;
+        // temp 
+         weekTimeStamp = block.timestamp;
+        weekNumber++;
+        s_currentPrompt =i_prompts[1];
     }
 
     function setRewardContract(address _rewardContract) external onlyOwner {

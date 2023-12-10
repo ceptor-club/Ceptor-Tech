@@ -9,8 +9,8 @@ const run = async () => {
         // 0x0a3c75634C8a167eD82D2089F8B2Cba49b7685Ad 0xEc2df342d40D46fae8407F24f078138ec6d77FbA 0x45DB01904b51857F6279FE9006De25bf6dE8d136  0x4Eb23215D4d8802d10BAf06A3e9d3935E9bdf630  0xDA38118B32394748f7b720E5CBad719EfD02da0B
         // reward should be done via hardhat, we have issues in passing the serverless function as args in forge
         // "PromptCollection", "CeptorDice", "Ceptors",  "CeptorClubID"
-
-        let contractAddress = ["0xEc2df342d40D46fae8407F24f078138ec6d77FbA", "0x45DB01904b51857F6279FE9006De25bf6dE8d136", "0xDA38118B32394748f7b720E5CBad719EfD02da0B","0x4Eb23215D4d8802d10BAf06A3e9d3935E9bdf630"]
+      
+        let contractAddress = ["0x0E39cA6B772Db545e65fEfC7195481547118AbAA", "0x642b3B4B9ce6A0480D248Cd589D54a00C86bd72a", "0x44849B2F272A3b434f8bce6EEC583DF672f98Dd9","0x7557812ebEa02D39d507BC114275dE5ee22F241E"]
         let contractNames = ["PromptCollection", "CeptorDice", "Ceptors",  "CeptorClubID"]
        
        /// sepolia testnet
@@ -42,7 +42,7 @@ const run = async () => {
             getCommand(contractAddress[1], contractNames[1], constructorArgs[1], chainId),
             getCommand(contractAddress[2], contractNames[2], constructorArgs[2], chainId),
             getCommand(contractAddress[3], contractNames[3], constructorArgs[3], chainId)]
-        const scriptCommand = commands[3];
+        const scriptCommand = commands[2];
         console.log({ scriptCommand });
          exec(scriptCommand, (error, stdout, stderr) => {
             console.log({ error, stdout, stderr });

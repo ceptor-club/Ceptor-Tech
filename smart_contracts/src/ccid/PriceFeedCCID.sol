@@ -4,16 +4,16 @@ pragma solidity ^0.8.19;
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract PriceFeedCCID {
-    AggregatorV3Interface internal dataFeed;
+    AggregatorV3Interface public dataFeed;
 
     // Base costs in USD with 3 decimal places
-    uint256 private constant BASE_PLAYER_REGISTRATION_COST = 50; // $0.05
-    uint256 private constant BASE_GAMEMASTER_REGISTRATION_COST = 200; // $0.20
+    uint256 public constant BASE_PLAYER_REGISTRATION_COST = 50; // $0.05
+    uint256 public constant BASE_GAMEMASTER_REGISTRATION_COST = 200; // $0.20
 
     constructor(address _priceFeed) {
         // Avalanche Fuji AVAX/USD price feed 0x5498BB86BC934c8D34FDA08E81D444153d0D06aD
         dataFeed = AggregatorV3Interface(_priceFeed);
-    }
+      }
 
     // Returns the latest AVAX/USD price
     function getLatestPrice() public view returns (uint256) {
@@ -33,7 +33,7 @@ contract PriceFeedCCID {
         return calculateCostInWei(BASE_GAMEMASTER_REGISTRATION_COST, latestPrice);
     }
 
-    function calculateCostInWei(uint256 baseCost, uint256 price) private pure returns (uint256) {
+    function calculateCostInWei(uint256 baseCost, uint256 price) public pure returns (uint256) {
         // Convert base cost from cents to USD and then to AVAX units, taking into account the 8 decimal places from the price feed
         // The goal is to first multiply before dividing to avoid rounding down to zero
 
