@@ -31,7 +31,7 @@ const DiceDashboard = ({}) => {
   const { address, isConnected } = useAccount();
 
   const diceContract = {
-    address: addresses[chain?.network || "sepolia"].ceptorDice,
+    address: addresses[chain?.network]?.ceptorDice,
     abi: ceptorDiceABI,
   };
 
@@ -136,8 +136,8 @@ const DiceDashboard = ({}) => {
 
   // Config for burning dice
   const { config: configBurn } = usePrepareContractWrite({
-    address: CONSTANTS.diceAddress,
-    abi: CONSTANTS.diceABI,
+    address: addresses[chain?.network]?.ceptorDice,
+    abi: ceptorDiceABI,
     functionName: "timerBurn",
     args: [address, _idsBurn, _amountsBurn],
   });
