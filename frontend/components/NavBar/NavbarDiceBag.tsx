@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import Countdown from "react-countdown";
 
 const NavbarDiceBag = ({
   diceBalance,

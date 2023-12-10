@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Alchemy, Network, Nft } from "alchemy-sdk";
 import Explorer from "../components/Explorer";
 import { Countdown } from "../components/Countdown";
 import {
@@ -46,14 +45,11 @@ export default function WeeklyChallenge({
   const provider = useEthersProvider({ chainId: chain?.id });
   const { address, isConnecting, isDisconnected } = useAccount();
 
-  const [latestBlock, setLatestBlock] = useState(null);
   const [nftList, setNFTList] = useState<SubmitData[]>([]);
   const [deadline, setDeadline] = useState<number>();
   const [weeklyChallenge, setWeeklyChallenge] = useState("Weekly Challenge");
   const [isConnected, setIsConnected] = useState(false);
   const [winnerNFT, setWinnerNFT] = useState<SubmitData>();
-  const [diceId, setDiceId] = useState(5);
-  const [currentTimer, setCurrentTimer] = useState();
   const [userPrompt, setUserPrompt] = useState("");
 
   // Generate Button States
