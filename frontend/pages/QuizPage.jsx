@@ -19,7 +19,7 @@ export default function QuizPage() {
 
 
     return (
-        <>
+        <div className='cover'>
             <Meta />
             <NavbarMdUp />
             <NavbarSmUp />
@@ -50,6 +50,6 @@ export default function QuizPage() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
