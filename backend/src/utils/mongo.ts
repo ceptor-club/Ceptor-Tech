@@ -13,12 +13,12 @@ interface User {
 }
 
 interface CharacterData {
-  _id: string
-  name: string
-  ownerWallet: string
+  _id: string;
+  name: string;
+  ownerWallet: string;
 }
 
-interface Submission {
+export interface Submission {
   addressOfCreator: string;
   image: string;
   likesAmount: number;
@@ -27,8 +27,10 @@ interface Submission {
   voterWallets: string[];
 }
 
-interface Scheduler {
+export interface Scheduler {
+  _id: string;
   gmWallet: string;
+  nameOfCampaign: string;
   pcWallets: string[];
   availableTimes: Date[];
 }
@@ -186,5 +188,36 @@ export async function addAvailableDates(scheduler: any, gmWallet: string) {
   } catch (error) {
     console.error(error)
     return error
+  }
+}
+
+//function to get campaign by _id
+export async function getCampaignById(_id: string){
+  try {
+    return schedulerCollection.findOne({_id: _id})
+  } catch(error) {
+    console.error(error)
+    return error
+  }
+} 
+
+// function to join a campaign, needs work
+export async function joinCampaign(scheduler: any, campaignId: string, pcWallet: string) {
+  try {
+
+    console.log(scheduler);
+
+    if (!scheduler) {
+      throw new Error('Campaign not found');
+    }
+
+    scheduler.pcWallets.push(pcWallet);
+
+    await schedulerCollection.updateOne({ _id: campaignId }, { $set: { pcWallets: scheduler.pcWallets } });
+
+    return scheduler;
+  } catch (error) {
+    console.error(error);
+    return error;
   }
 }

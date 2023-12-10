@@ -29,6 +29,8 @@ import {
   saveSubmission,
   getAvailableDates,
   addAvailableDates,
+  joinCampaign,
+  Scheduler,
 } from "./utils/mongo";
 
 app.use(cors()); // Open requests
@@ -168,6 +170,7 @@ app.get('/availability', async (req, res) => {
   dates ? res.send(dates) : res.send("no available dates in database")
 })
 
+//add available dates
 app.post('/availability', async (req, res) => {
   console.log('adding new dates')
   const gmWallet = req.body.gmWallet
@@ -175,6 +178,28 @@ app.post('/availability', async (req, res) => {
   const newDate = await addAvailableDates(scheduler, gmWallet)
   res.send(newDate)
 })
+
+//join a campaign, needs work
+app.post('/campaign/:_id/join', async (req: Request, res: Response) => {
+  const scheduler = req.body;
+  const campaignId = req.params._id;
+  const pcWallet = req.body.pcWallet;
+
+  try {
+    const updatedCampaignData: unknown = await joinCampaign(scheduler, campaignId, pcWallet);
+    const updatedCampaign: Scheduler | Error = updatedCampaignData as Scheduler | Error;
+
+    if (updatedCampaign instanceof Error) {
+      return res.status(400).json({ error: updatedCampaign.message });
+    }
+
+    return res.status(200).json(updatedCampaign);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 io.on("connection", (socket: any) => {
   console.log("A user connected");
