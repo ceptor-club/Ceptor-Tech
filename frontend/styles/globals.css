@@ -8,6 +8,11 @@
   font-family: "Oswald";
   src: url("/font/Oswald.ttf") format("truetype");
 }
+/* font for "ceptor club character generator" */
+@import url('https://fonts.googleapis.com/css2?family=Milonga&display=swap');
+:root {
+  --quiz-page-font: 'Milonga', cursive;;
+}
 
 html,
 body {
@@ -295,4 +300,53 @@ option {
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   color: red;
+}
+
+/* leom's added styles */
+/* background image for quiz */
+.cover {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-midpage/midPageImage.png"); /* Replace with your image path */
+  background-size: cover; /* Cover the entire screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
+}
+
+/* default font "Milonga */
+.dFont {
+  font-family: var(--quiz-page-font);
+}
+
+.ceptor-font {
+  font-family: var(--quiz-page-font); /* ceptor club's font */
+  color: #fff;
+  line-height: 66px;
+}
+
+.mdCover {
+  background-image: url("../public/images/CREATE-hero/quizbg.png"); /* Replace with your image path */
+  background-size: cover; /* Cover the entire quiz section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 75vh; /* Full height */
+  width: 70vw; /* Full width */
+}
+
+/* quiz input button border color */
+.iBorder{
+  border: 6px solid #ED670B;
+}
+
+/* quiz button {next && back}} */
+.btn-text {
+  text-align: center;
+  text-shadow: 0px 2.051px 2.051px rgba(0, 0, 0, 0.25);
+  font-family: var(--quiz-page-font);
+  font-size: 30.77px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
 }
