@@ -8,8 +8,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <Meta />
-      {isBrowser && window.location.pathname === "/" && <NavbarMdUp />}
-      {isBrowser && window.location.pathname === "/" && <NavbarSmUp />}
+      <NavbarMdUp />
+      <NavbarSmUp />
+
       <main>{children}</main>
       <footer className="mb-10"></footer>
     </>
