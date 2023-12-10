@@ -25,13 +25,15 @@ export default function BuyDice() {
 
   const ids = useMemo(() => {
     // TODO: get the tokenIDs form the CeptorDice.sol
-    return ["0", "1", "2", "3", "4", "5"];
+    return [0, 1, 2, 3, 4, 5];
   }, []); // Add dependencies that trigger the recalculation of 'ids'
 
   const amounts = useMemo(() => {
     return Object.values(userBag);
   }, [userBag]);
 
+  // TODO: import calculations
+  // is a payable function
   // Config for minting dice
   const { config: configMint } = usePrepareContractWrite({
     address: addresses[chain?.network]?.ceptorDice as any,

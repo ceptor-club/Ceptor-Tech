@@ -16,30 +16,24 @@ export default function BurnDice() {
   const [minutes, setMinutes] = useState(0);
   const [dice, setDice] = useState("");
   const [userBag, setUserBag] = useState({
-    "4": 0,
-    "6": 0,
-    "8": 0,
-    "10": 0,
-    "12": 0,
-    "20": 0,
+    "4": 1,
+    "6": 1,
+    "8": 1,
+    "10": 1,
+    "12": 1,
+    "20": 1,
   });
-  // TODO: get the amount of dice of user
+  // TODO: get the amount of dice of user - see Dice Dashboard but this needs a refacotring of the whole component
+  // we used different structure here...
   // TODO: replace with real user data
-
-  const { data: userTimerRead } = useContractRead({
-    address: addresses[chain?.network]?.ceptors,
-    abi: ceptorABI,
-    functionName: "userTimers",
-    args: [address],
-    watch: true,
-  });
 
   // Config for burning dice
   const { config: configBurn } = usePrepareContractWrite({
     address: addresses[chain?.network]?.ceptorDice as any,
     abi: ceptorDiceABI,
-    functionName: "burn",
-    args: [address, dice, "1"],
+    functionName: "timerBurn",
+    // you can't burn more than one dice at a time so amount is always 1
+    args: [address, dice, 1],
   });
 
   // Hook for burning dice
