@@ -275,7 +275,6 @@ export default function WeeklyChallenge({
             setImageResult={setImageResult}
             imageResult={imageResult}
             pdfData={pdfData}
-            isMinting={isMinting}
             imageProcessing={imageProcessing}
             prompt={userPrompt}
           />
