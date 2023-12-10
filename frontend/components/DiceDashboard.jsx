@@ -214,7 +214,7 @@ const DiceDashboard = ({}) => {
             </>
           </div>
         ) : (
-          <p>Connect to see dice balance</p>
+          <p className="font-oswald text-wrap ">Connect to see dice balance</p>
         )}
       </>
     </>
