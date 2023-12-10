@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import {Functions, FunctionsClient} from "@chainlink/contracts/src/v0.8/dev/functions/FunctionsClient.sol";
- import "./PromptCollection.sol";
+import "./PromptCollection.sol";
 import "./CeptorDice.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
@@ -22,9 +22,10 @@ contract Reward is AccessControl, FunctionsClient {
     mapping(string => bool) public usedRequests;
 
     event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
-    event Claimed(uint amount, address by);
- bytes32 public constant WINNER_MANAGEMENT_ROLE = keccak256("WINNER_MANAGEMENT_ROLE");
- 
+    event Claimed(uint256 amount, address by);
+
+    bytes32 public constant WINNER_MANAGEMENT_ROLE = keccak256("WINNER_MANAGEMENT_ROLE");
+
     /// @dev Constructor initializes the contract with the specified oracle, subscription ID, check logic, and contract addresses.
     constructor(
         address oracle,
@@ -32,17 +33,17 @@ contract Reward is AccessControl, FunctionsClient {
         string memory _checkLogic,
         address diceContract,
         address promptContract
-    ) FunctionsClient(oracle)  {
+    ) FunctionsClient(oracle) {
         checkLogic = _checkLogic;
         subscriptionId = _subscriptionId;
         dice = CeptorDice(diceContract);
         prompt = PromptCollection(promptContract);
-         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(WINNER_MANAGEMENT_ROLE, msg.sender);
     }
 
     /// @notice Sends a request to the Chainlink oracle to get the winner.
-    function getWinner(string memory weektimeStamp) public  onlyRole(WINNER_MANAGEMENT_ROLE) {
+    function getWinner(string memory weektimeStamp) public onlyRole(WINNER_MANAGEMENT_ROLE) {
         Functions.Request memory req;
 
         string[] memory args = new string[](1);
