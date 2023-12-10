@@ -11,10 +11,9 @@ interface IPriceCheckerFUJI {
 contract Register {
     IPriceCheckerFUJI priceChecker;
 
+    mapping(address => UserStruct) public users;
 
-    mapping (address => UserStruct) public users;
-
-    // simplified version of the user struct for CCID. 
+    // simplified version of the user struct for CCID.
     // first test, check if a registered new user has level 1 and username
     struct UserStruct {
         string username;
@@ -23,11 +22,10 @@ contract Register {
     }
 
     constructor(address _priceCheckerAddress, string memory _username) {
-    priceChecker = IPriceCheckerFUJI(_priceCheckerAddress);
-    users[msg.sender].username = _username;
-    users[msg.sender].level = 5; // tippi is level 5   
-
-}
+        priceChecker = IPriceCheckerFUJI(_priceCheckerAddress);
+        users[msg.sender].username = _username;
+        users[msg.sender].level = 5; // tippi is level 5
+    }
 
     // a new player can register with a username and pay the registration fee
     // if they don't pay enough they get an error
@@ -42,7 +40,6 @@ contract Register {
 
         users[msg.sender] = newUser;
     }
-
 
     // a new game master can register with a username and pay the registration fee: 20
     // if they don't pay enough they get an error

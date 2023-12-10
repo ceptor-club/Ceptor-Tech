@@ -12,15 +12,12 @@ contract PromptCollection is ERC721, Prompt {
 
     /// @dev Constructor initializes the contract with the specified parameters and sets the Dice contract address.
     constructor(
-         address vrfCoordindatorV2,
+        address vrfCoordindatorV2,
         address _diceContract,
         bytes32 keyhash,
         uint64 subscriptionId,
         uint32 callbackGasLimit
-    )
-        ERC721("PromptCollection", "PC")
-        Prompt( vrfCoordindatorV2, keyhash, subscriptionId, callbackGasLimit)
-    {
+    ) ERC721("PromptCollection", "PC") Prompt(vrfCoordindatorV2, keyhash, subscriptionId, callbackGasLimit) {
         diceContract = _diceContract;
     }
 
@@ -56,7 +53,6 @@ contract PromptCollection is ERC721, Prompt {
     function encodeTokenId(uint256 num1, uint256 num2) internal pure returns (uint256) {
         return (num1 << 128) | num2;
     }
-
 
     /**
      * This function takes a token ID (tokenId) as an input parameter.

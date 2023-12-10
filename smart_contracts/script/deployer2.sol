@@ -13,22 +13,13 @@ import "../src/CeptorCCID.sol";
 // import {IERC20} from "@chainlink/contracts-ccip/src/v0.8/vendor/openzeppelin-solidity/v4.8.0/token/ERC20/IERC20.sol";
 
 contract Deployer is Script, Helper {
-    function deployAll(  SupportedNetworks destination, address dice
-    ) external  {
-
-        
-     
+    function deployAll(SupportedNetworks destination, address dice) external {
         uint256 senderPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(senderPrivateKey);
-    
-        (address desinationRouter, , ,, address priceFeed  ) = getConfigFromNetwork(destination);
+
+        (address desinationRouter,,,, address priceFeed) = getConfigFromNetwork(destination);
         // deploy the CeptorCCID contract
         CeptorCCID ccid = new CeptorCCID( dice, desinationRouter, priceFeed);
         vm.stopBroadcast();
-         
     }
-  
-
- 
-
 }

@@ -1,12 +1,14 @@
-
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
+
 import "./ccid/CrossChainRegisteration.sol";
 import "./ccid/PriceFeedCCID.sol";
 import "./interfaces/ICeptorDice.sol";
-contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
+
+contract CeptorCCID is PriceFeedCCID, CrossChainRegisteration {
     ICeptorDice public dice;
-        struct Stats {
+
+    struct Stats {
         uint8 strong;
         uint8 agile;
         uint8 tanky;
@@ -36,7 +38,7 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
     // what is a "user"?
     struct UserStruct {
         string username;
-          bool isGamemaster;
+        bool isGamemaster;
         Stats stats;
         UserBody body;
         UserMind mind;
@@ -46,12 +48,15 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
     }
 
     // State variables
-    mapping (address => UserStruct) public users;
-/// @dev @notice  Should be in minter role at dice contract to mint 
-    constructor(address _priceFeed, address _router, address dice_  ) CrossChainRegisteration(_router) PriceFeedCCID(_priceFeed) {
-        dice = ICeptorDice(dice_); 
-    }
+    mapping(address => UserStruct) public users;
+    /// @dev @notice  Should be in minter role at dice contract to mint
 
+    constructor(address _priceFeed, address _router, address dice_)
+        CrossChainRegisteration(_router)
+        PriceFeedCCID(_priceFeed)
+    {
+        dice = ICeptorDice(dice_);
+    }
 
     // a new player can register with a username and pay the registration fee
     // if they don't pay enough they get an error
@@ -66,7 +71,7 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
 
         users[msg.sender] = newUser;
         // mint bag of dice to the player
-     // Arrays for NFT minting
+        // Arrays for NFT minting
         uint256[] memory _ids = new uint256[](4);
         _ids[0] = 0;
         _ids[1] = 1;
@@ -80,11 +85,10 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
         _amounts[2] = 20;
         _amounts[3] = 20;
         _amounts[4] = 20;
-       
 
         // Mint NFTs using the Dices contract
-        dice.minterMintBatch(msg.sender, _ids, _amounts, "");    }
-
+        dice.minterMintBatch(msg.sender, _ids, _amounts, "");
+    }
 
     // a new game master can register with a username and pay the registration fee: 20
     // if they don't pay enough they get an error
@@ -113,14 +117,13 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
         _amounts[2] = 20;
         _amounts[3] = 20;
         _amounts[4] = 20;
-       
 
         // Mint NFTs using the Dices contract
-        dice.minterMintBatch(msg.sender, _ids, _amounts, "");  
+        dice.minterMintBatch(msg.sender, _ids, _amounts, "");
     }
-        // Function to update user stats, only called _ccipReceive
+    // Function to update user stats, only called _ccipReceive
+
     function _updateBigStats(uint256 statId, uint256 value, address _user) internal {
-       
         if (statId == 0) users[_user].stats.strong = uint8(value);
         else if (statId == 1) users[_user].stats.agile = uint8(value);
         else if (statId == 2) users[_user].stats.tanky = uint8(value);
@@ -128,21 +131,24 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
         else if (statId == 4) users[_user].stats.wise = uint8(value);
         else if (statId == 5) users[_user].stats.cute = uint8(value);
         else if (statId == 6) users[_user].stats.lucky = uint8(value);
-         emit StatsUpdated(msg.sender, statId, value);
+        emit StatsUpdated(msg.sender, statId, value);
     }
 
     // Function to store loot. Only called by _ccipReceive
-    function _storeLoot(string memory loot, address user) internal  {
-         require(bytes(users[user].username).length != 0, "User must have a username");
+    function _storeLoot(string memory loot, address user) internal {
+        require(bytes(users[user].username).length != 0, "User must have a username");
         users[user].loot.push(loot);
         emit LootReceived(user, loot);
     }
 
     // CCIP Receive function -- have a seperate contract for each recieve (Loot and Stats)
-    
-    function _ccipReceive(Client.Any2EVMMessage memory any2EvmMessage) internal override onlyAllowedSenders(abi.decode(any2EvmMessage.sender, (address))) {
-     
-        if ( any2EvmMessage.sourceChainSelector == chainIdAvalancheFuji) {
+
+    function _ccipReceive(Client.Any2EVMMessage memory any2EvmMessage)
+        internal
+        override
+        onlyAllowedSenders(abi.decode(any2EvmMessage.sender, (address)))
+    {
+        if (any2EvmMessage.sourceChainSelector == chainIdAvalancheFuji) {
             // Example: Update stats or perform other actions based on received data
             // Not sure about how we can have security based on making sure that the Loot and Stats are from the right contract
             // I guess we can have an allowlist of contracts that can send data to this contract
@@ -153,7 +159,7 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
             if (bytes(users[userAddress].username).length == 0) {
                 revert UserIsNotRegistered(userAddress);
             }
-             users[userAddress].loot.push(loot);
+            users[userAddress].loot.push(loot);
             emit LootReceived(userAddress, loot);
         } else if (any2EvmMessage.sourceChainSelector == chainIdPolygonMumbai) {
             // Example: Update stats or perform other actions based on received data
@@ -161,26 +167,22 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
             // I guess we can have an allowlist of contracts that can send data to this contract
             // And depending on the structure of the message we can update the stats or store the loot
             // Extract the user's address and loot from the message
-            (address userAddress, uint256 statId, uint256 value) = abi.decode(any2EvmMessage.data, (address, uint256, uint256));
+            (address userAddress, uint256 statId, uint256 value) =
+                abi.decode(any2EvmMessage.data, (address, uint256, uint256));
             // Store the loot for the user
-              if (bytes(users[userAddress].username).length == 0) {
+            if (bytes(users[userAddress].username).length == 0) {
                 revert UserIsNotRegistered(userAddress);
             }
             _updateBigStats(statId, value, userAddress);
         } else {
-            revert DestinationChainNotAllowlisted(any2EvmMessage.sourceChainSelector );
+            revert DestinationChainNotAllowlisted(any2EvmMessage.sourceChainSelector);
         }
-     
-     
     }
-
-
 
     // Events
     event UsernameRegistered(address indexed user, string username, bool isFree);
     event StatsUpdated(address indexed user, uint256 statId, uint256 value);
     event LootReceived(address indexed user, string loot);
-
 
     // errors
     error UsernameAlreadySet(string username);

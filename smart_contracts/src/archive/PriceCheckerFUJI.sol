@@ -12,9 +12,7 @@ contract PriceCheckerFUJI {
 
     constructor() {
         // Avalanche Fuji AVAX/USD price feed
-        dataFeed = AggregatorV3Interface(
-            0x5498BB86BC934c8D34FDA08E81D444153d0D06aD
-        );
+        dataFeed = AggregatorV3Interface(0x5498BB86BC934c8D34FDA08E81D444153d0D06aD);
     }
 
     // Returns the latest AVAX/USD price
@@ -36,20 +34,18 @@ contract PriceCheckerFUJI {
     }
 
     function calculateCostInWei(uint256 baseCost, uint256 price) private pure returns (uint256) {
-    // Convert base cost from cents to USD and then to AVAX units, taking into account the 8 decimal places from the price feed
-    // The goal is to first multiply before dividing to avoid rounding down to zero
+        // Convert base cost from cents to USD and then to AVAX units, taking into account the 8 decimal places from the price feed
+        // The goal is to first multiply before dividing to avoid rounding down to zero
 
-    // Convert base cost to full USD amount with 18 decimals
-    uint256 baseCostInUSD = baseCost * 1e15;
+        // Convert base cost to full USD amount with 18 decimals
+        uint256 baseCostInUSD = baseCost * 1e15;
 
-    // Adjust the price to 18 decimals for calculation
-    uint256 priceAdjusted = price * 1e10;
+        // Adjust the price to 18 decimals for calculation
+        uint256 priceAdjusted = price * 1e10;
 
-    // Calculate cost in AVAX (convert USD cost to AVAX, both represented with 18 decimals)
-    uint256 costInAVAX = (baseCostInUSD * 1e18) / priceAdjusted;
+        // Calculate cost in AVAX (convert USD cost to AVAX, both represented with 18 decimals)
+        uint256 costInAVAX = (baseCostInUSD * 1e18) / priceAdjusted;
 
-    return costInAVAX;
-}
-
-
+        return costInAVAX;
+    }
 }
