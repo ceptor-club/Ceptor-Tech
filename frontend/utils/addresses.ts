@@ -3,7 +3,7 @@ export const addresses = {
     promptCollection: "0x0E39cA6B772Db545e65fEfC7195481547118AbAA",
     ceptorDice: "0x7285ebEf3F09311231Eb65A5Cf068FDBab530D66",
     ceptors: "0x44849B2F272A3b434f8bce6EEC583DF672f98Dd9",
-    ccipV4: "0x7557812ebEa02D39d507BC114275dE5ee22F241E",
+    ccipV4: "0x486A5Ee0839e142ABCC216A6bd79C23378793e7E",
   },
   goerli: {
     promptCollection: "",
