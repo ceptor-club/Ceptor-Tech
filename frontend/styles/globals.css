@@ -323,9 +323,7 @@ option {
 .ceptor-font {
   font-family: var(--quiz-page-font); /* ceptor club's font */
   color: #fff;
-  font-size: 60px;
-  font-weight: 400;
-  line-height: 96px;
+  line-height: 66px;
 }
 
 .mdCover {

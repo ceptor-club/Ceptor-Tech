@@ -156,8 +156,7 @@ export default function Quiz() {
     return (
         <div className="text-ceptor mx-32 p-8 max-w-500">
 
-            <h1 className="text-center text-6xl leading-8 mb-4">Ceptor Club Character</h1>
-            <h1 className="text-center text-6xl leading-8">Generator</h1>
+            <h1 className="ceptor-font text-center text-6xl mb-4">Ceptor Club Character <span><br />Generator</span> </h1>
             {currentState !== State.QUESTION1 ? <h2 id='character-name' className="text-center text-2xl leading-8 m-8">{charName}</h2> : null}
 
             {questionComponentMap[currentState]}
