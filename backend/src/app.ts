@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
+import bodyParser from 'body-parser'
 require("dotenv").config();
 import ethers from "ethers";
 const app: Application = express();
@@ -11,7 +12,7 @@ const io = require("socket.io")(server, {
     methods: ["GET", "POST"],
   },
 });
-import { runMiddleware } from "./auth";
+import { runMiddleware } from "./auth"; //needs work
 import { getImages } from "./utils/getImages";
 
 import { 
@@ -25,12 +26,12 @@ import {
   getMostLikedSubmission, 
   getSubmissions, 
   voteForSubmission, 
-  saveSubmission, 
-  Submission 
+  saveSubmission,
 } from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
+app.use(bodyParser.json())
 // app.use(runMiddleware);
 
 //use middleware with socket.io to parse incoming requests with JSON payloads
@@ -107,7 +108,9 @@ app.post("/voteForSubmission", async (req, res) => {
 
 app.post("/submit", async (req, res) => {
   console.log('submitting submission')
-  const submission = await saveSubmission(req.body);
+  const addressOfCreator = req.body.addressOfCreator
+  console.log(addressOfCreator)
+  const submission = await saveSubmission(req.body, addressOfCreator);
   res.send(submission);
 });
 
@@ -121,9 +124,9 @@ app.post("/user", async (req, res) => {
 //save character
 //NEEDS WORK TO SAVE TO SPECIFIC USER
 app.post("/characterData", async (req, res) => {
-  // const userId = req.user._id;
+  const ownerWallet = req.body.ownerWallet
   const characterData = req.body;
-  const savedCharacterData = await saveCharacterData(characterData, '')
+  const savedCharacterData = await saveCharacterData(characterData, ownerWallet)
   res.send(savedCharacterData)
 })
 

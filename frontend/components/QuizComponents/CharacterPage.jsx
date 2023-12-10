@@ -12,10 +12,11 @@ import { CharacterContext } from '../CharacterContext'
 import { useContext, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useAccount } from 'wagmi'
 
 
 export default function CharacterPage() {
-
+    const { address } = useAccount()
     const { characterData, setCharacterData } = useContext(CharacterContext)
     const [saveStatus, setSaveStatus] = useState({ success: null, error: null })
     const [isMessageVisible, setIsMessageVisible] = useState(false)
@@ -213,7 +214,7 @@ export default function CharacterPage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: character.charName })
+                body: JSON.stringify({ name: character.charName, ownerWallet: address })
             })
 
             if (response.ok) {
@@ -313,9 +314,9 @@ export default function CharacterPage() {
                 </div>
                 <div className='flex flex-row mt-0'>
                     {/* <Link href='/'> */}
-                        <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
-                            Save Character?
-                        </button>
+                    <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={saveCharacter}>
+                        Save Character?
+                    </button>
                     {/* </Link> */}
                     <Link href='http://localhost:3000/issuecredentials'>
                         <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={exportCharacter}>

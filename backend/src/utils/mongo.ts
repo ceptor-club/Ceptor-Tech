@@ -15,10 +15,10 @@ interface User {
 interface CharacterData {
   _id: string
   name: string
-  owner: User["_id"]
+  ownerWallet: string
 }
 
-export interface Submission {
+interface Submission {
   addressOfCreator: string;
   image: string;
   likesAmount: number;
@@ -63,8 +63,9 @@ export async function getUserById(_id: string) {
   }
 }
 
-export async function saveSubmission(submission: Submission) {
+export async function saveSubmission(submission: Submission, addressOfCreator: string) {
   try {
+    submission.addressOfCreator = addressOfCreator
     return submissionCollection.insertOne(submission);
   } catch (error) {
     console.error(error);
@@ -128,10 +129,9 @@ export async function getAllUsers() {
 }
 
 //function to save character data
-export async function saveCharacterData(characterData: any, userId: string) {
+export async function saveCharacterData(characterData: any, ownerWallet: string) {
   try {
-
-    characterData.owner = getUserById(userId)
+    characterData.ownerWallet = ownerWallet;
     return characterDataCollection.insertOne(characterData)
   } catch (error) {
     throw new Error("Error saving character data")
