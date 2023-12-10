@@ -54,6 +54,7 @@ export default function WeeklyChallenge({
   const [winnerNFT, setWinnerNFT] = useState<SubmitData>();
   const [diceId, setDiceId] = useState(5);
   const [currentTimer, setCurrentTimer] = useState();
+  const [userPrompt, setUserPrompt] = useState("");
 
   console.log(addresses[chain?.network]?.ceptorDice);
 
@@ -245,8 +246,7 @@ export default function WeeklyChallenge({
             Winner of last weeks challenge
           </h1>
         </div>
-        <button onClick={() => burnDice()}>burn</button>
-        <button onClick={() => sendSubmission()}>submit prompt</button>
+
         <div className="flex flex-wrap justify-center items-center">
           <div className="mt-4 bg-light-pink mx-auto min-w-max p-4 px-4 rounded-xl shadow-lg">
             <h1 className="font-oswald text-xl uppercase text-light-yellow">
@@ -260,6 +260,33 @@ export default function WeeklyChallenge({
             {/* TODO: add real deadline from smart contract */}
             <Countdown deadline={deadline} />
           </div>
+        </div>
+
+        <div>
+          <input
+            className="rounded-lg p-2 border-4 border-light-pink"
+            type="text"
+            id="myInput"
+            value={userPrompt}
+            onChange={(event) => {
+              setUserPrompt(event.target.value);
+            }}
+          />
+        </div>
+
+        <div className="flex flex-row">
+          <button
+            className="button-xs text-black pt-5"
+            onClick={() => sendSubmission()}
+          >
+            submit prompt
+          </button>
+          <button
+            className="button-xs text-black pt-5"
+            onClick={() => burnDice()}
+          >
+            burn
+          </button>
         </div>
       </div>
 
