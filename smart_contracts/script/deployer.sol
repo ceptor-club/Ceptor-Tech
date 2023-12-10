@@ -41,17 +41,43 @@ contract Deployer is Script, Helper {
         vm.stopBroadcast();
          
     }
-       function postDeploy(address reward, address prompt, address dice, address ccid) external  returns (bytes32) {
+
+
+    /**
+        1. dice contract : 
+        -What are the contracts that should be MINTER ? 
+            - Reward contract
+            - CCID contract
+        -   what are the contracts that should be in TIMER_MANAGEMENT_ROLE ?
+             - PromptCollection contract
+             - Ceptors contract
+        2. Reward contract : What are the contracs that should be in WINNER_MANAGEMENT_ROLE ? 
+             - PromptCollection contract
+        - 
+        3. PromptCollection contract we should set reward cntract address via setRewardContract ? 
+    - 
+    
+     */
+       function postDeploy(address reward, address prompt, address dice, address ccid, address ceptor) external  returns (bytes32) {
         uint256 senderPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(senderPrivateKey);
         Reward rewardContract = Reward(reward);
         CeptorDice diceContract = CeptorDice(reward);
         PromptCollection promptContract = PromptCollection(prompt);
+
+
+        
         rewardContract.grantRole(rewardContract.WINNER_MANAGEMENT_ROLE(), prompt);
 
         /// minter role for dice contract
         diceContract.grantRole(diceContract.MINTER(), ccid);
         diceContract.grantRole(diceContract.MINTER(), reward);
+
+
+        // timer management role for dice contract
+        diceContract.grantRole(diceContract.TIMER_MANAGEMENT_ROLE(), prompt);
+        diceContract.grantRole(diceContract.TIMER_MANAGEMENT_ROLE(), ceptor);
+
         promptContract.setRewardContract(reward);
         vm.stopBroadcast();
         
