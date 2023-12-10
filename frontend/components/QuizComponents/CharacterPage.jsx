@@ -45,7 +45,7 @@ export default function CharacterPage() {
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setIsMessageVisible(false)
-            setSaveStatus({ success: null, error: null })
+            // setSaveStatus({ success: null, error: null })
         }, 2000)
         return () => clearTimeout(timeoutId)
     }, [isMessageVisible])
@@ -206,6 +206,12 @@ export default function CharacterPage() {
     }
 
     async function saveCharacter() {
+        // const savedCharacterData = await response.json()
+        setCharacterData(character)
+        const requestData = {
+            ...characterData,
+            ownerWallet: address
+        }
         try {
 
             // const userId = User._id
@@ -214,15 +220,14 @@ export default function CharacterPage() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: character.charName, ownerWallet: address })
+                body: JSON.stringify(requestData)
             })
 
             if (response.ok) {
                 setSaveStatus({ success: 'Character saved successfully', error: null })
-                setCharacterData(character)
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 2000);
+                // setTimeout(() => {
+                //     window.location.href = '/';
+                // }, 20000);
             } else {
                 setSaveStatus({ success: null, error: 'Error saving character' })
             }
@@ -318,11 +323,18 @@ export default function CharacterPage() {
                         Save Character?
                     </button>
                     {/* </Link> */}
-                    <Link href='http://localhost:3000/issuecredentials'>
+                    {/* <Link href='http://localhost:3000/issuecredentials'>
                         <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4" onClick={exportCharacter}>
                             Export to Bit Bender
                         </button>
-                    </Link>
+                    </Link> */}
+                    {saveStatus.success !== null ? (
+                        <Link href='/'>
+                            <button className="bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4">
+                                Return to Main Screen and get an image of your character!
+                            </button>
+                        </Link>
+                    ) : null}
                 </div>
             </div>
         </>
