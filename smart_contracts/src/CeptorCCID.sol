@@ -3,8 +3,9 @@
 pragma solidity ^0.8.19;
 import "./ccid/CrossChainRegisteration.sol";
 import "./ccid/PriceFeedCCID.sol";
-
+import "./interfaces/ICeptorDice.sol";
 contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
+    ICeptorDice public dice;
         struct Stats {
         uint8 strong;
         uint8 agile;
@@ -46,9 +47,9 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
 
     // State variables
     mapping (address => UserStruct) public users;
-
-    constructor(address _priceFeed, address _router) CrossChainRegisteration(_router) PriceFeedCCID(_priceFeed) {
-        
+/// @dev @notice  Should be in minter role at dice contract to mint 
+    constructor(address _priceFeed, address _router, address dice_  ) CrossChainRegisteration(_router) PriceFeedCCID(_priceFeed) {
+        dice = ICeptorDice(dice_); 
     }
 
 
@@ -64,7 +65,25 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
         newUser.level = 1; // default level for a player
 
         users[msg.sender] = newUser;
-    }
+        // mint bag of dice to the player
+     // Arrays for NFT minting
+        uint256[] memory _ids = new uint256[](4);
+        _ids[0] = 0;
+        _ids[1] = 1;
+        _ids[2] = 2;
+        _ids[3] = 3;
+        _ids[4] = 4;
+
+        uint256[] memory _amounts = new uint256[](4);
+        _amounts[0] = 20;
+        _amounts[1] = 20;
+        _amounts[2] = 20;
+        _amounts[3] = 20;
+        _amounts[4] = 20;
+       
+
+        // Mint NFTs using the Dices contract
+        dice.minterMintBatch(msg.sender, _ids, _amounts, "");    }
 
 
     // a new game master can register with a username and pay the registration fee: 20
@@ -79,6 +98,25 @@ contract CeptorCCID  is PriceFeedCCID, CrossChainRegisteration {
         newUser.level = 1; // default level for a game master
 
         users[msg.sender] = newUser;
+        // mint bag of dice to the player
+        // Arrays for NFT minting
+        uint256[] memory _ids = new uint256[](4);
+        _ids[0] = 0;
+        _ids[1] = 1;
+        _ids[2] = 2;
+        _ids[3] = 3;
+        _ids[4] = 4;
+
+        uint256[] memory _amounts = new uint256[](4);
+        _amounts[0] = 20;
+        _amounts[1] = 20;
+        _amounts[2] = 20;
+        _amounts[3] = 20;
+        _amounts[4] = 20;
+       
+
+        // Mint NFTs using the Dices contract
+        dice.minterMintBatch(msg.sender, _ids, _amounts, "");  
     }
         // Function to update user stats, only called _ccipReceive
     function _updateBigStats(uint256 statId, uint256 value, address _user) internal {
