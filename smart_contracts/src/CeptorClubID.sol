@@ -80,11 +80,11 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
         _ids[4] = 4;
 
         uint256[] memory _amounts = new uint256[](4);
-        _amounts[0] = 20;
-        _amounts[1] = 20;
-        _amounts[2] = 20;
-        _amounts[3] = 20;
-        _amounts[4] = 20;
+        _amounts[0] = 2;
+        _amounts[1] = 2;
+        _amounts[2] = 2;
+        _amounts[3] = 2;
+        _amounts[4] = 2;
 
         // Mint NFTs using the Dices contract
         dice.minterMintBatch(msg.sender, _ids, _amounts, "");

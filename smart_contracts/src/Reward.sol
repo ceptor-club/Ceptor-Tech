@@ -83,8 +83,7 @@ contract Reward is AccessControl, FunctionsClient {
         // Mint NFTs using the Dices contract
         dice.minterMintBatch(_to, _ids, _amounts, "");
 
-        // Stop the timer for the user
-        dice.makeTimerUsed(_to);
+
 
         // Additional logic for calling the owner of the token and minting NFT
     }

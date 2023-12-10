@@ -8,10 +8,10 @@ const run = async () => {
         //address reward, address prompt, address dice, address ccid, address ceptor)
         // 0x0a3c75634C8a167eD82D2089F8B2Cba49b7685Ad 0xEc2df342d40D46fae8407F24f078138ec6d77FbA 0x45DB01904b51857F6279FE9006De25bf6dE8d136  0x4Eb23215D4d8802d10BAf06A3e9d3935E9bdf630  0xDA38118B32394748f7b720E5CBad719EfD02da0B
         // reward should be done via hardhat, we have issues in passing the serverless function as args in forge
-        // "PromptCollection", "CeptorDice", "Ceptors",  "CeptorCCID"
+        // "PromptCollection", "CeptorDice", "Ceptors",  "CeptorClubID"
 
         let contractAddress = ["0xEc2df342d40D46fae8407F24f078138ec6d77FbA", "0x45DB01904b51857F6279FE9006De25bf6dE8d136", "0xDA38118B32394748f7b720E5CBad719EfD02da0B","0x4Eb23215D4d8802d10BAf06A3e9d3935E9bdf630"]
-        let contractNames = ["PromptCollection", "CeptorDice", "Ceptors",  "CeptorCCID"]
+        let contractNames = ["PromptCollection", "CeptorDice", "Ceptors",  "CeptorClubID"]
        
        /// sepolia testnet
         let chainId = 11155111;
