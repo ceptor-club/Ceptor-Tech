@@ -61,7 +61,7 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
     // a new player can register with a username and pay the registration fee
     // if they don't pay enough they get an error
     function registerPlayer(string memory _username) public payable {
-        uint256 _playerPrice = playerPrice();
+        uint256 _playerPrice =  playerPrice();
         require(msg.value >= _playerPrice, "Insufficient funds for player registration");
 
         // construct a temporary user struct to write into the mapping
@@ -77,15 +77,13 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
         _ids[1] = 1;
         _ids[2] = 2;
         _ids[3] = 3;
-        _ids[4] = 4;
-
+ 
         uint256[] memory _amounts = new uint256[](4);
         _amounts[0] = 2;
         _amounts[1] = 2;
         _amounts[2] = 2;
         _amounts[3] = 2;
-        _amounts[4] = 2;
-
+ 
         // Mint NFTs using the Dices contract
         dice.minterMintBatch(msg.sender, _ids, _amounts, "");
     }
@@ -109,14 +107,14 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
         _ids[1] = 1;
         _ids[2] = 2;
         _ids[3] = 3;
-        _ids[4] = 4;
+        // _ids[4] = 4;
 
         uint256[] memory _amounts = new uint256[](4);
         _amounts[0] = 20;
         _amounts[1] = 20;
         _amounts[2] = 20;
         _amounts[3] = 20;
-        _amounts[4] = 20;
+        // _amounts[4] = 20;
 
         // Mint NFTs using the Dices contract
         dice.minterMintBatch(msg.sender, _ids, _amounts, "");

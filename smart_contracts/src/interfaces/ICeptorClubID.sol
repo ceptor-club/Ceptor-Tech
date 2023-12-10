@@ -44,7 +44,7 @@ interface ICeptorClubID  {
     function registerPlayer(string memory _username) external payable  ;
    
     function registerGameMaster(string memory _username) external payable  ;
- 
+    function getLatestPrice() external view returns (uint256);
     // Events
     event UsernameRegistered(address indexed user, string username, bool isFree);
     event StatsUpdated(address indexed user, uint256 statId, uint256 value);

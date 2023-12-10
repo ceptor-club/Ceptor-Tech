@@ -19,7 +19,8 @@ contract Deployer is Script, Helper {
 
         (address desinationRouter,,,, address priceFeed) = getConfigFromNetwork(destination);
         // deploy the CeptorClubID contract
-        CeptorClubID ccid = new CeptorClubID( dice, desinationRouter, priceFeed);
+        // (address _priceFeed, address _router, address dice_)
+        CeptorClubID ccid = new CeptorClubID( priceFeed, desinationRouter,dice );
         vm.stopBroadcast();
     }
 }
