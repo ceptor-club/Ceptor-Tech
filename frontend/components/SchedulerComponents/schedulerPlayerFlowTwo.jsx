@@ -17,18 +17,18 @@ function PlayerFlowPageTwo({ onPrevious, onNext }) {
   const subChoices = [
     {
       id: 1,
-      date: 'January 10, 2024',
-      startTime: '10:00 AM',
+      date: 'December 17, 2024',
+      startTime: '4:00 PM',
     },
     {
       id: 2,
-      date: 'January 10, 2024',
+      date: 'April 17, 2024',
       startTime: '10:00 AM',
     },
     {
       id: 3,
-      date: 'January 10, 2024',
-      startTime: '10:00 AM',
+      date: 'June 9, 2024',
+      startTime: '2:00 AM',
     },
   ];
 
