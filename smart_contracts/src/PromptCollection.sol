@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./Prompt.sol";
-import "./Timer.sol";
+import "./interfaces/ICeptorDice.sol";
 
 /// @title PromptCollection Contract
 /// @dev Extends ERC721 and Prompt contracts to manage collections of NFTs with specific functionality.
@@ -30,7 +30,7 @@ contract PromptCollection is ERC721, Prompt {
         require(weekTimeStamp != 0, "week not set");
         if (block.timestamp < weekTimeStamp + 604800) {
             // Check if the burning timer is still active
-            if (!Timer(diceContract).checkTimer(msg.sender)) {
+            if (!ICeptorDice(diceContract).checkTimer(msg.sender)) {
                 revert TimerExpired();
             }
 
@@ -39,7 +39,7 @@ contract PromptCollection is ERC721, Prompt {
             weekNFTs[weekTimeStamp].push(tokenId);
 
             // Stop the burning timer
-            Timer(diceContract).makeTimerUsed(msg.sender);
+            ICeptorDice(diceContract).makeTimerUsed(msg.sender);
 
             // Mint the NFT to the sender
             _mint(msg.sender, tokenId);

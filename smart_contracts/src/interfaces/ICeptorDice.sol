@@ -6,4 +6,7 @@ interface ICeptorDice {
         external;
     function mintBatch(uint256[] memory _ids, uint256[] memory _amounts) external payable;
     function timerBurn(address _address, uint256 _id, uint256 _amount) external;
+    
+    function checkTimer(address user) external view returns (bool) ;
+    function makeTimerUsed(address user) external;
 }
