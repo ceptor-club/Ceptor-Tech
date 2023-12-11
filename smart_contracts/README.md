@@ -37,6 +37,7 @@ LootGetter.sol is a contract that demonstrates how to receive string data across
 
 The contract is marked as an example and should not be used in production as it uses hardcoded values and un-audited code.
 
+**something amazing from Eman*: https://github.com/ceptor-club/Ceptor-Tech/blob/tech-dev/smart_contracts/script/Flow.sol
 
 ## Foundry
 
