@@ -58,10 +58,9 @@ io.on("connection", (socket: any) => {
 
   socket.on("imageRequest", (data: any) => {
     console.log("image request received", data);
-    getImages(data).then((responseData: any) => {
-      // console.log("response from getImages", response);
-      console.log("best practice", responseData.images.length)
-      socket.emit("imageResponse", responseData); //using socket instead of IO to send to only the client that requested the images
+    getImages(data).then((response: any) => {
+      console.log("response from getImages", response);
+      socket.emit("imageResponse", response); //using socket instead of IO to send to only the client that requested the images
     });
   });
 });

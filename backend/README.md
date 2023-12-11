@@ -8,12 +8,12 @@ frontend with sockets in context ready to be used: https://github.com/DnDnDiffus
 
 > interested in seeing what parts of the front-end are connecting to the sockets?
 >
-> See the front-end above for relevant code in **utils/socketContext** and **components/GenerateButton.jsx**
+> See the front-end above for relevant code in **utils/socketContext** and **components/Buttons/GenerateButton.jsx**
 
 ## installation
 
 1. npm install
-2. create a .env with the proper variables (SD_ENDPOINT: https://stable-diffusion10.p.rapidapi.com/generate-image) *thanks to Team Art (Spencer!)*
+2. create a .env with the proper variables (SD_ENDPOINT: https://stable-diffusion10.p.rapidapi.com/generate-image) _thanks to Team Art (Spencer!)_
 3. reenable the cors object (maybe)
 4. npm run dev
 
