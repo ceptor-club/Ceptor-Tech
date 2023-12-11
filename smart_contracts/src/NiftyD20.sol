@@ -118,9 +118,9 @@ contract NiftyD20 is ERC721, ERC721Enumerable, ERC721Burnable, Ownable, VRFConsu
         // Determine the correct metadata file based on the roll result
         string memory metadataFile;
         if (rollResult == 0 || rollResult == ROLL_IN_PROGRESS) {
-            metadataFile = "default.gif"; // Assuming you have a default.json for the rolling state
+            metadataFile = "42.json"; // Assuming you have a default.json for the rolling state
         } else {
-        metadataFile = string(abi.encodePacked(Strings.toString(rollResult),".gif"));
+        metadataFile = string(abi.encodePacked(Strings.toString(rollResult),".json"));
         }
     
     return string(abi.encodePacked(baseIPFSUrl,metadataFile));
