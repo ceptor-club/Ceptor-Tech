@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./Prompt.sol";
-import "./Timer.sol";
+import "./interfaces/ICeptorDice.sol";
 
 /// @title PromptCollection Contract
 /// @dev Extends ERC721 and Prompt contracts to manage collections of NFTs with specific functionality.
@@ -12,16 +12,12 @@ contract PromptCollection is ERC721, Prompt {
 
     /// @dev Constructor initializes the contract with the specified parameters and sets the Dice contract address.
     constructor(
-        address new_owner,
         address vrfCoordindatorV2,
         address _diceContract,
         bytes32 keyhash,
         uint64 subscriptionId,
         uint32 callbackGasLimit
-    )
-        ERC721("PromptCollection", "PC")
-        Prompt(new_owner, vrfCoordindatorV2, keyhash, subscriptionId, callbackGasLimit)
-    {
+    ) ERC721("PromptCollection", "PC") Prompt(vrfCoordindatorV2, keyhash, subscriptionId, callbackGasLimit) {
         diceContract = _diceContract;
     }
 
@@ -34,16 +30,16 @@ contract PromptCollection is ERC721, Prompt {
         require(weekTimeStamp != 0, "week not set");
         if (block.timestamp < weekTimeStamp + 604800) {
             // Check if the burning timer is still active
-            if (!Timer(diceContract).checkTimer(msg.sender)) {
+            if (!ICeptorDice(diceContract).checkTimer(msg.sender)) {
                 revert TimerExpired();
             }
 
             // Generate a unique token ID and mint the NFT
-            uint256 tokenId = encodeTokenId(weekTimeStamp, weekNFTs[weekNumber].length);
+            uint256 tokenId = encodeTokenId(weekTimeStamp, weekNFTs[weekNumber].length+1);
             weekNFTs[weekTimeStamp].push(tokenId);
 
             // Stop the burning timer
-            Timer(diceContract).makeTimerUsed(msg.sender);
+            ICeptorDice(diceContract).makeTimerUsed(msg.sender);
 
             // Mint the NFT to the sender
             _mint(msg.sender, tokenId);
@@ -57,7 +53,6 @@ contract PromptCollection is ERC721, Prompt {
     function encodeTokenId(uint256 num1, uint256 num2) internal pure returns (uint256) {
         return (num1 << 128) | num2;
     }
-
 
     /**
      * This function takes a token ID (tokenId) as an input parameter.

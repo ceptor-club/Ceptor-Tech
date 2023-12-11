@@ -1,5 +1,4 @@
-import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 export default function NavbarSmUp() {
@@ -30,7 +29,7 @@ export default function NavbarSmUp() {
                 <Link className="uppercase" href="/QuizPage">
                   Quiz
                 </Link>
-                <Link className="uppercase" href="/">
+                <Link className="uppercase" href="/create">
                   Create{" "}
                 </Link>
                 <Link className="uppercase" href="/nftpage">
@@ -39,19 +38,16 @@ export default function NavbarSmUp() {
                 <Link className="uppercase" href="/profile">
                   Profile{" "}
                 </Link>
-                <Link className="uppercase" href="/gameScheduler">
-                  Game Scheduler
-                </Link>
-                <Link className="uppercase" href="/weekly-challenge">
+                <Link className="uppercase" href="/weeklyChallenge">
                   Weekly Challenge
                 </Link>
-                <Link className="uppercase" href="/buy-dice">
+                <Link className="uppercase" href="/buyDice">
                   Buy Dice{" "}
                 </Link>
-                <Link className="uppercase" href="/free-dice">
+                <Link className="uppercase" href="/freeDice">
                   Free Dice{" "}
                 </Link>
-                <Link className="uppercase" href="/burn-dice">
+                <Link className="uppercase" href="/burnDice">
                   Burn Dice{" "}
                 </Link>
               </div>
