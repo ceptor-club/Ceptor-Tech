@@ -1,17 +1,15 @@
-
-import React from 'react';
-import { useEffect, useState, useContext } from 'react';
-import { createPrompt } from '../utils/promptGen';
-import AdvancedButton from './AdvancedButton';
-import { CONSTANTS } from '../utils/CONSTANTS';
-import Image from 'next/image';
-import { CharacterContext } from './CharacterContext';
+import React from "react";
+import { useEffect, useState, useContext } from "react";
+import { createPrompt } from "../utils/promptGen";
+import AdvancedButton from "./AdvancedButton";
+import { CONSTANTS } from "../utils/CONSTANTS";
+import Image from "next/image";
+import { CharacterContext } from "./CharacterContext";
 import Tooltip from "./ToolTip";
 import InfoIcon from "./InfoIcon";
 
 const characterStatsTT =
   "Here's what we're working with from your stat sheet. You can customize it prior to generating, or edit it later in \"Advanced\"";
-
 
 const CharacterStats = ({
   pdfData,
@@ -22,34 +20,34 @@ const CharacterStats = ({
   imageResult,
   advanced,
 }) => {
-  const { characterData } = useContext(CharacterContext)
+  const { characterData } = useContext(CharacterContext);
   useEffect(() => {
     if (!advanced && pdfData) {
-       console.log("pdfData: ", pdfData); 
+      console.log("pdfData: ", pdfData);
       //create text prompt using pdfData and other data
       const prompt = createPrompt(pdfData);
       setPrompt(prompt);
       setError(null);
     }
     if (characterData.myClass !== pdfData.class) {
-      setPdfData({ ...pdfData, class: characterData.myClass })
+      setPdfData({ ...pdfData, class: characterData.myClass });
     }
     if (characterData.background !== pdfData.background) {
-      setPdfData({ ...pdfData, background: characterData.background })
+      setPdfData({ ...pdfData, background: characterData.background });
     }
     if (characterData.myAlignment !== pdfData.alignment) {
-      setPdfData({...pdfData, alignment: characterData.myAlignment})
+      setPdfData({ ...pdfData, alignment: characterData.myAlignment });
     }
-    if(characterData.gender !== pdfData.gender) {
-      if (characterData.gender === "He" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "He / Him"})
-      } else if (characterData.gender === "She" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "She / Hers"})
-      } else if (characterData.gender === "They" && pdfData.gender === '') {
-        setPdfData({...pdfData, gender: "They / Them"})
+    if (characterData.gender !== pdfData.gender) {
+      if (characterData.gender === "He" && pdfData.gender === "") {
+        setPdfData({ ...pdfData, gender: "male" });
+      } else if (characterData.gender === "She" && pdfData.gender === "") {
+        setPdfData({ ...pdfData, gender: "female" });
+      } else if (characterData.gender === "They" && pdfData.gender === "") {
+        setPdfData({ ...pdfData, gender: "nonbinary" });
       }
     }
-    console.log(pdfData)
+    console.log(pdfData);
   });
 
   const handleClassSelect = (e) => {
@@ -63,6 +61,16 @@ const CharacterStats = ({
       setPdfData({ ...pdfData, class: "" });
     }
   };
+
+  const handleSpeciesSelect = (e) => {
+    const input = document.getElementById("speciesInput");
+    if (input.value !== "") {
+      setPdfData({ ...pdfData, race: input.value });
+    } else {
+      setPdfData({ ...pdfData, race: "" });
+    }
+  };
+    
 
   const handleArmorSelect = (e) => {
     const input = document.getElementById("armorInput");
@@ -168,7 +176,15 @@ const CharacterStats = ({
                     readOnly
                     disabled={imageResult}
                   ></input>
-                  <p className="mx-4">(LOCKED) RACE: Dragonborn</p>
+                  <p className="mx-4">SPECIES of CEPTOR: </p>
+                  <textarea
+                    id="speciesInput"
+                    placeholder="eg. centaur"
+                    className="bg-transparent resize-none h-6 overflow-hidden"
+                    onChange={handleSpeciesSelect}
+                    defaultValue={pdfData.race ? pdfData.race : ""}
+                    disabled={imageResult}
+                  ></textarea>
                 </div>
                 <div className="flex items-center mx-[48px] mt-2 mb-4">
                   <input
@@ -182,12 +198,11 @@ const CharacterStats = ({
                   <p className="mx-4">CLASS: </p>
                   <select
                     id="classInput"
-                    className="bg-transparent resize-none h-6  bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6  bg-slate-200 flex-grow"
                     onChange={handleClassSelect}
                     disabled={imageResult}
                   >
-                    <option value=''>
-
+                    <option value="">
                       {pdfData.class ? pdfData.class : "Select a Class"}
                     </option>
                     {CONSTANTS.characterClass.map((characterClass) => (
@@ -227,7 +242,7 @@ const CharacterStats = ({
                   <select
                     id="backgroundInput"
                     placeholder="Background"
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black  flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200  flex-grow"
                     onChange={handleBackgroundSelect}
                     disabled={imageResult}
                   >
@@ -258,12 +273,11 @@ const CharacterStats = ({
                   <select
                     id="alignmentInput"
                     placeholder="Neutral Good"
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 flex-grow"
                     onChange={handleAlignmentSelect}
                     disabled={imageResult}
                   >
-                    <option value=''>
-
+                    <option value="">
                       {pdfData.alignment ? pdfData.alignment : "Alignment..."}
                     </option>
                     {CONSTANTS.characterAlignment.map((characterAlignment) => (
@@ -305,12 +319,11 @@ const CharacterStats = ({
                   <select
                     id="colorInput"
                     placeholder=""
-                    className="bg-transparent resize-none h-6 bg-slate-200 text-black flex-grow"
+                    className="bg-transparent resize-none h-6 bg-slate-200 flex-grow"
                     onChange={handleColorSelect}
                     disabled={imageResult}
                   >
-                    <option value=''>
-
+                    <option value="">
                       {pdfData.color ? pdfData.color : "Color..."}
                     </option>
                     {CONSTANTS.colors.map((colors) => (
@@ -340,9 +353,8 @@ const CharacterStats = ({
               </div>
               <h4 className="text-center">EDIT THIS LATER IN ADVANCED</h4>
             </div>
-            
-            <Tooltip content={characterStatsTT}>
-            </Tooltip>
+
+            <Tooltip content={characterStatsTT}></Tooltip>
           </div>
         </>
       ) : null}
