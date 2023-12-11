@@ -45,7 +45,7 @@ Link to readme:
 - Alan Barry (Backend engineer and early-riser)
 - Nadia (3D modeling of Rollable D20)
 
-Link to readme:
+[Link to GAMES readme](https://github.com/ceptor-club/Ceptor-Tech/blob/temp2/README-GAMES.md), **temp2 is Games Team's prod branch.**
 
 # Getting Started 
 
