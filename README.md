@@ -14,13 +14,13 @@ Each team will have their own branch to show their individual contributions to t
 
 Each team will have their own narrative, demo video, internal page and readme linked below.
 
-> As Team Tech, we will oversee the technical polish and powerfully use Chainlink’s flagship services. We developed a login flow with monetization, crosschain compatiblity, and access control. We use Price Feeds, Automation, Functions, VRF, and CCIP. Tippi wants to prepare Ceptor Club to launch a BETA in Q1 next year and see some revenue.
+> As Team Tech, we will oversee the technical polish and powerfully use Chainlink’s flagship services.  We developed a login flow with monetization, crosschain compatiblity, and access control.  We use Price Feeds, Automation, Functions, VRF, and CCIP.  Tippi wants to prepare Ceptor Club to launch a BETA in Q1 next year and see some revenue.  
 
 ## Ceptor Tech is:
 
 - Tippi (Product Owner and CCID/CCIP Developer)
 - Eman (Chainlink Developer Expert -- Functions, Automation, VRF)
-- Alica (PM and Designer)
+- Amy (Executive Producer)
 - Lena (Web3 Fullstack with a heart of gold)
 - Aire (Front-end support)
 
@@ -32,18 +32,19 @@ Each team will have their own narrative, demo video, internal page and readme li
 - Melinda McClimans (Product & Research)
 - Spencer Kinney (Engineer)
 - Sam Yeh (boy wonder, and unofficial mascot -- creator of the AI prompt battler)
+- Creatjve (Branding and Wizards Hat)
 
 Link to readme:
 
 ### Ceptor Games
 
-> Team Games will make sure our overall project is fun and usable. They are building a couple small games and activities: Improved character creation and fun quiz, rollable 3D Big Dice, AI Prompt Battler, to make our app more “sticky.”
+> Team Games will make sure our overall project is fun and usable.  They are building a couple small games and activities: Improved character creation and fun quiz, rollable 3D Big Dice, AI Prompt Battler, to make our app more “sticky.”
 
-- leomofthings.eth (Front End Development)
-- Jason A
-- Vince
-- Alan Barry
-- Nadia
+- leomofthings.eth (Updating the Quiz UI)
+- Jason A (Team Lead and D20 Smart Contract)
+- Vince Lindsey (Scheduling UI & fullstack jr dev)
+- Alan Barry (Backend engineer and early-riser)
+- Nadia (3D modeling of Rollable D20)
 
 Link to readme:
 
