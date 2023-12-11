@@ -1,7 +1,9 @@
 # Constellation of Smart Contracts
 
 > Eman Herawy, Tippi Fifestarr, and Danjo the 0x all helped out with this
+> 
 > Jason A made the VRF D20 NFT
+>
 > Spencer made the LootSender and LootBox NFT.
 
 ## Overview
