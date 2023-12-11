@@ -82,7 +82,7 @@ big overview of contracts
     - Manages minting Dice NFTs for the most-liked POW NFT each week.
     -  Consumes **Chainlink function** to call the API and retrieve winning NFT.
     -  Calls the Dice NFT contract to mint a bag of dice for the winner.
-3. **Dice.sol**
+3. **CeptorDice.sol**
     - Manages minting of Dice NFTs.
     -  timer per burning of dice.
 4. **Ceptors.sol**
