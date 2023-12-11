@@ -7,8 +7,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 abstract contract CrossChainRegistration is CCIPReceiver, Ownable {
     //  uint64 constant chainIdEthereumSepolia = 16015286601757825753;
-    uint64 constant chainIdAvalancheFuji = 14767482510784806043;
-    uint64 constant chainIdPolygonMumbai = 12532609583862916517;
+    uint64   artChainSelector ;
+    uint64   gameChainSelector ;
     // approved list of sender addresses for CCIP messages
     mapping(address => bool) public approvedSenders;
 
@@ -19,7 +19,10 @@ abstract contract CrossChainRegistration is CCIPReceiver, Ownable {
         _;
     }
 
-    constructor(address router) CCIPReceiver(router) Ownable(msg.sender) {}
+    constructor(address router, uint64 _gameChain, uint64 artChain) CCIPReceiver(router) Ownable(msg.sender) {
+        gameChainSelector = _gameChain;
+        artChainSelector = artChain;
+    }
 
     // function to let the owner set the approved senders
     function setApprovedSender(address _sender, bool _approved) public onlyOwner {

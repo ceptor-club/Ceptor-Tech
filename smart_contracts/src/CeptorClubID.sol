@@ -51,8 +51,8 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
     mapping(address => UserStruct) public users;
     /// @dev @notice  Should be in minter role at dice contract to mint
 
-    constructor(address _priceFeed, address _router, address dice_)
-        CrossChainRegistration(_router)
+    constructor(address _priceFeed, address _router, address dice_, uint64 _gameChain, uint64 artChain)
+        CrossChainRegistration(_router , _gameChain, artChain)
         PriceFeedCCID(_priceFeed)
     {
         dice = ICeptorDice(dice_);
@@ -146,7 +146,7 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
         override
         onlyAllowedSenders(abi.decode(any2EvmMessage.sender, (address)))
     {
-        if (any2EvmMessage.sourceChainSelector == chainIdAvalancheFuji) {
+        if (any2EvmMessage.sourceChainSelector == artChainSelector) {
             // Example: Update stats or perform other actions based on received data
             // Not sure about how we can have security based on making sure that the Loot and Stats are from the right contract
             // I guess we can have an allowlist of contracts that can send data to this contract
@@ -159,7 +159,7 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
             }
             users[userAddress].loot.push(loot);
             emit LootReceived(userAddress, loot);
-        } else if (any2EvmMessage.sourceChainSelector == chainIdPolygonMumbai) {
+        } else if (any2EvmMessage.sourceChainSelector == gameChainSelector) {
             // Example: Update stats or perform other actions based on received data
             // Not sure about how we can have security based on making sure that the Loot and Stats are from the right contract
             // I guess we can have an allowlist of contracts that can send data to this contract
