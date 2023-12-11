@@ -3,14 +3,12 @@ import { useState, useEffect, useContext } from "react";
 import CreateHero from '../components/CreateHero';
 import { Create } from '../components/Create';
 import { Logo } from '../components/Logo';
-import HamburgerMenu from '../components/HamburgerMenu';
 import VectorImage from '../components/VectorImage';
 import Meta from '../components/Meta';
 import Image from 'next/image';
 import { NavbarMdUp, NavbarSmUp } from '../components/NavBar/index';
 import Link from "next/link";
 import { SocketContext } from "../utils/socketContext";
-
 
 export default function Home() {
   const socket = useContext(SocketContext);
@@ -29,7 +27,7 @@ export default function Home() {
     }
   }, [socket]);
 
-  const [imageProcessing, setImageProcessing] = useState(false); //processing state ie. loading...
+  const [imageProcessing, setImageProcessing] = useState(false); // processing state ie. loading...
   const [conditionalRender, setConditionalRender] = useState("");
 
   const toggleImageProcessing = async () => {
@@ -60,13 +58,21 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col justify-center items-center">
-        <p className="z-10">Version 0.8.22*</p>
-        <p className="z-10">{"*Merged, now with 100% more Quiz! :D"}</p>
+        <p className="z-10">Version 0.12.10*</p>
+        <p className="z-10">{"Aire's frontend! :D"}</p>
         <Link href="/nftpage">
           <span className="text-2xl relative z-10 text-white underline cursor-pointer font-black">
             NFT Explorer
           </span>
         </Link>
+
+        {/* Add the link to the "CCID" page */}
+        <Link href="/CCID">
+          <span className="text-2xl relative z-10 text-white underline cursor-pointer font-black ml-4">
+            CCID
+          </span>
+        </Link>
+
         <Logo setConditionalRender={setConditionalRender} />
 
         <div className="z-10 flex w-full justify-center">
@@ -75,6 +81,7 @@ export default function Home() {
           </div> */}
 
           <div className=" z-10">
+            {/* Include your Create component */}
             <Create />
           </div>
         </div>

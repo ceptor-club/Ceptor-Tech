@@ -1,29 +1,38 @@
 import "../styles/globals.css";
-import {
-  EthereumClient,
-  w3mProvider,
-  w3mConnectors,
-} from "@web3modal/ethereum";
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
+import { EthereumClient } from "@web3modal/ethereum";
 import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { sepolia, goerli } from "wagmi/chains";
+import {
+  sepolia,
+  goerli,
+  polygonMumbai,
+  polygonZkEvmTestnet,
+  avalancheFuji,
+} from "wagmi/chains";
 import Layout from "../components/Layout";
-import { CharacterProvider } from '../components/CharacterContext';
+import { CharacterProvider } from "../components/CharacterContext";
 import SocketProvider from "../utils/socketContext";
 
-const chains = [sepolia, goerli];
+const { chains, publicClient } = configureChains(
+  [sepolia, goerli, polygonMumbai, polygonZkEvmTestnet, avalancheFuji],
+  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+);
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
-const { publicClient } = configureChains(chains, [
-  w3mProvider({ projectId: projectId }),
-]);
+
+const { connectors } = getDefaultWallets({
+  appName: "Ceptor Tech",
+  projectId,
+  chains,
+});
+
 const wagmiConfig = createConfig({
   autoConnect: false,
-  connectors: w3mConnectors({
-    projectId,
-    chains,
-    version: 1,
-  }),
+  connectors,
   publicClient,
 });
 
@@ -33,15 +42,17 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <CharacterProvider>
-      <SocketProvider>
-        <WagmiConfig config={wagmiConfig}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </WagmiConfig>
-        <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
-      </SocketProvider>
-          </CharacterProvider>
+        <SocketProvider>
+          <WagmiConfig config={wagmiConfig}>
+            <RainbowKitProvider chains={chains}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </RainbowKitProvider>
+          </WagmiConfig>
+          <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+        </SocketProvider>
+      </CharacterProvider>
     </>
   );
 }
