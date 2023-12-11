@@ -36,15 +36,15 @@ Link to readme:
 
 ### Ceptor Games
 
-> Team Games will make sure our overall project is fun and usable.  They are building a couple small games and activities: Improved character creation and fun quiz, rollable 3D Big Dice, AI Prompt Battler, to make our app more “sticky.”
+> Team Games will make sure our overall project is fun and usable.  They are building a couple small games and activities: Improved character creation and fun quiz, rollable 3D Big Dice, and a game scheduler to make our app more “sticky.”
 
 - leomofthings.eth (Front End Development)
-- Jason A
-- Vince
-- Alan Barry
-- Nadia
+- Jason A (Chainlink VRF Integration)
+- Vince (Game Scheduler)
+- Alan Barry (Back End Development)
+- Nadia (3D Dice Model)
 
-Link to readme:
+Link to readme: https://github.com/ceptor-club/Ceptor-Tech/blob/temp2/README-GAMES.md
 
 # Getting Started 
 
