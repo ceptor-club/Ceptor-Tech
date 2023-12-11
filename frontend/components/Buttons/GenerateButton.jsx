@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { SocketContext } from "../../utils/socketContext";
 import Image from "next/image";
-import { CONSTANTS } from "../utils/CONSTANTS";
+import { CONSTANTS } from "../../utils/CONSTANTS";
 import { useRouter } from "next/router";
 import Tooltip from "../ToolTip";
 import InfoIcon from "../InfoIcon";

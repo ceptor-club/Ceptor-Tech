@@ -1,6 +1,6 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import React from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const CharacterPage = () => {
   const router = useRouter();
@@ -9,7 +9,9 @@ const CharacterPage = () => {
   return (
     <div className="bg-black text-white flex flex-col items-center justify-center h-screen p-4">
       <div className="text-center p-4 bg-black text-white w-full max-w-xs">
-        <p className="font-oswald text-4xl uppercase mb-4">Create a Character</p>
+        <p className="font-oswald text-4xl uppercase mb-4">
+          Create a Character
+        </p>
       </div>
       <div className="flex flex-col space-y-4 w-full max-w-xs">
         <Link href="/QuizPage">
@@ -25,12 +27,12 @@ const CharacterPage = () => {
             </span>
           </button>
         </Link>
-        <Link href="">
+        <Link href="/nftpage">
           <button className="w-full bg-orange-500 pl-3 pr-3 pt-1 text-2xl rounded-lg text-black font-nothing-you-could-do hover:bg-opacity-90">
             Explore Characters
           </button>
         </Link>
-        <Link href="">
+        {/* <Link href="">
           <button className="w-full bg-orange-500 pl-3 pr-3 pt-1 text-2xl rounded-lg text-black font-nothing-you-could-do hover:bg-opacity-90">
             Fill in the Blanks
           </button>
@@ -39,7 +41,7 @@ const CharacterPage = () => {
           <button className="w-full bg-orange-500 pl-3 pr-3 pt-1 text-2xl rounded-lg text-black font-nothing-you-could-do hover:bg-opacity-90">
             ORCS (upload)
           </button>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
