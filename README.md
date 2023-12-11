@@ -34,6 +34,9 @@ Each team will have their own narrative, demo video, internal page and readme li
 
 Link to readme:
 
+[https://github.com/spencerkinney/chainlink-hackathon-backend](https://github.com/spencerkinney/chainlink-hackathon-backend)
+
+
 ### Ceptor Games
 
 > Team Games will make sure our overall project is fun and usable.  They are building a couple small games and activities: Improved character creation and fun quiz, rollable 3D Big Dice, AI Prompt Battler, to make our app more “sticky.”
