@@ -47,7 +47,9 @@ const BurnDiePage = () => {
       }
       console.log("burn dice");
 
-      writeBurn();
+      // TODO: comment in to burn dice
+      // writeBurn();
+      navigateToQuizPage();
     } catch (error) {
       console.log(error);
     }
@@ -59,8 +61,8 @@ const BurnDiePage = () => {
     }
   }, [isSuccessBurn]);
 
-  const navigateToCharacterPage = () => {
-    router.push("/characterPage");
+  const navigateToQuizPage = () => {
+    router.push("/QuizPage");
   };
 
   return (
