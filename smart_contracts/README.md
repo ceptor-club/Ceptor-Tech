@@ -1,6 +1,8 @@
 # Constellation of Smart Contracts
 
 > Eman Herawy, Tippi Fifestarr, and Danjo the 0x all helped out with this
+> Jason A made the VRF D20 NFT
+> Spencer made the LootSender and LootBox NFT.
 
 ## Overview
 
@@ -8,7 +10,7 @@ This is a constellation of smart contracts that work together to create a decent
 
 ### Contracts
 
-**CCID_Full_unsafe2.sol**
+**CeptorClubID.sol**
 Below is an overview of its functionality:
 
 - User Registration: Users can register a username with the registerUsername function, which requires a payment unless the sender is the contract owner.
@@ -16,7 +18,6 @@ Below is an overview of its functionality:
 - Loot Handling: It includes functionality to store and manage loot associated with users. Loot can be added to a user's account via the _ccipReceive function, which is designed to handle cross-chain messages.
 - Chain Interaction: The contract can check the blockchain it's deployed on with checkDeployedChain and handle cross-chain messages with _ccipReceive.
 - Access Control: There's a mechanism to approve or disapprove senders for cross-chain interaction using setApprovedSender.
-TODO List for ccid_full_unsafe2.sol
 
 - [ ] Implement security checks to ensure that Loot and Stats are received from the correct contracts.
 - [ ] Consider adding a function to allow users to leave the system and retrieve a portion of their funds.
