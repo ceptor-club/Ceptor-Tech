@@ -49,16 +49,16 @@ export default function NavbarMdUp() {
                 <Link className="uppercase" href="/profile">
                   Profile{" "}
                 </Link>
-                <Link className="uppercase" href="/weekly-challenge">
+                <Link className="uppercase" href="/weeklyChallenge">
                   Weekly Challenge
                 </Link>
-                <Link className="uppercase" href="/buy-dice">
+                <Link className="uppercase" href="/buyDice">
                   Buy Dice{" "}
                 </Link>
-                <Link className="uppercase" href="/free-dice">
+                <Link className="uppercase" href="/freeDice">
                   Free Dice{" "}
                 </Link>
-                <Link className="uppercase" href="/burn-dice">
+                <Link className="uppercase" href="/burnDice">
                   Burn Dice{" "}
                 </Link>
               </div>
