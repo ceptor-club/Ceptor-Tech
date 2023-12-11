@@ -8,10 +8,10 @@ export const addresses = {
     timer: "0x30dd64c284a86f6a3a0d9c96e27a6546156d42c0",
   },
   "avalanche-fuji": {
-    promptCollection: "0x3A1f5f108dC123F8745CfBcfDfE7Ad09c92E1367",
+    promptCollection: "0x16441906972dB87d1498FF462C7351c46B55406F",
     ceptorDice: "0xf67Ad9EB4f909A330A78D30750966a883C07877D",
-    ceptors: "0x16441906972dB87d1498FF462C7351c46B55406F",
-    ccipV4: "0x89c0504E12ffeBdd62D6fFe7765f784c971A4415",
+    ceptors: "0x89c0504E12ffeBdd62D6fFe7765f784c971A4415",
+    ccipV4: "0x77c657EC04d5Da24411E4BF7Eb63fb4EA170520F",
     timer: "",
   },
   sepolia: {

@@ -1,0 +1,181 @@
+@startuml
+
+' ---- Group 1: Reward System ----
+package "Reward System" {
+    class Reward {
+        {abstract}AccessControl
+        {abstract}FunctionsClient
+        {abstract}📚Functions for [[Functions.Request]]
+
+        #[[uint64]] subscriptionId
+        #[[PromptCollection]] prompt
+        #[[CeptorDice]] dice
+        #[[string]] checkLogic
+        +[[mapping string=>bool]] usedRequests
+        +{static}[[bytes32]] WINNER_MANAGEMENT_ROLE
+
+        +**__constructor__**()
+        +getWinner()
+        #fulfillRequest()
+        +updateOracleAddress()
+    }
+    Reward --[#DarkGoldenRod]|> AccessControl
+    Reward --[#DarkGoldenRod]|> FunctionsClient
+    Reward ..[#DarkOliveGreen]|> Functions : //for Functions.Request//
+
+    class PromptCollection {
+        {abstract}ERC721
+        {abstract}Prompt
+
+        +**__constructor__**()
+        +mint()
+        #🔍encodeTokenId()
+        +setRewardContract(reward: address)
+    }
+    PromptCollection --[#DarkGoldenRod]|> ERC721
+    PromptCollection --[#DarkGoldenRod]|> Prompt
+
+    class Prompt {
+        {abstract}VRFConsumerBaseV2
+        {abstract}Ownable
+
+        -[[VRFCoordinatorV2Interface]] i_vrfCoordinator
+        -[[bytes32]] i_keyhash
+        -[[uint64]] i_subscriptionId
+        +{static}[[uint16]] REQUEST_CONFIRMATIONS
+        -[[uint32]] i_callbackGasLimit
+        +{static}[[uint32]] NUM_WORDS
+        -[[string]] i_prompts
+        +[[string]] s_currentPrompt
+        +[[uint256]] lastUpdated
+        -[[string]] s_lastPrompt
+        -[[string]] s_secondLastPrompt
+        +[[uint256]] lastTimeStamp
+        +[[uint256]] weekTimeStamp
+        +[[uint256]] weekNumber
+        +[[address]] rewardContract
+
+        +**__constructor__**()
+        +setRewardContract()
+        +requestPromptUpdate()
+        #fulfillRandomWords()
+        -🔍compareStrings()
+        +🔍getPrompt()
+        +🔍getTotalPromptCount()
+        +🔍getCurrentPrompt()
+        +setNewTenPrompts()
+    }
+    Prompt --[#DarkGoldenRod]|> VRFConsumerBaseV2
+    Prompt --[#DarkGoldenRod]|> Ownable
+}
+
+' ---- Group 2: Ceptor Club and Dice ----
+package "Ceptor Club and Dice" {
+    class CeptorClubID {
+        {abstract}PriceFeedCCID
+        {abstract}CrossChainRegistration
+
+        +**__constructor__**()
+        +💰registerPlayer()
+        +💰registerGameMaster()
+        #_updateBigStats()
+        #_storeLoot()
+        #_ccipReceive()
+    }
+    CeptorClubID --[#DarkGoldenRod]|> PriceFeedCCID
+    CeptorClubID --[#DarkGoldenRod]|> CrossChainRegistration
+
+    class CeptorDice {
+        {abstract}ERC1155
+        {abstract}Timer
+        +{static}[[bytes32]] MINTER
+        +{static}[[bytes32]] TIMER_MANAGEMENT_ROLE
+
+        +**__constructor__**()
+        +minterMintBatch()
+        +💰mintBatch()
+        +timerBurn()
+        +burn()
+        +addNewTokens(_ids: uint256[], _prices: uint256[], _times: uint256[], _uris: string[])
+        +🔍supportsInterface()
+        +pauseTokens()
+        +unpauseTokens()
+        +setTokenURI()
+        +setCeptorAddress()
+        +🔍uri()
+        +🔍balanceOf()
+        +🔍totalSupply()
+        +withdraw()
+    }
+    CeptorDice --[#DarkGoldenRod]|> ERC1155
+    CeptorDice --[#DarkGoldenRod]|> Timer
+}
+
+' ---- Group 3: Ceptors and Related ----
+package "Ceptors and Related" {
+    class Ceptors {
+        {abstract}ERC721URIStorage
+        {abstract}Pausable
+        {abstract}ERC721Burnable
+        {abstract}Ownable
+        {abstract}ERC721Enumerable
+
+        #[[uint256]] _tokenIdCounter
+        +[[address]] diceContract
+
+        +**__constructor__**()
+        +setPause()
+        +mint()
+        +🔍tokenURI()
+        +🔍supportsInterface()
+        #_update()
+        #_increaseBalance()
+    }
+    Ceptors --[#DarkGoldenRod]|> ERC721URIStorage
+    Ceptors --[#DarkGoldenRod]|> Pausable
+    Ceptors --[#DarkGoldenRod]|> ERC721Burnable
+    Ceptors --[#DarkGoldenRod]|> Ownable
+    Ceptors --[#DarkGoldenRod]|> ERC721Enumerable
+
+    class Timer {
+        {abstract}AccessControl
+
+        +{static}[[bytes32]] TIMER_MANAGEMENT_ROLE
+        +{static}[[bytes32]] MINTER
+        +[[mapping address=>UserTimer]] userToTimer
+
+        +**__constructor__**()
+        #_startTimer()
+        +🔍checkTimer()
+        +makeTimerUsed()
+    }
+    Timer --[#DarkGoldenRod]|> AccessControl
+
+    class CrossChainRegistration {
+        {abstract}CCIPReceiver
+        {abstract}Ownable
+
+        #{static}[[uint64]] chainIdAvalancheFuji
+        #{static}[[uint64]] chainIdPolygonMumbai
+        +[[mapping address=>bool]] approvedSenders
+
+        +**__constructor__**()
+        +setApprovedSender()
+    }
+    CrossChainRegistration --[#DarkGoldenRod]|> CCIPReceiver
+    CrossChainRegistration --[#DarkGoldenRod]|> Ownable
+
+    class PriceFeedCCID {
+        +[[AggregatorV3Interface]] dataFeed
+        -{static}[[uint256]] BASE_PLAYER_REGISTRATION_COST
+        -{static}[[uint256]] BASE_GAMEMASTER_REGISTRATION_COST
+
+        +**__constructor__**()
+        +🔍getLatestPrice()
+        +🔍playerPrice()
+        +🔍gameMasterPrice()
+        -🔍calculateCostInWei()
+    }
+}
+
+@enduml

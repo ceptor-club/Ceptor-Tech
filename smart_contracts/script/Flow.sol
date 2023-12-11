@@ -57,8 +57,8 @@ contract Flow is Script, Helper {
         // let's say he wants to participate in prompt
         // fist he needs to burn dice to paly
         diceContract.timerBurn(msg.sender, 1, 1);
-        promptContract.mint();
-        // he might be lucky and get a reward after a week and he can get more dice
+        //promptContract.mint();
+        // // he might be lucky and get a reward after a week and he can get more dice
 
         // now let's imagine he wants to mint a ceptor
         // first he needs to burn dice to mint
