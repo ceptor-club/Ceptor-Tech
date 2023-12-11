@@ -35,7 +35,7 @@ contract PromptCollection is ERC721, Prompt {
             }
 
             // Generate a unique token ID and mint the NFT
-            uint256 tokenId = encodeTokenId(weekTimeStamp, weekNFTs[weekNumber].length);
+            uint256 tokenId = encodeTokenId(weekTimeStamp, weekNFTs[weekNumber].length+1);
             weekNFTs[weekTimeStamp].push(tokenId);
 
             // Stop the burning timer
