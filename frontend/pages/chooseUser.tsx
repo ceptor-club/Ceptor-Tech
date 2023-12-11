@@ -28,13 +28,15 @@ const Userpage = () => {
     const userValue = role === "Gamemaster" ? "gm" : "player";
     setUser(userValue);
     router.push(
-      `/characterPage?username=${encodeURIComponent(
+      `/burnDieStart?username=${encodeURIComponent(
         username
       )}&user=${encodeURIComponent(userValue)}`
     );
   };
 
-  // registerPlayer function in the CeptorClubID contract
+  /**
+   * Hook for registering a Player
+   */
   const { config: configRegisterPlayer } = usePrepareContractWrite({
     address: addresses[chain?.network]?.ccipV4,
     abi: CeptorCCIDABI,
@@ -42,7 +44,7 @@ const Userpage = () => {
     args: [username],
   });
 
-  // Hook for minting dice
+  //
   const {
     data: dataRegisterPlayer,
     isLoading: isLoadingRegisterPlayer,
@@ -59,14 +61,18 @@ const Userpage = () => {
       }
       console.log("register player");
 
-      writeRegisterPlayer();
-      isSuccessRegisterPlayer && handleRoleSelection("player");
+      // writeRegisterPlayer();
+      // TODO: add check for successful registration
+      // isSuccessRegisterPlayer && handleRoleSelection("player");
+      handleRoleSelection("player");
     } catch (error) {
       console.log(error);
     }
   };
 
-  // registerPlayer function in the CeptorClubID contract
+  /**
+   * Hook for for registering a GameMaster
+   */
   const { config: configRegisterGameMaster } = usePrepareContractWrite({
     address: addresses[chain?.network]?.ccipV4,
     abi: CeptorCCIDABI,
@@ -74,7 +80,6 @@ const Userpage = () => {
     args: [username],
   });
 
-  // Hook for minting dice
   const {
     data: dataGameMaster,
     isLoading: isLoadingGameMaster,
@@ -92,7 +97,9 @@ const Userpage = () => {
       console.log("register Game Master");
 
       writeGameMaster();
-      isSuccessGameMaster && handleRoleSelection("gm");
+      // TODO: add check for successful registration
+      // isSuccessGameMaster && handleRoleSelection("gm");
+      handleRoleSelection("gm");
     } catch (error) {
       console.log(error);
     }
@@ -104,11 +111,13 @@ const Userpage = () => {
 
   return (
     <div className="bg-black min-h-screen flex flex-col justify-center items-center text-white">
-      <div className="bg-black text-white py-4 px-2 text-center absolute top-0 left-0 right-0">
-        <h1
-          className="cursor-pointer"
-          onClick={() => handleRoleSelection("Gamemaster")}
-        ></h1>
+      <div className="bg-black text-white py-4 px-2 text-center ">
+        <h1 className="font-milonga text-4xl uppercase text-light-yellow">
+          Create your Ceptor Club ID
+        </h1>
+        <h1 className="font-oswald text-2xl uppercase text-white">
+          and choose your role
+        </h1>
       </div>
       <div className="text-center mt-4">
         <input
@@ -121,7 +130,7 @@ const Userpage = () => {
       </div>
       <div className="text-center">
         <p className="text-white font-oswald text-xl mb-4">Choose your role</p>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center space-y-5">
           <button
             className="bags-button font-nothing-you-could-do text-xl uppercase text-black py-4 px-6 m-2 rounded-lg cursor-pointer"
             onClick={() => registerGameMaster()}
