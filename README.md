@@ -44,4 +44,4 @@ Link to readme:
 - Alan Barry
 - Nadia
 
-Link to readme:
+Link to readme: https://github.com/ceptor-club/Ceptor-Tech/blob/temp2/README-GAMES.md
