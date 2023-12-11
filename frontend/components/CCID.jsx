@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAccount } from "wagmi";
-import WalletConnectButton from "./WalletConnectButton";
+import RainbowKitButton from "./Buttons/RainbowKitButton";
 
 export default function CCID() {
   const [isCreateIDModalOpen, setIsCreateIDModalOpen] = useState(false);
@@ -10,13 +10,14 @@ export default function CCID() {
   const [isLoginErrorPopupOpen, setIsLoginErrorPopupOpen] = useState(false);
   const router = useRouter();
   const { isConnected } = useAccount();
+  const [hasCCID, setHasCCID] = useState();
 
   useEffect(() => {
     if (isConnected) {
       // Automatically close the "Your wallet is successfully connected" pop-up after 4 seconds and redirect to the uploadpage
       setTimeout(() => {
         setIsLoginSuccessPopupOpen(false);
-        router.push("/uploadpage");
+        router.push("/chooseUser");
       }, 4000);
     }
   }, [isConnected, router]);
@@ -71,18 +72,20 @@ export default function CCID() {
 
         {isLoginPopupOpen && (
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-            <div className="bg-white p-4 rounded-lg text-center relative">
+            <div className="bg-light-grey  p-4 rounded-lg text-center relative">
               <button
                 onClick={() => setIsLoginPopupOpen(false)}
-                className="absolute top-2 right-2 text-black text-lg cursor-pointer"
+                className="absolute bg-light-orange top-2 px-2 right-2 text-white text-lg cursor-pointer rounded-xl"
               >
                 x
               </button>
-              <p className="font-oswald text-black">
-                Please connect your wallet and choose the network to mint your
-                CCID (Ceptor Club ID)
-              </p>
-              <WalletConnectButton />
+              <div className="flex flex-col justify-center items-center m-5">
+                <p className="font-oswald text-white">
+                  Please connect your wallet and choose the network to mint your
+                  CCID (Ceptor Club ID)
+                </p>
+                <RainbowKitButton />
+              </div>
             </div>
           </div>
         )}
