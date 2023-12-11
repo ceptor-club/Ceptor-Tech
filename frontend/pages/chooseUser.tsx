@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { addresses } from "../utils/addresses";
+import { CeptorCCIDABI } from "../utils/abis";
+import {
+  useAccount,
+  useContractWrite,
+  useNetwork,
+  usePrepareContractWrite,
+} from "wagmi";
 
 const Userpage = () => {
+  const { chain, chains } = useNetwork();
+  const { address, isConnected } = useAccount();
+
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [user, setUser] = useState("");
@@ -17,13 +28,75 @@ const Userpage = () => {
     const userValue = role === "Gamemaster" ? "gm" : "player";
     setUser(userValue);
     router.push(
-      `/burnDie?username=${encodeURIComponent(
+      `/characterPage?username=${encodeURIComponent(
         username
       )}&user=${encodeURIComponent(userValue)}`
     );
   };
 
-  // TODO: CCID call the registerPlayer function
+  // registerPlayer function in the CeptorClubID contract
+  const { config: configRegisterPlayer } = usePrepareContractWrite({
+    address: addresses[chain?.network]?.ccipV4,
+    abi: CeptorCCIDABI,
+    functionName: "registerPlayer",
+    args: [username],
+  });
+
+  // Hook for minting dice
+  const {
+    data: dataRegisterPlayer,
+    isLoading: isLoadingRegisterPlayer,
+    isSuccess: isSuccessRegisterPlayer,
+    write: writeRegisterPlayer,
+  } = useContractWrite(configRegisterPlayer);
+
+  const registerPlayer = async () => {
+    try {
+      if (!isConnected) {
+        open();
+      } else if (isConnected) {
+        console.log("wallet is connected");
+      }
+      console.log("register player");
+
+      writeRegisterPlayer();
+      isSuccessRegisterPlayer && handleRoleSelection("player");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // registerPlayer function in the CeptorClubID contract
+  const { config: configRegisterGameMaster } = usePrepareContractWrite({
+    address: addresses[chain?.network]?.ccipV4,
+    abi: CeptorCCIDABI,
+    functionName: "registerPlayer",
+    args: [username],
+  });
+
+  // Hook for minting dice
+  const {
+    data: dataGameMaster,
+    isLoading: isLoadingGameMaster,
+    isSuccess: isSuccessGameMaster,
+    write: writeGameMaster,
+  } = useContractWrite(configRegisterGameMaster);
+
+  const registerGameMaster = async () => {
+    try {
+      if (!isConnected) {
+        open();
+      } else if (isConnected) {
+        console.log("wallet is connected");
+      }
+      console.log("register Game Master");
+
+      writeGameMaster();
+      isSuccessGameMaster && handleRoleSelection("gm");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleClosePopup = () => {
     setIsUsernameErrorPopupOpen(false);
@@ -51,13 +124,13 @@ const Userpage = () => {
         <div className="flex flex-col items-center">
           <button
             className="bags-button font-nothing-you-could-do text-xl uppercase text-black py-4 px-6 m-2 rounded-lg cursor-pointer"
-            onClick={() => handleRoleSelection("Gamemaster")}
+            onClick={() => registerGameMaster()}
           >
             Gamemaster
           </button>
           <button
             className="bags-button font-nothing-you-could-do text-xl uppercase text-black py-4 px-6 m-2 rounded-lg cursor-pointer"
-            onClick={() => handleRoleSelection("Player")}
+            onClick={() => registerPlayer()}
           >
             Player
           </button>
