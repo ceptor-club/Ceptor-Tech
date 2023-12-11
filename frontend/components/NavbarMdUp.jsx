@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Logo } from "./Logo";
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import WalletConnectButton from "./WalletConnectButton";
+import WalletConnectButton from "./Buttons/WalletConnectButton";
 import DiceDashboard from "./DiceDashboard";
 
 export default function NavbarMdUp() {
