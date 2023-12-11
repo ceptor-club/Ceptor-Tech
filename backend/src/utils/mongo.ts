@@ -6,7 +6,6 @@ interface User {
   name: string
   email: string | null
   wallet: string
-  mailingList: boolean
 }
 
 const url = process.env.DB_CONN_STRING as string

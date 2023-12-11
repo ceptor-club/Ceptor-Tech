@@ -10,7 +10,7 @@ import {
   usePrepareContractWrite,
 } from "wagmi";
 import NftCard from "../components/NftCard";
-import GenerateButton from "../components/GenerateButton";
+import GenerateButton from "../components/Buttons/GenerateButton";
 
 import { getServerSideProperties } from "../utils/getServerSideProps";
 import { getMostLikedSubmission } from "./api/getMostLikedSubmission";
@@ -265,7 +265,7 @@ export default function WeeklyChallenge({
             }}
           />
         </div>
-
+        {/* 
         {!error && !imageProcessing ? (
           <GenerateButton
             setConditionalCreate={setConditionalCreate}
@@ -277,7 +277,7 @@ export default function WeeklyChallenge({
             imageProcessing={imageProcessing}
             prompt={userPrompt}
           />
-        ) : null}
+        ) : null} */}
 
         <div className="flex flex-row">
           <button

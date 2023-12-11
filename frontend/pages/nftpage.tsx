@@ -37,12 +37,12 @@ export default function NFTPage({
   }, []);
 
   return (
-    <div>
-      <Link href="/" className="fixed top-4 left-4 z-50">
-        <span className="text-xl text-white underline cursor-pointer font-black">
-          Return
-        </span>
-      </Link>
+    <div className="flex flex-col">
+      <div className="flex flex-col justify-center items-center mt-20">
+        <p className="font-milonga text-light-yellow text-4xl uppercase mb-4">
+          Explore Characters
+        </p>
+      </div>
       <Explorer
         ALCHEMY_GOERLI_API_KEY={ALCHEMY_GOERLI_API_KEY}
         ALCHEMY_SEPOLIA_API_KEY={ALCHEMY_SEPOLIA_API_KEY}

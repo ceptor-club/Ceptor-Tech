@@ -260,13 +260,14 @@ export const Create = () => {
                   </div> */}
                   {!imageResult && (
                     <div className="w-full max-w-[450px]">
-                      <OCRParser
+                      {/* <OCRParser
                         pdfData={pdfData}
                         setError={setError}
                         setPdfData={setPdfData}
                         imageProcessing={imageProcessing}
                         setImageProcessing={setImageProcessing}
-                      />
+                      /> */}
+                      ORCS Coming Soon
                     </div>
                   )}
                   <CharacterStats

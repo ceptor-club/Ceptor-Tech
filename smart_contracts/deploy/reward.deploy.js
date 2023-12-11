@@ -1,5 +1,5 @@
 // const { parseEther } = require('ethers/lib/utils')
-const fs = require('fs').promises;  // Import 'promises' from 'fs' module
+const fs = require("fs").promises; // Import 'promises' from 'fs' module
 
 // deploy/00_deploy_my_contract.js
 module.exports = async ({ getNamedAccounts, deployments }) => {
@@ -11,18 +11,13 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const subscriptionId = 1839;
     const _checkLogic = await fs.readFile("./source.js", "utf8");
 
-   
-    // variables go here 
-    // const _owner = deployer// 0xac701BB1557F6c06070Bc114Ca6Ace4a358D3A84
-     await deploy('Reward', {
-        from: deployer,
-        args: [
-
-
-            oracle, subscriptionId, _checkLogic, dice, prompt
-        ],
-        log: true,
-    })
-    execute('Reward', { from: deployer }, 'setReward')
-   }
-module.exports.tags = ['Reward']
+  // variables go here
+  // const _owner = deployer// 0xac701BB1557F6c06070Bc114Ca6Ace4a358D3A84
+  await deploy("Reward", {
+    from: deployer,
+    args: [oracle, subscriptionId, _checkLogic, dice, prompt],
+    log: true,
+  });
+  execute("Reward", { from: deployer }, "setReward");
+};
+module.exports.tags = ["Reward"];
