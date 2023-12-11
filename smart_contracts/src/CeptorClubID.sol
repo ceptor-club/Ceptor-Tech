@@ -51,8 +51,8 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
     mapping(address => UserStruct) public users;
     /// @dev @notice  Should be in minter role at dice contract to mint
 
-    constructor(address _priceFeed, address _router, address dice_)
-        CrossChainRegistration(_router)
+    constructor(address _priceFeed, address _router, address dice_, uint64 _gameChain, uint64 artChain)
+        CrossChainRegistration(_router , _gameChain, artChain)
         PriceFeedCCID(_priceFeed)
     {
         dice = ICeptorDice(dice_);
@@ -61,7 +61,7 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
     // a new player can register with a username and pay the registration fee
     // if they don't pay enough they get an error
     function registerPlayer(string memory _username) public payable {
-        uint256 _playerPrice = playerPrice();
+        uint256 _playerPrice =  playerPrice();
         require(msg.value >= _playerPrice, "Insufficient funds for player registration");
 
         // construct a temporary user struct to write into the mapping
@@ -77,15 +77,13 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
         _ids[1] = 1;
         _ids[2] = 2;
         _ids[3] = 3;
-        _ids[4] = 4;
-
+ 
         uint256[] memory _amounts = new uint256[](4);
-        _amounts[0] = 20;
-        _amounts[1] = 20;
-        _amounts[2] = 20;
-        _amounts[3] = 20;
-        _amounts[4] = 20;
-
+        _amounts[0] = 2;
+        _amounts[1] = 2;
+        _amounts[2] = 2;
+        _amounts[3] = 2;
+ 
         // Mint NFTs using the Dices contract
         dice.minterMintBatch(msg.sender, _ids, _amounts, "");
     }
@@ -109,14 +107,14 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
         _ids[1] = 1;
         _ids[2] = 2;
         _ids[3] = 3;
-        _ids[4] = 4;
+        // _ids[4] = 4;
 
         uint256[] memory _amounts = new uint256[](4);
         _amounts[0] = 20;
         _amounts[1] = 20;
         _amounts[2] = 20;
         _amounts[3] = 20;
-        _amounts[4] = 20;
+        // _amounts[4] = 20;
 
         // Mint NFTs using the Dices contract
         dice.minterMintBatch(msg.sender, _ids, _amounts, "");
@@ -148,7 +146,7 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
         override
         onlyAllowedSenders(abi.decode(any2EvmMessage.sender, (address)))
     {
-        if (any2EvmMessage.sourceChainSelector == chainIdAvalancheFuji) {
+        if (any2EvmMessage.sourceChainSelector == artChainSelector) {
             // Example: Update stats or perform other actions based on received data
             // Not sure about how we can have security based on making sure that the Loot and Stats are from the right contract
             // I guess we can have an allowlist of contracts that can send data to this contract
@@ -161,7 +159,7 @@ contract CeptorClubID is PriceFeedCCID, CrossChainRegistration {
             }
             users[userAddress].loot.push(loot);
             emit LootReceived(userAddress, loot);
-        } else if (any2EvmMessage.sourceChainSelector == chainIdPolygonMumbai) {
+        } else if (any2EvmMessage.sourceChainSelector == gameChainSelector) {
             // Example: Update stats or perform other actions based on received data
             // Not sure about how we can have security based on making sure that the Loot and Stats are from the right contract
             // I guess we can have an allowlist of contracts that can send data to this contract

@@ -11,7 +11,7 @@ interface ICeptors {
     function balanceOf(address account) external view returns (uint256);
 }
 
-contract CeptorClubID is Ownable, CCIPReceiver {
+contract CeptorClubID2 is Ownable, CCIPReceiver {
     // User stats structure
     struct Stats {
         uint8 strong;
