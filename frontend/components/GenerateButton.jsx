@@ -56,10 +56,10 @@ const GenerateButton = ({
     setConditionalCreate("results");
 
     // TODO: replace testimage with backend response
-    const result = { images: [CONSTANTS.testBase64Image] }; // <------------- THIS IS FOR TESTING
+    // const result = { images: [CONSTANTS.testBase64Image] }; // <------------- THIS IS FOR TESTING
 
-    setImageResult(result);
-    // socket.emit("imageRequest", { prompt: prompt });
+    // setImageResult(result);
+    socket.emit("imageRequest", { prompt: prompt });
   };
 
   return (
