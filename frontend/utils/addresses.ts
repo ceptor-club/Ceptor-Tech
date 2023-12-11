@@ -27,10 +27,10 @@ export const addresses = {
     timer: "",
   },
   "avalanche-fuji": {
-    promptCollection: "",
-    ceptorDice: "",
-    ceptors: "",
-    ccipV4: "",
+    promptCollection: "0xDEB7576A403641A39CD8eA51163e0F1661e3b9Df",
+    ceptorDice: "0xf67Ad9EB4f909A330A78D30750966a883C07877D",
+    ceptors: "0x89c0504E12ffeBdd62D6fFe7765f784c971A4415",
+    ccipV4: "0x77c657EC04d5Da24411E4BF7Eb63fb4EA170520F",
     timer: "",
   },
 };

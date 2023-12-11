@@ -55,16 +55,16 @@ contract Flow is Script, Helper {
         // let's say he wants to participate in prompt
         // fist he needs to burn dice to paly
         diceContract.timerBurn(msg.sender, 1, 1);
-        promptContract.mint();
-        // he might be lucky and get a reward after a week and he can get more dice
+        //promptContract.mint();
+        // // he might be lucky and get a reward after a week and he can get more dice
 
-        // now let's imagine he wants to mint a ceptor
-        // first he needs to burn dice to mint
-        diceContract.timerBurn(msg.sender, 1, 1);
-        // now he can mint a ceptor
-        string memory uri = "https://cdn.discordapp.com/attachments/1082779671369887798/1082780320153214986/logo.png";
+        // // now let's imagine he wants to mint a ceptor
+        // // first he needs to burn dice to mint
+        // diceContract.timerBurn(msg.sender, 1, 1);
+        // // now he can mint a ceptor
+        // string memory uri = "https://cdn.discordapp.com/attachments/1082779671369887798/1082780320153214986/logo.png";
 
-        ceptorsContract.mint(uri);
+        // ceptorsContract.mint(uri);
         
          
         vm.stopBroadcast();

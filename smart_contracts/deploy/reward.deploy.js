@@ -5,8 +5,8 @@ const fs = require('fs').promises;  // Import 'promises' from 'fs' module
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, get, execute } = deployments
     const { deployer } = await getNamedAccounts()
-    let prompt =  "0x3A1f5f108dC123F8745CfBcfDfE7Ad09c92E1367"
-    let dice =  "0xdec77A6595a6870CbA1E9313C2d97d852b6b1737"
+    let prompt =  "0x2eD832Ba664535e5886b75D64C46EB9a228C2610"
+    let dice =  "0xf67Ad9EB4f909A330A78D30750966a883C07877D"
     const oracle = "0xb83E47C2bC239B3bf370bc41e1459A34b41238D0";
     const subscriptionId = 1839;
     const _checkLogic = await fs.readFile("./source.js", "utf8");

@@ -135,10 +135,15 @@ Link to readme:
  `forge compile`
 6. to deploy the smart contract
  `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "deployAll()" `
- `forge script ./script/deployer2.sol -vvv  --rpc-url ethereumSepolia --broadcast --sig "deployAll(uint8,address)" -- 0 0x45DB01904b51857F6279FE9006De25bf6dE8d136`
+ `forge script ./script/deployer2.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "deployAll(uint8,uint8,uint8,address)" -- 0 1 3 0xdec77A6595a6870CbA1E9313C2d97d852b6b1737 `
  `npx hardhat deploy --network sepolia `
- `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "postDeploy(address,address,address,address,address)" -- 0x0a3c75634C8a167eD82D2089F8B2Cba49b7685Ad 0xEc2df342d40D46fae8407F24f078138ec6d77FbA 0x45DB01904b51857F6279FE9006De25bf6dE8d136  0x4Eb23215D4d8802d10BAf06A3e9d3935E9bdf630  0xDA38118B32394748f7b720E5CBad719EfD02da0B  `
-
+ `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "postDeploy(address,address,address,address,address)" --  0x5081566D2767844208F412cebF74BB1Fc89a386a  0xDEB7576A403641A39CD8eA51163e0F1661e3b9Df 0xf67Ad9EB4f909A330A78D30750966a883C07877D 0x77c657EC04d5Da24411E4BF7Eb63fb4EA170520F 0x89c0504E12ffeBdd62D6fFe7765f784c971A4415`
+address reward, address prompt, address dice, address ccid, address ceptor
+ 
+ 0x5081566D2767844208F412cebF74BB1Fc89a386a  0x3A1f5f108dC123F8745CfBcfDfE7Ad09c92E1367 0xf67Ad9EB4f909A330A78D30750966a883C07877D 0x77c657EC04d5Da24411E4BF7Eb63fb4EA170520F 0x36a3DE68D9C4F7f5c9f413aCD20aC7831371E7E4
+ 
+ 
+0xdCa89bEfb151dF68a5DcE5a5F879BEBdE9c4Abd2
 ## 🖥️ Let's Setup Backend
 
 1. Go to Backend folder
