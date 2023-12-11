@@ -4,7 +4,7 @@ Todo:
 - [x] Provide a quick start guide for devs and judges
 - [x] Explain the 3 teams (Art + Tech + Games) and how they work together
 - [x] High level [overview of Ceptor Club and our goal for this hackathon](https://docs.google.com/document/d/1tzb8Nj6E7Tyr8YrIWLrJBskozBuCecXe3IotgcpygKo/edit?usp=sharing) / future
-- [ ] Onboard all 3 teams to this repo
+- [X] Onboard all 3 teams to this repo
 - [ ] Add Art, Tech, and Games pages to the navbar and front-end.
 
 ### We are providing a unified codebase for all 3 teams and clear documentation for the judges:
