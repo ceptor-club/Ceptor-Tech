@@ -5,11 +5,11 @@ const fs = require("fs").promises; // Import 'promises' from 'fs' module
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, get, execute } = deployments
     const { deployer } = await getNamedAccounts()
-  let prompt =  "0x561fd1f9e0B23A00F88b56C6Eb6C93CEFA4b82F6"
-  let dice = "0x616cb11FD8Db66a464f2Ec04C39cAaC757CC9E01"
+  let prompt =  "0x557d4b0a566613f344E2F5a9bc4FC52F6897B372"
+  let dice = "0xB4e5136F4BADDdF23a720A14a6a0D0d60A5ee9ee"
   // fuji 
-    const oracle = "0xA9d587a00A31A52Ed70D6026794a8FC5E2F5dCb0";
-  const subscriptionId = 20;
+  //   const oracle = "0xA9d587a00A31A52Ed70D6026794a8FC5E2F5dCb0";
+  // const subscriptionId = 20;
 
   // const oracle = "0xb83E47C2bC239B3bf370bc41e1459A34b41238D0";
   // const subscriptionId = 1839;
@@ -17,8 +17,8 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   
 
   // mumbai 
-  // const oracle = "0x6E2dc0F9DB014aE19888F539E59285D2Ea04244C";
-  // const subscriptionId = 338;
+  const oracle = "0x6E2dc0F9DB014aE19888F539E59285D2Ea04244C";
+  const subscriptionId = 338;
     const _checkLogic = await fs.readFile("./source.js", "utf8");
 
   // variables go here

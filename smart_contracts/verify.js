@@ -11,11 +11,11 @@ const run = async () => {
         // reward should be done via hardhat, we have issues in passing the serverless function as args in forge
         // 
    
-        let contractAddress = ["0x561fd1f9e0B23A00F88b56C6Eb6C93CEFA4b82F6", "0x616cb11FD8Db66a464f2Ec04C39cAaC757CC9E01", "0x1C44d18173dd38c676C8F789AAD66144FEaE3751", "0xFF5c16cF21E78304D74C6BE9C87272F000D8f948"]
+        let contractAddress = ["0x557d4b0a566613f344E2F5a9bc4FC52F6897B372", "0xB4e5136F4BADDdF23a720A14a6a0D0d60A5ee9ee", "0xf965217a040cc52354d55ed6D41112bb5f9Bf9D2", "0x99F37C9503F9A089dA202a8279F9cC729E86972c"]
         let contractNames = ["PromptCollection", "CeptorDice", "Ceptors",  "CeptorClubID"]
        
        /// sepolia testnet
-        let chainId = 43113;
+        let chainId = 80001;
          const  vrfCoordindatorV2 = "0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625";
 
         const keyhash = "0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c";
@@ -49,33 +49,33 @@ const run = async () => {
             getCommand(contractAddress[1], contractNames[1], constructorArgs[1], chainId),
             getCommand(contractAddress[2], contractNames[2], constructorArgs[2], chainId),
             getCommand(contractAddress[3], contractNames[3], constructorArgs[3], chainId)]
-        const scriptCommand = commands[3];
-        console.log({ scriptCommand });
-         exec(scriptCommand, (error, stdout, stderr) => {
-            console.log({ error, stdout, stderr });
-            if (error) {
-                console.error(`Error: ${error.message}`);
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-            }
-            console.log(`Script output:\n${stdout}`);
-        });
-        // for (let index = 0; index < commands.length; index++) {
+        // const scriptCommand = commands[3];
+        // console.log({ scriptCommand });
+        //  exec(scriptCommand, (error, stdout, stderr) => {
+        //     console.log({ error, stdout, stderr });
+        //     if (error) {
+        //         console.error(`Error: ${error.message}`);
+        //     }
+        //     if (stderr) {
+        //         console.error(`stderr: ${stderr}`);
+        //     }
+        //     console.log(`Script output:\n${stdout}`);
+        // });
+        for (let index = 0; index < commands.length; index++) {
     
-        //     const scriptCommand = commands[index];
-        //     console.log({ scriptCommand });
-        //     await exec(scriptCommand, (error, stdout, stderr) => {
-        //         console.log({ error, stdout, stderr });
-        //         if (error) {
-        //             console.error(`Error: ${error.message}`);
-        //         }
-        //         if (stderr) {
-        //             console.error(`stderr: ${stderr}`);
-        //         }
-        //         console.log(`Script output:\n${stdout}`);
-        //     });
-        // }
+            const scriptCommand = commands[index];
+            console.log({ scriptCommand });
+            await exec(scriptCommand, (error, stdout, stderr) => {
+                console.log({ error, stdout, stderr });
+                if (error) {
+                    console.error(`Error: ${error.message}`);
+                }
+                if (stderr) {
+                    console.error(`stderr: ${stderr}`);
+                }
+                console.log(`Script output:\n${stdout}`);
+            });
+        }
       
     } catch (error) {
         console.error('Error reading or writing source file:', error);
