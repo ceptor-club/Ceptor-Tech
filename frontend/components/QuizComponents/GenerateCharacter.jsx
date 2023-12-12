@@ -47,6 +47,7 @@ export default function GenerateCharacter({
     setCurrentState(State.CHARACTER_PAGE);
   }
 
+
   return (
     <div className="flex justify-center items-center ">
       <div className="mx-auto">

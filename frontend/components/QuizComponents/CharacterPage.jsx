@@ -1,4 +1,5 @@
 import {
+
   setClass,
   calculateSavingThrows,
   calcXP,
@@ -369,32 +370,55 @@ export default function CharacterPage() {
     }`;
   }
 
-  function printCharacter() {}
-  function connectWallet() {}
 
-  async function saveCharacter() {
-    try {
-      // const userId = User._id
-      const response = await fetch("http://localhost:4000/characterData", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: character.charName }),
-      });
+    async function saveCharacter() {
+        // const savedCharacterData = await response.json()
+        setCharacterData(character)
+        const requestData = {
+            ...characterData,
+            ownerWallet: address
+        }
+        try {
 
-      if (response.ok) {
-        setSaveStatus({ success: "Character saved successfully", error: null });
-        setCharacterData(character);
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 2000);
-      } else {
-        setSaveStatus({ success: null, error: "Error saving character" });
-      }
-    } catch (error) {
-      console.error("Error saving character data: ", error);
-      setSaveStatus({ success: null, error: "Error saving character" });
+            // const userId = User._id
+            const response = await fetch('http://localhost:4000/characterData', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+
+            if (response.ok) {
+                setSaveStatus({ success: 'Character saved successfully', error: null })
+                // setTimeout(() => {
+                //     window.location.href = '/';
+                // }, 20000);
+            } else {
+                setSaveStatus({ success: null, error: 'Error saving character' })
+            }
+        } catch (error) {
+            console.error('Error saving character data: ', error)
+            setSaveStatus({ success: null, error: 'Error saving character' })
+        }
+        setIsMessageVisible(true)
+    }
+
+    function exportCharacter() {
+        let characterObject = {
+            strength: character.strength,
+            dexterity: character.dexterity,
+            constitution: character.constitution,
+            intelligence: character.intelligence,
+            wisdom: character.wisdom,
+            charisma: character.charisma,
+            alignment: character.myAlignment,
+            characterClass: character.myClass,
+            species: character.species
+        }
+        localStorage.setItem('character', JSON.stringify(characterObject))
+        console.log(characterObject, "this is the character object")
+
     }
     setIsMessageVisible(true);
   }
@@ -414,6 +438,7 @@ export default function CharacterPage() {
     localStorage.setItem("character", JSON.stringify(characterObject));
     console.log(characterObject, "this is the character object");
   }
+
 
   return (
     <>
@@ -548,3 +573,4 @@ export default function CharacterPage() {
 </div> */
   }
 }
+

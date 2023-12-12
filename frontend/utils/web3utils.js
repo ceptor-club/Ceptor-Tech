@@ -2,6 +2,7 @@ import { NFTStorage, File } from "nft.storage";
 import { useContext } from "react";
 import { CharacterContext } from "../components/CharacterContext";
 
+
 const token = process.env.NEXT_PUBLIC_NFT_STORAGE;
 
 // takes in base64 binary image data
@@ -40,6 +41,8 @@ async function createStructuredMetadata(pdfData, prompt, someBinaryImageData) {
 
   const structuredMetadata = {
     name: "Wizard NFT!",
+    likesAmount: "2",
+    tokenID: 2,
     description:
       "This is a wizard NFT, created during 'Operation Dragonborn' by our fearless heroes and the Scope Creeper! Just try to funge it. You can't do it.",
     image: imageFile,

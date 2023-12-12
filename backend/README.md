@@ -8,17 +8,13 @@ frontend with sockets in context ready to be used: https://github.com/DnDnDiffus
 
 > interested in seeing what parts of the front-end are connecting to the sockets?
 >
-> See the front-end above for relevant code in **utils/socketContext** and **components/GenerateButton.jsx**
+> See the front-end above for relevant code in **utils/socketContext** and **components/Buttons/GenerateButton.jsx**
 
 ## installation
 
 1. npm install
-<<<<<<< HEAD
-2. create a .env with the proper variables
-=======
-2. create a .env with the proper variables (SD_ENDPOINT: https://stablediff-664a3266e9c5.herokuapp.com/generate-image)
->>>>>>> games-dev
-3. reenable the cors object
+2. create a .env with the proper variables (SD_ENDPOINT: https://stable-diffusion10.p.rapidapi.com/generate-image) _thanks to Team Art (Spencer!)_
+3. reenable the cors object (maybe)
 4. npm run dev
 
 ## other stuff
@@ -31,11 +27,9 @@ You need to run the backend in conjunction with the frontend to get this to work
 
 ## Now also has endpoints for user creation and lookup!
 
-<<<<<<< HEAD
-you can put `mongodb+srv://ceptorclub:dajfMXIwMzwM8ssI@ceptor.pgtoahq.mongodb.net/?retryWrites=true&w=majority` into mongodb compass and see the db
-=======
+
 you can put `mongodb+srv://verinta:BFWmxukoOsNdIx4x@ceptorclub.rq4oohp.mongodb.net/` into mongodb compass and see the db
->>>>>>> games-dev
+
 
 GET /user?wallet=<wallet0x> will give you the user
 POST /user with

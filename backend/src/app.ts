@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 require("dotenv").config();
 import ethers from "ethers";
 const app: Application = express();
@@ -11,7 +12,7 @@ const io = require("socket.io")(server, {
     methods: ["GET", "POST"],
   },
 });
-import { runMiddleware } from "./auth";
+import { runMiddleware } from "./auth"; //needs work
 import { getImages } from "./utils/getImages";
 
 import {
@@ -27,11 +28,16 @@ import {
   voteForSubmission,
   saveSubmission,
   Submission,
+  getAvailableDates,
+  addAvailableDates,
+  joinCampaign,
+  Scheduler,
 } from "./utils/mongo";
 
 app.use(cors()); // Open requests
 app.use(express.json());
-app.use(runMiddleware);
+app.use(bodyParser.json());
+// app.use(runMiddleware);
 
 //use middleware with socket.io to parse incoming requests with JSON payloads
 io.use((socket: any, next: any) => {
@@ -108,7 +114,9 @@ app.post("/voteForSubmission", async (req, res) => {
 
 app.post("/submit", async (req, res) => {
   console.log("submitting submission");
-  const submission = await saveSubmission(req.body);
+  const addressOfCreator = req.body.addressOfCreator;
+  console.log(addressOfCreator);
+  const submission = await saveSubmission(req.body, addressOfCreator);
   res.send(submission);
 });
 
@@ -122,9 +130,12 @@ app.post("/user", async (req, res) => {
 //save character
 //NEEDS WORK TO SAVE TO SPECIFIC USER
 app.post("/characterData", async (req, res) => {
-  // const userId = req.user._id;
+  const ownerWallet = req.body.ownerWallet;
   const characterData = req.body;
-  const savedCharacterData = await saveCharacterData(characterData, "");
+  const savedCharacterData = await saveCharacterData(
+    characterData,
+    ownerWallet
+  );
   res.send(savedCharacterData);
 });
 
@@ -156,6 +167,51 @@ app.get("/characterData/:_id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+//get available dates
+app.get("/availability", async (req, res) => {
+  console.log("getting available dates");
+  const dates = await getAvailableDates();
+  dates ? res.send(dates) : res.send("no available dates in database");
+});
+
+//add available dates
+app.post("/availability", async (req, res) => {
+  console.log("adding new dates");
+  const gmWallet = req.body.gmWallet;
+  const scheduler = req.body;
+  const newDate = await addAvailableDates(scheduler, gmWallet);
+  res.send(newDate);
+});
+
+//join a campaign, needs work
+app.post("/campaign/:_id/join", async (req: Request, res: Response) => {
+  const scheduler = req.body;
+  const campaignId = req.params._id;
+  const pcWallet = req.body.pcWallet;
+
+  try {
+    const updatedCampaignData: unknown = await joinCampaign(
+      scheduler,
+      campaignId,
+      pcWallet
+    );
+    const updatedCampaign: Scheduler | Error = updatedCampaignData as
+      | Scheduler
+      | Error;
+
+    if (updatedCampaign instanceof Error) {
+      return res.status(400).json({ error: updatedCampaign.message });
+    }
+
+    return res.status(200).json(updatedCampaign);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 io.on("connection", (socket: any) => {
   console.log("A user connected");

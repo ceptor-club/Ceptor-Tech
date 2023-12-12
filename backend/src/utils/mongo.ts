@@ -15,7 +15,7 @@ interface User {
 interface CharacterData {
   _id: string;
   name: string;
-  owner: User["_id"];
+  ownerWallet: string;
 }
 
 export interface Submission {
@@ -25,6 +25,15 @@ export interface Submission {
   tokenID: number;
   chainId: number;
   voterWallets: string[];
+}
+
+
+export interface Scheduler {
+  _id: string;
+  gmWallet: string;
+  nameOfCampaign: string;
+  pcWallets: string[];
+  availableTimes: Date[];
 }
 
 const collectionNames = process.env.DB_COLLECTION?.split(",") || [];
@@ -37,6 +46,11 @@ const characterDataCollection = client
 const submissionCollection = client
   .db(process.env.DB_NAME!)
   .collection<Submission>(collectionNames[2]);
+
+const schedulerCollection = client
+  .db(process.env.DB_NAME!)
+  .collection<Scheduler>(collectionNames[3]);
+
 
 //function to connect to mongoDB and save a user to the database
 export async function saveUser(user: any) {
@@ -68,8 +82,13 @@ export async function getUserById(_id: string) {
   }
 }
 
-export async function saveSubmission(submission: Submission) {
+//function to add submission
+export async function saveSubmission(
+  submission: Submission,
+  addressOfCreator: string
+) {
   try {
+    submission.addressOfCreator = addressOfCreator;
     return submissionCollection.insertOne(submission);
   } catch (error) {
     console.error(error);
@@ -77,6 +96,7 @@ export async function saveSubmission(submission: Submission) {
   }
 }
 
+//function to see all submissions
 export async function getSubmissions() {
   try {
     return submissionCollection.find().toArray();
@@ -121,8 +141,6 @@ export async function voteForSubmission(tokenID: number, wallet: string) {
   }
 }
 
-console.log(getUserById("656cae1617b89fde18bfc726"));
-
 //function to list all users
 export async function getAllUsers() {
   try {
@@ -135,9 +153,12 @@ export async function getAllUsers() {
 }
 
 //function to save character data
-export async function saveCharacterData(characterData: any, userId: string) {
+export async function saveCharacterData(
+  characterData: any,
+  ownerWallet: string
+) {
   try {
-    characterData.owner = getUserById(userId);
+    characterData.ownerWallet = ownerWallet;
     return characterDataCollection.insertOne(characterData);
   } catch (error) {
     throw new Error("Error saving character data");
@@ -159,6 +180,64 @@ export async function getAllCharacters() {
 export async function getCharacterById(_id: string) {
   try {
     return characterDataCollection.findOne({ _id: _id });
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+//function to get all availble dates
+export async function getAvailableDates() {
+  try {
+    return schedulerCollection.find().toArray();
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+//function to add new availibility
+export async function addAvailableDates(scheduler: any, gmWallet: string) {
+  try {
+    scheduler.gmWallet = gmWallet;
+    return schedulerCollection.insertOne(scheduler);
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+//function to get campaign by _id
+export async function getCampaignById(_id: string) {
+  try {
+    return schedulerCollection.findOne({ _id: _id });
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+// function to join a campaign, needs work
+export async function joinCampaign(
+  scheduler: any,
+  campaignId: string,
+  pcWallet: string
+) {
+  try {
+    console.log(scheduler);
+
+    if (!scheduler) {
+      throw new Error("Campaign not found");
+    }
+
+    scheduler.pcWallets.push(pcWallet);
+
+    await schedulerCollection.updateOne(
+      { _id: campaignId },
+      { $set: { pcWallets: scheduler.pcWallets } }
+    );
+
+    return scheduler;
   } catch (error) {
     console.error(error);
     return error;

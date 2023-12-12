@@ -1,6 +1,7 @@
 import { CONSTANTS } from "../../utils/CONSTANTS";
 
 export default function Background({ background, setBackground }) {
+
   const characterBackgrounds = CONSTANTS.characterBackground;
   return (
     <div>

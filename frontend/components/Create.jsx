@@ -221,6 +221,19 @@ export const Create = () => {
             <div className="flex flex-col w-full justify-center items-center">
               {imageProcessing ? (
                 <>
+                  <div className="flex flex-col items-center justify-center stats text-white md:3/6 h-[300px] p-16 mt-8">
+                  <div className="text-sm">The Creator is evolving. If you don&#39;t see your artwork in the first 30 seconds please retry.</div>
+                    <progress min="0" max="100" value="44">44</progress>
+                    {/* retry button (back to Create start) */}
+                    <button
+                      className="bg-black bg-opacity-50 rounded-sm text-white hover:text-[#e137b1] cursor-pointer w-full text-center py-2 mt-4"
+                      onClick={retry}
+                    >
+                      Retry
+                    </button>
+                    
+                    
+                  </div>
                   <LoadingTips />
                 </>
               ) : !imageProcessing ? (
@@ -244,13 +257,14 @@ export const Create = () => {
                   </div> */}
                   {!imageResult && (
                     <div className="w-full max-w-[450px]">
-                      <OCRParser
+                      {/* <OCRParser
                         pdfData={pdfData}
                         setError={setError}
                         setPdfData={setPdfData}
                         imageProcessing={imageProcessing}
                         setImageProcessing={setImageProcessing}
-                      />
+                      /> */}
+                      ORCS Coming Soon
                     </div>
                   )}
                   <CharacterStats

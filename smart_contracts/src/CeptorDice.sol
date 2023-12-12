@@ -21,11 +21,10 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "./Timer.sol";
- 
 
 // TODO: add burnCount where needed ----------------------------<<<<<<
 
-contract CeptorDice is ERC1155 , Timer {
+contract CeptorDice is ERC1155, Timer {
     struct Token {
         uint256 mintCount;
         uint256 burnCount;
@@ -41,8 +40,6 @@ contract CeptorDice is ERC1155 , Timer {
     mapping(address => uint256) public addressMinted; //address => amount minted
 
     constructor() ERC1155("CeptorDice") {
-     
-
         totalTokens = 0;
     }
 
@@ -89,7 +86,7 @@ contract CeptorDice is ERC1155 , Timer {
 
     address public ceptorContractAddress;
 
-/// @dev Todo: remove the amount if we only  minit one at a time or support this logic amount * time = total time
+    /// @dev Todo: remove the amount if we only  minit one at a time or support this logic amount * time = total time
     function timerBurn(address _address, uint256 _id, uint256 _amount) public {
         require(tokens[_id].exists, "Doesn't exist.");
         require(_amount > 0, "Amount must be greater than 0.");
@@ -98,7 +95,7 @@ contract CeptorDice is ERC1155 , Timer {
         _burn(_address, _id, _amount);
         // start timer on avatar contract to mint avatar
         //FunctionInterface(ceptorContractAddress).setTimer(_address, tokens[_id].time);
-        _startTimer(_address,tokens[_id].time);
+        _startTimer(_address, tokens[_id].time);
         tokens[_id].burnCount += _amount;
     }
 
@@ -144,17 +141,21 @@ contract CeptorDice is ERC1155 , Timer {
             }
         }
     }
-    function supportsInterface(bytes4 interfaceId) public view virtual override(AccessControl,ERC1155) returns (bool) {
-        return 
-        interfaceId == type(IERC1155).interfaceId || 
-        interfaceId == type(IAccessControl).interfaceId || 
-        super.supportsInterface(interfaceId);
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(AccessControl, ERC1155)
+        returns (bool)
+    {
+        return interfaceId == type(IERC1155).interfaceId || interfaceId == type(IAccessControl).interfaceId
+            || super.supportsInterface(interfaceId);
     }
 
-//         function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, AccessControl, IERC165, ERC1155) returns (bool) {
-//     return super.supportsInterface(interfaceId);
-// }
-
+    //         function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, AccessControl, IERC165, ERC1155) returns (bool) {
+    //     return super.supportsInterface(interfaceId);
+    // }
 
     // PAUSING ----------------------------
 
@@ -224,7 +225,6 @@ contract CeptorDice is ERC1155 , Timer {
     //   }
     //   return allTokens;
     // }
-
 
     // WITHDRAW ----------------------------
 
