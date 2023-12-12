@@ -138,7 +138,7 @@ Link to readme:
    `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "deployAll()" `
    `forge script ./script/deployer2.sol -vvv  --rpc-url polygonMumbai --broadcast --sig "deployAll(uint8,uint8,uint8,address)" -- 0 2 4 0xB4e5136F4BADDdF23a720A14a6a0D0d60A5ee9ee`
    `npx hardhat deploy --network sepolia `
-   `forge script ./script/deployer.sol -vvv --rpc-url polygonMumbai --broadcast --sig "postDeploy(address,address,address,address,address)" -- 0x557d4b0a566613f344E2F5a9bc4FC52F6897B372 0xB4e5136F4BADDdF23a720A14a6a0D0d60A5ee9ee 0xf965217a040cc52354d55ed6D41112bb5f9Bf9D2  0x99F37C9503F9A089dA202a8279F9cC729E86972c  0x45DB01904b51857F6279FE9006De25bf6dE8d136  `
+   `forge script ./script/deployer.sol -vvv --rpc-url polygonMumbai --broadcast --sig "postDeploy(address,address,address,address,address)" -- 0x557d4b0a566613f344E2F5a9bc4FC52F6897B372 0xB4e5136F4BADDdF23a720A14a6a0D0d60A5ee9ee 0xf965217a040cc52354d55ed6D41112bb5f9Bf9D2  0x359A9d940692e09a318C1D690eb1cEDBBBb7E03f  0x45DB01904b51857F6279FE9006De25bf6dE8d136  `
    where addresses are in the following order address prompt, address dice, address ceptor , address ccid,address reward
 
 ## 🖥️ Let's Setup Backend

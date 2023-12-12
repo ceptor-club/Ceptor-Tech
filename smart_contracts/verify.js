@@ -2,7 +2,8 @@ const { exec } = require('child_process');
 const fs = require('fs').promises;
 const path = require('path');
 
- 
+const dotenv = require("dotenv");
+dotenv.config();
 const run = async () => {
     try {
         //address reward, address prompt, address dice, address ccid, address ceptor)
@@ -11,7 +12,7 @@ const run = async () => {
         // reward should be done via hardhat, we have issues in passing the serverless function as args in forge
         // 
    
-        let contractAddress = ["0x557d4b0a566613f344E2F5a9bc4FC52F6897B372", "0xB4e5136F4BADDdF23a720A14a6a0D0d60A5ee9ee", "0xf965217a040cc52354d55ed6D41112bb5f9Bf9D2", "0x99F37C9503F9A089dA202a8279F9cC729E86972c"]
+        let contractAddress = ["0x557d4b0a566613f344E2F5a9bc4FC52F6897B372", "0xB4e5136F4BADDdF23a720A14a6a0D0d60A5ee9ee", "0xf965217a040cc52354d55ed6D41112bb5f9Bf9D2", "0x359A9d940692e09a318C1D690eb1cEDBBBb7E03f"]
         let contractNames = ["PromptCollection", "CeptorDice", "Ceptors",  "CeptorClubID"]
        
        /// sepolia testnet
@@ -28,16 +29,16 @@ const run = async () => {
     uint64 constant chainIdArbitrumTestnet = 6101244977088475029;
     uint64 constant chainIdPolygonMumbai = 12532609583862916517; */
         const gameChain = "14767482510784806043";
-        const artChain = "12532609583862916517";
+        const artChain = "16015286601757825753";
         const subscriptionId = 7650;
         const callbackGasLimit = 2500000;
         let constructorArgs = [`"constructor(address ,address,bytes32,uint64,uint32 callbackGasLimit)" ${vrfCoordindatorV2} ${contractAddress[1]} ${keyhash} ${subscriptionId} ${callbackGasLimit}`, "", `"constructor(address)" ${contractAddress[1]}`, `"constructor(address ,address,address,uint64,uint64 )" ${contractAddress[1]} ${_router} ${_priceFeed} ${gameChain} ${artChain} `]
 
         const getCommand = (contractAddress, contractName, constructorArgs, chainId) => {
             if (constructorArgs == "") {
-                return `forge verify-contract ${contractAddress}  ${contractName} --watch  --chain-id ${chainId}`;
+                return `forge verify-contract ${contractAddress}  ${contractName}  --etherscan-api-key ${process.env.ETHERSCAN_API_KEY} --watch  --chain-id ${chainId}`;
             } else {
-                return `forge verify-contract ${contractAddress}  ${contractName}  --constructor-args $(cast abi-encode ${constructorArgs} ) --watch   --chain-id  ${chainId}`;
+                return `forge verify-contract ${contractAddress}  ${contractName}  --constructor-args $(cast abi-encode ${constructorArgs} ) --etherscan-api-key ${process.env.ETHERSCAN_API_KEY} --watch   --chain-id  ${chainId}`;
             }
         }
         // $(cast abi-encode "constructor(  address ,address,bytes32,uint64,uint32 callbackGasLimit)" ${vrfCoordindatorV2} ${contractAddress[1]} ${keyhash} ${subscriptionId} ${callbackGasLimit})
@@ -49,33 +50,33 @@ const run = async () => {
             getCommand(contractAddress[1], contractNames[1], constructorArgs[1], chainId),
             getCommand(contractAddress[2], contractNames[2], constructorArgs[2], chainId),
             getCommand(contractAddress[3], contractNames[3], constructorArgs[3], chainId)]
-        // const scriptCommand = commands[3];
-        // console.log({ scriptCommand });
-        //  exec(scriptCommand, (error, stdout, stderr) => {
-        //     console.log({ error, stdout, stderr });
-        //     if (error) {
-        //         console.error(`Error: ${error.message}`);
-        //     }
-        //     if (stderr) {
-        //         console.error(`stderr: ${stderr}`);
-        //     }
-        //     console.log(`Script output:\n${stdout}`);
-        // });
-        for (let index = 0; index < commands.length; index++) {
+        const scriptCommand = commands[3];
+        console.log({ scriptCommand });
+         exec(scriptCommand, (error, stdout, stderr) => {
+            console.log({ error, stdout, stderr });
+            if (error) {
+                console.error(`Error: ${error.message}`);
+            }
+            if (stderr) {
+                console.error(`stderr: ${stderr}`);
+            }
+            console.log(`Script output:\n${stdout}`);
+        });
+        // for (let index = 0; index < commands.length; index++) {
     
-            const scriptCommand = commands[index];
-            console.log({ scriptCommand });
-            await exec(scriptCommand, (error, stdout, stderr) => {
-                console.log({ error, stdout, stderr });
-                if (error) {
-                    console.error(`Error: ${error.message}`);
-                }
-                if (stderr) {
-                    console.error(`stderr: ${stderr}`);
-                }
-                console.log(`Script output:\n${stdout}`);
-            });
-        }
+        //     const scriptCommand = commands[index];
+        //     console.log({ scriptCommand });
+        //     await exec(scriptCommand, (error, stdout, stderr) => {
+        //         console.log({ error, stdout, stderr });
+        //         if (error) {
+        //             console.error(`Error: ${error.message}`);
+        //         }
+        //         if (stderr) {
+        //             console.error(`stderr: ${stderr}`);
+        //         }
+        //         console.log(`Script output:\n${stdout}`);
+        //     });
+        // }
       
     } catch (error) {
         console.error('Error reading or writing source file:', error);
