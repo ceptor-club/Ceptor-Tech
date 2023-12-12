@@ -23,19 +23,19 @@ contract Deployer is Script, Helper {
 
         // deploy the prompt collection contract
         // Fuji
-        // address vrfCoordindatorV2 = 0x2eD832Ba664535e5886b75D64C46EB9a228C2610;
-        // bytes32 keyhash = 0x354d2f95da55398f44b7cff77da56283d9c6c829a4bdf1bbcaf2ad6a4d081f61;
-        // /* gasLane */
-        // uint64 subscriptionId = 7650;
-        // uint32 callbackGasLimit = 2500000;
+        address vrfCoordindatorV2 = 0x2eD832Ba664535e5886b75D64C46EB9a228C2610;
+        bytes32 keyhash = 0x354d2f95da55398f44b7cff77da56283d9c6c829a4bdf1bbcaf2ad6a4d081f61;
+        /* gasLane */
+        uint64 subscriptionId = 7650;
+        uint32 callbackGasLimit = 2500000;
 
         // Sepolai 
-             address vrfCoordindatorV2 = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
+        //      address vrfCoordindatorV2 = 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625;
 
-        bytes32 keyhash=0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
-         /* gasLane */
-        uint64 subscriptionId=7650;
-        uint32 callbackGasLimit =	2500000;
+        // bytes32 keyhash=0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
+        //  /* gasLane */
+        // uint64 subscriptionId=7650;
+        // uint32 callbackGasLimit =	2500000;
         // Mumbai 
         //      address vrfCoordindatorV2 = 0x7a1bac17ccc5b313516c5e16fb24f7659aa5ebed;
 

@@ -136,9 +136,9 @@ Link to readme:
    `forge compile`
 6. to deploy the smart contract
    `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "deployAll()" `
-   `forge script ./script/deployer2.sol -vvv  --rpc-url ethereumSepolia --broadcast --sig "deployAll(uint8,uint8,uint8,address)" -- 0 2 4 0xC52f4F4DD6c4f94fDc539f87621cb12755E59491`
+   `forge script ./script/deployer2.sol -vvv  --rpc-url ethereumSepolia --broadcast --sig "deployAll(uint8,uint8,uint8,address)" -- 0 2 4 0x616cb11FD8Db66a464f2Ec04C39cAaC757CC9E01`
    `npx hardhat deploy --network sepolia `
-   `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "postDeploy(address,address,address,address,address)" -- 0x693C70980222c89CFF63A8aC8FE7d36ff18f8Bc9 0xC52f4F4DD6c4f94fDc539f87621cb12755E59491 0x312475E9A778cD8b5548B5b7F0148Fd7b3553768  0x684C50C910555ad41EeE3C33f0dE3E204F76C29A  0xCF80806243a9261455cd48ABc6951aafe5081920  `
+   `forge script ./script/deployer.sol -vvv --rpc-url avalancheFuji --broadcast --sig "postDeploy(address,address,address,address,address)" -- 0x561fd1f9e0B23A00F88b56C6Eb6C93CEFA4b82F6 0x616cb11FD8Db66a464f2Ec04C39cAaC757CC9E01 0x1C44d18173dd38c676C8F789AAD66144FEaE3751  0xFF5c16cF21E78304D74C6BE9C87272F000D8f948  0x0346FD18AeE90dC45472cdF71b55A698c91C3834  `
    where addresses are in the following order address prompt, address dice, address ceptor , address ccid,address reward
 
 ## 🖥️ Let's Setup Backend

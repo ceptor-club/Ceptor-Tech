@@ -11,11 +11,11 @@ const run = async () => {
         // reward should be done via hardhat, we have issues in passing the serverless function as args in forge
         // 
    
-        let contractAddress = ["0x693C70980222c89CFF63A8aC8FE7d36ff18f8Bc9", "0xC52f4F4DD6c4f94fDc539f87621cb12755E59491", "0x312475E9A778cD8b5548B5b7F0148Fd7b3553768",  "0x684C50C910555ad41EeE3C33f0dE3E204F76C29A"]
+        let contractAddress = ["0x561fd1f9e0B23A00F88b56C6Eb6C93CEFA4b82F6", "0x616cb11FD8Db66a464f2Ec04C39cAaC757CC9E01", "0x1C44d18173dd38c676C8F789AAD66144FEaE3751", "0xFF5c16cF21E78304D74C6BE9C87272F000D8f948"]
         let contractNames = ["PromptCollection", "CeptorDice", "Ceptors",  "CeptorClubID"]
        
        /// sepolia testnet
-        let chainId = 11155111;
+        let chainId = 43113;
          const  vrfCoordindatorV2 = "0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625";
 
         const keyhash = "0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c";
@@ -31,7 +31,7 @@ const run = async () => {
         const artChain = "12532609583862916517";
         const subscriptionId = 7650;
         const callbackGasLimit = 2500000;
-        let constructorArgs = [`"constructor(address ,address,bytes32,uint64,uint32 callbackGasLimit)" ${vrfCoordindatorV2} ${contractAddress[1]} ${keyhash} ${subscriptionId} ${callbackGasLimit}`, "", `"constructor(address)" ${contractAddress[1]}`, `"constructor(address ,address,address,uint64,uint64 )" 0x694AA1769357215DE4FAC081bf1f309aDC325306 0xD0daae2231E9CB96b94C8512223533293C3693Bf 0x6fBcC51a9fCFe22181c1C299bfbE0b424BCE1d1a 14767482510784806043 12532609583862916517`]
+        let constructorArgs = [`"constructor(address ,address,bytes32,uint64,uint32 callbackGasLimit)" ${vrfCoordindatorV2} ${contractAddress[1]} ${keyhash} ${subscriptionId} ${callbackGasLimit}`, "", `"constructor(address)" ${contractAddress[1]}`, `"constructor(address ,address,address,uint64,uint64 )" ${contractAddress[1]} ${_router} ${_priceFeed} ${gameChain} ${artChain} `]
 
         const getCommand = (contractAddress, contractName, constructorArgs, chainId) => {
             if (constructorArgs == "") {
@@ -49,7 +49,7 @@ const run = async () => {
             getCommand(contractAddress[1], contractNames[1], constructorArgs[1], chainId),
             getCommand(contractAddress[2], contractNames[2], constructorArgs[2], chainId),
             getCommand(contractAddress[3], contractNames[3], constructorArgs[3], chainId)]
-        const scriptCommand = commands[2];
+        const scriptCommand = commands[3];
         console.log({ scriptCommand });
          exec(scriptCommand, (error, stdout, stderr) => {
             console.log({ error, stdout, stderr });

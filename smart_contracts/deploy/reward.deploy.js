@@ -5,14 +5,14 @@ const fs = require("fs").promises; // Import 'promises' from 'fs' module
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, get, execute } = deployments
     const { deployer } = await getNamedAccounts()
-  let prompt =  "0x693C70980222c89CFF63A8aC8FE7d36ff18f8Bc9"
-  let dice = "0xC52f4F4DD6c4f94fDc539f87621cb12755E59491"
+  let prompt =  "0x561fd1f9e0B23A00F88b56C6Eb6C93CEFA4b82F6"
+  let dice = "0x616cb11FD8Db66a464f2Ec04C39cAaC757CC9E01"
   // fuji 
-    // const oracle = "0xA9d587a00A31A52Ed70D6026794a8FC5E2F5dCb0";
-  // const subscriptionId = 20;
+    const oracle = "0xA9d587a00A31A52Ed70D6026794a8FC5E2F5dCb0";
+  const subscriptionId = 20;
 
-  const oracle = "0xb83E47C2bC239B3bf370bc41e1459A34b41238D0";
-  const subscriptionId = 1839;
+  // const oracle = "0xb83E47C2bC239B3bf370bc41e1459A34b41238D0";
+  // const subscriptionId = 1839;
 
   
 
