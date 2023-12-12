@@ -29,6 +29,11 @@ module.exports = {
       accounts: [process.env.PRIVATE_KEY || ''],
       saveDeployments: true,
     },
+    zkevm: {
+      url: 'https://rpc.public.zkevm-test.net',
+      accounts: [process.env.PRIVATE_KEY || ''],
+      saveDeployments: true,
+    },
   },
   paths: {
     sources: './src',

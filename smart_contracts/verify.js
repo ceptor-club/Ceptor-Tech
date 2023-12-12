@@ -50,7 +50,7 @@ const run = async () => {
             getCommand(contractAddress[1], contractNames[1], constructorArgs[1], chainId),
             getCommand(contractAddress[2], contractNames[2], constructorArgs[2], chainId),
             getCommand(contractAddress[3], contractNames[3], constructorArgs[3], chainId)]
-        const scriptCommand = commands[3];
+        const scriptCommand = commands[0];
         console.log({ scriptCommand });
          exec(scriptCommand, (error, stdout, stderr) => {
             console.log({ error, stdout, stderr });

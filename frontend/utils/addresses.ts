@@ -1,11 +1,11 @@
 export const addresses = {
   "polygon-zkevm-testnet": {
-    promptCollection: "",
-    ceptorDice: "0xf7dfff550e35719fb3749bd20f555f99365136c8",
-    ceptors: "0x976dc5dd9cba6d34b6d9f5634431e49b9d37ca02",
+    promptCollection: "0x61fC4a178ED1b88a07697Ea56E2A8E503c44d491",
+    ceptorDice: "0xB1eB539E7E845991F2915967f96838025277804C",
+    ceptors: "0x8861B67f5Ac24eDc67A34162B31472ADDb1547A7",
     dice: "0x8acf65f38b51b34616748625b76830a74ae116cd",
-    ccipV4: "",
-    timer: "0x30dd64c284a86f6a3a0d9c96e27a6546156d42c0",
+    ccipV4: "0x5b733081C516a6956539659e0732b1d06a0B5afe",
+    timer: "",
   },
   "avalanche-fuji": {
     promptCollection: "0x561fd1f9e0B23A00F88b56C6Eb6C93CEFA4b82F6",
