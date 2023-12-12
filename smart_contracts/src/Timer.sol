@@ -30,6 +30,7 @@ contract Timer is AccessControl {
     /// @param _time The duration of the timer in seconds.
     function _startTimer(address to, uint256 _time) internal {
         userToTimer[to].endTime = block.timestamp + _time;
+        userToTimer[to].isUsed=false;
     }
 
     /// @dev Public function to check if a user's timer is still running and hasn't been used.

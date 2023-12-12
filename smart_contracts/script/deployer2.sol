@@ -15,7 +15,7 @@ import "../src/CeptorClubID.sol";
 
 contract Deployer is Script, Helper {
     function deployAll(
-        SupportedNetworks destination,
+        SupportedNetworks techChain,
         SupportedNetworks gameChain,
         SupportedNetworks artChain,
         address dice
@@ -29,7 +29,7 @@ contract Deployer is Script, Helper {
             ,
             ,
             address priceFeed
-        ) = getConfigFromNetwork(destination);
+        ) = getConfigFromNetwork(techChain);
         (, , , uint64 gameChainSelector, ) = getConfigFromNetwork(gameChain);
         (, , , uint64 artChainSelector, ) = getConfigFromNetwork(artChain);
         // deploy the CeptorClubID contract

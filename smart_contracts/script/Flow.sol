@@ -23,6 +23,7 @@ contract Flow is Script, Helper {
     ) external {
         uint256 senderPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(senderPrivateKey);
+        
         // let's have  instance of all the contracts
         Reward rewardContract = Reward(reward);
         CeptorDice diceContract = CeptorDice(dice);
@@ -42,7 +43,7 @@ contract Flow is Script, Helper {
         _amounts[3] = 2;
 
         // Mint NFTs using the Dices contract
-        diceContract.minterMintBatch(msg.sender, _ids, _amounts, "");
+       // diceContract.minterMintBatch(msg.sender, _ids, _amounts, "");
         // prompt should be started via chainlink automation but for now , let call it manually
         //  promptContract.requestPromptUpdate();
         // // let's have the game master address

@@ -31,7 +31,7 @@ contract PromptCollection is ERC721, Prompt {
         if (block.timestamp < weekTimeStamp + 604800) {
             // Check if the burning timer is still active
             if (!ICeptorDice(diceContract).checkTimer(msg.sender)) {
-                revert TimerExpired();
+                 revert TimerExpired();
             }
 
             // Generate a unique token ID and mint the NFT
