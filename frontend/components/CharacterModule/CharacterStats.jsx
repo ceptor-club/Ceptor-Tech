@@ -49,7 +49,7 @@ const CharacterStats = ({
         setPdfData({...pdfData, gender: "They / Them"})
       }
     }
-    console.log(pdfData)
+    console.log("unfortunately named pdfData", pdfData)
   });
 
   const handleClassSelect = (e) => {

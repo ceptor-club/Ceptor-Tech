@@ -53,8 +53,8 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col justify-center items-center">
-        <p className="z-10">Version 0.8.22*</p>
-        <p className="z-10">{"*Merged, now with 100% more Quiz! :D"}</p>
+        <p className="z-10">Version 0.12.11*</p>
+        <p className="z-10">{"*Ceptor Tech Team 4 Constellation, Quiz 2 Create, Weekly Challenge! :D"}</p>
         <Link href="/nftpage">
           <span className="text-2xl relative z-10 text-white underline cursor-pointer font-black">
             NFT Explorer

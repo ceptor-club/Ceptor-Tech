@@ -259,14 +259,14 @@ export const Create = () => {
                     </div>
                   </div> */}
                   {!imageResult && (
-                    <div className="w-full max-w-[450px]">
-                      <OCRParser
+                    <div className="w-full max-w-[450px] bg-black">
+                      {/* <OCRParser
                         pdfData={pdfData}
                         setError={setError}
                         setPdfData={setPdfData}
                         imageProcessing={imageProcessing}
                         setImageProcessing={setImageProcessing}
-                      />
+                      /> */} Have fun Constellation people @ Chainlink 2023!
                     </div>
                   )}
                   <CharacterStats
