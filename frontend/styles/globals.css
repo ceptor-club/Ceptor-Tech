@@ -335,6 +335,16 @@ option {
 
 /* leom's added styles */
 /* background image for quiz */
+.cover {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-midpage/midPageImage.png"); /* Replace with your image path */
+  background-size: cover; /* Cover the entire screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
+}
 
 /* default font "Milonga */
 .dFont {
