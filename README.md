@@ -1,10 +1,11 @@
 # Ceptor Club Tech Team - Constellation - A CHAINLINK HACKATHON | NOV 8 – DEC 10
 
 Todo:
+
 - [x] Provide a quick start guide for devs and judges
 - [x] Explain the 3 teams (Art + Tech + Games) and how they work together
 - [x] High level [overview of Ceptor Club and our goal for this hackathon](https://docs.google.com/document/d/1tzb8Nj6E7Tyr8YrIWLrJBskozBuCecXe3IotgcpygKo/edit?usp=sharing) / future
-- [ ] Onboard all 3 teams to this repo
+- [x] Onboard all 3 teams to this repo
 - [ ] Add Art, Tech, and Games pages to the navbar and front-end.
 
 ### We are providing a unified codebase for all 3 teams and clear documentation for the judges:
@@ -19,7 +20,7 @@ Each team will have their own narrative, demo video, internal page and readme li
 
 - Tippi (Product Owner and CCID/CCIP Developer)
 - Eman (Chainlink Developer Expert -- Functions, Automation, VRF)
-- Alica (PM and Designer)
+- Amy (Executive Producer)
 - Lena (Web3 Fullstack with a heart of gold)
 - Aire (Front-end support)
 
@@ -31,6 +32,7 @@ Each team will have their own narrative, demo video, internal page and readme li
 - Melinda McClimans (Product & Research)
 - Spencer Kinney (Engineer)
 - Sam Yeh (boy wonder, and unofficial mascot -- creator of the AI prompt battler)
+- Creatjve (Branding and Wizards Hat)
 
 Link to readme:
 
@@ -38,15 +40,15 @@ Link to readme:
 
 > Team Games will make sure our overall project is fun and usable.  They are building a couple small games and activities: Improved character creation and fun quiz, rollable 3D Big Dice, AI Prompt Battler, to make our app more “sticky.”
 
-- leomofthings.eth (Front End Development)
-- Jason A
-- Vince
-- Alan Barry
-- Nadia
+- leomofthings.eth (Updating the Quiz UI)
+- Jason A (Team Lead and D20 Smart Contract)
+- Vince Lindsey (Scheduling UI & fullstack jr dev)
+- Alan Barry (Backend engineer and early-riser)
+- Nadia (3D modeling of Rollable D20)
 
 Link to readme:
 
-# Getting Started 
+# Getting Started
 
 1. Clone this directory
 
@@ -54,7 +56,7 @@ Link to readme:
 
 2. It will create three folders: `backend` and `frontend` (and `smart_contracts`).
 
-## 🧑‍💻 Let's Setup Frontend First 
+## 🧑‍💻 Let's Setup Frontend First
 
 1. Go to frontend folder
 
@@ -68,10 +70,10 @@ Link to readme:
 
    `cp .env.sample .env`
 
-4. Setting up .env variables 
+4. Setting up .env variables
 
    - Setting up Network and Chain Id
-      
+
      - `NEXT_PUBLIC_NETWORK=goerli`
      - `NEXT_PUBLIC_CHAIN_ID=5`
 
@@ -86,7 +88,7 @@ Link to readme:
      - Go to [WalletConnect Dashboard](https://cloud.walletconnect.com/app) and create an account(if you don't have one already)
      - Create a new project and copy the API Key
      - Paste the API Key in `.env` file as `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=f88d2c49_sample`
-     
+
    - Setting up OPENAI_API_KEY (optional)
 
      - Go to [OpenAI Dashboard](https://platform.openai.com/account/api-keys) and create an account(if you don't have one already)
@@ -100,17 +102,16 @@ Link to readme:
      - Paste the API Key in `.env` file as `NEXT_PUBLIC_NFT_STORAGE=eyJhbGciOiJIUzI1NiIsI_sample`
 
 5. Run the frontend
-   
-      `npm run dev`
+
+   `npm run dev`
 
 6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result and enjoy!
 
-    `Need to setup backend now to see the full functionality of the frontend, if already setup then skip to step 7`
+   `Need to setup backend now to see the full functionality of the frontend, if already setup then skip to step 7`
 
 7. Check that the back-end API is functioning by uploading the fastcharacter.com sheet pdf and generating an image.
 
-
-## 🖥️ Let's Setup smart contract 
+## 🖥️ Let's Setup smart contract
 
 1. Go to Backend folder
 
@@ -126,15 +127,18 @@ Link to readme:
    `cp .env.example .env`
 
 4. Setting up .env variables
- 
-  - PRIVATE_KEY=
-- ETHEREUM_SEPOLIA_RPC_URL= 
- - AVALANCHE_FUJI_RPC_URL= 
+
+- PRIVATE_KEY=
+- ETHEREUM_SEPOLIA_RPC_URL=
+- AVALANCHE_FUJI_RPC_URL=
 
 5. to compile the smart contract
- `forge compile`
+   `forge compile`
 6. to deploy the smart contract
- `forge script ./script/deployer.sol -vvv --rpc-url polygonMumbai --broadcast --sig "deployAll()" `
+   `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "deployAll()" `
+   `forge script ./script/deployer2.sol -vvv  --rpc-url ethereumSepolia --broadcast --sig "deployAll(uint8,address)" -- 0 0x45DB01904b51857F6279FE9006De25bf6dE8d136`
+   `npx hardhat deploy --network sepolia `
+   `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "postDeploy(address,address,address,address,address)" -- 0x0a3c75634C8a167eD82D2089F8B2Cba49b7685Ad 0xEc2df342d40D46fae8407F24f078138ec6d77FbA 0x45DB01904b51857F6279FE9006De25bf6dE8d136  0x4Eb23215D4d8802d10BAf06A3e9d3935E9bdf630  0xDA38118B32394748f7b720E5CBad719EfD02da0B  `
 
 ## 🖥️ Let's Setup Backend
 
@@ -151,18 +155,18 @@ Link to readme:
    `cp .env.example .env`
 
 4. Setting up .env variables
- 
+
    - For ALCHEMY_API_KEY use the same key as in frontend
    - Setup API_KEY="testKey" for Socket io connections
    - Setup DB_CONN_STRING=mongodb+srv://verinta:BFWmxukoOsNdIx4x@ceptorclub.rq4oohp.mongodb.net/ for db connection
 
-5. Renable CORS object 
+5. Renable CORS object
 
 6. Run the backend
 
    `npm run dev`
 
-# Learn More 
+# Learn More
 
 ## **🛠️ MongoDB Setup: Endpoints for user creation and lookup!**
 

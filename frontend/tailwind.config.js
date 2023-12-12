@@ -20,10 +20,6 @@ module.exports = {
         "light-orange": "#FF9D0A",
         "light-grey": "#2a2727",
         "light-pink": "#F55082",
-        'customOrange': '#ED670B',
-        'customYellow': '#F8C522',
-        'radioYellow': '#FFFD2F',
-        'radioLightYellow': '#FFFfD6'
       },
     },
   },

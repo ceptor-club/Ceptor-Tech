@@ -9,9 +9,9 @@
   src: url("/font/Oswald.ttf") format("truetype");
 }
 /* font for "ceptor club character generator" */
-@import url('https://fonts.googleapis.com/css2?family=Milonga&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Milonga&display=swap");
 :root {
-  --quiz-page-font: 'Milonga', cursive;;
+  --quiz-page-font: "Milonga", cursive;
 }
 
 html,
@@ -239,6 +239,26 @@ option {
   padding-top: 20px;
 }
 
+.button-xs {
+  margin: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 8vh; /* Full height */
+  width: 10vw; /* Full width */
+}
+
+.wallet-xs {
+  margin: 0;
+  background-image: url("../public/images/CREATE-hero/buttonImage.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 10vh; /* Full height */
+  width: 12vw; /* Full width */
+}
+
 .backpack {
   margin: 0;
   padding: 5;
@@ -261,6 +281,17 @@ option {
   height: 20vh; /* Full height */
   width: 13vw; /* Full width */
   margin-top: 50px;
+}
+
+.backpack-tiny {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE-dice/Backpack.png"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 10vh; /* Full height */
+  width: 6vw; /* Full width */
 }
 
 .buy-dice-button-bg {
@@ -314,7 +345,7 @@ option {
   height: 100vh; /* Full height */
   width: 100vw; /* Full width */
 }
-/*test for merging*/
+
 /* default font "Milonga */
 .dFont {
   font-family: var(--quiz-page-font);
@@ -336,8 +367,8 @@ option {
 }
 
 /* quiz input button border color */
-.iBorder{
-  border: 6px solid #ED670B;
+.iBorder {
+  border: 6px solid #ed670b;
 }
 
 /* quiz button {next && back}} */
@@ -349,4 +380,14 @@ option {
   font-style: normal;
   font-weight: 400;
   line-height: 160%;
+}
+.dice-bar {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/images/CREATE/dice-bar.svg"); /* Replace with your image path */
+  background-size: contain; /* Contains the whole image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  height: 18px;
+  width: 150px;
 }
