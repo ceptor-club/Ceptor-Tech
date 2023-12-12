@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "./Prompt.sol";
 import "./interfaces/ICeptorDice.sol";
 
 /// @title PromptCollection Contract
-/// @dev Extends ERC721 and Prompt contracts to manage collections of NFTs with specific functionality.
-contract PromptCollection is ERC721, Prompt {
+/// @dev Extends ERC721Enumerable, ERC721URIStorage and Prompt contracts to manage collections of NFTs with specific functionality.
+contract PromptCollection is ERC721Enumerable,ERC721URIStorage, Prompt {
     address public diceContract;
 
     /// @dev Constructor initializes the contract with the specified parameters and sets the Dice contract address.
@@ -26,7 +27,7 @@ contract PromptCollection is ERC721, Prompt {
 
     /// @notice Mints an NFT if the current timestamp is within the current week.
     /// @dev Requires the burning timer to be active, checks the week timestamp, and mints a unique NFT ID.
-    function mint() public {
+    function mint(string memory uri) public {
         require(weekTimeStamp != 0, "week not set");
         if (block.timestamp < weekTimeStamp + 604800) {
             // Check if the burning timer is still active
@@ -43,9 +44,38 @@ contract PromptCollection is ERC721, Prompt {
 
             // Mint the NFT to the sender
             _mint(msg.sender, tokenId);
+            _setTokenURI(tokenId, uri);
         }
     }
+  // The following functions are overrides required by Solidity.
 
+    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+        return ERC721URIStorage.tokenURI(tokenId);
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override( ERC721Enumerable, ERC721URIStorage)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+
+    function _update(address to, uint256 tokenId, address auth)
+        internal
+        virtual
+        override(ERC721Enumerable, ERC721)
+        returns (address)
+    {
+        return ERC721Enumerable._update(to, tokenId, auth);
+    }
+
+    function _increaseBalance(address account, uint128 value) internal override(ERC721Enumerable, ERC721) {
+        unchecked {
+            return ERC721Enumerable._increaseBalance(account, value);
+        }
+    }
     /// @dev Encodes two numbers into a unique token ID.
     /// @param num1 The higher-order bits of the token ID.
     /// @param num2 The lower-order bits of the token ID.

@@ -15,10 +15,10 @@ export const addresses = {
     timer: "",
   },
   sepolia: {
-    promptCollection: "0x3A1f5f108dC123F8745CfBcfDfE7Ad09c92E1367",
-    ceptorDice: "0xdec77A6595a6870CbA1E9313C2d97d852b6b1737",
-    ceptors: "0x36a3DE68D9C4F7f5c9f413aCD20aC7831371E7E4",
-    ccipV4: "0xf89C0496984c80aBB13577337ceE3c152C804e9F",
+    promptCollection: "0x693C70980222c89CFF63A8aC8FE7d36ff18f8Bc9",
+    ceptorDice: "0xC52f4F4DD6c4f94fDc539f87621cb12755E59491",
+    ceptors: "0x312475E9A778cD8b5548B5b7F0148Fd7b3553768",
+    ccipV4: "0x684C50C910555ad41EeE3C33f0dE3E204F76C29A",
   },
   goerli: {
     promptCollection: "",

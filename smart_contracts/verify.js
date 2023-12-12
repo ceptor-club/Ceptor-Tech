@@ -11,7 +11,7 @@ const run = async () => {
         // reward should be done via hardhat, we have issues in passing the serverless function as args in forge
         // 
    
-        let contractAddress = ["0x0346FD18AeE90dC45472cdF71b55A698c91C3834", "0x6fBcC51a9fCFe22181c1C299bfbE0b424BCE1d1a", "0xFF5c16cF21E78304D74C6BE9C87272F000D8f948",  "0xE69a3a4fd7BA3c99d114c5ff032867F5Ace680da"]
+        let contractAddress = ["0x693C70980222c89CFF63A8aC8FE7d36ff18f8Bc9", "0xC52f4F4DD6c4f94fDc539f87621cb12755E59491", "0x312475E9A778cD8b5548B5b7F0148Fd7b3553768",  "0x684C50C910555ad41EeE3C33f0dE3E204F76C29A"]
         let contractNames = ["PromptCollection", "CeptorDice", "Ceptors",  "CeptorClubID"]
        
        /// sepolia testnet
