@@ -19,7 +19,6 @@ import { addresses } from "../utils/addresses";
 import { ceptorDiceABI, promptCollectionABI, timerABI } from "../utils/abis";
 import { useEthersProvider } from "../utils/ethers";
 import { submit } from "./api/submit";
-import PromptCollection from "../abis/PromptCollection.json";
 import { COWsubmissionsMock, winningSubmissionMock } from "../utils/mock";
 import { SubmitData } from "../utils/types";
 
@@ -111,13 +110,13 @@ export default function WeeklyChallenge({
   } = useContractReads({
     contracts: [
       {
-        address: addresses["sepolia"]?.promptCollection,
-        abi: promptCollectionABI,
+        address: addresses["sepolia"]?.promptCollection as any,
+        abi: promptCollectionABI as any,
         functionName: "getCurrentPrompt",
       },
       {
         address: addresses["sepolia"]?.promptCollection as any,
-        abi: PromptCollection.abi as any,
+        abi: promptCollectionABI as any,
         functionName: "weekTimeStamp",
       },
     ],
@@ -266,6 +265,19 @@ export default function WeeklyChallenge({
             }}
           />
         </div>
+        {/* 
+        {!error && !imageProcessing ? (
+          <GenerateButton
+            setConditionalCreate={setConditionalCreate}
+            setImageProcessing={setImageProcessing}
+            setError={setError}
+            setImageResult={setImageResult}
+            imageResult={imageResult}
+            pdfData={pdfData}
+            imageProcessing={imageProcessing}
+            prompt={userPrompt}
+          />
+        ) : null} */}
 
         {!error && !imageProcessing ? (
           <GenerateButton

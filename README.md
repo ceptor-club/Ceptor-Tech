@@ -4,7 +4,7 @@ Todo:
 - [x] Provide a quick start guide for devs and judges
 - [x] Explain the 3 teams (Art + Tech + Games) and how they work together
 - [x] High level [overview of Ceptor Club and our goal for this hackathon](https://docs.google.com/document/d/1tzb8Nj6E7Tyr8YrIWLrJBskozBuCecXe3IotgcpygKo/edit?usp=sharing) / future
-- [ ] Onboard all 3 teams to this repo
+- [X] Onboard all 3 teams to this repo
 - [ ] Add Art, Tech, and Games pages to the navbar and front-end.
 
 ### We are providing a unified codebase for all 3 teams and clear documentation for the judges:
@@ -136,8 +136,9 @@ Link to readme:
  `forge compile`
 6. to deploy the smart contract
  `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "deployAll()" `
+ `forge script ./script/deployer2.sol -vvv  --rpc-url ethereumSepolia --broadcast --sig "deployAll(uint8,address)" -- 0 0x45DB01904b51857F6279FE9006De25bf6dE8d136`
  `npx hardhat deploy --network sepolia `
- `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "postDeploy(address,address)" -- 0x9C28052c9dD62d43bbFe3084a14ACC1c24944b20 0x557d4b0a566613f344E2F5a9bc4FC52F6897B372  `
+ `forge script ./script/deployer.sol -vvv --rpc-url ethereumSepolia --broadcast --sig "postDeploy(address,address,address,address,address)" -- 0x0a3c75634C8a167eD82D2089F8B2Cba49b7685Ad 0xEc2df342d40D46fae8407F24f078138ec6d77FbA 0x45DB01904b51857F6279FE9006De25bf6dE8d136  0x4Eb23215D4d8802d10BAf06A3e9d3935E9bdf630  0xDA38118B32394748f7b720E5CBad719EfD02da0B  `
 
 ## 🖥️ Let's Setup Backend
 

@@ -19,7 +19,7 @@ contract Timer is AccessControl {
     // Struct to represent a user's timer
     struct UserTimer {
         uint256 endTime; // The timestamp when the timer will end
-        bool isUsed;     // Flag indicating if the timer has been used in any operation
+        bool isUsed; // Flag indicating if the timer has been used in any operation
     }
 
     // Mapping from user address to their timer information
