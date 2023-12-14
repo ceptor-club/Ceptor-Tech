@@ -1,9 +1,11 @@
 export default function Question2({ weapon, setWeapon }) {
     return (
-        <div >
-            <h3 className="text-3xl">You find yourself in the middle of a bar brawl.</h3>
-            <h3 className="text-3xl">Which weapon would you prefer to brandish?</h3>
-            <div className='flex flex-col mt-8 text-xl space-y-8 > * + *' >
+        <div>
+            <div className="text-white p-3 mb-8">
+                <h3 className="text-3xl">You find yourself in the middle of a bar brawl.</h3>
+                <h3 className="text-3xl">Which weapon would you prefer to brandish?</h3>
+            </div>
+            <div className='grid grid-cols-2 text-xl justify-between gap-4 mb-20 text-white' >
 
                 <div className="group">
                     <input
@@ -12,11 +14,11 @@ export default function Question2({ weapon, setWeapon }) {
                         id="two-handed-sword"
                         checked={weapon === "Two-Handed Sword"}
                         onChange={(e) => setWeapon(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-customYellow"
                     />
                     <label
                         htmlFor="two-handed-sword"
-                        className={`cursor-pointer p-2 rounded-md ${weapon === "Two-Handed Sword" ? "border-4 border-solid border-ceptor p-2" : ""
+                        className={`cursor-pointer p-2 rounded-md ${weapon === "Two-Handed Sword" ? "border-4 border-solid border-customYellow p-2" : ""
                             }`}
                     >
                         Two-Handed Sword
@@ -30,11 +32,11 @@ export default function Question2({ weapon, setWeapon }) {
                         id="bastard-sword"
                         checked={weapon === "Bastard Sword"}
                         onChange={(e) => setWeapon(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-customYellow"
                     />
                     <label
                         htmlFor="bastard-sword"
-                        className={`cursor-pointer p-2 rounded-md ${weapon === "Bastard Sword" ? "border-4 border-solid border-ceptor p-2" : ""
+                        className={`cursor-pointer p-2 rounded-md ${weapon === "Bastard Sword" ? "border-4 border-solid border-customYellow p-2" : ""
                             }`}
                     >
                         Bastard Sword
@@ -48,11 +50,11 @@ export default function Question2({ weapon, setWeapon }) {
                         id="bo-staff"
                         checked={weapon === "Bo Staff"}
                         onChange={(e) => setWeapon(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-customYellow"
                     />
                     <label
                         htmlFor="bo-staff"
-                        className={`cursor-pointer p-2 rounded-md ${weapon === "Bo Staff" ? "border-4 border-solid border-ceptor p-2" : ""
+                        className={`cursor-pointer p-2 rounded-md ${weapon === "Bo Staff" ? "border-4 border-solid border-customYellow p-2" : ""
                             }`}
                     >
                         Bo Staff
@@ -66,11 +68,11 @@ export default function Question2({ weapon, setWeapon }) {
                         id="halberd"
                         checked={weapon === "Halberd"}
                         onChange={(e) => setWeapon(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-customYellow"
                     />
                     <label
                         htmlFor="halberd"
-                        className={`cursor-pointer p-2 rounded-md ${weapon === "Halberd" ? "border-4 border-solid border-ceptor p-2" : ""
+                        className={`cursor-pointer p-2 rounded-md ${weapon === "Halberd" ? "border-4 border-solid border-customYellow p-2" : ""
                             }`}
                     >
                         Halberd
@@ -84,11 +86,11 @@ export default function Question2({ weapon, setWeapon }) {
                         id="throwing-knives"
                         checked={weapon === "Throwing Knives"}
                         onChange={(e) => setWeapon(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-customYellow"
                     />
                     <label
                         htmlFor="throwing-knives"
-                        className={`cursor-pointer p-2 rounded-md ${weapon === "Throwing Knives" ? "border-4 border-solid border-ceptor p-2" : ""
+                        className={`cursor-pointer p-2 rounded-md ${weapon === "Throwing Knives" ? "border-4 border-solid border-customYellow p-2" : ""
                             }`}
                     >
                         Throwing Knives
@@ -102,11 +104,11 @@ export default function Question2({ weapon, setWeapon }) {
                         id="spiked-mace"
                         checked={weapon === "Spiked Mace"}
                         onChange={(e) => setWeapon(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-customYellow"
                     />
                     <label
                         htmlFor="spiked-mace"
-                        className={`cursor-pointer p-2 rounded-md ${weapon === "Spiked Mace" ? "border-4 border-solid border-ceptor p-2" : ""
+                        className={`cursor-pointer p-2 rounded-md ${weapon === "Spiked Mace" ? "border-4 border-solid border-customYellow p-2" : ""
                             }`}
                     >
                         Spiked Mace
@@ -120,11 +122,11 @@ export default function Question2({ weapon, setWeapon }) {
                         id="cross-bow"
                         checked={weapon === "Cross Bow"}
                         onChange={(e) => setWeapon(e.target.value)}
-                        className="hidden"
+                        className="mr-4 w-6 h-6 align-middle accent-customYellow"
                     />
                     <label
                         htmlFor="cross-bow"
-                        className={`cursor-pointer p-2 rounded-md ${weapon === "Cross Bow" ? "border-4 border-solid border-ceptor p-2" : ""
+                        className={`cursor-pointer p-2 rounded-md ${weapon === "Cross Bow" ? "border-4 border-solid border-customYellow p-2" : ""
                             }`}
                     >
                         Cross Bow

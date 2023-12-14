@@ -7,21 +7,21 @@ export default function NameLevelGender({ charName, setCharName, level, setLevel
 
     return (
         <div >
-            <h3 className="leading-8 text-2xl">What do you want to name your character?</h3>
-            <div className='flex flex-wrap m-8 flex-col' id='pName-div'>
-                <label className="text-xl">Character Name: </label>
-                <input className="text-base p-8 m-4 placeholder-black text-black" type="text" placeholder="Character Name" value={charName} id="pName" onChange={(e) => setCharName(e.target.value)} />
-                <input type="button" className=' cursor-pointer bg-ceptor border-0 text-black p-4 text-center no-underline inline-block text-base m-4' id='random-name-button' onClick={(e) => setCharName(RandomName(e.target.value))} value="Random Name" />
+            <h3 className="leading-8 mt-12 text-2xl mb-12 text-white">What do you want to name your character?</h3>
+            <div className='flex w-5/5 relative' id='pName-div'>
+                <label className="text-xl dFont text-white mr-5 mt-3">Character Name: </label>
+                <input className="grow border iBorder p-2.5 placeholder-black text-black" type="text" placeholder="Character Name" value={charName} id="pName" onChange={(e) => setCharName(e.target.value)} />
+                <input type="button" className='cursor-pointer m-2 absolute right-0 top-0 bottom-0 px-4 border-4 border-customOrange bg-customYellow text-black leading-7 text-center place-items-center text-lg' id='random-name-button' onClick={(e) => setCharName(RandomName(e.target.value))} value="Random Name" />
             </div>
-            <div className="flex flex-row">
-                <div className='flex flex-wrap m-8 flex-col' id='pLevel-div'>
-                    <label className="text-xl" >Starting Level:</label>
-                    <input className="text-base text-black p-8 m-4" type="number" value={level} min={1} max={20} onChange={(e) => setLevel(e.target.value)} />
+            <div className="flex flex-col">
+                <div className='m-4' id='pLevel-div'>
+                    <label className="text-xl dFont text-white mr-5 align-middle" >Level:</label>
+                    <input className="text-base text-black py-3 px-4 w-32 h-10 border-4 border-customOrange" type="number" value={level} min={1} max={20} onChange={(e) => setLevel(e.target.value)} />
                 </div>
 
-                <div className="container max-w-s m-8 inline-flex">
-                    <label className="mx-2">Character Gender: </label>
-                    <div className="flex flex-col space-y-8 > * + *">
+                <div className="container m-4 inline-flex">
+                    <label className="mx-2 text-xl dFont text-white mr-5">Character Gender: </label>
+                    <div className="flex flex-row gap-6">
 
                         <div>
                             <input
@@ -30,11 +30,11 @@ export default function NameLevelGender({ charName, setCharName, level, setLevel
                                 id="He"
                                 checked={gender === "He"}
                                 onChange={(e) => setGender(e.target.value)}
-                                className="hidden"
+                                className="mr-4 w-6 h-6 align-middle accent-customYellow"
                             />
                             <label
                                 htmlFor="He"
-                                className={`cursor-pointer p-2 rounded-md ${gender === "He" ? "border-4 border-solid border-ceptor p-2" : ""
+                                className={`cursor-pointer p-2 rounded-md border-customYellow ${gender === "He" ? "border-4 border-solid border-ceptor p-2 text-white" : "text-white"
                                     }`}
                             >
                                 He / Him
@@ -48,11 +48,11 @@ export default function NameLevelGender({ charName, setCharName, level, setLevel
                                 id="She"
                                 checked={gender === "She"}
                                 onChange={(e) => setGender(e.target.value)}
-                                className="hidden"
+                                className="mr-4 w-6 h-6 align-middle accent-customYellow"
                             />
                             <label
                                 htmlFor="She"
-                                className={`cursor-pointer p-2 rounded-md ${gender === "She" ? "border-4 border-solid border-ceptor p-2" : ""
+                                className={`cursor-pointer p-2 rounded-md border-customYellow ${gender === "She" ? "border-4 border-solid border-ceptor p-2 text-white" : "text-white"
                                     }`}
                             >
                                 She / Her
@@ -66,11 +66,11 @@ export default function NameLevelGender({ charName, setCharName, level, setLevel
                                 id="They"
                                 checked={gender === "They"}
                                 onChange={(e) => setGender(e.target.value)}
-                                className="hidden"
+                                className="mr-4 w-6 h-6 align-middle accent-customYellow"
                             />
                             <label
                                 htmlFor="They"
-                                className={`cursor-pointer p-2 rounded-md ${gender === "They" ? "border-4 border-solid border-ceptor p-2" : ""
+                                className={`cursor-pointer p-2 rounded-md border-customYellow ${gender === "They" ? "border-4 border-solid border-ceptor text-white p-2" : "text-white"
                                     }`}
                             >
                                 They / Them

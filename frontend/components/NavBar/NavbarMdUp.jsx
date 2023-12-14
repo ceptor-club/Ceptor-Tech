@@ -27,7 +27,7 @@ export default function NavbarMdUp() {
 
           {navMenuVisible ? (
             <>
-              <div className="w-full flex flex-col ml-6 mt-6">
+              <div className="w-full flex flex-col ml-6 mt-6 leading-10 pt-12 pl-10">
                 <Image
                   src="/logo.png"
                   alt=""
@@ -47,6 +47,9 @@ export default function NavbarMdUp() {
                 </Link>
                 <Link className="uppercase" href="/profile">
                   Profile{" "}
+                </Link>
+                <Link className="uppercase" href="/gameScheduler">
+                  Game Scheduler
                 </Link>
                 <Link className="uppercase" href="/weekly-challenge">
                   Weekly Challenge

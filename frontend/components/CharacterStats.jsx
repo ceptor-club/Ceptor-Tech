@@ -29,13 +29,16 @@ const CharacterStats = ({
       setPrompt(prompt);
       setError(null);
     }
-    if (characterData.myClass !== pdfData.class) {
+    if (characterData.species !== pdfData.race && characterData.species !== "") {
+      setPdfData({ ...pdfData, race: characterData.species })
+    }
+    if (characterData.myClass !== pdfData.class && characterData.myClass !== "") {
       setPdfData({ ...pdfData, class: characterData.myClass });
     }
-    if (characterData.background !== pdfData.background) {
+    if (characterData.background !== pdfData.background && characterData.background !== "") {
       setPdfData({ ...pdfData, background: characterData.background });
     }
-    if (characterData.myAlignment !== pdfData.alignment) {
+    if (characterData.myAlignment !== pdfData.alignment && characterData.myAlignment !== "") {
       setPdfData({ ...pdfData, alignment: characterData.myAlignment });
     }
     if (characterData.gender !== pdfData.gender) {
@@ -70,7 +73,7 @@ const CharacterStats = ({
       setPdfData({ ...pdfData, race: "" });
     }
   };
-    
+
 
   const handleArmorSelect = (e) => {
     const input = document.getElementById("armorInput");
@@ -150,9 +153,8 @@ const CharacterStats = ({
               className="absolute top-0 left-0 -z-10 object-cover min-h-full min-w-full"
             />
             <div
-              className={`${
-                imageResult ? "grayscale" : ""
-              } text-sm relative top-0 text-white sm:w-full opacity-in opacity-load`}
+              className={`${imageResult ? "grayscale" : ""
+                } text-sm relative top-0 text-white sm:w-full opacity-in opacity-load`}
             >
               <h4 className="text-center text-2xl pt-4">Character Stats</h4>
 
