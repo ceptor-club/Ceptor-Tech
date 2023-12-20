@@ -22,6 +22,7 @@ export default function CharacterPage() {
     const [isMessageVisible, setIsMessageVisible] = useState(false)
 
     const [user, setUser] = useState(null);
+    const DB_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 
     //   useEffect(() => {
     //     const fetchUserData = async () => {
@@ -207,6 +208,7 @@ export default function CharacterPage() {
 
     async function saveCharacter() {
         // const savedCharacterData = await response.json()
+        console.log(DB_URL)
         setCharacterData(character)
         const requestData = {
             ...characterData,
@@ -215,7 +217,7 @@ export default function CharacterPage() {
         try {
 
             // const userId = User._id
-            const response = await fetch('http://localhost:4000/characterData', {
+            const response = await fetch(`${DB_URL}/characterData`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
