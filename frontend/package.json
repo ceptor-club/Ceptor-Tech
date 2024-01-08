@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hotjar/browser": "^1.0.9",
     "@next/font": "^13.1.6",
     "@tippyjs/react": "^4.2.6",
     "@web3modal/ethereum": "^2.0.0-rc.3",
