@@ -10,17 +10,6 @@ import { sepolia, goerli } from "wagmi/chains";
 import Layout from "../components/Layout";
 import { CharacterProvider } from '../components/CharacterContext';
 import SocketProvider from "../utils/socketContext";
-import Hotjar from '@hotjar/browser'
-
-const siteId = 3815832;
-const hotjarVersion = 6;
-
-Hotjar.init(siteId, hotjarVersion);
-
-// Initializing with `debug` option:
-Hotjar.init(siteId, hotjarVersion, {
-  debug: true
-});
 
 const chains = [sepolia, goerli];
 
