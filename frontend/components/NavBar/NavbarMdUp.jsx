@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import WalletConnectButton from "../WalletConnectButton";
 import DiceDashboard from "../DiceDashboard";
+import ExplainButton from "../ExplainButton";
 
 export default function NavbarMdUp() {
   const [navMenuVisible, setNavMenuVisible] = useState(true);
@@ -36,6 +37,7 @@ export default function NavbarMdUp() {
                   className="mb-6"
                 />
                 {/* TODO: Check all hrefs */}
+                <ExplainButton />
                 <Link className="uppercase" href="/QuizPage">
                   Quiz
                 </Link>
