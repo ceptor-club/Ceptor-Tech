@@ -1,9 +1,15 @@
 import axios from "axios";
 
-export async function getImages(data: any) {
+interface responseFormat {
+  task_id: string;
+  estimated_processing_time_seconds: number;
+}
+
+export async function sendPrompt(data: any) {
   console.log("hello :", data);
+  const taskPrefix = "generate image of a"
   const obj = {
-    prompt: data.prompt,
+    task: `${taskPrefix} ${data.prompt}`,
     // seed: -1,
     // batch_size: 2,
     // n_iter: 1,
@@ -20,31 +26,61 @@ export async function getImages(data: any) {
     method: "POST",
     url: process.env.SD_API_ENDPOINT,
     headers: {
-      "content-type": "application/json",
-      "X-RapidAPI-Key": "86b88a2dc1mshd611d568ecd2738p1ea496jsncf8335dc2d11",
-      "X-RapidAPI-Host": "stable-diffusion10.p.rapidapi.com",
-
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.BAM_API_KEY}`,
     },
     data: JSON.stringify(obj),
   };
 
-  const imagesData = await axios(config)
-    .then(function (response) {
-      //format images with 'data:image/png;base64,' at the front
-      // console.log("lets see", response.data)
-      response.data.data.images.forEach((image: Blob, i: number) => {
-        response.data.data.images[i] = "data:image/png;base64," + image;
-      });
-      console.log("hooty", response.data.data.images.length);
-      // console.log("RESPONSE DATA", response.data);
-      // response.data.prompted = data;
-      // console.log("RESPONSE DATA with prompt", response.data.prompted);
-      return response.data.data;
-    })
-    .catch(function (error) {
-      console.log("lets see");
-      console.log(error);
-      return error;
-    });
-  return imagesData;
+  // the post request will return an id and estimated time to completion
+  // use the id to make a get request to the endpoint with the id after waiting for the estimated time
+  // if its still pending it will return a 202, if its done it will return a 200 and the image
+  // when its done, it returns a base64 encoded image in the results keyword
+  // You might need to install node-fetch if you're using this in a Node.js environment
+// import fetch from 'node-fetch';
+try {
+  const response = await axios(config);
+  const { task_id, estimated_processing_time_seconds } = response.data;
+  return { task_id, estimated_processing_time_seconds };
+} catch (error) {
+  console.error(error);
+  return null;
+}
+  
+}
+
+async function fetchImage(responseData: responseFormat) {
+  console.log("id :", responseData.task_id, "time :", responseData.estimated_processing_time_seconds)
+  const endpoint = `${process.env.SD_API_ENDPOINT}${responseData.task_id}/`;
+
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      try {
+        const response = await axios.get(endpoint, {
+          headers: {
+            Authorization: `Bearer ${process.env.BAM_API_KEY}`,
+          },
+        });
+
+        if (response.status === 200) {
+          const image = response.data.result.image;
+          // decode the base64 image
+          resolve(image);
+        } else if (response.status === 202) {
+          resolve(fetchImage(responseData));
+        }
+      }
+        catch (error) {
+        console.error(error);
+        reject(error);
+      }
+    }, responseData.estimated_processing_time_seconds * 1000);
+  });
+}
+
+export async function getImages(data: any) {
+  const responseData = await sendPrompt(data);
+  const image1 = await fetchImage(responseData as responseFormat);
+  const image2 = await fetchImage(responseData as responseFormat);
+  return { "images": [image1, image2] }
 }
