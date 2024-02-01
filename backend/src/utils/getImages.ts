@@ -75,7 +75,6 @@ async function fetchImage(responseData: responseFormat) {
         });
 
         if (response.status === 200 && response.data.result?.content) {
-          const image = response.data.result.image;
           const base64Image = await convertImageUrlToBase64(response.data.result.content);
           // decode the base64 image
           resolve(base64Image);
