@@ -87,7 +87,7 @@ async function fetchImage(responseData: responseFormat) {
         console.error(error);
         reject(error);
       }
-    }, responseData.estimated_processing_time_seconds * 1000);
+    }, 500;
   });
 }
 
