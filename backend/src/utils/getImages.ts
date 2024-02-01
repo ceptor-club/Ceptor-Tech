@@ -5,6 +5,18 @@ interface responseFormat {
   estimated_processing_time_seconds: number;
 }
 
+// Utility function to convert image URL to Base64
+async function convertImageUrlToBase64(imageUrl: string): Promise<string> {
+  try {
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    const base64 = Buffer.from(response.data, 'binary').toString('base64');
+    return `data:${response.headers['content-type']};base64,${base64}`;
+  } catch (error) {
+    console.error('Error converting image to Base64', error);
+    throw error;
+  }
+}
+
 export async function sendPrompt(data: any) {
   console.log("hello :", data);
   const taskPrefix = "generate image of a"
@@ -62,10 +74,11 @@ async function fetchImage(responseData: responseFormat) {
           },
         });
 
-        if (response.status === 200) {
+        if (response.status === 200 && response.data.result?.content) {
           const image = response.data.result.image;
+          const base64Image = await convertImageUrlToBase64(response.data.result.content);
           // decode the base64 image
-          resolve(image);
+          resolve(base64Image);
         } else if (response.status === 202) {
           resolve(fetchImage(responseData));
         }
@@ -80,7 +93,10 @@ async function fetchImage(responseData: responseFormat) {
 
 export async function getImages(data: any) {
   const responseData = await sendPrompt(data);
-  const image1 = await fetchImage(responseData as responseFormat);
-  const image2 = await fetchImage(responseData as responseFormat);
+  const images = await Promise.all([
+    fetchImage(responseData as responseFormat),
+    fetchImage(responseData as responseFormat)
+  ]);
+  return { images };
   return { "images": [image1, image2] }
 }
