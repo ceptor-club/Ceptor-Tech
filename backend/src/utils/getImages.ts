@@ -98,5 +98,4 @@ export async function getImages(data: any) {
     fetchImage(responseData as responseFormat)
   ]);
   return { images };
-  return { "images": [image1, image2] }
 }
