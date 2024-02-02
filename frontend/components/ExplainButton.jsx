@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
+import Tooltip from './ToolTip'
 
 const ExplainButton = () => {
   const [selectedText, setSelectedText] = useState('');
   const [explanation, setExplanation] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [openaiKey, setOpenaiKey] = useState('');
+  const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     const fetchOpenAIKey = async () => {
@@ -98,11 +100,17 @@ const ExplainButton = () => {
   return (
     <>
       <Draggable>
-        <button className="explain-btn" onClick={handleExplainButtonClick}>
+        <div>
+      <Tooltip content="Highlight something, press me, and I'll explain it">
+        <button 
+        className="explain-btn" 
+        onClick={handleExplainButtonClick} >
           {selectedText ? `Explain ${selectedText} to me` : 'Explain something to me'}
         </button>
+        </Tooltip>
+        </div>
       </Draggable>
-
+      
       {showModal && (
   <div className="modal-overlay">
     <div className="modal-content">

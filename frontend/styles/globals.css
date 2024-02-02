@@ -453,7 +453,3 @@ option {
   transition: background-color 0.3s ease;
 }
 
-.wizard-button:hover {
-  background-color: rgb(106, 0, 106);
-  box-shadow: 0 0 10px rgba(128, 0, 128, 0.8);
-}
