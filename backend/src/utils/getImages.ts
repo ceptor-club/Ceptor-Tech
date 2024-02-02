@@ -86,15 +86,17 @@ async function fetchImage(responseData: responseFormat) {
         console.error(error);
         reject(error);
       }
-    }, 500;
+    }, 500)
   });
 }
 
 export async function getImages(data: any) {
-  const responseData = await sendPrompt(data);
+  const responseData1 = await sendPrompt(data);
+  const responseData2 = await sendPrompt(data);
+
   const images = await Promise.all([
-    fetchImage(responseData as responseFormat),
-    fetchImage(responseData as responseFormat)
+    fetchImage(responseData1 as responseFormat),
+    fetchImage(responseData2 as responseFormat)
   ]);
   return { images };
 }
