@@ -15,6 +15,16 @@ const io = require("socket.io")(server, {
 import { runMiddleware } from "./auth"; //needs work
 import { getImages } from "./utils/getImages";
 
+app.use(cors());
+
+// Add bodyParser middleware
+app.use(bodyParser.json());
+
+// Endpoint to get OpenAI API key
+app.get('/api/openai-key', (req, res) => {
+  res.json({ openai_key: process.env.OPENAI_KEY });
+});
+
 import {
   getUserByWallet,
   saveUser,

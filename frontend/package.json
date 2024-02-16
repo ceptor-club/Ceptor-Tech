@@ -28,6 +28,7 @@
     "react": "18.2.0",
     "react-countdown": "^2.3.5",
     "react-dom": "18.2.0",
+    "react-draggable": "^4.4.6",
     "react-lazy": "^1.1.0",
     "react-twitter-embed": "^4.0.4",
     "socket.io-client": "^4.6.1",
